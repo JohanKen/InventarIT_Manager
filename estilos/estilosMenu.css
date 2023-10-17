@@ -46,6 +46,8 @@
 }
 
 #itemNav1 {
+  width: 300px;
+  height: 300px;
   margin-left: 18px;
   font-size: 15px;
 }
@@ -130,6 +132,16 @@ ul {
   font-size: 14px;
   list-style: none;
   text-decoration: none;
+  width: 250px;
+  height: 250px;
+  padding: 30px;
+}
+
+a::before {
+  content: "";
+  display: flex;
+  width: 100px;
+  height: 100px;
 }
 
 /* Estilos para la clase .liNavVer */
@@ -212,8 +224,9 @@ ul {
 }
 
 .colSecc {
-  display: inline-block;
+  display: flex;
   width: 80%;
+ 
   padding: 8px;
   justify-content: center;
 }
@@ -232,7 +245,7 @@ ul {
 }
 
 .coll {
-  display: flex;
+  display:flex;
   width: 240px;
 }
 

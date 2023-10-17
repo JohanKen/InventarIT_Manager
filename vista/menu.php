@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./estilos/estilosMenu.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
+
 </head>
 
 <body>
@@ -18,23 +18,26 @@
                     <!-- Contenido de tu barra de navegación vertical aquí -->
                     <img src="./images/logoinventarit.png" alt="" id="logoInventaritNav">
                     <ul id="ulNavVertical">
-                        <li class="liNavVer"><img src="./images/dashIcon.png" id="logoNav"><a href="inicio"
-                                id="itemNav1">Inicio</a></li>
-                        <li class="liNavVer"><img src="./images/inventario.png" id="logoNav"><a href="#"
-                                id="itemNav2">Inventario</a>
-                        </li>
-                        <li class="liNavVer"><img src="./images/onboarding.png" id="logoNav"><a href="#"
-                                id="itemNav3">Onboarding</a>
-                        </li>
-                        <li class="liNavVer"><img src="./images/godin.png" id="logoNav"><a href="#"
-                                id="itemNav4">Colaboradores</a></li>
-                        <li class="liNavVer"><img src="./images/laptop.png" id="logoNav"><a href="#"
-                                id="itemNav5">Equipos</a></li>
-                        <li class="liNavVer"><img src="./images/user.png" id="logoNav"><a href="#"
-                                id="itemNav6">Usuarios</a></li>
+                        <li class="liNavVer"><a href="index.php?seccion=inicio" id="itemNav1"><img
+                                    src="./images/dashIcon.png" id="logoNav"> Inicio</a></li>
+                        <li class="liNavVer"><a href="index.php?seccion=inventario" id="itemNav2"><img
+                                    src="./images/inventario.png" id="logoNav"> Inventario</a></li>
+                        <li class="liNavVer"><a href="#" id="itemNav3"><img 
+                                    src="./images/onboarding.png" id="logoNav">
+                                Onboarding</a></li>
+                        <li class="liNavVer"><a href="#" id="itemNav4"><img 
+                                    src="./images/godin.png" id="logoNav">
+                                Colaboradores</a></li>
+                        <li class="liNavVer"><a href="#" id="itemNav5"><img 
+                                    src="./images/laptop.png" id="logoNav">
+                                Equipos</a></li>
+                        <li class="liNavVer"><a href="#" id="itemNav6"><img 
+                                    src="./images/user.png" id="logoNav">
+                                Usuarios</a></li>
                         <img src="./images/flechaIz.png" id="logoNav1" class="menu-button" alt="flechaIMG"
                             id="menu-toggle-button">
                     </ul>
+
                 </div>
             </div>
 
@@ -82,7 +85,8 @@
                                         <li id="dropLI"><a class="dropdown-item" href="#" disabled>Configuración</a>
                                         </li>
                                         <li class="dropdown-divider"></li>
-                                        <li id="dropLI"><a class="dropdown-item" href="./login.php">Cerrar Sesión</a></li>
+                                        <li id="dropLI"><a class="dropdown-item" href="./login.php">Cerrar Sesión</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -91,16 +95,7 @@
                 </nav>
 
 
-                <div class="seccion">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="content">
-                                <!-- Contenido de la sección (cambiar según la página) -->
-                                <p>Esta es la sección de inicio</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <!-- Contenedor del contenido fuera de las columnas -->
 
