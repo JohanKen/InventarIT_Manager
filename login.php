@@ -1,3 +1,10 @@
+<?php
+    include './modelo/conexion.php';
+    include './modelo/ModeloUsuarios.php';
+    include 'C:\laragon\www\InventaritManager\controlador\ControladorUsuarios';
+    $login = new ControladorUsuarios;
+    $login->validarLogin();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,22 +23,23 @@
         <div class="login-form">
             <img src="./images/logoinventarit.png" id="imgLogo" alt="">
             <h2 id="h2Bienvenido">¡Bienvenido de nuevo!</h2>
-            <form action="procesar_login.php" method="POST" id="formLogin">
+            <form  method="POST" id="formLogin">
 
-                <input type="text" id="correo" name="usuario" required placeholder="Correo electronico">
+                <input type="text" id="correo" name="email"required placeholder="Correo electronico">
 
 
-                <input type="password" id="correo" name="contrasena" required placeholder="Contraseña">
+                <input type="password" id="correo" name="password"  required placeholder="Contraseña">
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="recordar-contrasena" name="recordar-contrasena">
                     Recordar contraseña
                 </label>
-                <button type="submit">Iniciar Sesión</button>
+                <input type="submit" name="entrar" value="Entrarrrr"></input>
 
             <hr>
             <br>
-                <a href="olvideContra.php" id="olvideContra">Olvide mi contraseña</a>
+                <a href="olvideContra.php" id="olvideContra" 
+            name="entrar" >Olvide mi contraseña</a>
 
             </form>
         </div>
