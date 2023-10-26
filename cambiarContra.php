@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olvidaste tu Contraseña</title>
+    <title>Recupera tu contraseña</title>
     <link rel="stylesheet" href="./estilos/estilosLogin.css">
 
     <style>
+        body{
+            background: gray;
+        }
         .login-container {
             display: flex;
             align-items: center; /* Centra verticalmente los elementos */
@@ -31,22 +34,20 @@
     
     <div class="login-container">
         <div>
-            <img src="./images/perro2.jpg" alt="">
+            <img src="./images/perro3.jfif" alt="">
         </div>
         <div class="login-form">
-            <h2>Olvidaste tu contraseña?</h2>
-            <p id="texto">Lo entendemos, suceden cosas. ¡Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña!</p>
-            <form action="./config/recovery.php" method="POST">
+            <h2>Recupera tu contraseña</h2>
+            <form action="./config/cambiarContra.php" method="POST">
 
-                <input type="email" id="correo" name="correo" required placeholder="Ingresa tu dirección de correo electrónico">
-
+                <input type="text" id="correo" name="new_password" required placeholder="Nueva contraseña">
+                <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
                 <button type="submit">Enviar Contraseña</button>
                 
                 <hr>
 
-                
+                <p>¿Ya tienes una cuenta? <a href="login.php" id="inicia">Inicia sesión</a></p>
             </form>
-            <p>¿Ya tienes una cuenta? <a href="login.php" id="inicia">Inicia sesión</a></p>
         </div>
     </div>
 </body>

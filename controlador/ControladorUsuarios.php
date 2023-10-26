@@ -63,13 +63,21 @@
                             window.location.href="Login.php";
                           </script>';
                 }
-            } else {
-                echo '<script>
-                        alert("El usuario no existe, es incorrecto o la contraseña es errónea");
-                        window.location.href="Login.php";
-                      </script>';
-            }
+            }  else {
+                $usuarioIncorrecto = ModeloUsuarios::comprobarUsuario($email);
+                if ($usuarioIncorrecto) {
+                    echo '<script>
+                            alert("La contraseña es incorrecta");
+                            window.location.href="Login.php";
+                          </script>';
+                } else {
+                    echo '<script>
+                            alert("El usuario no existe");
+                            window.location.href="Login.php";
+                          </script>';
+                }
         }
+    }
     }
 }
 ?>
