@@ -85,7 +85,7 @@
                                         <li id="dropLI"><a class="dropdown-item" href="#" disabled>Configuración</a>
                                         </li>
                                         <li class="dropdown-divider"></li>
-                                        <li id="dropLI"><a class="dropdown-item" href="./login.php">Cerrar Sesión</a>
+                                        <li id="dropLI"><a class="dropdown-item" href="./logout.php">Cerrar Sesión</a>
                                         </li>
                                     </ul>
                                 </div>

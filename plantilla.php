@@ -2,7 +2,8 @@
     <head>
             <title>InventarIT Manager</title>
             <link rel="icon" href="./imagenes/logoAGENCIAPNG.png">
-    </head>
+             
+        </head>
     <body>
         <?php
            include_once('./vista/menu.php');
