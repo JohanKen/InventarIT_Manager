@@ -8,7 +8,7 @@
         <?php
            include_once('./vista/menu.php');
         ?>
-        <hr>
+        
         <div >
             <div>
                     <?php

@@ -1,381 +1,216 @@
-/* Estilo para el navbar vertical */
-.navbar-vertical {
-  width: 160px;
-  top: 0;
-  list-style: none;
-  left: 0;
-  height: 800px;
-  border-radius: 8px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(20, 173, 255);
-  position: relative;
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Montserrat Alternates', sans-serif;
+	}
+	body{
+    background-size: 50vw 50vh;
+    background-position:top;
+		background-repeat: no-repeat;
+    background: linear-gradient(0deg, rgba(81,85,87,1) 0%, rgba(226,227,229,1) 100%);  	}
+.capa{
+		position: fixed;
+		width: 100%;
+		height: 100vh;
 
-#search-button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
+		background: rgba(255, 255, 255, 0.068);
+		z-index: -1;
+		top: 0;left: 0;
+	}
+	/*Estilos para el encabezado*/
+	.header{
+		width: 100%;
+		height: 100px;
+		position: fixed;
+		top: 0;left: 0;
+	}
+	.container{
+		width: 90%;
+		max-width: auto;
+		margin: auto;
+    height: auto;
+	}
+	.container .btn-menu, .logo{
+		float: left;
+		line-height:100px;
+	}
+	.container .btn-menu label{
+		color: #fff;
+		font-size: 25px;
+		cursor: pointer;
+	}
+	.logo h1{
+		color: #fff;
+		font-weight: 400;
+		font-size: 22px;
+		margin-left: 10px;
+	}
+	.container .menu{
+		float: right;
+		line-height: 100px;
+	}
+	.container .menu a{
+		display: inline-block;
+		padding: 15px;
+    
+		line-height: normal;
+		text-decoration: none;
+		color: #000000;
+		transition: all 0.3s ease;
+		border-bottom: 2px solid transparent;
+		font-size: 15px;
+		margin-right: 5px;
+	}
+	.container .menu a:hover{
+		border-bottom: 2px solid blue;
+		padding-bottom: 5px;
+	}
+	/*Fin de Estilos para el encabezado*/
 
-#imgBuscar,
-#imgNavHorizontal,
-#imgNavHorizontal1 {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-}
-
-#imgNavHorizontal,
-#imgNavHorizontal1 {
-  margin-left: -64px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-#search-button:hover {
-  background-color: rgb(20, 173, 255);
-  /* transform: scale(1.3); */ /* Eliminamos la transformación para mantener el tamaño */
-}
-
-#imgNavHorizontal:hover,
-#imgNavHorizontal1:hover {
-  background-color: rgb(20, 173, 255);
-  transform: scale(1.5);
-  border-radius: 5px;
-}
-
-#itemNav1 {
-
-  margin-left: 18px;
-  font-size: 15px;
-}
-
-#itemNav2 {
-  margin-left: 4px;
-  font-size: 15px;
-}
-
-#itemNav3 {
-  margin-left: -2px;
-  font-size: 15px;
-}
-
-#itemNav4 {
-  margin-left: -15px;
-  font-size: 15px;
-}
-
-#itemNav5 {
-  margin-left: 6px;
-  font-size: 15px;
-}
-
-#itemNav6 {
-  margin-left: 5px;
-  font-size: 15px;
-}
-
-#ulNavVertical {
-  justify-content: center;
-  text-align: center;
-}
-
-/* Estilos para los íconos en los elementos <li> */
-#logoNav {
-  width: 24px;
-  height: 24px;
-  margin-left: -24px;
-  display: block;
-  margin: 0 auto;
-}
-
-#logoNav1 {
-  cursor: pointer;
-  margin-top: 120px;
-  margin-left: 24px;
-  width: 40px;
-  height: 32px;
-  transition: transform 0.3s;
-}
-
-#logoNav1.rotate {
-  transform: rotate(180deg);
-}
-
-/* Elimina los puntos de la lista */
-ul {
-  padding-right: 32px;
-  justify-items: start;
-  list-style-type: none;
-  list-style: none;
-}
-
-/* Estilo para el logo en el navbar */
-#logoInventaritNav {
-  margin-top: -40px;
-  margin-left: -32px;
-  height: 168px;
-  width: 224px;
-}
-#logoInventaritNav:hover{
-  transform: scale(1.2);
-  cursor:pointer;
-}
-
-/* Estilos para los enlaces en la lista */
-.navbar-vertical a {
-  margin-left: 24px;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  list-style: none;
-  text-decoration: none;
-  width: 250px;
-  height: 250px;
-  padding: 30px;
-}
-
-a::before {
-  content: "";
-  display: flex;
-  width: 100px;
-  height: 10px;
-}
-
-/* Estilos para la clase .liNavVer */
-.liNavVer {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-
-  margin-left: -30px;
-  font-size: 25px;
-  text-align: start;
-  font-family: sans-serif;
-  text-transform: capitalize;
-  position: relative;
-  transition: 0.5s;
-
-  z-index: 1;
-  border-radius: 10px;
-  display: block;
-}
-
-.liNavVer::before,
-.liNavVer::after {
-  content: '';
-  position: absolute;
-  width: 0.6em;
-  margin-left: -80px;
-  height: 0.6em;
-  background-color: rgb(220, 220, 220);
-  border-radius: 50%;
-  transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
-  top: calc(50% - 0.6em / 2);
-}
-
-.liNavVer::before {
-  left: 0;
-  background-color: transparent;
-  z-index: -1;
-  margin-left: -30px;
-}
-
-.liNavVer::after {
-  background-color: transparent;
-  border-radius: 10px;
-  right: 0;
-  z-index: -2;
-}
-
-.liNavVer:hover {
-  width: 120%;
-  margin-left: 0px;
-  transform: scale(1.1);
-}
-
-.liNavVer:hover::before,
-.liNavVer:hover::after {
-  width: 100%;
-  margin-left: -30px;
-  border-radius: 10px;
-  font-size: 40px;
-  height: 100%;
-  border-radius: 0;
-}
-
-.liNavVer:hover::before {
-  top: 0;
-  margin-left: -15px;
-  border-radius: 10px;
-  background-color: rgb(59, 89, 152);
-}
-
-.liNavVer:hover::after {
-  right: 0.8em;
-  border-radius: 10px;
-  margin-left: 25px;
-  transform: scale(1.1);
-  filter: brightness(0.8);
-  background-color: rgba(1, 90, 255, 0.23);
-}
-
-.colSecc {
-  display: inline-block;
-  width: 100%;
+	/*Menù lateral*/
+	#btn-menu{
+		display: none;
+    color: #1c1c1c;
+	}
+	.container-menu{
+		position: absolute;
+		background: rgba(0,0,0,0.5);
+		width: 100%;
+		height: 1000vh;
+		top: 0;left: 0;
+		transition: all 500ms ease;
+		opacity: 0;
+		visibility: hidden;
+	}
+	#btn-menu:checked ~ .container-menu{
+		opacity: 1;
+		visibility: visible;
+	}
+	.cont-menu{
+		width: 100%;
+		max-width: 250px;
+		background: #1c1c1c;
+		height:500px;
+    border-bottom-right-radius: 30px;
+		position: fixed;
+		transition: all 500ms ease;
+		transform: translateX(-100%);
+	}
+	#btn-menu:checked ~ .container-menu .cont-menu{
+		transform: translateX(0%);
+	}
+	.cont-menu nav{
+		transform: translateY(15%);
+	}
+	.cont-menu nav a{
+		display: block;
+		text-decoration: none;
+		padding: 20px;
   
-  padding: 8px;
-  justify-content: center;
+		color: #c7c7c7;
+		border-left: 5px solid transparent;
+		transition: all 400ms ease;
+	}
+	.cont-menu nav a:hover{
+		border-left: 5px solid #c7c7c7;
+		background: #fff7f7;
+    border-left: 5px solid blue;
+    color: black;
+	}
+	.cont-menu label{
+		position: absolute;
+		right: 5px;
+		top: 10px;
+		color: #fff;
+		cursor: pointer;
+		font-size: 18px;
+	}
+
+  #logoInventarit{
+    width:100%;
+    height: 100%;
+  }
+
+  #logoInven{
+    margin-top: -20px;
+    width: 300px;
+    height: 150px;
+  }
+  .menu {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.107); 
+    color: #fff;
+    border-radius: 10px;
+    border-top-right-radius: 0%;
+    border-top-left-radius: 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
-.seccion {
-  width: auto;
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 15px;
 }
 
-.container-fluidd {
-  width: auto;
-  justify-content: center;
-  height: auto;
+.search {
+    display: flex;
+    align-items: center;
+    transition: transform 0.30s ease;
 }
-
-.roww {
+.search:hover {
   display: flex;
-}
-
-.coll {
-  display:flex;
-  width: 240px;
-}
-
-#navHorizontal.navbar {
-  padding: 0px;
-  background-color: rgb(106, 255, 0);
-  border-radius: 8px;
-}
-
-#searchInput {
-  margin-left: 10px;
-  width: 320px;
-}
-
-#searchbar {
-  margin-left: 0px;
-  margin-top: 16px;
-  height: 32px;
-}
-
-#imgVertical {
-  height: 40px;
-  color: aqua;
-  margin-left: -480px;
-}
-
-#imgNavHorizontal {
-  width: 20px;
-  height: 20px;
-  margin-left: -64px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.formNavUser {
-  margin-left: -480px;
-}
-
-.navbar {
-  justify-content: initial !important;
-  width: 820px !important;
-  margin-left: 0px !important;
-}
-
-.nav-icon-container1 {
-  margin-left: 80px;
-}
-
-.nav-icon-container2 {
-  margin-left: 352px;
-}
-
-.nav-icon-container3 {
-  margin-left: 24px;
-  width: auto;
-  height: inherit;
-}
-
-.disabled {
-  margin-right: 240px;
-}
-
-#userimgnav {
-  width: 24px;
-  height: 24px;
-}
-
-#UsuarioParrafo {
-  margin-top: 16px;
-  margin-left: 8px;
-}
-
-#dropdownList {
-  margin-top: -24px;
-}
-
-#formUser {
-  margin-top: 8px;
-  margin-left: -384px;
   align-items: center;
-  text-align: center;
-  display: flex;
+  transform: scale(1.4);
+  border: transparent;
+  box-shadow: 0px 0px 10px blue;
 }
 
-#imgNavHorizontal1 {
-  width: 20px;
-  height: 20px;
-  margin-left: -384px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+.notifications {
+    display: flex;
+    align-items: center;
 }
 
+.messages {
+    display: flex;
+    align-items: center;
+}
 
+.user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
 
-#ulDrop {
+.user-menu {
+    margin-top: 350px;
+    margin-right: 80px;
+    display: none;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.107); 
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    list-style: none;
+    padding: 10px;
   
-  width: 160px !important;
-  background-color:rgb(255, 255, 255);
-
-
-}
-#ulDrop:hover{
-  transform: scale(1.2);
 }
 
-.btn.dropdown-toggle {
-  background: none;
-  border-radius: 60px;
-  border-style: none;
-  padding: 0;
-  width: 40px;
-  height: 20px;
-  margin-top: -10px;
-  margin-left: -10px;
-}
-.btn.dropdown-toggle:hover{
-  background-color:rgb(20, 173, 255);
-}
-.dropdown-toggle::after {
-  color: black; /* Cambia el color aquí */
-  transform: scale(1.5);
-  width: 10px;
+.user-menu a {
+    text-decoration: none;
+    color: #0026ff;
+    
+    display: block;
+    margin-bottom: 5px;
 }
 
-#dropLI{
-  font-size: 13px;
-}
-#dropLI::after{
-  transform: scale(1.2);
-  background-color:rgb(20, 173, 255) !important;
-  border-radius: 10px;
+
+.user:hover .user-menu {
+    display: block;
 }

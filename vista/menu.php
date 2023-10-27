@@ -1,127 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos/estilosMenu.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+	<meta charset="UTF-8">
+	<title>Menù Lateral con Css</title>
+	<link rel="stylesheet" href="./estilos/estilosMenu.css">
 </head>
-
 <body>
-    <div class="container-fluidd">
-        <div class="roww">
-            <div class="coll">
-                <div class="navbar-vertical">
-                    <!-- Contenido de tu barra de navegación vertical aquí -->
-                    <img src="./images/logoinventarit.png" alt="" id="logoInventaritNav">
-                    <ul id="ulNavVertical">
-                        <li class="liNavVer"><a href="index.php?seccion=inicio" id="itemNav1"><img
-                                    src="./images/dashIcon.png" id="logoNav"> Inicio</a></li>
-                        <li class="liNavVer"><a href="index.php?seccion=inventario" id="itemNav2"><img
-                                    src="./images/inventario.png" id="logoNav"> Inventario</a></li>
-                        <li class="liNavVer"><a href="#" id="itemNav3"><img 
-                                    src="./images/onboarding.png" id="logoNav">
-                                Onboarding</a></li>
-                        <li class="liNavVer"><a href="#" id="itemNav4"><img 
-                                    src="./images/godin.png" id="logoNav">
-                                Colaboradores</a></li>
-                        <li class="liNavVer"><a href="#" id="itemNav5"><img 
-                                    src="./images/laptop.png" id="logoNav">
-                                Equipos</a></li>
-                        <li class="liNavVer"><a href="#" id="itemNav6"><img 
-                                    src="./images/user.png" id="logoNav">
-                                Usuarios</a></li>
-                        <img src="./images/flechaIz.png" id="logoNav1" class="menu-button" alt="flechaIMG"
-                            id="menu-toggle-button">
-                    </ul>
+	<header class="header">
+		<div class="container">
+		<div class="btn-menu">
+        <label for="btn-menu" style="color: black;">☰</label>
 
-                </div>
-            </div>
-
-            <div class="colSecc">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center" id="navHorizontal">
-                    <div class="container-fluid" style="justify-content: none;">
-                        <form class="d-flex" id="searchbar">
-                            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search"
-                                id="searchInput">
-                            <button class="btn btn-outline-success" type="submit" id="search-button">
-                                <img id="imgBuscar" src="./images/buscar.png" alt="Buscar">
-                            </button>
-                        </form>
-                        <div class="nav-icon-container1">
-                            <a href="#" class="nav-link">
-                                <img src="./images/campana.png" alt="Campana" id="imgNavHorizontal" class="navbar-icon">
-                            </a>
-                        </div>
-                        <div class="nav-icon-container2">
-                            <a href="#" class="nav-link">
-                                <img src="./images/correo.png" alt="Correo" id="imgNavHorizontal1" class="navbar-icon">
-                            </a>
-                        </div>
-                        <div class="nav-icon-container3">
-                            <a href="#" class="nav-link">
-                                <img src="./images/lnvertical.png" alt="Correo" id="imgNavHorizontal1"
-                                    class="navbar-icon">
-                            </a>
-                        </div>
-
-                        <form action="" id="formUser">
-                            <img src="./images/user.png" alt="" id="userimgnav">
-                            <a href="#" class="nav-link">
-                                <p id="UsuarioParrafo">Usuario</p>
-                            </a>
-                            <div class="container mt-5">
-                                <div class="dropdown" id="dropdownList">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="ulDrop">
-                                        <li id="dropLI"><a class="dropdown-item" href="#">Configuración de Perfil</a>
-                                        </li>
-                                        <li id="dropLI"><a class="dropdown-item" href="#" disabled>Configuración</a>
-                                        </li>
-                                        <li class="dropdown-divider"></li>
-                                        <li id="dropLI"><a class="dropdown-item" href="./logout.php">Cerrar Sesión</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-
-
-
-            </div>
-            <!-- Contenedor del contenido fuera de las columnas -->
-
+		</div>
+			<div class="logo">
+				<h1 id="logoInven"><img src="./images/logoinventarit.png" alt="imgLogo" id="logoInventarit"></h1>
+			</div>
+            <nav class="menu">
+      
+        <div class="search">
+            <input type="text" placeholder="Buscar">
         </div>
-    </div>
+        <div class="notifications">
+            <a href="#">🔔</a>
+        </div>
+        <div class="messages">
+            <a href="#">📬</a>
+        </div>
+        <div class="user">
+            <a href="#">Usuario</a>
+            <ul class="user-menu">
+                <li><a href="#">Perfil</a></li>
+                <li><a href="#">Configuración</a></li>
+                <li><a href="#" id="logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+		</div>
+	</header>
+	<div class="capa"></div>
+<!--	--------------->
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+	<div class="cont-menu">
+		<nav>
+			<a href="#">Inicio</a>
+			<a href="#">Inventario</a>
+			<a href="#">Onboarding</a>
+			<a href="#">Colaboradores</a>
+			<a href="#">Equipos</a>
+			<a href="#">Usuarios</a>
+		</nav>
+		<label for="btn-menu">✖️</label>
+	</div>
+</div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const logoutLink = document.getElementById("logout");
 
+    logoutLink.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    <!-- Aquí puedes agregar más contenido y secciones -->
+        const confirmLogout = window.confirm("¿Estás seguro de que deseas cerrar la sesión?");
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#logoNav1").click(function() {
-            $(".navbar-vertical").toggleClass(
-                "nav-open"); // Agrega o quita la clase "nav-open" al hacer clic
-            $(this).toggleClass("rotate"); // Agrega o quita la clase "rotate" al hacer clic
-        });
+        if (confirmLogout) {
+            // Realiza la acción de cierre de sesión aquí
+            window.location.href = "logout.php"; // Reemplaza esto con la URL de tu proceso de cierre de sesión
+        }
     });
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-
-
+});
+</script>
 </body>
-
 </html>
