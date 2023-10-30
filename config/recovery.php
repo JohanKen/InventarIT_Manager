@@ -34,7 +34,7 @@
             $mail->addAddress('johanestradacastillo6@gmail.com', 'Johan User');     //Add a recipient
           
             //Content   
-            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->isHTML(true);   //Set email format to HTML
             $mail->Subject = 'Recuperacion de contra';
             $mail->Body = 'Solicitaste la recuperación de tu contraseña de InventarIT Manager, 
             por favor da click en el siguiente enlace <a href="localhost/InventaritManager/cambiarContra.php?id='.$row['id_usuario'].'">Click aqui.</a>';
