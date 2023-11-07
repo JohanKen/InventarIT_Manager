@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="./images/logoNav.png">2
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olvidaste tu Contraseña</title>
     <link rel="stylesheet" href="./estilos/estilosLogin.css">

@@ -1,0 +1,37 @@
+.tabla{
+    background-color: red;
+    margin-top: 10px;
+}
+.headerTabla{
+    display: flex;
+    color: rgb(0, 0, 0);
+}
+#searchBar{
+    margin-top: 8px;
+    margin-left: 400px;
+}
+.search {
+    display: flex;
+    align-items: center;
+    line-height: 0px;
+   
+}
+        .container .menu{
+		float: right;
+		height: 50px;
+        
+        margin-top: 20px;
+	}
+        .contentSeccion{
+            display:block;
+            margin-top: 200px;
+            padding: 10px;
+            background-color: white;
+            border-style: solid;
+            border-color: #000000;
+            margin-left:150px;
+            border-radius:10px;
+            z-index: -1;
+            max-width:1080px;
+            height: 2080px;
+        }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recupera tu contraseña</title>
+    <link rel="icon" href="./images/logoNav.png">
     <link rel="stylesheet" href="./estilos/estilosLogin.css">
 
     <style>

@@ -1,21 +1,28 @@
-<?php class ControladorUsuarios {
+<?php 
+class ControladorUsuarios {
+    
+
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
         if (isset($_POST["entrar"])) {
             $email = $_POST["email"];
             $password = $_POST["password"];
-            
+
+            // Obtener el usuario
             $usuario = ModeloUsuarios::login($email, $password);
 
             // Obtener el número de filas
             $count = $usuario->num_rows;
 
             if ($count > 0) {
-                session_start();
                 $arreglo = $usuario->fetch_all(MYSQLI_ASSOC);
                 if (isset($arreglo[0]['id_rol']) && isset($arreglo[0]['id_estado_usuario'])) {
                     $rol_usuario = $arreglo[0]['id_rol'];
                     $estado_usuario = $arreglo[0]['id_estado_usuario'];
+
+                    // Configurar la variable de sesión con los datos del usuario
+                    $_SESSION['usuario'] = $arreglo[0];
+
                     switch (true) {
                         case $rol_usuario == 1 && $estado_usuario == 1:
                             echo  '<script>
@@ -76,8 +83,8 @@
                             window.location.href="Login.php";
                           </script>';
                 }
+            }
         }
-    }
     }
 }
 ?>

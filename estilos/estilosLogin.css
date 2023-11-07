@@ -135,3 +135,6 @@ body {
 #inicia:hover{
     color: #0022ff;
 }
+* {
+    user-select: none;
+}
