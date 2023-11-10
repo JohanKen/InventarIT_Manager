@@ -29,42 +29,23 @@
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID Dispositivo</th>
-                    <th>ID Tipo Dispositivo</th>
+                    <th>Id Dispositivo</th>
+                    <th>Tipo de dispositivo</th>
                     <th>Modelo</th>
                     <th>Número de Serie</th>
-                    <th>ID Marca</th>
-                    <th>ID Estado Dispositivo</th>
+                    <th>Marca</th>
                     <th>Precio</th>
+                    <th>Estado del Dispositivo</th>
                     <th>Fecha de Compra</th>
-                    <th>ID Proveedor</th>
-                    <th>Nota</th>
+                    <th>Notas</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>Modelo 1</td>
-                    <td>Número de Serie 1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>100.00</td>
-                    <td>2023-01-01</td>
-                    <td>1</td>
-                    <td>Nota 1</td>
-                    <td>imagen1.jpg</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                    </td>
-                </tr>
-                <!-- Agrega más filas para representar más datos -->
-            </tbody>
-        </table>
-        <?php
+               
+
+            <?php
                 //Llamada a metodo para eliminar dispositivos
                 $eliminar = new ControladorDispositivos;
                 $eliminar -> borrarDispositivos();
@@ -74,19 +55,31 @@
                 foreach($lista as $row => $item){
                     echo '
                         <tr>
+                        <!-- Contenido de la tabla que se tomaron desde la vista de dispositivos -->
                             <td>'.$item[0].'</td>
                             <td>'.$item[1].'</td>
                             <td>'.$item[2].'</td>
-                            <td><img src="'.$item[4].'" alt="" height="50"></td>
+                            <td>'.$item[3].'</td>
+                            <td>'.$item[4].'</td>
+                            <td>'.$item[5].'</td>
                             <td>'.$item[6].'</td>
+                            <td>'.$item[7].'</td>
+                            <td>'.$item[8].'</td>
+                            <td><img src="'.$item[9].'" alt="" height="50"></td>
+                            
+                            <!-- Acciones... -->
                             <td>
-                            <a href="index.php?seccion=editarProductos&id='.$item[0].'">Editar</a>
-                            <a href="index.php?seccion=listaProductos&accion=eliminarProductos&id='.$item[0].'">Borrar</a>
+                            <a href="index.php?seccion=editarDispositivos&id_dispositivo='.$item[0].'">Editar</a>
+                            <a href="index.php?seccion=dispositivos&accion=eliminarDispositivos&id_dispositivo='.$item[0].'">Borrar</a>
                             </td>
                         </tr>
                     ';
                 }
             ?>
+
+            </tbody>
+        </table>
+      
         </div>
     </div>
 

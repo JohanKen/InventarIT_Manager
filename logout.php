@@ -1,7 +1,12 @@
 <?php
-    session_start();
-    
-    if(session_destroy()){
-    header('location: login.php');
-    }
+session_start();
+
+// Eliminar la variable de sesión específica
+unset($_SESSION['usuario']);
+
+// Redirigir a la página de inicio de sesión
+header('location: login.php');
+
+// Asegurar que el código se detenga después de la redirección
+exit();
 ?>

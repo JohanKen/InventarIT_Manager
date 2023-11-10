@@ -43,44 +43,46 @@
 	<div class="container-menu">
 		<div class="cont-menu">
 			<nav>
-				<a href="#">Inicio</a>
-				<a href="#">Inventario</a>
-				<a href="#">Onboarding</a>
-				<a href="#">Colaboradores</a>
-				<a href="#">Equipos</a>
-				<a href="#">Usuarios</a>
+				<a href="inicio">Inicio</a>
+				<a href="inventario">Inventario</a>
+				<a href="onboarding">Onboarding</a>
+				<a href="colaboradores">Colaboradores</a>
+				<a href="equipos">Equipos</a>
+				<a href="usuarios">Usuarios</a>
 			</nav>
 			<label for="btn-menu">✖️</label>
 		</div>
 	</div>
 
 	<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const equiposLink = document.querySelector(".container-menu nav a:nth-child(5)");
-      const dropdownContent = document.createElement("div");
-      dropdownContent.className = "dropdown-content";
-      dropdownContent.innerHTML = `
-        <a href="index.php?seccion=dispositivos">Dispositivos</a>
-        <a href="#">CCTV</a>
-        <a href="#">Herramientas</a>
-      `;
+    let equiposLink; // Declarar la variable fuera de la función
 
-      equiposLink.appendChild(dropdownContent);
+document.addEventListener("DOMContentLoaded", function () {
+  equiposLink = document.querySelector(".container-menu nav a:nth-child(5)");
+  const dropdownContent = document.createElement("div");
+  dropdownContent.className = "dropdown-content";
+  dropdownContent.innerHTML = `
+    <a href="index.php?seccion=dispositivos">Dispositivos</a>
+    <a href="#">CCTV</a>
+    <a href="#">Herramientas</a>
+  `;
 
-      equiposLink.addEventListener("mouseover", function () {
-        dropdownContent.style.display = "block";
-      });
- 
-      equiposLink.addEventListener("mouseout", function () {
-        dropdownContent.style.display = "none";
-      });
-    });
+  equiposLink.appendChild(dropdownContent);
 
-    document.addEventListener("click", function (event) {
-      if (event.target !== equiposLink && event.target !== dropdownContent) {
-        dropdownContent.style.display = "none";
-      }
-    });
+  equiposLink.addEventListener("mouseover", function () {
+    dropdownContent.style.display = "block";
+  });
+
+  equiposLink.addEventListener("mouseout", function () {
+    dropdownContent.style.display = "none";
+  });
+});
+
+document.addEventListener("click", function (event) {
+  if (event.target !== equiposLink && event.target !== dropdownContent) {
+    dropdownContent.style.display = "none";
+  }
+});
 	</script>
 </body>
 </html>

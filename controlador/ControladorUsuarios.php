@@ -1,28 +1,36 @@
 <?php 
 class ControladorUsuarios {
     
-
+    
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
+
+          // Verificar si el usuario ha iniciado sesión
+          if (isset($_SESSION['usuario'])) {
+            // Redirigir a la página de inicio de sesión si no ha iniciado sesión
+            header('location: index.php');
+            exit(); // Asegurar que el código se detenga después de la redirección
+        }
+
         if (isset($_POST["entrar"])) {
             $email = $_POST["email"];
             $password = $_POST["password"];
-
+    
             // Obtener el usuario
             $usuario = ModeloUsuarios::login($email, $password);
 
             // Obtener el número de filas
             $count = $usuario->num_rows;
-
+            
             if ($count > 0) {
                 $arreglo = $usuario->fetch_all(MYSQLI_ASSOC);
                 if (isset($arreglo[0]['id_rol']) && isset($arreglo[0]['id_estado_usuario'])) {
                     $rol_usuario = $arreglo[0]['id_rol'];
                     $estado_usuario = $arreglo[0]['id_estado_usuario'];
-
+                    
                     // Configurar la variable de sesión con los datos del usuario
                     $_SESSION['usuario'] = $arreglo[0];
-
+                   
                     switch (true) {
                         case $rol_usuario == 1 && $estado_usuario == 1:
                             echo  '<script>

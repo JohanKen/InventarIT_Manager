@@ -14,7 +14,6 @@
 		position: fixed;
 		width: 100%;
 		height: 100vh;
-
 		background: rgba(255, 255, 255, 0.068);
 		z-index: -1;
 		top: 0;left: 0;
@@ -105,7 +104,7 @@
 		transform: translateY(15%);
 	}
 	.cont-menu nav a{
-		display: block;
+		display: flex;
 		text-decoration: none;
 		padding: 20px;
 		
@@ -141,7 +140,7 @@
   }
   .menu {
     backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.107); 
+    background-color: rgba(0, 0, 0, 0.107);
     color: #fff;
     border-radius: 10px;
     border-top-right-radius: 0%;
@@ -152,11 +151,13 @@
     padding: 10px 20px;
 }
 
+
 .menu a {
     text-decoration: none;
     color: #fff;
     margin: 0 15px;
 }
+
 
 .search {
     display: flex;
