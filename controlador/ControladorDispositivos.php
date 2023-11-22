@@ -45,7 +45,7 @@
             }
         }
          // Función para obtener el ID de la marca por su nombre
-       
+   /*    
     static function obtenerIdMarcaPorNombre($nombreMarca) {
         $tabla = 'marcas';
         $marcas = ModeloDispositivos::selectMarcas('marcas')->fetch_all(MYSQLI_ASSOC);
@@ -58,35 +58,40 @@
 
         return null; // o manejar el caso de marca no encontrada
     }
+*/
+// Función para editar Dispositivo
+static function editarDispositivos() {
+    if (isset($_POST["guardar"])) {
+       
+        // ... (otros códigos)
+        $uploadedOK = 1; // Inicializar la variable
 
-    // Función para editar Dispositivo
-    static function editarDispositivos() {
-        if (isset($_POST["guardar"])) {
-            // ... (otros códigos)
-            $uploadedOK = 0; // Inicializar la variable
+        // Obtener el ID de la marca por su nombre (descomentar y adaptar según necesidades)
+        //$idMarca = isset($_POST["marca"]) ? self::obtenerIdMarcaPorNombre($_POST["marca"]) : null;
 
-            // Obtener el ID de la marca por su nombre
-            $idMarca = isset($_POST["marca"]) ? self::obtenerIdMarcaPorNombre($_POST["marca"]) : null;
-            // Almacenamos la información al modelo para que la guarde en la base de datos
-            if ($uploadedOK == 1 && $idMarca !== null) {
+        // Almacenamos la información al modelo para que la guarde en la base de datos
+        if ($uploadedOK == 1) {
+            try { 
+                // Ajustar max_allowed_packet para esta conexión
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
                 $datos = array(
                     "id_dispositivo" => $_POST["id_dispositivo"],
-                    "tipo" => $_POST["tipo"],
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
+                    "id_marca" => $_POST["marca"],
+                    "precio" => $_POST["precio"],
+                    "fecha_compra" => $_POST["fecha_compra"],
+                    "nota" => $_POST["nota"],
+                    "foto" => "FOTO.png",
                     "ram" => $_POST["ram"],
                     "procesador" => $_POST["procesador"],
                     "sistema_operativo" => $_POST["sistema_operativo"],
-                    "id_marca" => $idMarca, // Cambio aquí
-                    "precio" => $_POST["precio"],
                     "estado" => $_POST["estado"],
-                    "fecha_compra" => $_POST["fecha_compra"],
-                    "nota" => $_POST["nota"],
-                    "url_foto" => $target_file,
                 );
 
-                $tabla = 'editar_laptop';
-                $insert = ModeloDispositivos::updateDispositivos($tabla, $datos);
+                $insert = ModeloDispositivos::updateLaptop($datos);
 
                 if ($insert > 0) {
                     echo '
@@ -96,9 +101,32 @@
                         </script>
                     ';
                 }
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 2006) { // Código de error para "MySQL server has gone away"
+                    // Reconectar manualmente
+                    Conexion::conectar()->real_connect(Conexion::$servername, Conexion::$username, Conexion::$password, Conexion::$database);
+                    // Volver a intentar la ejecución de la sentencia preparada
+                    $insert = ModeloDispositivos::updateLaptop($datos);
+                    if ($insert > 0) {
+                        echo '
+                            <script>
+                                alert("Dispositivo actualizado correctamente");
+                                window.location.href="index.php?seccion=dispositivos";
+                            </script>
+                        ';
+                    }
+                } else {
+                    // Manejar otros errores
+                    echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
+                }
             }
+        } else {
+            echo 'Por favor, introduce una imagen';
         }
     }
+}
+
+
            //Funcion para consultar los tipos de dispositivos
            static function getTiposDispositivos(){
             $tabla = "tipos_dispositivos";
