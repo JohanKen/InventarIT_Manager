@@ -1,6 +1,7 @@
 <?php
 
     class ControladorDispositivos{
+        
         //Funcion para consultar el listado de productos en venta.
         static function consultaDispositivos(){
             $tabla = 'v_inv_dispositivos';

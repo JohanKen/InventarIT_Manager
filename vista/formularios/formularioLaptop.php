@@ -1,6 +1,6 @@
 <?php
 
-require_once 'C:\laragon\www\InventaritManager\controlador\ControladorDispositivos.php';
+require_once 'controlador/ControladorDispositivos.php';
 
 // Obtener la información del dispositivo
 $dispositivoInfo = ControladorDispositivos::detalleLaptop();
