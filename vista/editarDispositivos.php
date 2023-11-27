@@ -1,14 +1,21 @@
 <?php
 
-// Obtener e   l ID del dispositivo de la URL
+// Obtener el ID del dispositivo de la URL
 $id = $_GET['id_dispositivo'];
+
+
 
 // Obtener datos del dispositivo según el ID
 $datosDispositivo = obtenerDatosDispositivo($id);
 
 function obtenerDatosDispositivo($id) {
     // Aquí consultamos la información del dispositivo desde la BD con su ID
-    $DispositivoInfo = ControladorDispositivos::detalleDispositivo($id);
+    if ($id>=3){
+        $DispositivoInfo = ControladorDispositivos::detalleDispositivoPLI($id);
+    }else{
+        $DispositivoInfo = ControladorDispositivos::detalleDispositivo($id);
+    }
+    
 
     // Verificar si se obtuvieron datos
     if (!$DispositivoInfo || empty($DispositivoInfo[0])) {
@@ -21,9 +28,15 @@ function obtenerDatosDispositivo($id) {
 }
 
 // Verificar el tipo de dispositivo y cargar el formulario correspondiente
+
+//hay que imprimir que trae el arreglo $datosDispositivo del modelo...
 if ($datosDispositivo !== null) {
-    switch ($datosDispositivo[1]) {
-        case 'Laptop':
+    var_dump($datosDispositivo);
+
+      // Verificar si la clave 1 existe en el array
+      if (array_key_exists('tipo', $datosDispositivo)) {
+    switch ($datosDispositivo['tipo']) {
+        case "Laptop":
             include('formularios/formularioLaptop.php');
             break;
         case 'Descktop':
@@ -65,6 +78,9 @@ if ($datosDispositivo !== null) {
         default:
             // Tipo desconocido
             echo "Tipo de dispositivo desconocido.";
+    }
+}else {
+        echo "Error: La clave 1 no está presente en el array.";
     }
 } else {
     // Mostrar un mensaje de error

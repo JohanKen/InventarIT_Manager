@@ -3,7 +3,8 @@
 require_once 'controlador/ControladorDispositivos.php';
 
 // Obtener la información del dispositivo
-$dispositivoInfo = ControladorDispositivos::detalleLaptop();
+$dispositivoInfo = ControladorDispositivos::detalleDispositivoPLI();
+var_dump($dispositivoInfo);
 
 // Inicializar el controlador para realizar la actualización
 $update = new ControladorDispositivos;
@@ -47,6 +48,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-3" id="formForm">
                 <label for="numero_serie" class="form-label">Número de serie</label>
                 <input type="text" class="form-control" name="numero_serie" value="<?= $dispositivoInfo[0][3] ?>">
+            </div>
+            <div class="mb-3" id="formForm">
+                <label for="marca" class="form-label">Marca</label>
+                <select name="marca" id="" class="form-control">
+                    <?php
+                    $marcas = ControladorDispositivos::getMarcas();
+
+                    foreach ($marcas as $row => $item) {
+                        echo '<option value="' . $item[0] . '" ' . ($dispositivoInfo[0][9] == $item[1] ? 'selected' : '') . '>' . $item[1] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3" id="formForm">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="text" class="form-control" name="precio" value="<?= '$' . number_format($dispositivoInfo[0][8], 2, '.', ',') ?>">
+            </div>
+            <div class="mb-3" id="formForm">
+                <label for="fechaCompraInput" class="form-label">Fecha de compra</label>
+                <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= $dispositivoInfo[0][10] ?>" placeholder="Selecciona una fecha">
+                <input type="date" style="display: none;" name="fecha_compra_hidden" value="<?= $dispositivoInfo[0][10] ?>" id="fechaCompraHidden">
+            </div>
+            <div class="mb-3" id="formForm">
+                <label for="nota" class="form-label">Notas</label>
+                <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0][11] ?></textarea>
+            </div>
+            <div class="mb-3" id="formForm">
+                <label for="" class="form-label" style="color:black; font-family:lato; text-align:center;" required="true">Imagen del dispositivo</label>
+                <input type="file" class="form-control" name="foto">
             </div>
             <div class="mb-3" id="formForm">
                 <label for="ram" class="form-label">RAM</label>
@@ -103,22 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </select>
             </div>
-            <div class="mb-3" id="formForm">
-                <label for="marca" class="form-label">Marca</label>
-                <select name="marca" id="" class="form-control">
-                    <?php
-                    $marcas = ControladorDispositivos::getMarcas();
-
-                    foreach ($marcas as $row => $item) {
-                        echo '<option value="' . $item[0] . '" ' . ($dispositivoInfo[0][9] == $item[1] ? 'selected' : '') . '>' . $item[1] . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="mb-3" id="formForm">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="text" class="form-control" name="precio" value="<?= '$' . number_format($dispositivoInfo[0][8], 2, '.', ',') ?>">
-            </div>
+            
+            
             <div class="mb-3" id="formForm">
                 <label for="estado" class="form-label">Estado</label>
                 <select name="estado" id="" class="form-control">
@@ -131,19 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </select>
             </div>
-            <div class="mb-3" id="formForm">
-                <label for="fechaCompraInput" class="form-label">Fecha de compra</label>
-                <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= $dispositivoInfo[0][10] ?>" placeholder="Selecciona una fecha">
-                <input type="date" style="display: none;" name="fecha_compra_hidden" value="<?= $dispositivoInfo[0][10] ?>" id="fechaCompraHidden">
-            </div>
-            <div class="mb-3" id="formForm">
-                <label for="nota" class="form-label">Notas</label>
-                <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0][11] ?></textarea>
-            </div>
-            <div class="mb-3" id="formForm">
-                <label for="" class="form-label" style="color:black; font-family:lato; text-align:center;" required="true">Imagen del dispositivo</label>
-                <input type="file" class="form-control" name="foto">
-            </div>
+            
             <div class="mb-3" id="formForm">
                 <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
                 <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">

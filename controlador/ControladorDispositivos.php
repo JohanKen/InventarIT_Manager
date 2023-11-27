@@ -35,11 +35,31 @@
                 return $dispositivo;
             }
         }
+        static function detalleDispositivoPLI(){
+            if(isset($_GET["id_dispositivo"])){
+                $id = $_GET["id_dispositivo"];
+        
+                $obj = ModeloDispositivos::selectDispositivosPLI($id);
+        
+                // Verificar si $obj es un objeto mysqli_result
+                if ($obj instanceof mysqli_result) {
+                    // Si es un objeto mysqli_result, aplicar fetch_all()
+                    $dispositivo = $obj->fetch_all(MYSQLI_ASSOC);
+                } else {
+                    // Si no es un objeto mysqli_result, asumir que ya es un array
+                    $dispositivo = $obj;
+                }
+        
+                return $dispositivo;
+            }
+        }
+        
+
         static function detalleLaptop(){
             if(isset($_GET["id_dispositivo"])){
                 $tabla = "v_inv_laptops";
                 $id = $_GET["id_dispositivo"];
-
+                
                 $obj = ModeloDispositivos::selectDispositivosId($tabla, $id);
                 $dispositivoInfo = $obj->fetch_all();
                 return $dispositivoInfo;

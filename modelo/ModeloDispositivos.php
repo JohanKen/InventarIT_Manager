@@ -29,6 +29,39 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
+    //seleccionar dispositivos si son laptop, pc o imac
+    static function selectDispositivosPLI($id) {
+        try {
+            $conexion = Conexion::conectar();
+    
+            // Usar un prepared statement con un marcador de posición ?
+            $stmt = $conexion->prepare("CALL inventarit_manager.datos_laptop(?)");
+            $stmt->bind_param('i', $id); // 'i' indica que el parámetro es de tipo entero
+            $stmt->execute();
+    
+            // Obtener el resultado
+            $result = $stmt->get_result();
+    
+            // Verificar si get_result() está disponible
+            if ($result !== false) {
+                // Devolver el resultado en formato asociativo
+                return $result->fetch_all(MYSQLI_ASSOC);
+            } else {
+                // Manejar el caso donde get_result() no está disponible
+                echo "Error: No se pudo obtener el resultado de la consulta.";
+                return null;
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Manejar la excepción de alguna manera apropiada (puedes imprimir el mensaje o lanzar la excepción)
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            // O lanzar la excepción para que sea manejada en un nivel superior
+            // throw new Exception("Error al ejecutar la consulta: " . $e->getMessage());
+        }
+    }
+    
+    
+    
+    
 
     // Función para seleccionar marcas
     static function selectMarcas($tabla) {
