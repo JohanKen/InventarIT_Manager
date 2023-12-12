@@ -99,17 +99,21 @@ static function editarDispositivos() {
 
                 $datos = array(
                     "id_dispositivo" => $_POST["id_dispositivo"],
+                    "tipo" => "Laptop",
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
-                    "id_marca" => $_POST["marca"],
-                    "precio" => $_POST["precio"],
-                    "fecha_compra" => $_POST["fecha_compra"],
-                    "nota" => $_POST["nota"],
-                    "foto" => "FOTO.png",
                     "ram" => $_POST["ram"],
                     "procesador" => $_POST["procesador"],
                     "sistema_operativo" => $_POST["sistema_operativo"],
+                    "id_marca" => $_POST["marca"],
+                    "precio" => $_POST["precio"],
                     "estado" => $_POST["estado"],
+                    "fecha_compra" => $_POST["fecha_compra"],
+                    "nota" => $_POST["nota"],
+                    "foto" => "FOTO.png",
+                    
+                    
+                    
                 );
 
                 $insert = ModeloDispositivos::updateLaptop($datos);
@@ -138,7 +142,7 @@ static function editarDispositivos() {
                     }
                 } else {
                     // Manejar otros errores
-                    echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
+                    echo "Error al intentar insertar los datos en el procedimiento almacenadoooooo: " . $e->getMessage();
                 }
             }
         } else {

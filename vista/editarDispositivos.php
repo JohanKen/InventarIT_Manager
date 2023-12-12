@@ -31,7 +31,7 @@ function obtenerDatosDispositivo($id) {
 
 //hay que imprimir que trae el arreglo $datosDispositivo del modelo...
 if ($datosDispositivo !== null) {
-    var_dump($datosDispositivo);
+    
 
       // Verificar si la clave 1 existe en el array
       if (array_key_exists('tipo', $datosDispositivo)) {

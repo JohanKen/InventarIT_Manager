@@ -58,11 +58,6 @@ class ModeloDispositivos extends Conexion {
             // throw new Exception("Error al ejecutar la consulta: " . $e->getMessage());
         }
     }
-    
-    
-    
-    
-
     // Función para seleccionar marcas
     static function selectMarcas($tabla) {
         $sql = "SELECT * FROM $tabla;";
