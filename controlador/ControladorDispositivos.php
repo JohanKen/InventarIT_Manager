@@ -25,6 +25,9 @@
                 }
             }
         }
+
+       
+
         static function detalleDispositivo(){
             if(isset($_GET["id_dispositivo"])){
                 $tabla = "v_inv_dispositivos";
@@ -38,7 +41,7 @@
         static function detalleDispositivoPLI(){
             if(isset($_GET["id_dispositivo"])){
                 $id = $_GET["id_dispositivo"];
-        
+                
                 $obj = ModeloDispositivos::selectDispositivosPLI($id);
         
                 // Verificar si $obj es un objeto mysqli_result
@@ -49,8 +52,9 @@
                     // Si no es un objeto mysqli_result, asumir que ya es un array
                     $dispositivo = $obj;
                 }
-        
+                
                 return $dispositivo;
+                
             }
         }
         
@@ -76,7 +80,6 @@
                 return $marca['id_marca'];
             }
         }
-
         return null; // o manejar el caso de marca no encontrada
     }
 */
@@ -102,7 +105,7 @@ static function editarDispositivos() {
                     "tipo" => "Laptop",
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
-                    "ram" => $_POST["ram"],
+                     "ram" => $_POST["ram"],
                     "procesador" => $_POST["procesador"],
                     "sistema_operativo" => $_POST["sistema_operativo"],
                     "id_marca" => $_POST["marca"],

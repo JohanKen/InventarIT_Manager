@@ -53,7 +53,7 @@ class ModeloDispositivos extends Conexion {
             }
         } catch (mysqli_sql_exception $e) {
             // Manejar la excepción de alguna manera apropiada (puedes imprimir el mensaje o lanzar la excepción)
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            echo "Error al ejecutar la consulta:" . $e->getMessage();
             // O lanzar la excepción para que sea manejada en un nivel superior
             // throw new Exception("Error al ejecutar la consulta: " . $e->getMessage());
         }
@@ -64,6 +64,7 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
+
 
     // Función para seleccionar los distintos tipos de estados
     static function selectEstados($tabla) {
@@ -85,24 +86,25 @@ class ModeloDispositivos extends Conexion {
             Conexion::reconectar();
     
             // Llamada al procedimiento almacenado
-            $sql = "CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = Conexion::conectar()->prepare($sql);
     
             // Enlazar parámetros
             $stmt->bind_param(
                 "issiisssissi",
                 $datos["id_dispositivo"],
+                $datos["tipo"],
                 $datos["modelo"],
                 $datos["numero_serie"],
-                $datos["id_marca"],
-                $datos["precio"],
-                $datos["fecha_compra"],
-                $datos["nota"],
-                $datos["foto"],
                 $datos["ram"],
                 $datos["procesador"],
                 $datos["sistema_operativo"],
-                $datos["estado"]
+                $datos["id_marca"],
+                $datos["precio"],
+                $datos["estado"],
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"]
             );
     
             // Ejecutar la sentencia preparada
