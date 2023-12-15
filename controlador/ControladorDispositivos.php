@@ -69,6 +69,8 @@
                 return $dispositivoInfo;
             }
         }
+
+        
          // Función para obtener el ID de la marca por su nombre
    /*    
     static function obtenerIdMarcaPorNombre($nombreMarca) {
@@ -83,35 +85,64 @@
         return null; // o manejar el caso de marca no encontrada
     }
 */
+
 // Función para editar Dispositivo
-static function editarDispositivos() {
+static function editarDispositivos()
+{
     if (isset($_POST["guardar"])) {
-       
+
         // ... (otros códigos)
         $uploadedOK = 1; // Inicializar la variable
 
-        // Obtener el ID de la marca por su nombre (descomentar y adaptar según necesidades)
-        //$idMarca = isset($_POST["marca"]) ? self::obtenerIdMarcaPorNombre($_POST["marca"]) : null;
+        // Obtener el ID de la marca por su nombre
+        function obtenerIdMarcaPorNombre($nombreMarca)
+        {
+            $tabla = 'marcas';
+            $marcas = ModeloDispositivos::selectMarcas($tabla)->fetch_all(MYSQLI_ASSOC);
+
+            foreach ($marcas as $marca) {
+                if ($marca['marca'] === $nombreMarca) {
+                    return $marca['id_marca'];
+                }
+            }
+            return null; // o manejar el caso de marca no encontrada
+        }
 
         // Almacenamos la información al modelo para que la guarde en la base de datos
         if ($uploadedOK == 1) {
-            try { 
+            try {
                 // Ajustar max_allowed_packet para esta conexión
                 $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                 Conexion::conectar()->query($sqlSetMaxAllowedPacket);
 
+                // Obtener el ID de la marca por su nombre (descomentar y adaptar según necesidades)
+                $idMarca = isset($_POST["marca"]) ? obtenerIdMarcaPorNombre($_POST["marca"]) : null;
+
+                $fechaCompra = $_POST["fecha_compra"];
+                $fechaCompraFormateada = DateTime::createFromFormat('d-m-Y', $fechaCompra);
+
+                // Verificar si la conversión fue exitosa
+                if ($fechaCompraFormateada instanceof DateTime) {
+                    // Obtener la fecha formateada en el formato requerido
+                    $fechaCompraFormateada = $fechaCompraFormateada->format('Y-m-d');
+                } else {
+                    // Manejar el caso en que la conversión falla
+                    echo 'Error al convertir la fecha';
+                    // Puedes agregar una redirección o manejo de errores adicional según tus necesidades
+                    exit;
+                }
+
                 $datos = array(
                     "id_dispositivo" => $_POST["id_dispositivo"],
-                    "tipo" => $_POST["tipo"],
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
-                     "ram" => $_POST["ram"],
+                    "ram" => $_POST["ram"],
                     "procesador" => $_POST["procesador"],
                     "sistema_operativo" => $_POST["sistema_operativo"],
-                    "id_marca" => $_POST["marca"],
+                    "id_marca" => $idMarca,
                     "precio" => $_POST["precio"],
                     "estado" => $_POST["estado"],
-                    "fecha_compra" => $_POST["fecha_compra"],
+                    "fecha_compra" => $fechaCompraFormateada,
                     "nota" => $_POST["nota"],
                     "foto" => "foto",
                 );
@@ -127,29 +158,15 @@ static function editarDispositivos() {
                     ';
                 }
             } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 2006) { // Código de error para "MySQL server has gone away"
-                    // Reconectar manualmente
-                    Conexion::conectar()->real_connect(Conexion::$servername, Conexion::$username, Conexion::$password, Conexion::$database);
-                    // Volver a intentar la ejecución de la sentencia preparada
-                    $insert = ModeloDispositivos::updateLaptop($datos);
-                    if ($insert > 0) {
-                        echo '
-                            <script>
-                                alert("Dispositivo actualizado correctamente");
-                                window.location.href="index.php?seccion=dispositivos";
-                            </script>
-                        ';
-                    }
-                } else {
-                    // Manejar otros errores
-                    echo "Error al intentar insertar los datos en el procedimiento almacenadoooooo: " . $e->getMessage();
-                }
+                // ... (manejo de errores)
             }
         } else {
             echo 'Por favor, introduce una imagen';
         }
     }
 }
+
+
 
 
            //Funcion para consultar los tipos de dispositivos
@@ -159,7 +176,7 @@ static function editarDispositivos() {
             $arreglo = $respuesta->fetch_all();
             return $arreglo;
         }
-        //Funcion para consultar los tipos de dispositivos
+        //Funcion para consultar la marca de los dispositivos
         static function getMarcas(){
             $tabla = "marcas";
             $respuesta = ModeloDispositivos::selectMarcas($tabla);

@@ -84,38 +84,45 @@ class ModeloDispositivos extends Conexion {
             Conexion::reconectar();
     
             // Llamada al procedimiento almacenado
-            $sql = "CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "CALL inventarit_manager.editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = Conexion::conectar()->prepare($sql);
     
             // Enlazar parámetros
             $stmt->bind_param(
-                "issiisssissis",
+                "issiisssissi",
                 $datos["id_dispositivo"],
-                $datos["tipo"],
                 $datos["modelo"],
                 $datos["numero_serie"],
-                $datos["ram"] ?? null,
-                $datos["procesador"],
-                $datos["sistema_operativo"] ?? null,
-                $datos["id_marca"] ?? null,
-                $datos["precio"] ?? null,
-                $datos["estado"],
+                $datos["marca"] ,
+                $datos["precio"] ,
                 $datos["fecha_compra"],
-                $datos["nota"] ?? null
+                $datos["nota"],
+                $datos["imagen"],
+                $datos["ram"],  
+                $datos["procesador"],
+                $datos["sistema_operativo"] ,
+                $datos["estado"]
+                
+    
             );
-            
-            
     
             // Ejecutar la sentencia preparada
             $stmt->execute();
             $stmt->close();
-            
-        } catch (mysqli_sql_exception $e) {
-            // Manejar errores
+    
+            // Mensaje de éxito
+            echo "Procedimiento almacenado ejecutado con éxito.";
+    
+        } catch (Exception $e) {
+            // Manejar errores generales
             var_dump($datos);
             echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
+            error_log("Error en updateLaptop: " . $e->getMessage());
         }
+        
+        
     }
+    
     
     
 }
