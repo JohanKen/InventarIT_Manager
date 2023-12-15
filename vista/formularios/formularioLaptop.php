@@ -10,9 +10,13 @@ $update = new ControladorDispositivos;
 
 // Verificar si se envió el formulario para actualizar el dispositivo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (isset($_POST['guardar'])) {
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+            
         $update->editarDispositivos();
-    }
+    
+    }}else{}
 }
 
 // Renderizar el formulario con la información del dispositivo
@@ -38,6 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
         ?>
             <form action="" method="post" enctype="multipart/form-data">
+
+                
+                <div class="mb-3" id="formForm">
+                    <label for="tipo" class="form-label">Tipo de dispositivo</label>
+                    <input type="text" class="form-control" name="tipo" value="<?= $dispositivoInfo[0]["tipo"] ?>" readonly>
+                </div>
 
                 <div class="mb-3" id="formForm">
                     <label for="id_dispositivo" class="form-label">ID</label>
@@ -67,6 +77,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                     </select>
                 </div>
+                <div class="mb-3" id="formForm">
+    <label for="estado" class="form-label">Estado</label>
+    <select class="form-select" name="estado">
+        <?php
+        $estados = array("Asignado", "Disponible", "Dañado");
+
+        foreach ($estados as $estado) {
+            $selected = ($dispositivoInfo[0]["estado"] == $estado) ? 'selected' : '';
+            echo "<option value='$estado' $selected>$estado</option>";
+        }
+        ?>
+    </select>
+</div>
 
                 <div class="mb-3" id="formForm">
                     <label for="precio" class="form-label">Precio</label>
@@ -82,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
                 </div>
                 <div class="mb-3" id="formForm">
-                    <label for="" class="form-label" style="color:black; font-family:lato; text-align:center;" required="true">Imagen del dispositivo</label>
+                    <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;" required="true">Imagen del dispositivo</label>
                     <input type="file" class="form-control" name="foto">
                 </div>
                 <!-- Sección de RAM -->
@@ -167,9 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Debugueando los arrays para verificar que esta todo en orden
     -->
-        <?php var_dump($marcas); ?>
-        <br><br><br><br><br>
-        <?php var_dump($dispositivoInfo); ?>
+    
 
         <!-- Agregamos un formulario -->
 

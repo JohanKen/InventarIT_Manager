@@ -102,7 +102,7 @@ static function editarDispositivos() {
 
                 $datos = array(
                     "id_dispositivo" => $_POST["id_dispositivo"],
-                    "tipo" => "Laptop",
+                    "tipo" => $_POST["tipo"],
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
                      "ram" => $_POST["ram"],
@@ -113,10 +113,7 @@ static function editarDispositivos() {
                     "estado" => $_POST["estado"],
                     "fecha_compra" => $_POST["fecha_compra"],
                     "nota" => $_POST["nota"],
-                    "foto" => "FOTO.png",
-                    
-                    
-                    
+                    "foto" => "foto",
                 );
 
                 $insert = ModeloDispositivos::updateLaptop($datos);

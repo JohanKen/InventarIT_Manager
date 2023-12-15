@@ -73,14 +73,12 @@ class ModeloDispositivos extends Conexion {
         return $res;
     }
 
-    // ...
-
-    // Función para actualizar un Dispositivo por ID
+    // funcion para actualizar las laptop mediante el id
     static function updateLaptop($datos) {
         try {
             // Ajustar max_allowed_packet para esta conexión
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            Conexion::conectar()->options(MYSQLI_OPT_CONNECT_TIMEOUT, 300); // Ajusta el tiempo de espera según sea necesario
+            Conexion::conectar()->options(MYSQLI_OPT_CONNECT_TIMEOUT, 300); // Ajustar el tiempo de espera según sea necesario
     
             // Reconectar antes de ejecutar la consulta
             Conexion::reconectar();
@@ -91,31 +89,34 @@ class ModeloDispositivos extends Conexion {
     
             // Enlazar parámetros
             $stmt->bind_param(
-                "issiisssissi",
+                "issiisssissis",
                 $datos["id_dispositivo"],
                 $datos["tipo"],
                 $datos["modelo"],
                 $datos["numero_serie"],
-                $datos["ram"],
+                $datos["ram"] ?? null,
                 $datos["procesador"],
-                $datos["sistema_operativo"],
-                $datos["id_marca"],
-                $datos["precio"],
+                $datos["sistema_operativo"] ?? null,
+                $datos["id_marca"] ?? null,
+                $datos["precio"] ?? null,
                 $datos["estado"],
                 $datos["fecha_compra"],
-                $datos["nota"],
-                $datos["foto"]
+                $datos["nota"] ?? null
             );
+            
+            
     
             // Ejecutar la sentencia preparada
             $stmt->execute();
             $stmt->close();
-    
+            
         } catch (mysqli_sql_exception $e) {
             // Manejar errores
+            var_dump($datos);
             echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
         }
     }
+    
     
 }
 ?>
