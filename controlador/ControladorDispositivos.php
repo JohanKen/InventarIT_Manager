@@ -94,19 +94,20 @@ static function editarDispositivos()
         // ... (otros códigos)
         $uploadedOK = 1; // Inicializar la variable
 
-        // Obtener el ID de la marca por su nombre
-        function obtenerIdMarcaPorNombre($nombreMarca)
-        {
-            $tabla = 'marcas';
-            $marcas = ModeloDispositivos::selectMarcas($tabla)->fetch_all(MYSQLI_ASSOC);
 
-            foreach ($marcas as $marca) {
-                if ($marca['marca'] === $nombreMarca) {
-                    return $marca['id_marca'];
-                }
-            }
-            return null; // o manejar el caso de marca no encontrada
-        }
+         // Obtener el ID de la marca por su nombre
+         function obtenerIdMarcaPorNombre($nombreMarca)
+         {
+             $tabla = 'marcas';
+             $marcas = ModeloDispositivos::selectMarcas($tabla)->fetch_all(MYSQLI_ASSOC);
+ 
+             foreach ($marcas as $marca) {
+                 if ($marca['marca'] === $nombreMarca) {
+                     return $marca['id_marca'];
+                 }
+             }
+             return null; // o manejar el caso de marca no encontrada
+         }
 
         // Almacenamos la información al modelo para que la guarde en la base de datos
         if ($uploadedOK == 1) {
@@ -166,8 +167,7 @@ static function editarDispositivos()
     }
 }
 
-
-
+    
 
            //Funcion para consultar los tipos de dispositivos
            static function getTiposDispositivos(){

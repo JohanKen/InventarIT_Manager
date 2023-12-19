@@ -2,13 +2,15 @@
 include_once 'conexion.php';
 
 class ModeloDispositivos extends Conexion {
-
+    
     // Función para ver toda la VISTA de dispositivos
     static function selectDispositivos($tabla) {
         $sql = "SELECT * FROM inventarit_manager.$tabla;";
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
+
+
 
     // Función para eliminar un dispositivo
     static function deleteDispositivos($tabla, $id) {
@@ -29,6 +31,10 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
+
+
+
+
     //seleccionar dispositivos si son laptop, pc o imac
     static function selectDispositivosPLI($id) {
         try {
@@ -42,6 +48,9 @@ class ModeloDispositivos extends Conexion {
             // Obtener el resultado
             $result = $stmt->get_result();
     
+            
+            
+
             // Verificar si get_result() está disponible
             if ($result !== false) {
                 // Devolver el resultado en formato asociativo
@@ -73,6 +82,7 @@ class ModeloDispositivos extends Conexion {
         return $res;
     }
 
+
     // funcion para actualizar las laptop mediante el id
     static function updateLaptop($datos) {
         try {
@@ -86,7 +96,10 @@ class ModeloDispositivos extends Conexion {
             // Llamada al procedimiento almacenado
             $sql = "CALL inventarit_manager.editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = Conexion::conectar()->prepare($sql);
-    
+            
+
+        
+
             // Enlazar parámetros
             $stmt->bind_param(
                 "issiisssissi",
@@ -101,9 +114,7 @@ class ModeloDispositivos extends Conexion {
                 $datos["ram"],  
                 $datos["procesador"],
                 $datos["sistema_operativo"] ,
-                $datos["estado"]
-                
-    
+                $datos["estado"]    
             );
     
             // Ejecutar la sentencia preparada
@@ -119,8 +130,11 @@ class ModeloDispositivos extends Conexion {
             echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
             error_log("Error en updateLaptop: " . $e->getMessage());
         }
+
+
         
         
+
     }
     
     

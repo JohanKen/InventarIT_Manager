@@ -1,10 +1,22 @@
 <?php
 require_once 'controlador/ControladorDispositivos.php';
 
-// Obtener la información del dispositivo
+// Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
 $dispositivoInfo = ControladorDispositivos::detalleDispositivoPLI();
 
+// Array asociativo que mapea nombres de marcas a IDs 
+$marcas = array(
+    1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10,
+    11 => 11, 12 => 12, 13 => 13, 14 => 14, 15 => 15, 16 => 16, 17 => 17, 18 => 18, 19 => 19, 20 => 20,
+    21 => 21, 22 => 22, 23 => 23, 24 => 24, 25 => 25, 26 => 26, 27 => 27, 28 => 28, 29 => 29, 30 => 30,
+    31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 => 35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
+);
+
+
+
+
 $id = $_GET['id_dispositivo'];
+
 // Inicializar el controlador para realizar la actualización
 $update = new ControladorDispositivos;
 
@@ -12,11 +24,19 @@ $update = new ControladorDispositivos;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_POST['guardar'])) {
+        // Obtener el ID de la marca desde el array asociativo
+        $marcaSeleccionada = $_POST['marca'];
+        $idMarca = $marcas[$marcaSeleccionada];
+
+        // Almacena el ID de la marca en el arreglo $dispositivoInfo
+        $dispositivoInfo[0]['id_marca'] = $idMarca;
+
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
             $update->editarDispositivos();
         }
     }
 }
+
 
 // Renderizar el formulario con la información del dispositivo
 ?>
@@ -60,7 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $marcas = ControladorDispositivos::getMarcas();
 
                         foreach ($marcas as $row => $item) {
-                            $selected = ($dispositivoInfo[0]["id_marca"] == $item[0]) ? 'selected' : '';
+                            // Comparar la marca del dispositivo con la marca actual del bucle
+                            $selected = ($dispositivoInfo[0]["marca"] == $item[1]) ? 'selected' : '';
+
                             echo '<option value="' . $item[0] . '" ' . $selected . '>' . $item[1] . '</option>';
                         }
                         ?>
@@ -87,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3" id="formForm">
                     <label for="fecha_compra" class="form-label">Fecha de compra</label>
-                    <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= date('d-m-Y', strtotime($dispositivoInfo[0]["fecha_compra"])) ?>" placeholder="Selecciona una fecha">
+                    <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= date('Y-m-d', strtotime($dispositivoInfo[0]["fecha_compra"])) ?>" placeholder="Selecciona una fecha">
                     <input type="date" style="display: none;" name="fecha_compra_hidden" value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" id="fechaCompraHidden">
                 </div>
                 <div class="mb-3" id="formForm">
