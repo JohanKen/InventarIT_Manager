@@ -13,6 +13,12 @@ $marcas = array(
 );
 
 
+$estados = array(
+    1 => 1,
+    2 => 2,
+    3 => 3
+);
+
 
 
 $id = $_GET['id_dispositivo'];
@@ -27,10 +33,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtener el ID de la marca desde el array asociativo
         $marcaSeleccionada = $_POST['marca'];
         $idMarca = $marcas[$marcaSeleccionada];
-
+    
         // Almacena el ID de la marca en el arreglo $dispositivoInfo
         $dispositivoInfo[0]['id_marca'] = $idMarca;
 
+        // Obtener el ID del estado desde el array asociativo
+        $estadoSeleccionado = $_POST['estado'];
+        $idEstado = $estados[$estadoSeleccionado];
+    
+        // Almacena el ID del estado en el arreglo $dispositivoInfo
+        $dispositivoInfo[0]['id_estado'] = $idEstado;
+    
+        // Obtén el valor directo del campo de precio (ya que se formatea en JavaScript)
+        $precio = intval(str_replace(',', '', substr($_POST['precio'], 1))); // Convierte a float y elimina el símbolo de dólar
+
+        // Almacena el precio en el arreglo $dispositivoInfo
+        $dispositivoInfo[0]['precio'] = $precio;
+    
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
             $update->editarDispositivos();
         }
@@ -90,23 +109,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
 
-                <div class="mb-3" id="formForm">
-                    <label for="estado" class="form-label">Estado</label>
-                    <select class="form-select" name="estado">
-                        <?php
-                        $estados = array("Asignado", "Disponible", "Dañado");
+        
+                                            <div class="mb-3" id="formForm">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select class="form-select" name="estado">
+                                    <?php
+                                    foreach ($estados as $estadoId => $estadoLabel) {
+                                        $selected = ($dispositivoInfo[0]["id_estado"] == $estadoId) ? 'selected' : '';
+                                        echo "<option value='$estadoId' $selected>";
+                                        
+                                        // Mostrar el nombre del estado en lugar del valor entero
+                                        switch ($estadoId) {
+                                            case 1:
+                                                echo "Asignado";
+                                                break;
+                                            case 2:
+                                                echo "Disponible";
+                                                break;
+                                            case 3:
+                                                echo "Dañado";
+                                                break;
+                                            
+                                        }
 
-                        foreach ($estados as $estado) {
-                            $selected = ($dispositivoInfo[0]["estado"] == $estado) ? 'selected' : '';
-                            echo "<option value='$estado' $selected>$estado</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                                        echo "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                 <div class="mb-3" id="formForm">
                     <label for="precio" class="form-label">Precio</label>
-                    <input type="text" class="form-control" name="precio" value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>">
+                    <input type="text" class="form-control" name="precio" id="precioInput" value="<?= $dispositivoInfo[0]["precio"] ?>">
                 </div>
+
                 <div class="mb-3" id="formForm">
                     <label for="fecha_compra" class="form-label">Fecha de compra</label>
                     <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= date('Y-m-d', strtotime($dispositivoInfo[0]["fecha_compra"])) ?>" placeholder="Selecciona una fecha">
@@ -179,6 +214,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var_dump($dispositivoInfo);
         
         ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var precioInput = document.getElementById('precioInput');
+
+        precioInput.addEventListener('input', function () {
+            // Formatear el precio al estilo de moneda al escribir
+            var precioFormateado = '$' + new Intl.NumberFormat().format(parseFloat(precioInput.value.replace(',', '')));
+            precioInput.value = precioFormateado;
+        });
+    });
+</script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
