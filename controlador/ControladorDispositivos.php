@@ -70,44 +70,10 @@
             }
         }
 
-        
-         // Función para obtener el ID de la marca por su nombre
-   /*    
-    static function obtenerIdMarcaPorNombre($nombreMarca) {
-        $tabla = 'marcas';
-        $marcas = ModeloDispositivos::selectMarcas('marcas')->fetch_all(MYSQLI_ASSOC);
-
-        foreach ($marcas as $marca) {
-            if ($marca['marca'] === $nombreMarca) {
-                return $marca['id_marca'];
-            }
-        }
-        return null; // o manejar el caso de marca no encontrada
-    }
-*/
-
-// Función para editar Dispositivo
-static function editarDispositivos()
+        static function editarDispositivos()
 {
     if (isset($_POST["guardar"])) {
-
-        // ... (otros códigos)
-        $uploadedOK = 1; // Inicializar la variable
-
-
-         // Obtener el ID de la marca por su nombre
-         function obtenerIdMarcaPorNombre($nombreMarca)
-         {
-             $tabla = 'marcas';
-             $marcas = ModeloDispositivos::selectMarcas($tabla)->fetch_all(MYSQLI_ASSOC);
- 
-             foreach ($marcas as $marca) {
-                 if ($marca['marca'] === $nombreMarca) {
-                     return $marca['id_marca'];
-                 }
-             }
-             return null; // o manejar el caso de marca no encontrada
-         }
+        $uploadedOK = 1;
 
         // Almacenamos la información al modelo para que la guarde en la base de datos
         if ($uploadedOK == 1) {
@@ -116,37 +82,35 @@ static function editarDispositivos()
                 $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                 Conexion::conectar()->query($sqlSetMaxAllowedPacket);
 
-                // Obtener el ID de la marca por su nombre (descomentar y adaptar según necesidades)
-                $idMarca = isset($_POST["marca"]) ? obtenerIdMarcaPorNombre($_POST["marca"]) : null;
-
+                // Validar el formato de la fecha
                 $fechaCompra = $_POST["fecha_compra"];
-                $fechaCompraFormateada = DateTime::createFromFormat('d-m-Y', $fechaCompra);
-
-                // Verificar si la conversión fue exitosa
-                if ($fechaCompraFormateada instanceof DateTime) {
-                    // Obtener la fecha formateada en el formato requerido
-                    $fechaCompraFormateada = $fechaCompraFormateada->format('Y-m-d');
-                } else {
-                    // Manejar el caso en que la conversión falla
-                    echo 'Error al convertir la fecha';
-                    // Puedes agregar una redirección o manejo de errores adicional según tus necesidades
+                if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                    $fechaCompraFormateada = $fechaCompra;
+                } else { 
+                    // Manejar el caso en que la fecha no tiene el formato correcto
+                    echo 'Error en el formato de la fecha';
                     exit;
                 }
+                
+                // Obtén el valor directo del campo de precio 
+                
 
                 $datos = array(
-                    "id_dispositivo" => $_POST["id_dispositivo"],
+                    "id_dispositivo" => (int)$_POST["id_dispositivo"],
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
-                    "ram" => $_POST["ram"],
+                    "ram" => (int)$_POST["ram"],
                     "procesador" => $_POST["procesador"],
                     "sistema_operativo" => $_POST["sistema_operativo"],
-                    "id_marca" => $idMarca,
-                    "precio" => $_POST["precio"],
-                    "estado" => $_POST["estado"],
+                    "id_marca" => (int)$_POST["marca"],
+                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  // Se usa el precio procesado como double
+                    "estado" => (int)$_POST["estado"],
                     "fecha_compra" => $fechaCompraFormateada,
                     "nota" => $_POST["nota"],
                     "foto" => "foto",
                 );
+
+                // Luego, puedes usar el array $datos en tu lógica de negocios
 
                 $insert = ModeloDispositivos::updateLaptop($datos);
 
@@ -157,15 +121,20 @@ static function editarDispositivos()
                             window.location.href="index.php?seccion=dispositivos";
                         </script>
                     ';
+                } else {
+                    echo 'Error al intentar actualizar el dispositivo.';
                 }
             } catch (mysqli_sql_exception $e) {
-                // ... (manejo de errores)
+                // Manejar excepciones de MySQL
+                echo 'Error en la conexión a la base de datos.';
             }
         } else {
             echo 'Por favor, introduce una imagen';
         }
     }
 }
+
+        
 
     
 

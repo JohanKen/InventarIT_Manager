@@ -44,11 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Almacena el ID del estado en el arreglo $dispositivoInfo
         $dispositivoInfo[0]['id_estado'] = $idEstado;
     
-        // Obtén el valor directo del campo de precio (ya que se formatea en JavaScript)
-        $precio = intval(str_replace(',', '', substr($_POST['precio'], 1))); // Convierte a float y elimina el símbolo de dólar
+         // Obtén el valor directo del campo de precio 
+$precio = isset($_POST['precio']) ? intval(str_replace(',', '', $_POST['precio'])) : 0;
 
-        // Almacena el precio en el arreglo $dispositivoInfo
-        $dispositivoInfo[0]['precio'] = $precio;
+// Almacena el precio en el arreglo $dispositivoInfo
+$dispositivoInfo[0]['precio'] = $precio;
+
     
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
             $update->editarDispositivos();
@@ -137,16 +138,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ?>
                                 </select>
                             </div>
-                <div class="mb-3" id="formForm">
-                    <label for="precio" class="form-label">Precio</label>
-                    <input type="text" class="form-control" name="precio" id="precioInput" value="<?= $dispositivoInfo[0]["precio"] ?>">
-                </div>
+
+
+                            <div class="mb-3" id="formForm">
+                                <label for="precio" class="form-label">Precio</label>
+                                <input type="text" class="form-control" name="precio" id="precioInput" value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>">
+                            </div>
+
+
+
 
                 <div class="mb-3" id="formForm">
-                    <label for="fecha_compra" class="form-label">Fecha de compra</label>
-                    <input type="text" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= date('Y-m-d', strtotime($dispositivoInfo[0]["fecha_compra"])) ?>" placeholder="Selecciona una fecha">
-                    <input type="date" style="display: none;" name="fecha_compra_hidden" value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" id="fechaCompraHidden">
-                </div>
+    <label for="fecha_compra" class="form-label">Fecha de compra</label>
+    <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha">
+</div>
+
                 <div class="mb-3" id="formForm">
                     <label for="nota" class="form-label">Notas</label>
                     <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
@@ -204,28 +210,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
                     <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
                 </div>
+        
+
             </form>
 
         <?php
+        
+        
+
         } else {
             echo "El array \$dispositivoInfo no está definido o no tiene la estructura esperada.";
         }
 
-        var_dump($dispositivoInfo);
+        
         
         ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var precioInput = document.getElementById('precioInput');
-
         precioInput.addEventListener('input', function () {
-            // Formatear el precio al estilo de moneda al escribir
-            var precioFormateado = '$' + new Intl.NumberFormat().format(parseFloat(precioInput.value.replace(',', '')));
+            // Reemplaza todos los caracteres que no son dígitos o puntos
+            var precioNumerico = precioInput.value.replace(/[^\d.]/g, '');
+            // Convierte a número y formatea al estilo de moneda
+            var precioFormateado = '$' + new Intl.NumberFormat().format(parseFloat(precioNumerico));
             precioInput.value = precioFormateado;
         });
     });
 </script>
-
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var fechaCompraInput = document.getElementById('fechaCompraInput');

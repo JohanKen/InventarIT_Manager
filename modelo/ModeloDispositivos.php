@@ -88,34 +88,38 @@ class ModeloDispositivos extends Conexion {
         try {
             // Ajustar max_allowed_packet para esta conexión
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            Conexion::conectar()->options(MYSQLI_OPT_CONNECT_TIMEOUT, 300); // Ajustar el tiempo de espera según sea necesario
-    
-            // Reconectar antes de ejecutar la consulta
-            Conexion::reconectar();
-    
+           
+        
             // Llamada al procedimiento almacenado
             $sql = "CALL inventarit_manager.editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = Conexion::conectar()->prepare($sql);
             
 
-        
+           
+// Crear variables para almacenar los valores
+$id_dispositivo = (int)$datos["id_dispositivo"];
+$id_marca = (int)$datos["id_marca"];
+$ram = (int)$datos["ram"];
+$estado = (int)$datos["estado"];
+$precio = (double)$datos["precio"];
 
-            // Enlazar parámetros
-            $stmt->bind_param(
-                "issiisssissi",
-                $datos["id_dispositivo"],
-                $datos["modelo"],
-                $datos["numero_serie"],
-                $datos["marca"] ,
-                $datos["precio"] ,
-                $datos["fecha_compra"],
-                $datos["nota"],
-                $datos["imagen"],
-                $datos["ram"],  
-                $datos["procesador"],
-                $datos["sistema_operativo"] ,
-                $datos["estado"]    
-            );
+// Enlazar parámetros
+$stmt->bind_param(
+    "issiisssissi",
+    $id_dispositivo,
+    $datos["modelo"],
+    $datos["numero_serie"],
+    $id_marca,
+    $precio,
+    $datos["fecha_compra"],
+    $datos["nota"],
+    $datos["foto"],
+    $ram,
+    $datos["procesador"],
+    $datos["sistema_operativo"],
+    $estado
+);
+
     
             // Ejecutar la sentencia preparada
             $stmt->execute();
@@ -126,7 +130,55 @@ class ModeloDispositivos extends Conexion {
     
         } catch (Exception $e) {
             // Manejar errores generales
-            var_dump($datos);
+            echo '<pre>';
+            var_dump($id_dispositivo);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["modelo"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["numero_serie"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($id_marca);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($precio);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["fecha_compra"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["nota"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["foto"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($ram);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["procesador"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($datos["sistema_operativo"]);
+            echo '</pre><br>';
+            
+            echo '<pre>';
+            var_dump($estado);
+            echo '</pre><br>';
+            
+            
             echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
             error_log("Error en updateLaptop: " . $e->getMessage());
         }
