@@ -11,6 +11,10 @@ class ModeloDispositivos extends Conexion {
     }
 
 
+    
+
+
+
 
     // Función para eliminar un dispositivo
     static function deleteDispositivos($tabla, $id) {
@@ -91,7 +95,7 @@ class ModeloDispositivos extends Conexion {
            
         
             // Llamada al procedimiento almacenado
-            $sql = "CALL inventarit_manager.editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "call inventarit_manager.editar_laptop(13, 'modelo generico 2' , 'numero de serie 334', 1, 0, '2000-11-26', 'Prueba', 'foto.jpg', 4, 'AMD Ryzen 5000', 'Windows 10 Pro - 64 bits', 1);";
             $stmt = Conexion::conectar()->prepare($sql);
             
 
@@ -121,6 +125,7 @@ $stmt->bind_param(
 );
 
     
+
             // Ejecutar la sentencia preparada
             $stmt->execute();
             $stmt->close();
@@ -130,6 +135,7 @@ $stmt->bind_param(
     
         } catch (Exception $e) {
             // Manejar errores generales
+            echo "ARREGLO DEL MODELO QUE SE ESTA ENVIANDO A LA BASE DE DATOS";
             echo '<pre>';
             var_dump($id_dispositivo);
             echo '</pre><br>';

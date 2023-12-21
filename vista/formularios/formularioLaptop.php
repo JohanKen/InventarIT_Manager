@@ -20,7 +20,6 @@ $estados = array(
 );
 
 
-
 $id = $_GET['id_dispositivo'];
 
 // Inicializar el controlador para realizar la actualización
@@ -45,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dispositivoInfo[0]['id_estado'] = $idEstado;
     
          // Obtén el valor directo del campo de precio 
-$precio = isset($_POST['precio']) ? intval(str_replace(',', '', $_POST['precio'])) : 0;
+$precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
 
 // Almacena el precio en el arreglo $dispositivoInfo
 $dispositivoInfo[0]['precio'] = $precio;
@@ -210,13 +209,19 @@ $dispositivoInfo[0]['precio'] = $precio;
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
                     <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
                 </div>
-        
+                        <!-- debug de array del formulario para verificar que tipo de datos se estan enviando
+                        y estos coincidan con lo que se espera en el procedimiento almacenado 
+                        <?php< 
+                        //echo "ARRAY EN EL FORMULARIO...";
+                        // var_dump ($dispositivoInfo); ?>
+                        <-->
 
             </form>
 
         <?php
-        
-        
+    
+
+   
 
         } else {
             echo "El array \$dispositivoInfo no está definido o no tiene la estructura esperada.";

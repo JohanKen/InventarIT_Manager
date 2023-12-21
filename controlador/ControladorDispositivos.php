@@ -109,8 +109,10 @@
                     "nota" => $_POST["nota"],
                     "foto" => "foto",
                 );
-
-                // Luego, puedes usar el array $datos en tu lógica de negocios
+                
+               
+               
+          
 
                 $insert = ModeloDispositivos::updateLaptop($datos);
 
@@ -131,6 +133,9 @@
         } else {
             echo 'Por favor, introduce una imagen';
         }
+
+        echo "ARRAY EN EL CONTROLADOR...";
+        var_dump ($datos); 
     }
 }
 
