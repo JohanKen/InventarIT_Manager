@@ -87,115 +87,52 @@ class ModeloDispositivos extends Conexion {
     }
 
 
-    // funcion para actualizar las laptop mediante el id
-    static function updateLaptop($datos) {
-        try {
-            // Ajustar max_allowed_packet para esta conexión
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-           
-        
-            // Llamada al procedimiento almacenado
-            $sql = "call inventarit_manager.editar_laptop(13, 'modelo generico 2' , 'numero de serie 334', 1, 0, '2000-11-26', 'Prueba', 'foto.jpg', 4, 'AMD Ryzen 5000', 'Windows 10 Pro - 64 bits', 1);";
-            $stmt = Conexion::conectar()->prepare($sql);
-            
+    //funcion para insertar a base de datos directamente desde el modelo con datos precargados sin usar el formulario
+    //esta funcion solo es de prueba debido a que la sentencia esta fallando desde el controlador (tipos de datos no coinciden y no hace nada la funcion en el modelo)
+// Función para actualizar las laptop mediante el id
+static function updateLaptop($datos, $conexion) {
+    try {
+        // Crear variables para almacenar los valores
+        $id_dispositivo = (int) $datos["id_dispositivo"];
+        $id_marca = (int) $datos["id_marca"];
+        $ram = (int) $datos["ram"];
+        $estado = (int) $datos["estado"];
+        $precio = (double) $datos["precio"];
 
-           
-// Crear variables para almacenar los valores
-$id_dispositivo = (int)$datos["id_dispositivo"];
-$id_marca = (int)$datos["id_marca"];
-$ram = (int)$datos["ram"];
-$estado = (int)$datos["estado"];
-$precio = (double)$datos["precio"];
+        //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
+        $statement = $conexion->prepare("CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->bind_param("issiisssissi",
+            $id_dispositivo,
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+            $ram,
+            $datos["procesador"],
+            $datos["sistema_operativo"],
+            $estado
+        );
 
-// Enlazar parámetros
-$stmt->bind_param(
-    "issiisssissi",
-    $id_dispositivo,
-    $datos["modelo"],
-    $datos["numero_serie"],
-    $id_marca,
-    $precio,
-    $datos["fecha_compra"],
-    $datos["nota"],
-    $datos["foto"],
-    $ram,
-    $datos["procesador"],
-    $datos["sistema_operativo"],
-    $estado
-);
+        // Muestra el array antes de ejecutar la sentencia preparada
+        var_dump($datos);
 
-    
+        $statement->execute();
+        $statement->close();
+        $conexion->close();
 
-            // Ejecutar la sentencia preparada
-            $stmt->execute();
-            $stmt->close();
-    
-            // Mensaje de éxito
-            echo "Procedimiento almacenado ejecutado con éxito.";
-    
-        } catch (Exception $e) {
-            // Manejar errores generales
-            echo "ARREGLO DEL MODELO QUE SE ESTA ENVIANDO A LA BASE DE DATOS";
-            echo '<pre>';
-            var_dump($id_dispositivo);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["modelo"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["numero_serie"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($id_marca);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($precio);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["fecha_compra"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["nota"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["foto"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($ram);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["procesador"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($datos["sistema_operativo"]);
-            echo '</pre><br>';
-            
-            echo '<pre>';
-            var_dump($estado);
-            echo '</pre><br>';
-            
-            
-            echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
-            error_log("Error en updateLaptop: " . $e->getMessage());
-        }
+        // Mensaje de éxito
+        echo "Procedimiento almacenado ejecutado con éxito.";
 
-
-        
-        
-
+    } catch (Exception $e) {
+        // Manejar errores generales
+        echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
+        error_log("Error en updateLaptop: " . $e->getMessage());
     }
-    
-    
+}
+
     
 }
 ?>

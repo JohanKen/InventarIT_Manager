@@ -5,7 +5,6 @@
 	<title>Menú Lateral con Css</title>
 	<link rel="stylesheet" href="./estilos/estilosMenu.css">
 </head>
-
 <!--
 <body>
 	<header class="header">
@@ -19,7 +18,7 @@
             <nav class="menu">
       
         <div class="search">
-            <input type="text" placeholder="Buscar">
+            <input type="text" placeholder="Buscar">f
         </div>
         <div class="notifications">
             <a href="#">🔔</a>

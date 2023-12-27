@@ -12,7 +12,7 @@ $marcas = array(
     31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 => 35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
 );
 
-
+//Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
 $estados = array(
     1 => 1,
     2 => 2,
@@ -29,17 +29,19 @@ $update = new ControladorDispositivos;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_POST['guardar'])) {
+
+        //primero hay que obtener la marca como id como en las siguientes lineas...
         // Obtener el ID de la marca desde el array asociativo
         $marcaSeleccionada = $_POST['marca'];
         $idMarca = $marcas[$marcaSeleccionada];
-    
         // Almacena el ID de la marca en el arreglo $dispositivoInfo
         $dispositivoInfo[0]['id_marca'] = $idMarca;
 
+
+        //hacemos lo mismo con esl estado...
         // Obtener el ID del estado desde el array asociativo
         $estadoSeleccionado = $_POST['estado'];
         $idEstado = $estados[$estadoSeleccionado];
-    
         // Almacena el ID del estado en el arreglo $dispositivoInfo
         $dispositivoInfo[0]['id_estado'] = $idEstado;
     
@@ -74,10 +76,13 @@ $dispositivoInfo[0]['precio'] = $precio;
     </script>
 </head>
 
+
+
 <body>
     <div class="contentSeccion">
         <?php
         if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
+            
         ?>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="mb-3" id="formForm">
@@ -211,17 +216,18 @@ $dispositivoInfo[0]['precio'] = $precio;
                 </div>
                         <!-- debug de array del formulario para verificar que tipo de datos se estan enviando
                         y estos coincidan con lo que se espera en el procedimiento almacenado 
-                        <?php< 
-                        //echo "ARRAY EN EL FORMULARIO...";
-                        // var_dump ($dispositivoInfo); ?>
-                        <-->
+                    -->
+                        <?php 
+                        echo "ARRAY EN EL FORMULARIO...";
+                         var_dump ($dispositivoInfo); ?>
+                        
 
             </form>
 
         <?php
     
 
-   
+    
 
         } else {
             echo "El array \$dispositivoInfo no está definido o no tiene la estructura esperada.";

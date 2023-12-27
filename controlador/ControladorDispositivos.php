@@ -9,11 +9,12 @@
             $arregloDispositivos = $obj->fetch_all();
             return $arregloDispositivos;
         }
+        
         //funcion para eliminar dispositivos
         static function borrarDispositivos(){
             if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarDispositivos"){
                 $id = $_GET["id_dispositivo"];
-                $tabla = 'dispositivos';
+                $tabla = 'dispositivos';                                                                                                                                                                    
                 $delete = ModeloDispositivos::deleteDispositivos($tabla, $id);
                 if($delete>0){
                     echo '
@@ -27,7 +28,8 @@
         }
 
        
-
+        //funcion para consultar los detalles de dispositivos de manera general sin especificar
+        //que sea de algun tipo en especifico
         static function detalleDispositivo(){
             if(isset($_GET["id_dispositivo"])){
                 $tabla = "v_inv_dispositivos";
@@ -38,6 +40,11 @@
                 return $dispositivo;
             }
         }
+
+
+        
+
+
         static function detalleDispositivoPLI(){
             if(isset($_GET["id_dispositivo"])){
                 $id = $_GET["id_dispositivo"];
@@ -71,7 +78,7 @@
         }
 
         static function editarDispositivos()
-{
+    {
     if (isset($_POST["guardar"])) {
         $uploadedOK = 1;
 

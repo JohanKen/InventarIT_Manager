@@ -4,7 +4,7 @@
     public static $username = "Johan";
     public static $password = "RTStrc2023";
     public static $database = "inventarit_manager";
-
+    
     // Método para conectar a la base de datos
     public static function conectar() {
         // Verificar la correcta conexión entre las mismas
@@ -16,9 +16,6 @@
         }
         return $con;
     }
-    public static function reconectar() {
-        Conexion::conectar()->real_connect(Conexion::$servername, Conexion::$username, Conexion::$password, Conexion::$database);
-    }
-    
+  
 }
 ?>
