@@ -1,7 +1,7 @@
 <?php
-    include './modelo/conexion.php';
-    include './modelo/ModeloUsuarios.php';
-    include 'C:\laragon\www\InventaritManager\controlador\ControladorUsuarios.php';
+    include 'modelo/conexion.php';
+    include 'modelo/ModeloUsuarios.php';
+    include 'controlador/ControladorUsuarios.php';
     $login = new ControladorUsuarios;
     $login->validarLogin();
 ?>

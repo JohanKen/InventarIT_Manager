@@ -5,13 +5,7 @@ class ControladorUsuarios {
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
 
-          // Verificar si el usuario ha iniciado sesión
-          if (isset($_SESSION['usuario'])) {
-            // Redirigir a la página de inicio de sesión si no ha iniciado sesión
-            header('location: index.php');
-            exit(); // Asegurar que el código se detenga después de la redirección
-        }
-
+      
         if (isset($_POST["entrar"])) {
             $email = $_POST["email"];
             $password = $_POST["password"];
@@ -37,6 +31,7 @@ class ControladorUsuarios {
                                     alert("Iniciaste sesión como administrador");
                                     window.location.href="index.php";
                                     </script>';
+                                    
                             break;
                         case $rol_usuario == 2 && $estado_usuario == 1:
                             echo  '<script>

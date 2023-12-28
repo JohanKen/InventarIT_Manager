@@ -18,7 +18,7 @@
             <nav class="menu">
       
         <div class="search">
-            <input type="text" placeholder="Buscar">f
+            <input type="text" placeholder="Buscar">
         </div>
         <div class="notifications">
             <a href="#">🔔</a>
@@ -31,7 +31,7 @@
             <ul class="user-menu">
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Configuración</a></li>
-                <li><a href="#" id="logout">Cerrar Sesión</a></li>
+                <li><a href="logout.php" id="logout">Cerrar Sesión</a></li>
             </ul>
         </div>
     </nav>
