@@ -43,7 +43,7 @@ class ModeloDispositivos extends Conexion {
     static function selectDispositivosPLI($id) {
         try {
             $conexion = Conexion::conectar();
-    
+            
             // Usar un prepared statement con un marcador de posición ?
             $stmt = $conexion->prepare("CALL inventarit_manager.datos_laptop(?)");
             $stmt->bind_param('i', $id); // 'i' indica que el parámetro es de tipo entero
@@ -54,7 +54,7 @@ class ModeloDispositivos extends Conexion {
     
             
             
-
+            
             // Verificar si get_result() está disponible
             if ($result !== false) {
                 // Devolver el resultado en formato asociativo
@@ -77,7 +77,7 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-    
+
 
     // Función para seleccionar los distintos tipos de estados
     static function selectEstados($tabla) {

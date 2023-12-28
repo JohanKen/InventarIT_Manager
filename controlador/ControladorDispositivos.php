@@ -43,16 +43,12 @@
             }
         }
 
-
-        
-
-
         static function detalleDispositivoPLI(){
             if(isset($_GET["id_dispositivo"])){
                 $id = $_GET["id_dispositivo"];
                 
                 $obj = ModeloDispositivos::selectDispositivosPLI($id);
-        
+                
                 // Verificar si $obj es un objeto mysqli_result
                 if ($obj instanceof mysqli_result) {
                     // Si es un objeto mysqli_result, aplicar fetch_all()

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<heqqader class="header">
+	<header class="header">
 		<div class="container">
 		<div class="btn-menu">
         <label for="btn-menu" style="color: black;">☰</label>

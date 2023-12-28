@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarDispositivos();
-        header('Location: dispositivos.php');
+        header('Location:index.php?seccion=dispositivos');
         exit;
         
     }
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         
-                                            <div class="mb-3" id="formForm">
+                                    <div class="mb-3" id="formForm">
                                 <label for="estado" class="form-label">Estado</label>
                                 <select class="form-select" name="estado">
                                     <?php
@@ -220,10 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
                     <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
                 </div>
-                        <!-- debug de array del formulario para verificar que tipo de datos se estan enviando
-                        y estos coincidan con lo que se espera en el procedimiento almacenado 
-                    -->
-                     
+                        
 
             </form>
 
