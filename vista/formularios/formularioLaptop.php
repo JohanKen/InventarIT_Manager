@@ -1,5 +1,8 @@
 <?php
 require_once 'controlador/ControladorDispositivos.php';
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 
 // Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
 $dispositivoInfo = ControladorDispositivos::detalleDispositivoPLI();
@@ -22,22 +25,24 @@ $estados = array(
 
 $id = $_GET['id_dispositivo'];
 
-// Inicializar el controlador para realizar la actualización
-$update = new ControladorDispositivos;
 
 // Verificar si se envió el formulario para actualizar el dispositivo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_POST['guardar'])) {
+        $update = new ControladorDispositivos;
 
+
+
+
+        //LAS SIGUIENTES LINEAS SON EMPAREJAMIENTOS DE VARIABLES Y ASIGNACIONES PARA QUE PUEDAN PASAR AL CONTROLADOR DEL TIPO 
+        //QUE LAS ESPERA PARA QUE NO TENGA NINGUN INCONVENIENTE CON ELLO.
         //primero hay que obtener la marca como id como en las siguientes lineas...
         // Obtener el ID de la marca desde el array asociativo
         $marcaSeleccionada = $_POST['marca'];
         $idMarca = $marcas[$marcaSeleccionada];
         // Almacena el ID de la marca en el arreglo $dispositivoInfo
         $dispositivoInfo[0]['id_marca'] = $idMarca;
-
-
         //hacemos lo mismo con esl estado...
         // Obtener el ID del estado desde el array asociativo
         $estadoSeleccionado = $_POST['estado'];
@@ -46,15 +51,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dispositivoInfo[0]['id_estado'] = $idEstado;
     
          // Obtén el valor directo del campo de precio 
-$precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
-
-// Almacena el precio en el arreglo $dispositivoInfo
-$dispositivoInfo[0]['precio'] = $precio;
+        $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
+        // Almacena el precio en el arreglo $dispositivoInfo
+        $dispositivoInfo[0]['precio'] = $precio;
 
     
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-            $update->editarDispositivos();
-        }
+        
+        $update->editarDispositivos();
+        header('Location: dispositivos.php');
+        exit;
+        
     }
 }
 
@@ -77,7 +83,6 @@ $dispositivoInfo[0]['precio'] = $precio;
 </head>
 
 
-
 <body>
     <div class="contentSeccion">
         <?php
@@ -85,6 +90,7 @@ $dispositivoInfo[0]['precio'] = $precio;
             
         ?>
             <form action="" method="post" enctype="multipart/form-data">
+
                 <div class="mb-3" id="formForm">
                     <label for="id_dispositivo" class="form-label">ID</label>
                     <input type="text" class="form-control" name="id_dispositivo" value="<?= $dispositivoInfo[0]["id_dispositivo"] ?>" readonly>
@@ -153,9 +159,9 @@ $dispositivoInfo[0]['precio'] = $precio;
 
 
                 <div class="mb-3" id="formForm">
-    <label for="fecha_compra" class="form-label">Fecha de compra</label>
-    <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha">
-</div>
+                    <label for="fecha_compra" class="form-label">Fecha de compra</label>
+                    <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha">
+                </div>
 
                 <div class="mb-3" id="formForm">
                     <label for="nota" class="form-label">Notas</label>
@@ -217,10 +223,7 @@ $dispositivoInfo[0]['precio'] = $precio;
                         <!-- debug de array del formulario para verificar que tipo de datos se estan enviando
                         y estos coincidan con lo que se espera en el procedimiento almacenado 
                     -->
-                        <?php 
-                        echo "ARRAY EN EL FORMULARIO...";
-                         var_dump ($dispositivoInfo); ?>
-                        
+                     
 
             </form>
 
@@ -233,7 +236,9 @@ $dispositivoInfo[0]['precio'] = $precio;
             echo "El array \$dispositivoInfo no está definido o no tiene la estructura esperada.";
         }
 
-        
+                
+            
+
         
         ?>
 

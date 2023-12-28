@@ -65,7 +65,7 @@
                                 <td>' . $item[8] . '</td>
                                 <td><img src="' . $item[9] . '" alt="" height="50"></td>
                                 
-                                <!-- Acciones... -->
+                              
                                 <td>
                                 <a href="index.php?seccion=editarDispositivos&id_dispositivo='.$item[0].'">Editar</a>
    

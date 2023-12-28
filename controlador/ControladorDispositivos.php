@@ -1,5 +1,5 @@
 <?php
-
+    include_once "./modelo/ModeloDispositivos.php";
     class ControladorDispositivos{
         
         //Funcion para consultar el listado de productos en venta.
@@ -26,7 +26,9 @@
                 }
             }
         }
+        
 
+       
        
         //funcion para consultar los detalles de dispositivos de manera general sin especificar
         //que sea de algun tipo en especifico
@@ -80,10 +82,10 @@
         static function editarDispositivos()
     {
     if (isset($_POST["guardar"])) {
-        $uploadedOK = 1;
+   
 
         // Almacenamos la información al modelo para que la guarde en la base de datos
-        if ($uploadedOK == 1) {
+      
             try {
                 // Ajustar max_allowed_packet para esta conexión
                 $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
@@ -141,9 +143,9 @@
             echo 'Por favor, introduce una imagen';
         }
 
-        echo "ARRAY EN EL CONTROLADOR...";
+        echo "ARRAY EN EL CONTROLADOR (datos)...";
         var_dump ($datos); 
-    }
+    
 }
 
         

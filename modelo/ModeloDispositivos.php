@@ -77,7 +77,7 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-
+    
 
     // Función para seleccionar los distintos tipos de estados
     static function selectEstados($tabla) {
@@ -90,7 +90,8 @@ class ModeloDispositivos extends Conexion {
     //funcion para insertar a base de datos directamente desde el modelo con datos precargados sin usar el formulario
     //esta funcion solo es de prueba debido a que la sentencia esta fallando desde el controlador (tipos de datos no coinciden y no hace nada la funcion en el modelo)
 // Función para actualizar las laptop mediante el id
-static function updateLaptop($datos, $conexion) {
+static function updateLaptop($datos) {
+    $conexion = Conexion::conectar();// Accede a la variable de conexión global
     try {
         // Crear variables para almacenar los valores
         $id_dispositivo = (int) $datos["id_dispositivo"];
@@ -117,11 +118,15 @@ static function updateLaptop($datos, $conexion) {
         );
 
         // Muestra el array antes de ejecutar la sentencia preparada
-        var_dump($datos);
+      
 
         $statement->execute();
         $statement->close();
-        $conexion->close();
+       
+        
+        
+        //echo "ARRAY EN EL MODELO(datos)...($datos)";
+        //var_dump($datos);
 
         // Mensaje de éxito
         echo "Procedimiento almacenado ejecutado con éxito.";

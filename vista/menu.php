@@ -5,9 +5,9 @@
 	<title>Menú Lateral con Css</title>
 	<link rel="stylesheet" href="./estilos/estilosMenu.css">
 </head>
-<!--
+
 <body>
-	<header class="header">
+	<heqqader class="header">
 		<div class="container">
 		<div class="btn-menu">
         <label for="btn-menu" style="color: black;">☰</label>
@@ -38,7 +38,7 @@
 		</div>
 	</header>
 	<div class="capa"></div>
--->
+
 	<!-- Menú desplegable de "Equipos" -->
 	<input type="checkbox" id="btn-menu">
 	<div class="container-menu">

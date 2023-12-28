@@ -33,6 +33,16 @@ function obtenerDatosDispositivo($id) {
 if ($datosDispositivo !== null) {
     
 
+    //debug de arreglo que esta llegando desde la vista para decidir por la clave a que formulario sera enviado...
+    //echo "ARREGLO DE editarDispositivos datosDispositivo...";
+    //echo "<br>";
+    //echo "<pre>";
+    //var_dump($datosDispositivo);
+    //echo "</pre>";
+
+    
+   
+
       // Verificar si la clave 1 existe en el array
       if (array_key_exists('tipo', $datosDispositivo)) {
     switch ($datosDispositivo['tipo']) {
