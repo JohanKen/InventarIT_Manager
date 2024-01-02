@@ -1,4 +1,7 @@
-<?php class ModeloUsuarios {
+<?php
+include_once 'modelo/conexion.php';
+class ModeloUsuarios {
+    
     static function login($email, $password) {
         $sql = "SELECT id_rol, id_estado_usuario FROM usuarios WHERE correo_usuario = ? AND password = ?;";
         $conn = Conexion::conectar();

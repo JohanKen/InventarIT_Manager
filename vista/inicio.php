@@ -22,6 +22,8 @@
     </style>
 </head>
 
+
+
 <body>
     <div class="contentSeccion">
         <p>PAGINA DE DASHBOARDS</p>
@@ -30,3 +32,4 @@
 </body>
 
 </html>
+
