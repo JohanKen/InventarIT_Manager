@@ -1,11 +1,12 @@
 <?php 
+
+include_once 'modelo/ModeloUsuarios.php';
 class ControladorUsuarios {
     
     
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
 
-      
         if (isset($_POST["entrar"])) {
             $email = $_POST["email"];
             $password = $_POST["password"];
@@ -27,11 +28,15 @@ class ControladorUsuarios {
                    
                     switch (true) {
                         case $rol_usuario == 1 && $estado_usuario == 1:
+<<<<<<< HEAD
                             echo  '<script>
                                     alert("Iniciaste sesión como administrador");
                                     window.location.href="index.php?seccion=dispositivos";
                                     </script>';
                                     
+=======
+                            header('Location: index.php?seccion=dispositivos');
+>>>>>>> dc8fd907a8b095499b0b04d3a176752b4df7392e
                             break;
                         case $rol_usuario == 2 && $estado_usuario == 1:
                             echo  '<script>
@@ -76,7 +81,7 @@ class ControladorUsuarios {
             }  else {
                 $usuarioIncorrecto = ModeloUsuarios::comprobarUsuario($email);
                 if ($usuarioIncorrecto) {
-                    echo '<script>
+                    echo '<script>a
                             alert("La contraseña es incorrecta");
                             window.location.href="Login.php";
                           </script>';
