@@ -1,5 +1,5 @@
 <?php
-    require_once('C:\laragon\www\InventaritManager\modelo\conexion.php');
+    require_once('../modelo/conexion.php');
     $id = $_POST['id'];
     $pass= $_POST['new_password'];
 

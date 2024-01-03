@@ -7,7 +7,7 @@ require '../PHPMailer/Exception.php';
 require '../PHPMailer/PHPMailer.php';
 require '../PHPMailer/SMTP.php';
 
-include_once 'C:\laragon\www\InventaritManager\modelo\conexion.php';
+include_once '../modelo/conexion.php';
 
 $correo = $_POST['correo'];
 $query = "SELECT nombre_usuario, id_usuario FROM usuarios WHERE correo_usuario = '$correo' AND id_estado_usuario = 1";
@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
                 <div style="text-align: center; padding: 20px;">
                     <p style="font-size: 18px;">Recuperación de contraseña</p>
                     <p style="font-size: 16px;">Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-                    <a href="http://localhost/InventaritManager/cambiarContra.php?id=' . $row['id_usuario'] . '" style="background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Restablecer Contraseña</a>
+                    <a href="http://localhost/InventarIT_Manager/cambiarContra.php?id=' . $row['id_usuario'] . '" style="background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Restablecer Contraseña</a>
                 </div>';
             
             $mail->Body = $body;

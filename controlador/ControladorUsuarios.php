@@ -29,7 +29,7 @@ class ControladorUsuarios {
                         case $rol_usuario == 1 && $estado_usuario == 1:
                             echo  '<script>
                                     alert("Iniciaste sesión como administrador");
-                                    window.location.href="index.php";
+                                    window.location.href="index.php?seccion=dispositivos";
                                     </script>';
                                     
                             break;
