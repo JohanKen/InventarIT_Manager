@@ -1,4 +1,5 @@
 <?php class controladorVistas {
+    
     public function cargarSeccion() {
         
 

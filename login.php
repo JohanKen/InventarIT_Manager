@@ -1,16 +1,18 @@
-
 <?php
-include_once 'controlador/ControladorUsuarios.php';
-if (isset($_POST["entrar"])) {
+    session_start();
+    include 'modelo/conexion.php';
+    include_once 'modelo/ModeloUsuarios.php';
+    include 'controlador/ControladorUsuarios.php';
     $login = new ControladorUsuarios;
     $login->validarLogin();
-}
-  
-   
 ?>
+
+
+
+
+
+
 <!DOCTYPE html>
-
-
 <html lang="es">
 
 <head>
@@ -65,7 +67,7 @@ if(isset($_GET['message'])){
                 break;
         }
         ?></div>
- 
+
 
                 <?php
 }
@@ -79,7 +81,7 @@ if(isset($_GET['message'])){
 
                 <hr>
                 <br>
-                <a href="olvideContra.php" id="olvideContra" name="OlvideContra">Olvide mi contraseña</a>
+                <a href="olvideContra.php" id="olvideContra" name="entrar">Olvide mi contraseña</a>
 
             </form>
         </div>
