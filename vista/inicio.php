@@ -11,12 +11,11 @@
             display:flex;
             margin-top: 200px;
             background-color: white;
-            border-style: solid;
-            border-color: #000000;
-            margin-left:150px;
+           
+            margin-left:100px;
             border-radius:10px;
             z-index: -1;
-            max-width:1080px;
+            max-width:1180px;
             height: 2080px;
         }
     </style>
