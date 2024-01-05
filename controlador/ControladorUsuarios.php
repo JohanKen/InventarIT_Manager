@@ -8,6 +8,22 @@ class ControladorUsuarios {
         return $arregloUsuario;
     }
 
+    public static function borrarUsuarios(){
+        if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarUsuario"){
+            $id = $_GET ["id_usuario"];
+            $tabla = 'usuarios';
+            $objDelete = ModeloUsuarios::deleteUsuarios($tabla,$id);
+            if($objDelete>0){
+                echo    '
+                <script>
+                    alert("Usuario eliminado correctamente");
+                    window.location.href="index.php?seccion=usuarios";
+                </script>
+            ';
+            }
+        }
+    }
+
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
         if (isset($_POST["entrar"])) {
