@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -84,7 +86,7 @@
                     </div>
                 </form>
             </header>
-            <img src="./images/laptop.png" id="laptopIMG" alt="IMAGEN">
+            <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
         </div>
         <div class="tabla">
             <table class="tabla">
@@ -105,11 +107,13 @@
                 </thead>
                 <tbody>
                     <?php
+                    
                     $eliminar = new ControladorDispositivos;
                     $eliminar->borrarDispositivos();
 
                     $lista = ControladorDispositivos::consultaDispositivos();
                     foreach ($lista as $row => $item) {
+                        
                         echo '
                             <tr>
                                 <td>' . $item[0] . '</td>

@@ -86,7 +86,7 @@ body {
 .container-menu {
     position: absolute;
     background-color:#333;
-    width: 250px; /* Ajusta el ancho según tus preferencias */
+    width: 300px; /* Ajusta el ancho según tus preferencias */
     height: 700px; /* Ajusta la altura según tus preferencias */
     top: 0;
     left: 0;
@@ -103,7 +103,7 @@ body {
 
 .cont-menu {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     height: 1000px;
     border-bottom-right-radius: 30px;
     position: fixed;

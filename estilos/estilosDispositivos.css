@@ -13,7 +13,7 @@ body {
     margin-top: 0;
     padding: 100px;
     animation: slideDownContent 1s forwards;
-}.headerTabla {
+    }.headerTabla {
     backdrop-filter: blur(10px);
     margin-left: 10%;
     box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.1);
@@ -28,12 +28,12 @@ body {
     position: relative;
 }
 
+.headerTabla{
+    height: 100px;
+}
 
-
-/* Agregamos un efecto de animación sutil */
-.headerTabla:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
+.headerTabla h1{
+color: #333;
 }
 
 .form-inline {
@@ -42,8 +42,8 @@ body {
 }
 
 #IMGlaptop{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     margin-left: 150px;
 }
 

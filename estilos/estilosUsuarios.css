@@ -1,0 +1,152 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f4f4f4;
+        }
+
+        .up {
+            display: flex;
+            max-height: 300px;
+        }
+
+        .contentSeccion {
+            max-width: auto;
+            margin-top: 0;
+            padding: 100px;
+            animation: slideDownContent 1s forwards;
+        }
+
+        .headerTabla {
+            backdrop-filter: blur(10px);
+            margin-left: 10%;
+            box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            font-size: 24px;
+            border-radius: 15px;
+            padding: 5px;
+            text-align: center;
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+            height: 100px;
+        }
+
+        .headerTabla h1 {
+            color: #333;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: center;
+        }
+
+        #IMGlaptop {
+            width: 300px;
+            height: 300px;
+            margin-left: 150px;
+        }
+
+        .input-group {
+            margin: 5px;
+        }
+
+        .tabla {
+            margin-top: 60px;
+            width: 100%;
+            margin-left: 30px; /* Centra la tabla */
+        }
+
+        .tabla th, .tabla td {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .thead-dark {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .tabla tbody tr:nth-child(even) {
+            color: black;
+            background-color: #f9f9f9;
+        }
+
+        .tabla tbody tr:hover {
+            background: none;
+            background: linear-gradient(0deg, rgba(0, 22, 249, 0.2553396358543417) 51%, rgba(0, 151, 249, 0.7819502801120448) 100%);
+            color: #ffffff;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tabla tbody tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregado box-shadow a la transición */
+        }
+
+        .tabla tbody tr:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tabla a {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .header.hidden-header {
+            display: none;
+        }
+
+        .tabla img {
+            max-width: 1900%;
+            height: auto;
+        }
+
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownMenu {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownContent {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            animation: slideInHeader 1s forwards;
+            z-index: 2;
+        }
+
+        .container-menu {
+            animation: slideDownMenu 1s forwards;
+            z-index: 3;
+        }
+
+        .header h1 {
+            margin-top: 300px; /* Ajusta el valor según sea necesario */
+        }

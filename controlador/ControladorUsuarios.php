@@ -1,6 +1,13 @@
 <?php 
+include_once "modelo/ModeloUsuarios.php";
 class ControladorUsuarios {
-    
+    public static function consultarUsuarios(){
+        $tabla= 'usuarios';
+        $obj = ModeloUsuarios::seleccionarUsuario($tabla);
+        $arregloUsuario = $obj->fetch_all();
+        return $arregloUsuario;
+    }
+
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {
         if (isset($_POST["entrar"])) {
