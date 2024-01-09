@@ -68,6 +68,10 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            animation-duration: 0.5s; /* Duración de la animación */
+
+            animation: slideIn 0.5s ease-out; /* Agrega una animación llamada slideIn */
+
         }
 
         .modal-content2 {
@@ -144,6 +148,26 @@
             transition: background 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Definición de la animación de cierre */
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
         }
 
         .custom-button:hover {
@@ -312,6 +336,8 @@
     <script>
         function nuevoUsuario() {
             document.getElementById('nuevoUsuarioModal').style.display = 'flex';
+            modal.style.display = 'flex';
+            modal.style.animationName = 'slideIn'; // Agrega la animación de apertura
         }
 
         function confirmarBorrar(id_usuario) {
@@ -322,8 +348,11 @@
         }
 
         function cerrarModal() {
-            document.getElementById('confirmarBorrarModal').style.display = 'none';
-            document.getElementById('nuevoUsuarioModal').style.display = 'none';
+            var modal = document.getElementById('nuevoUsuarioModal');
+            modal.style.animationName = 'slideOut'; // Agrega la animación de cierre
+            setTimeout(function () {
+                modal.style.display = 'none';
+            }, 500); // Ajusta el tiempo para que coincida con la duración de la animación
         }
 
         function prepararFecha() {
@@ -342,6 +371,7 @@
                 document.getElementById('fecha_ingreso_usuario').value = fechaFormateada;
             }
         }
+         
     </script>
 </body>
 
