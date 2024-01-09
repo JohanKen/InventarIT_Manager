@@ -13,8 +13,7 @@
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 0;            width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             justify-content: center;
@@ -66,7 +65,7 @@
         .btn-secondary {
             background: #4169e1;
             color: #fff;
-        }
+        }v
 
         .btn-danger:hover,
         .btn-secondary:hover {

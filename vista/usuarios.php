@@ -73,11 +73,24 @@
     </style>
 </head>
 
+
 <body>
-    <h2>USUARIOS</h2>
+<div class="contentSeccion">
+        <div class="up">
+            <header class="headerTabla">
+                <h1>Usuarios</h1>
+                <form class="form-inline" id="searchBar">
+                    <div class="input-group">
+                        <!-- Agrega aquí elementos de búsqueda si es necesario -->
+                    </div>
+                </form>
+            </header>
+            <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
+        </div>
+    
     <div class="tabla">
-        <table>
-            <thead>
+        <table class="tabla">
+            <thead class="thead-dark">
                 <tr>
                     <th>Id Usuario</th>
                     <th>Apellido Paterno</th>

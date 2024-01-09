@@ -1,12 +1,25 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
     font-family: sans-serif;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(0deg, rgba(20,173,255,0.6168592436974789) 10%, rgba(20,173,255,1) 100%);}
+.gen{
+    margin-left: 25%;
+    margin-top: 5%;
+}
+footer{
+    margin-top: 50px;
+    
+}
+
+#IMGlogo{
+    margin-left: 70%;
+    width: 250px;
+    height: 100px;
+}
 
 .login-container {
     width: 900px;

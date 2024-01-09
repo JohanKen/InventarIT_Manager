@@ -49,9 +49,7 @@ footer{
         </div>
 
         <footer>
-    <div class="left-content">
-        <img src="./images/TI LOGO.png" id="FootImg1" alt="">
-    </div>
+  
     <div class="right-content" >
         <img src="./images/logo.png" alt=""id="FootImg">
     </div>
