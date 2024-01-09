@@ -4,15 +4,11 @@
             <title>InventarIT Manager</title>
             <link rel="icon" href="./images/logoNav.png">
         <style>
-            footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0; /* Ajusta el color de fondo según sea necesario */
-}
+           
 footer{
+    margin-top: 15px;
     background: none;
+    height: auto;
 }
 .left-content {
     flex: 1; /* El contenido izquierdo ocupará todo el espacio disponible */
