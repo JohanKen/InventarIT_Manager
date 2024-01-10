@@ -10,8 +10,9 @@
        
     </style>
 </head>
-
+        
 <body>
+    
     <div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
@@ -26,7 +27,7 @@
         </div>
 
         <button class="custom-button" onclick="nuevoUsuario();">AGREGAR NUEVO USUARIO</button>
-
+    
         <div class="tabla">
             <table class="tabla">
                 <thead class="thead-dark">
@@ -74,7 +75,7 @@
                 </tbody>
             </table>
         </div>
-
+        <!--modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario-->
         <div class="modal" id="confirmarBorrarModal">
             <div class="modal-content">
                 <span class="close-modal" onclick="cerrarModal()">&times;</span>
@@ -84,52 +85,79 @@
                 <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
             </div>
         </div>
-
+        <?php
+            $agregar = new ControladorUsuarios;
+            $agregar->agregarUsuarios();
+        ?>
         <!-- Modal para agregar a un nuevo usuario -->
         <div class="modal2" id="nuevoUsuarioModal">
             <div class="modal-content2">
                 <div class="tittleModal">
-                    <span class="close-modal2" onclick="cerrarModal()">&times;</span>
-                    <br><br>
+                
+                <br><br>
                     <h4 id="agregarTXT">Agregar a un nuevo usuario</h4>
                 </div>
-
+            
                 <form action="index.php?seccion=usuarios&accion=agregarUsuario" method="post" id="form">
                     <label for="apellido_paterno">Apellido Paterno:</label>
-                    <input type="text" id="apellido_paterno" name="apellido_paterno" required>
+                    <input type="text" id="apellido_paterno" name="apellidoPaterno" required>
 
                     <label for="apellido_materno">Apellido Materno:</label>
-                    <input type="text" id="apellido_materno" name="apellido_materno" required>
+                    <input type="text" id="apellido_materno" name="apellidoMaterno" required>
 
                     <label for="nombre_usuario">Nombre:</label>
-                    <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+                    <input type="text" id="nombre_usuario" name="nombreUsuario" .| required>
 
                     <label for="correo_usuario">Correo:</label>
-                    <input type="email" id="correo_usuario" name="correo_usuario" required>
+                    <input type="email" id="correo_usuario" name="correoUsuario" required>
 
-                    <label for="id_rol">ID Rol:</label>
-                    <input type="text" id="id_rol" name="id_rol" required>
-
+                    <!-- hay que mostrar los nombre como cadenas de texto pero obtener cada uno como id con un array asociativo-->
+                    
+                    <label for="id_rol">Rol:</label>
+                    <input type="text" id="id_rol" name="rol" required>
+ 
                     <label for="fecha_ingreso_usuario">Fecha de Ingreso:</label>
-                    <input type="date" id="fecha_ingreso_usuario" name="fecha_ingreso_usuario" required onchange="prepararFecha()">
+                    <input type="date" id="fecha_ingreso_usuario" name="fechaIngreso" required onchange="prepararFecha()">
 
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" required>
 
+
+                    
                     <label for="password_repeat">Repetir contraseña:</label>
-                    <input type="password" id="password_repeat" name="password_repeat" required>
+                    <input type="password" id="password_repeat" name="passwordRepeat" required>
+                    
+                    
+                    
+
 
                     <hr><br><br><br>
 
                     <button class="btn-danger" type="button" onclick="cerrarModal()">Cancelar</button>
-                    <button class="btn-secondary" type="submit">Agregar</button>
-
+                    <button class="btn-secondary" type="submit" name="agregar">Agregar</button>
+                                    
                 </form>
             </div>
         </div>
 
     </div>
+                    <?php
 
+                    //codigo solo para verificar que las contraseñas que se ingresan en el formulario son iguales
+
+                    if(isset ($_POST["agregar"])){
+
+                        
+                        $password = $_POST["password"];
+                        $passworRepeat = $_POST ["passwordRepeat"];
+                        if($password == $passworRepeat){
+                            echo 'La contraseñas coinciden'
+
+                        }else{
+                            echo 'Las contraseñas no coinciden'
+                        }
+                    }
+                    ?>
     <script>
         function nuevoUsuario() {
             document.getElementById('nuevoUsuarioModal').style.display = 'flex';
@@ -152,22 +180,6 @@
             }, 500); // Ajusta el tiempo para que coincida con la duración de la animación
         }
 
-        function prepararFecha() {
-            // Obtiene el valor del campo de fecha
-            var fechaIngreso = document.getElementById('fecha_ingreso_usuario').value;
-
-            // Verifica si la fecha está en formato yyyy-mm-dd
-            if (/^\d{4}-\d{2}-\d{2}$/.test(fechaIngreso)) {
-                // Divide la fecha en año, mes y día
-                var partesFecha = fechaIngreso.split("-");
-
-                // Construye la fecha en formato yyyy/mm/dd
-                var fechaFormateada = partesFecha[0] + "/" + partesFecha[1] + "/" + partesFecha[2];
-
-                // Asigna la fecha formateada de vuelta al campo de fecha
-                document.getElementById('fecha_ingreso_usuario').value = fechaFormateada;
-            }
-        }
          
     </script>
 </body>

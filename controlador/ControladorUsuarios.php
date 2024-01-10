@@ -1,12 +1,26 @@
 <?php 
 include_once "modelo/ModeloUsuarios.php";
 class ControladorUsuarios {
+    
     public static function consultarUsuarios(){
         $tabla= 'usuarios';
         $obj = ModeloUsuarios::seleccionarUsuario($tabla);
         $arregloUsuario = $obj->fetch_all();
         return $arregloUsuario;
     }
+
+    public static function agregarUsuarios(){
+        $tabla = 'usuarios';
+        if (!isset($_POST["agregar"]));
+        {
+            try{
+                //validamos el formato de la fecha para no tener problemas cuando la vayamos a insertar en la bsae de datos
+                $fechaIngreso = $_POST["fechaIngreso"];
+                $ 
+            }
+        }
+    }
+
 
     public static function borrarUsuarios(){
         if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarUsuario"){
@@ -23,6 +37,9 @@ class ControladorUsuarios {
             }
         }
     }
+
+
+
 
     // Función para llevar a cabo el inicio de sesión
     public static function validarLogin() {

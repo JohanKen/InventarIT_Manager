@@ -45,7 +45,7 @@
     right: 2px;
     cursor: pointer;
     color: #fff;
-    font-size: 20px;
+    font-size: 50px;
 }
 
 /* Estilos del modal secundario */
@@ -153,14 +153,7 @@
 }
 
 /* Definición de la animación de cierre */
-@keyframes slideOut {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-100%);
-    }
-}
+
 
 .custom-button:hover {
     background-color: #2f74d3;
@@ -187,9 +180,11 @@
     background: none;
     backdrop-filter: blur(10px);
 }
-
+  
 #form {
     display: inline-block;
+    padding: auto;
+    
 }
 
 .btn-secondary:hover {
@@ -201,7 +196,9 @@
 }
 
 #agregarTXT {
-    font-size: 15px;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: 15gpx;
 }
 body {
             font-family: Arial, sans-serif;

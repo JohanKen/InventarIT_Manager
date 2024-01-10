@@ -76,73 +76,73 @@
         }
 
         static function editarDispositivos()
-    {
-    if (isset($_POST["guardar"])) {
-   
+                {
+                if (isset($_POST["guardar"])) {
+            
 
-        // Almacenamos la información al modelo para que la guarde en la base de datos
-      
-            try {
-                // Ajustar max_allowed_packet para esta conexión
-                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
-                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
-
-                // Validar el formato de la fecha
-                $fechaCompra = $_POST["fecha_compra"];
-                if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
-                    $fechaCompraFormateada = $fechaCompra;
-                } else { 
-                    // Manejar el caso en que la fecha no tiene el formato correcto
-                    echo 'Error en el formato de la fecha';
-                    exit;
-                }
+                    // Almacenamos la información al modelo para que la guarde en la base de datos
                 
-                // Obtén el valor directo del campo de precio 
+                        try {
+                            // Ajustar max_allowed_packet para esta conexión
+                            $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                            Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                            // Validar el formato de la fecha
+                            $fechaCompra = $_POST["fecha_compra"];
+                            if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                                $fechaCompraFormateada = $fechaCompra;
+                            } else { 
+                                // Manejar el caso en que la fecha no tiene el formato correcto
+                                echo 'Error en el formato de la fecha';
+                                exit;
+                            }
+                            
+                            // Obtén el valor directo del campo de precio 
+                            
+
+                            $datos = array(
+                                "id_dispositivo" => (int)$_POST["id_dispositivo"],
+                                "modelo" => $_POST["modelo"],
+                                "numero_serie" => $_POST["numero_serie"],
+                                "ram" => (int)$_POST["ram"],
+                                "procesador" => $_POST["procesador"],
+                                "sistema_operativo" => $_POST["sistema_operativo"],
+                                "id_marca" => (int)$_POST["marca"],
+                                "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  // Se usa el precio procesado como double
+                                "estado" => (int)$_POST["estado"],
+                                "fecha_compra" => $fechaCompraFormateada,
+                                "nota" => $_POST["nota"],
+                                "foto" => "foto",
+                            );
+                            
+                        
+                        
+                    
+
+                            $insert = ModeloDispositivos::updateLaptop($datos);
+
+                            if ($insert > 0) {
+                                echo '
+                                    <script>
+                                        alert("Dispositivo actualizado correctamente");
+                                        window.location.href="index.php?seccion=dispositivos";
+                                    </script>
+                                ';
+                            } else {
+                                echo 'Error al intentar actualizar el dispositivo.';
+                            }
+                        } catch (mysqli_sql_exception $e) {
+                            // Manejar excepciones de MySQL
+                            echo 'Error en la conexión a la base de datos.';
+                        }
+                    } else {
+                        echo 'Por favor, introduce una imagen';
+                    }
+
+                    echo "ARRAY EN EL CONTROLADOR (datos)...";
+                    var_dump ($datos); 
                 
-
-                $datos = array(
-                    "id_dispositivo" => (int)$_POST["id_dispositivo"],
-                    "modelo" => $_POST["modelo"],
-                    "numero_serie" => $_POST["numero_serie"],
-                    "ram" => (int)$_POST["ram"],
-                    "procesador" => $_POST["procesador"],
-                    "sistema_operativo" => $_POST["sistema_operativo"],
-                    "id_marca" => (int)$_POST["marca"],
-                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  // Se usa el precio procesado como double
-                    "estado" => (int)$_POST["estado"],
-                    "fecha_compra" => $fechaCompraFormateada,
-                    "nota" => $_POST["nota"],
-                    "foto" => "foto",
-                );
-                
-               
-               
-          
-
-                $insert = ModeloDispositivos::updateLaptop($datos);
-
-                if ($insert > 0) {
-                    echo '
-                        <script>
-                            alert("Dispositivo actualizado correctamente");
-                            window.location.href="index.php?seccion=dispositivos";
-                        </script>
-                    ';
-                } else {
-                    echo 'Error al intentar actualizar el dispositivo.';
-                }
-            } catch (mysqli_sql_exception $e) {
-                // Manejar excepciones de MySQL
-                echo 'Error en la conexión a la base de datos.';
             }
-        } else {
-            echo 'Por favor, introduce una imagen';
-        }
-
-        echo "ARRAY EN EL CONTROLADOR (datos)...";
-        var_dump ($datos); 
-    
-}
 
         
 
