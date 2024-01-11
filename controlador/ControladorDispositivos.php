@@ -28,9 +28,9 @@
         }
         
 
+     
        
-       
-        //funcion para consultar los detalles de dispositivos de manera general sin especificar
+       //funcion para consultar los detalles de dispositivos de manera general sin especificar
         //que sea de algun tipo en especifico
         static function detalleDispositivo(){
             if(isset($_GET["id_dispositivo"])){
@@ -78,10 +78,7 @@
         static function editarDispositivos()
                 {
                 if (isset($_POST["guardar"])) {
-            
-
                     // Almacenamos la información al modelo para que la guarde en la base de datos
-                
                         try {
                             // Ajustar max_allowed_packet para esta conexión
                             $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
@@ -142,13 +139,8 @@
                     echo "ARRAY EN EL CONTROLADOR (datos)...";
                     var_dump ($datos); 
                 
-            }
-
-        
-
-    
-
-           //Funcion para consultar los tipos de dispositivos
+                }
+        //Funcion para consultar los tipos de dispositivos
            static function getTiposDispositivos(){
             $tabla = "tipos_dispositivos";
             $respuesta = ModeloDispositivos::selectTiposDispositivos($tabla);

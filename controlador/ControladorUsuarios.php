@@ -8,19 +8,30 @@ class ControladorUsuarios {
         $arregloUsuario = $obj->fetch_all();
         return $arregloUsuario;
     }
-
     public static function agregarUsuarios(){
         $tabla = 'usuarios';
-        if (!isset($_POST["agregar"]));
-        {
-            try{
-                //validamos el formato de la fecha para no tener problemas cuando la vayamos a insertar en la bsae de datos
+        if (isset($_POST["agregar"])) {
+            try {
+                // Validamos el formato de la fecha para evitar problemas al insertarla en la base de datos
                 $fechaIngreso = $_POST["fechaIngreso"];
-                $ 
+                if (DateTime::createFromFormat('Y-m-d', $fechaIngreso) !== false ){
+                    $fechaIngresoFormateada = $fechaIngreso;
+                } else {
+                    echo 'Error en el formato de la fecha';
+                    exit;
+                }
+    
+                // Generamos un array que contiene todas las variables de los campos del formulario del usuario a editar
+    
+            } catch (Exception $e) {
+                // Manejo de excepciones
+                echo 'Error: ' . $e->getMessage();
             }
         }
     }
+    
 
+    
 
     public static function borrarUsuarios(){
         if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarUsuario"){
@@ -34,11 +45,22 @@ class ControladorUsuarios {
                     window.location.href="index.php?seccion=usuarios";
                 </script>
             ';
-            }
+            } 
         }
+    } 
+
+    public static function detalleUsuario(){
+        if(isset($_GET["id_usuario"])){
+        $tabla="usuarios";
+        $id = $_GET["id_usuario"];
+
+
+        $obj = ModeloUsuarios::selectUsuariosId($tabla, $id);
+        $usuario = $obj->fetch_all();
+        return $usuario;
+        }
+
     }
-
-
 
 
     // Función para llevar a cabo el inicio de sesión

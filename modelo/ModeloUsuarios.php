@@ -31,6 +31,10 @@ static function seleccionarUsuario($tabla){
     return $res;
 }
 
+
+//funcion para seleccionar usuarios por id (individualmente para despues poderlos editar)
+static function detalleUsuarioId
+
 //funcion para eliminar un usuario por medio del procedimiento almacenado...
 static function deleteUsuarios($tabla,$id){
     $sql = "CALL inventarit_manager.eliminar_usuario('$id');";

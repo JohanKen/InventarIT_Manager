@@ -75,7 +75,7 @@
 </head>
 
 <body>
-    <div class="contentSeccion">
+    <div class="contentSeccion">  
         <div class="up">
             <header class="headerTabla">
                 <h1>Dispositivos</h1>
