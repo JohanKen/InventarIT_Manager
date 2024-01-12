@@ -63,7 +63,7 @@
             }
         }
         
-
+        
         static function detalleLaptop(){
             if(isset($_GET["id_dispositivo"])){
                 $tabla = "v_inv_laptops";
