@@ -33,14 +33,23 @@ static function seleccionarUsuario($tabla){
 
 
 //funcion para seleccionar usuarios por id (individualmente para despues poderlos editar)
-static function selectUsuariosId($tabla,$id){
-    $sql = "SELECT * FROM usuarios WHERE id_usuario = $id;";
-   $conn = Conexion::conectar();
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    return $res;
+static function selectUsuariosId($id){
+    try {
+        $sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        $conn = Conexion::conectar();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
+    } catch (Exception $e) {
+        // Manejar la excepción, por ejemplo, registrándola o lanzándola nuevamente
+        echo "Error en la consulta: " . $e->getMessage();
+        return false;
+    }
 }
+
+
 
 //funcion para eliminar un usuario por medio del procedimiento almacenado...
 static function deleteUsuarios($tabla,$id){
@@ -48,6 +57,7 @@ static function deleteUsuarios($tabla,$id){
     $res = Conexion::conectar()->query($sql);
     return $res;
 }
+
 
 }
 ?>

@@ -65,7 +65,7 @@
                                 <td>' . $item[8] . '</td>
                                 <td>' . $item[9] . '</td>
                                 <td class="actions">
-                                    <a href="index.php?seccion=editarUsuarios&id_usuario=' . $item[0] . '">Editar</a>
+                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '">Editar</a>
                                     <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');">Borrar</a>
                                 </td>
                             </tr>

@@ -156,6 +156,19 @@ class ControladorUsuarios {
             }
         }
     }
+
+    static function getUser($id){
+        if(isset($id)){
+            $tabla = "usuarios";
+            $obj = ModeloUsuarios::selectUsuariosId($id);
+            $usuarioSeleccionado = $obj->fetch_all();
+            return $usuarioSeleccionado;
+        } else {
+            echo "No llego ningun id al controlador para poder llevar a cabo de maner correcta la consulta";
+        }
+    }
+    
+
 }
 
 ?>

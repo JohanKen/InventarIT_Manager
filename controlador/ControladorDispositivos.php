@@ -136,8 +136,7 @@
                         echo 'Por favor, introduce una imagen';
                     }
 
-                    echo "ARRAY EN EL CONTROLADOR (datos)...";
-                    var_dump ($datos); 
+               
                 
                 }
         //Funcion para consultar los tipos de dispositivos

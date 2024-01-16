@@ -1,6 +1,6 @@
 <?php
 
-// Obtener el ID del dispositivo de la URL
+// Obtener el ID del dispositivo de la URL 
 $id = $_GET['id_dispositivo'];
 
 
