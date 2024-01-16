@@ -1,0 +1,357 @@
+
+ /* Estilos del modal principal */
+ .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(0deg, rgba(0,22,249,0.24413515406162467) 14%, rgba(0,151,249,0.7819502801120448) 100%);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.modal-content h4 {
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+}
+
+.close-modal2 {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+}
+
+/* Estilos del modal secundario */
+.modal2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation-duration: 0.5s; /* Duración de la animación */
+
+    animation: slideIn 0.5s ease-out; /* Agrega una animación llamada slideIn */
+
+}
+
+.modal-content2 {
+    background: linear-gradient(0deg, rgba(0,22,249,0.24413515406162467) 14%, rgba(0,151,249,0.7819502801120448) 100%);
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.modal-content2 h4 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.modal-content2 label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.modal-content2 input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.modal-content2 button {
+    padding: 15px 30px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.modal-content2 button.btn-danger {
+    background: #ff6f6f;
+    color: #fff;
+    transform: translateY(0);
+}
+
+.modal-content2 button.btn-secondary {
+    background: #4169e1;
+    color: #fff;
+    transform: translateY(0);
+}
+
+.modal-content2 button:hover {
+    background: #2f74d3;
+    transform: translateY(-5px);
+}
+
+.custom-button {
+    margin-left: 85%;
+    margin-top: 20px;
+    background-color: #4169e1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Definición de la animación de cierre */
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.custom-button:hover {
+    background-color: #2f74d3;
+}
+
+.custom-button:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+    pointer-events: none;
+}
+
+.custom-button:hover:after {
+    left: 100%;
+}
+
+.tittleModal {
+    display: flex;
+    background: none;
+    backdrop-filter: blur(10px);
+}
+
+#form {
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(90deg, rgba(7,0,69,1) 0%, rgba(46,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.btn-danger:hover {
+    background: #d32f2f;
+}
+
+#agregarTXT {
+    font-size: 15px;
+}
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+           
+            background-color: #f4f4f4;
+        }
+
+        .up {
+            display: flex;
+            max-height: 300px;
+        }
+
+        .contentSeccion {
+            max-width: auto;
+            margin-top: 0;
+            padding: 100px;
+            animation: slideDownContent 1s forwards;
+        }
+
+        .headerTabla {
+            backdrop-filter: blur(10px);
+            margin-left: 10%;
+            box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            font-size: 24px; 
+            border-radius: 15px;
+            padding: 5px;
+            text-align: center;
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+            height: 100px;
+        }
+
+        .headerTabla h1 {
+            color: #333;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: center;
+        }
+
+        #IMGlaptop {
+            width: 200px;
+            height: 200px;
+            margin-left: 150px;
+        }
+
+        .input-group {
+            margin: 5px;
+        }
+
+        .tabla {
+            margin-top: 60px;
+            width: 100%;
+            margin-left: 30px; /* Centra la tabla */
+        }
+
+        .tabla th, .tabla td {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .thead-dark {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .tabla tbody tr:nth-child(even) {
+            color: black;
+            background-color: #f9f9f9;
+        }
+
+        .tabla tbody tr:hover {
+            background: none;
+            background: linear-gradient(0deg, rgba(0, 22, 249, 0.2553396358543417) 51%, rgba(0, 151, 249, 0.7819502801120448) 100%);
+            color: #ffffff;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tabla tbody tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregado box-shadow a la transición */
+        }
+
+        .tabla tbody tr:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tabla a {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .header.hidden-header {
+            display: none;
+        }
+
+        .tabla img {
+            max-width: 1900%;
+            height: auto;
+        }
+
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownMenu {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownContent {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            animation: slideInHeader 1s forwards;
+            z-index: 2;
+        }
+
+        .container-menu {
+            animation: slideDownMenu 1s forwards;
+            z-index: 3;
+        }
+
+        .header h1 {
+            margin-top: 300px; /* Ajusta el valor según sea necesario */
+        }
