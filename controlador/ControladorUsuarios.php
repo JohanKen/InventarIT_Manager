@@ -167,6 +167,18 @@ class ControladorUsuarios {
             echo "No llego ningun id al controlador para poder llevar a cabo de maner correcta la consulta";
         }
     }
+
+/*
+    static function UpdateUser(){
+        if(isset($$_POST["guardar"]) && $_POST["editar"] == "Actualizar"){
+            $tabla= "usuarios";
+            $datos = array ('id' => $_POST['id'],
+                            'email' => $_POST['email'],
+                            'pass' => $_POST['pass']);
+
+            $respuesta = ModeloUsario::UpdateUser($tabla, $datos)
+        
+  */  
     
 
 }

@@ -52,8 +52,14 @@ static function selectUsuariosId($id){
 
 
 //funcion para eliminar un usuario por medio del procedimiento almacenado...
-static function deleteUsuarios($tabla,$id){
+static function deleteUsuarios($id){
     $sql = "CALL inventarit_manager.eliminar_usuario('$id');";
+    $res = Conexion::conectar()->query($sql);
+    return $res;
+}
+
+static function updateUser($id){
+    $sql = "CALL inventarit_manager.editar_usuario('$id');";
     $res = Conexion::conectar()->query($sql);
     return $res;
 }

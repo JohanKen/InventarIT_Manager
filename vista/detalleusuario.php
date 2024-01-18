@@ -28,79 +28,80 @@ function ObtenerDatosUsuario($id){
     }
 }
         
-   //Llamamos al metodo UpdateUser para actualizar
-         //$obj = new ControladorUsuarios();
-         //$obj -> UpdateUser();
-    
-?><!DOCTYPE html>
+    //Llamamos al metodo update del controlador para actualizar
+         $obj = new ControladorUsuarios();
+         $obj -> UpdateUser();
+    ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos/estilosForms.css">
 </head>
 <body>
+    <h1>Editar Usuario</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form class="row gy-2 gx-3 align-items-center">
+                    <?php
+                    var_dump ($datosUsuario);
+                    ?>
                     <div class="col-12">
-                        <label class="visually-hidden" for="id_usuario">Id Usuario:</label>
-                        <input type="text" class="form-control" id="id_usuario" name="id_usuario" readonly="true" value="<?php echo $datosUsuario[0]; ?>" placeholder="Id Usuario">
+                        <label  for="id_usuario">Id Usuario:</label>
+                        <input type="text" class="form-control" id="id_usuario" name="id_usuario" readonly="true" value="<?php echo $datosUsuario[0]; ?>">
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="apellido_paterno">Apellido Paterno:</label>
-                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" placeholder="Apellido Paterno">
+                        <label  for="apellido_paterno">Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>"  >
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="apellido_materno">Apellido Materno:</label>
-                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Apellido Materno">
+                        <label  for="apellido_materno">Apellido Materno:</label>
+                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" >
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="nombre_usuario">Nombre(s):</label>
-                        <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Nombre(s)">
+                        <label  for="nombre_usuario">Nombre(s):</label>
+                        <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="<?php echo $datosUsuario[3]; ?>" >
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="correo">Correo Electronico:</label>
-                        <input type="text" class="form-control" id="correo" name="correo" placeholder="Correo Electronico">
+                        <label  for="correo">Correo Electronico:</label>
+                        <input type="text" class="form-control" id="correo" name="correo" value="<?php echo $datosUsuario[4]; ?>" >
+                    </div> 
+                    <!-- Crear metodo para obtener los estados por nombre y no por ID-->
+                    <div class="col-12">
+                        <label  for="estado">Estado:</label>
+                        <input type="text" class="form-control" id="estado" name="estado" value="<?php echo $datosUsuario[5]; ?>" >
+                    </div>
+                    <!-- Crear metodo para obtener los roles por nombre y no por ID-->
+                    <div class="col-12">
+                        <label  for="rol">Rol:</label>
+                        <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $datosUsuario[6]; ?>" >
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="estado">Estado:</label>
-                        <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado">
+                        <label  for="fecha_ingreso">Fecha de Ingreso:</label>
+                        <input type="text" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="rol">Rol:</label>
-                        <input type="text" class="form-control" id="rol" name="rol" placeholder="Rol">
+                        <label  for="fecha_creacion">Fecha de Creación:</label>
+                        <input type="text" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $datosUsuario[8]; ?>" >
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="fecha_ingreso">Fecha de Ingreso:</label>
-                        <input type="text" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="Fecha de Ingreso">
+                        <label  for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $datosUsuario[9]; ?>" >
                     </div>
+                    
+                    <!--
                     <div class="col-12">
-                        <label class="visually-hidden" for="fecha_creacion">Fecha de Creación:</label>
-                        <input type="text" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha de Creación">
+                        <label  for="repetir_password">Repetir Password:</label>
+                        <input type="password" class="form-control" id="repetir_password" name="repetir_password" value="<?php echo $datosUsuario[0]; ?>" placeholder="Repetir Password">
                     </div>
+-->
                     <div class="col-12">
-                        <label class="visually-hidden" for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <div class="col-12">
-                        <label class="visually-hidden" for="repetir_password">Repetir Password:</label>
-                        <input type="password" class="form-control" id="repetir_password" name="repetir_password" placeholder="Repetir Password">
-                    </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" name="guardar" class="btn btn-primary">Guardar Cambios</button>
                         <button type="button" class="btn btn-secondary">Cancelar</button>
                     </div>
                 </form>
@@ -111,6 +112,4 @@ function ObtenerDatosUsuario($id){
     <!-- Agrega el enlace a Bootstrap JS y Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></scr
