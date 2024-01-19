@@ -168,17 +168,25 @@ class ControladorUsuarios {
         }
     }
 
-/*
-    static function UpdateUser(){
-        if(isset($$_POST["guardar"]) && $_POST["editar"] == "Actualizar"){
-            $tabla= "usuarios";
-            $datos = array ('id' => $_POST['id'],
-                            'email' => $_POST['email'],
-                            'pass' => $_POST['pass']);
 
-            $respuesta = ModeloUsario::UpdateUser($tabla, $datos)
-        
-  */  
+    static function UpdateUser($id){
+        if(isset($_POST["guardar"]) && $_POST["editar"] == "Actualizar"){
+            $tabla= "usuarios";
+            $datos = array ('id' => $_POST['id_usuario'],
+                            'apellidoPaterno' => $_POST['apellido_paterno'],
+                            'apellidoMaterno' => $_POST['apellido_materno'],
+                            'nombre' => $_POST['nombre_usuario'],
+                            'correo' => $_POST['correo'],
+                            'estado' => $_POST['estado'],
+                            'rol' => $_POST['rol'],
+                            'fechaIngreso' => $_POST['fecha_ingreso'],
+                            'fechaCreacion' => $_POST['fecha_creacion'],
+                            'password' => $_POST[$password]
+                            
+                        );
+            $respuesta = ModeloUsario::UpdateUser($tabla, $datos);
+        }
+    
     
 
 }
