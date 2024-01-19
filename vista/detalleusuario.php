@@ -27,11 +27,19 @@ function ObtenerDatosUsuario($id){
         return null;
     }
 }
+/*Verfificar con el metodo post que se presione el boton guardar del formulario
+    if(isset($_POST['guardar']) {
+        $update = new ControladorUsuarios();
+        
+    })
+
+  
         
     //Llamamos al metodo update del controlador para actualizar
          $obj = new ControladorUsuarios();
          $obj -> UpdateUser();
-    ?>
+    */
+         ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,23 +79,106 @@ function ObtenerDatosUsuario($id){
                         <label  for="correo">Correo Electronico:</label>
                         <input type="text" class="form-control" id="correo" name="correo" value="<?php echo $datosUsuario[4]; ?>" >
                     </div> 
+
+
+
+
+                    
                     <!-- Crear metodo para obtener los estados por nombre y no por ID-->
-                    <div class="col-12">
-                        <label  for="estado">Estado:</label>
-                        <input type="text" class="form-control" id="estado" name="estado" value="<?php echo $datosUsuario[5]; ?>" >
+                    <div class="mb-3" id="formForm">
+                        <label for="estado" class="form-label">Estado del Usuario</label>
+                        <select class="form-select" name="estado">
+                            <?php
+                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
+                            $estados = array(
+                                1 => 1,
+                                2 => 2,
+                               
+                            );
+                            
+                            foreach ($estados as $estadoId => $estadoLabel) {
+                                // Verificar si el estado actual coincide con el estado del usuario
+                                $selected = ($datosUsuario[5] == $estadoLabel) ? 'selected' : '';
+                                echo "<option value='$estadoLabel' $selected>";
+
+                                // Mostrar el nombre del estado en lugar del valor entero
+                                switch ($estadoLabel) {
+                                    case 1:
+                                        echo "Activo";
+                                        break;
+                                    case 2:
+                                        echo "Inactivo";
+                                        break;
+                                  
+                                    // En caso de que el estado no coincida con ningún caso
+                                    default:
+                                        echo "Desconocido";
+                                        break;
+                                }
+
+                                // Cerrar la etiqueta de opción
+                                echo "</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
-                    <!-- Crear metodo para obtener los roles por nombre y no por ID-->
-                    <div class="col-12">
-                        <label  for="rol">Rol:</label>
-                        <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $datosUsuario[6]; ?>" >
+
+
+                    
+
+                    <div class="mb-3" id="formForm">
+                        <label for="estado" class="form-label">Rol del Usuario</label>
+                        <select class="form-select" name="rol">
+                            <?php
+                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
+                            $roles = array(
+                                1 => 1,
+                                2 => 2,
+                                3 => 3
+                               
+                            );
+                            
+                            foreach ($roles as $rolId => $rolLabel) {
+                                // Verificar si el rol actual coincide con el rol del usuario
+                                $selected = ($datosUsuario[6] == $rolLabel) ? 'selected' : '';
+                                echo "<option value='$rolLabel' $selected>";
+
+                                // Mostrar el nombre del rol en lugar del valor entero
+                                switch ($rolLabel) {
+                                    case 1:
+                                        echo "Administrador";
+                                        break;
+                                    case 2:
+                                        echo "Editor";
+                                        break;
+                                    case 3:
+                                        echo "Consultor";
+                                        break;
+                                    // En caso de que el rol no coincida con ningún caso
+                                    default:
+                                        echo "Desconocido";
+                                        break;
+                                }
+
+                                // Cerrar la etiqueta de opción
+                                echo "</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
+
+
+
+
+
+                   
                     <div class="col-12">
                         <label  for="fecha_ingreso">Fecha de Ingreso:</label>
-                        <input type="text" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
+                        <input type="date" class="form-control" id="fechaIngresoInput" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
                     </div>
                     <div class="col-12">
                         <label  for="fecha_creacion">Fecha de Creación:</label>
-                        <input type="text" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $datosUsuario[8]; ?>" >
+                        <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $datosUsuario[8]; ?>" >
                     </div>
                     <div class="col-12">
                         <label  for="password">Password:</label>
@@ -108,8 +199,51 @@ function ObtenerDatosUsuario($id){
             </div>
         </div>
     </div>
+</body>
 
+<script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var fechaIngresoInput = document.getElementById('fechaIngresoInput');
+                var fechaIngresoHidden = document.getElementById('fechaIngresoHidden');
+
+                fechaIngresoInput.addEventListener('focus', function () {
+                    if (fechaIngresoInput.value === '') {
+                        fechaIngresoInput.placeholder = 'Selecciona una fecha';
+                    }
+                });
+
+                fechaIngresoInput.addEventListener('blur', function () {
+                    if (fechaIngresoInput.value === '') {
+                        fechaIngresoInput.placeholder = 'Selecciona una fecha';
+                    }
+                });
+
+                fechaIngresoInput.addEventListener('click', function () {
+                    fechaIngresoHidden.style.display = 'block';
+                    fechaIngresoInput.style.display = 'none';
+                });
+
+                fechaIngresoHidden.addEventListener('change', function () {
+                    var fechaSeleccionada = new Date(fechaIngresoHidden.value);
+                    var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
+                    fechaIngresoInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
+                        fechaSeleccionada.getFullYear();
+                    fechaIngresoHidden.style.display = 'none';
+                    fechaIngresoInput.style.display = 'block';
+                });
+
+                function obtenerNombreMes(numeroMes) {
+                    var meses = [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ];
+                    return meses[numeroMes];
+                }
+            });
+        </script>
+
+                        
     <!-- Agrega el enlace a Bootstrap JS y Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></scr
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

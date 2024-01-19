@@ -30,11 +30,7 @@ $id = $_GET['id_dispositivo'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_POST['guardar'])) {
-        $update = new ControladorDispositivos;
-
-
-
-
+        $update = new ControladorDispositivos;    
         //LAS SIGUIENTES LINEAS SON EMPAREJAMIENTOS DE VARIABLES Y ASIGNACIONES PARA QUE PUEDAN PASAR AL CONTROLADOR DEL TIPO 
         //QUE LAS ESPERA PARA QUE NO TENGA NINGUN INCONVENIENTE CON ELLO.
         //primero hay que obtener la marca como id como en las siguientes lineas...

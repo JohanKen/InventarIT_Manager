@@ -156,7 +156,7 @@ class ControladorUsuarios {
             }
         }
     }
-
+    
     static function getUser($id){
         if(isset($id)){
             $tabla = "usuarios";
@@ -164,31 +164,56 @@ class ControladorUsuarios {
             $usuarioSeleccionado = $obj->fetch_all();
             return $usuarioSeleccionado;
         } else {
-            echo "No llego ningun id al controlador para poder llevar a cabo de maner correcta la consulta";
+            echo "No llego ningun id al controlador para poder llevar a cabo de manera correcta la consulta";
         }
     }
 
-
+/*
     static function UpdateUser($id){
-        if(isset($_POST["guardar"]) && $_POST["editar"] == "Actualizar"){
-            $tabla= "usuarios";
-            $datos = array ('id' => $_POST['id_usuario'],
-                            'apellidoPaterno' => $_POST['apellido_paterno'],
-                            'apellidoMaterno' => $_POST['apellido_materno'],
-                            'nombre' => $_POST['nombre_usuario'],
-                            'correo' => $_POST['correo'],
-                            'estado' => $_POST['estado'],
-                            'rol' => $_POST['rol'],
-                            'fechaIngreso' => $_POST['fecha_ingreso'],
-                            'fechaCreacion' => $_POST['fecha_creacion'],
-                            'password' => $_POST[$password]
-                            
-                        );
-            $respuesta = ModeloUsario::UpdateUser($tabla, $datos);
-        }
+        if(isset($_POST["guardar"])){
+
+            try{
+
+
+                //Formateo
+                $fecha_creacion = $_POST["fecha_creacion"];
+                if (DateTime::createFromFormat('Y-m-d', $fecha_creacion) !== false ){
+                    $fecha_creacionFormateada = $fecha_creacion;
+                } else {
+                    echo 'Error en el formato de la fecha de creación';
+                    exit;
+                }
+
+                $fecha_ingreso = $_POST["fecha_ingreso"];
+                if (DateTime::createFromFormat('Y-m-d', $fechaIngreso) !== false ){
+                    $fechaIngresoFormateada = $fecha_ingreso;
+                } else {
+                    echo 'Error en el formato de la fecha de ingreso';
+                    exit;
+                }
+
+                $datos = array ('id' => $_POST['id_usuario'],
+                'apellidoPaterno' => $_POST['apellido_paterno'],
+                'apellidoMaterno' => $_POST['apellido_materno'],
+                'nombre' => $_POST['nombre_usuario'],
+                'correo' => $_POST['correo'],
+                'estado' => $_POST['estado'],
+                'rol' => $_POST['rol'],
+                'fechaIngreso' => $_POST[$fecha_ingreso],
+                'fechaCreacion' => $_POST[$fecha_creacion],
+                'password' => $_POST[$password]
+                
+            );
+                $respuesta = ModeloUsuario::UpdateUser($tabla, $datos);
+                }
+        
+            }       
+            
+     
     
     
 
+}*/
 }
 
 ?>
