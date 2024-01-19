@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 
 
 // Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
-$dispositivoInfo = ControladorDispositivos::detalleDispositivoPLI();
+$dispositivoInfo = ControladorDispositivos::detalleDispositivoGen();
 
 // Array asociativo que mapea nombres de marcas a IDs 
 $marcas = array(
@@ -29,7 +29,7 @@ $id = $_GET['id_dispositivo'];
 // Verificar si se envió el formulario para actualizar el dispositivo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    if (isset($_POST['guardar'])) {
+    if (isset($_POST['guardarDispositivo'])) {
         $update = new ControladorDispositivos;
 
 
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
         
-        $update->editarDispositivos();
+        $update->editarDispositivo();
         header('Location:index.php?seccion=dispositivos');
         exit;
         
@@ -128,10 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         // Mostrar el nombre del estado en lugar del valor entero
                                         switch ($estadoId) {
                                             case 1:
-                                                echo "Asignado";
+                                                echo "Disponible";
                                                 break;
                                             case 2:
-                                                echo "Disponible";
+                                                echo "Asignado";
                                                 break;
                                             case 3:
                                                 echo "Dañado";
@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <div class="mb-3" id="formForm">
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
-                    <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
+                    <input type="submit" class="btn btn-primary" name="guardarDispositivo" value="Actualizar Dispositivo">
                 </div>
                         
 

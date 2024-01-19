@@ -11,7 +11,7 @@ $datosDispositivo = obtenerDatosDispositivo($id);
 function obtenerDatosDispositivo($id) {
     // Aquí consultamos la información del dispositivo desde la BD con su ID
     if ($id>=3){
-        $DispositivoInfo = ControladorDispositivos::detalleDispositivoPLI($id);
+        $DispositivoInfo = ControladorDispositivos::detalleDispositivoGen($id);
     }else{
         $DispositivoInfo = ControladorDispositivos::detalleDispositivo($id);
     }

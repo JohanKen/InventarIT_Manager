@@ -29,7 +29,7 @@ $id = $_GET['id_dispositivo'];
 // Verificar si se envió el formulario para actualizar el dispositivo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    if (isset($_POST['guardar'])) {
+    if (isset($_POST['guardarLaptop'])) {
         $update = new ControladorDispositivos;
 
 
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
         
-        $update->editarDispositivos();
+        $update->editarLaptop();
         header('Location:index.php?seccion=dispositivos');
         exit;
         
@@ -128,10 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         // Mostrar el nombre del estado en lugar del valor entero
                                         switch ($estadoId) {
                                             case 1:
-                                                echo "Asignado";
+                                                echo "Disponible";
                                                 break;
                                             case 2:
-                                                echo "Disponible";
+                                                echo "Asignado";
                                                 break;
                                             case 3:
                                                 echo "Dañado";
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="procesador" class="form-label">Procesador</label>
                     <select class="form-select" name="procesador">
                         <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1");
+                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",'Intel core i5');
 
                         foreach ($procesadoresBaseDatos as $procesador) {
                             $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3" id="formForm">
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
-                    <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
+                    <input type="submit" class="btn btn-primary" name="guardarLaptop" value="Actualizar Dispositivo">
                 </div>
                         
 

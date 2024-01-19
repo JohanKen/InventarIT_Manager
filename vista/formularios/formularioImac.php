@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 
 
 // Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
-$dispositivoInfo = ControladorDispositivos::detalleDispositivoPLI();
+$dispositivoInfo = ControladorDispositivos::detalleDispositivoIMac();
 
 // Array asociativo que mapea nombres de marcas a IDs 
 $marcas = array(
@@ -29,7 +29,7 @@ $id = $_GET['id_dispositivo'];
 // Verificar si se envió el formulario para actualizar el dispositivo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    if (isset($_POST['guardar'])) {
+    if (isset($_POST['guardarIMac'])) {
         $update = new ControladorDispositivos;
 
 
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
         
-        $update->editarDispositivos();
+        $update->editarIMac();
         header('Location:index.php?seccion=dispositivos');
         exit;
         
@@ -128,10 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         // Mostrar el nombre del estado en lugar del valor entero
                                         switch ($estadoId) {
                                             case 1:
-                                                echo "Asignado";
+                                                echo "Disponible";
                                                 break;
                                             case 2:
-                                                echo "Disponible";
+                                                echo "Asignado";
                                                 break;
                                             case 3:
                                                 echo "Dañado";
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="procesador" class="form-label">Procesador</label>
                     <select class="form-select" name="procesador">
                         <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1");
+                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",'Intel core i5');
 
                         foreach ($procesadoresBaseDatos as $procesador) {
                             $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
@@ -214,25 +214,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mb-3" id="formForm">
                     <label for="Keyboard_model" class="fotm-label">Modelo Del Teclado</label>
-                    <input type="text" class="form-control" name="Keyboard_model" value="" >
+                    <input type="text" class="form-control" name="Keyboard_model" value="<?= $dispositivoInfo[0]["Keyboard_model"] ?>">
                 </div>
                 <div class="mb-3" id="formForm">
                     <label for="keyboard_ns" class="fotm-label">Numero De Serie Del Teclado</label>
-                    <input type="text" class="form-control" name="keyboard_ns" value="" >
+                    <input type="text" class="form-control" name="keyboard_ns" value="<?= $dispositivoInfo[0]["keyboard_ns"] ?>" >
                 </div>
                 <div class="mb-3" id="formForm">
                     <label for="mouse_model" class="fotm-label">Modelo de Mouse</label>
-                    <input type="text" class="form-control" name="mouse_model" value="" >
+                    <input type="text" class="form-control" name="mouse_model" value="<?= $dispositivoInfo[0]["mouse_model"] ?>" >
                 </div>
                 <div class="mb-3" id="formForm">
                     <label for="mouse_ns" class="fotm-label">Numero de Serie de Mouse</label>
-                    <input type="text" class="form-control" name="mouse_ns" value="" >
+                    <input type="text" class="form-control" name="mouse_ns" value="<?= $dispositivoInfo[0]["mouse_ns"] ?>" >
                 </div>
 
 
                 <div class="mb-3" id="formForm">
                     <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
-                    <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
+                    <input type="submit" class="btn btn-primary" name="guardarIMac" value="Actualizar Dispositivo">
                 </div>
                         
 
