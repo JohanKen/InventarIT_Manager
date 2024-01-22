@@ -1,4 +1,5 @@
 <?php
+
 //obtenemos el id del usuario mediante la url
 $id = $_GET["id_usuario"];
 // obtenemos los datos de un usuario
@@ -27,18 +28,23 @@ function ObtenerDatosUsuario($id){
         return null;
     }
 }
-/*Verfificar con el metodo post que se presione el boton guardar del formulario
-    if(isset($_POST['guardar']) {
-        $update = new ControladorUsuarios();
-        
-    })
+//Verificar si se envio el formulario para editar el usuario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  
-        
-    //Llamamos al metodo update del controlador para actualizar
-         $obj = new ControladorUsuarios();
+//Verfificar con el metodo post que se presione el boton guardar del formulario
+    if(isset($_POST['guardar'])) {
+        $obj = new ControladorUsuarios();
          $obj -> UpdateUser();
-    */
+         echo  '<script>
+                    alert("Actualizacion realizada con exito!");
+                    window.location.href="index.php?seccion=usuarios";
+                </script>';
+         exit;
+        
+    }
+}
+        
+
          ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,10 +61,8 @@ function ObtenerDatosUsuario($id){
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form class="row gy-2 gx-3 align-items-center">
-                    <?php
-                    var_dump ($datosUsuario);
-                    ?>
+                <form class="row gy-2 gx-3 align-items-center" method="post">
+                    
                     <div class="col-12">
                         <label  for="id_usuario">Id Usuario:</label>
                         <input type="text" class="form-control" id="id_usuario" name="id_usuario" readonly="true" value="<?php echo $datosUsuario[0]; ?>">
@@ -176,10 +180,7 @@ function ObtenerDatosUsuario($id){
                         <label  for="fecha_ingreso">Fecha de Ingreso:</label>
                         <input type="date" class="form-control" id="fechaIngresoInput" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
                     </div>
-                    <div class="col-12">
-                        <label  for="fecha_creacion">Fecha de Creación:</label>
-                        <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $datosUsuario[8]; ?>" >
-                    </div>
+                  
                     <div class="col-12">
                         <label  for="password">Password:</label>
                         <input type="password" class="form-control" id="password" name="password" value="<?php echo $datosUsuario[9]; ?>" >
@@ -206,7 +207,7 @@ function ObtenerDatosUsuario($id){
                 var fechaIngresoInput = document.getElementById('fechaIngresoInput');
                 var fechaIngresoHidden = document.getElementById('fechaIngresoHidden');
 
-                fechaIngresoInput.addEventListener('focus', function () {
+                fechaIngresoInput.addEventListener('focus', functitn () {
                     if (fechaIngresoInput.value === '') {
                         fechaIngresoInput.placeholder = 'Selecciona una fecha';
                     }

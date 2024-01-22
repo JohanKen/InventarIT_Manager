@@ -25,7 +25,7 @@
 				</div>
 				<div class="notifications">
 					<a href="#">🔔</a>
-</div>
+</div> 
 				<div class="messages">
 					<a href="#">📬</a>
 				</div>
@@ -42,7 +42,7 @@
 	</header>
 	<div class="capa"></div>
 
-	<!-- Menú desplegable de "Equipos" -->
+	 <!--Menú desplegable de "Equipos"--> 
 	<input type="checkbox" id="btn-menu">
 	<div class="container-menu">
 		<div class="cont-menu">
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 
-	
+s
 	<script>
         document.addEventListener("DOMContentLoaded", function () {
             let header = document.querySelector(".header");

@@ -53,15 +53,42 @@ static function selectUsuariosId($id){
 
 //funcion para eliminar un usuario por medio del procedimiento almacenado...
 static function deleteUsuarios($id){
-    $sql = "CALL inventarit_manager.eliminar_usuario('$id');";
+    $id_usuario= (int)$id;
+    $sql = "CALL inventarit_manager.eliminar_usuario('$id_usuario');";
     $res = Conexion::conectar()->query($sql);
     return $res;
 }
 
-static function updateUser($id){
-    $sql = "CALL inventarit_manager.editar_usuario('$id');";
-    $res = Conexion::conectar()->query($sql);
-    return $res;
+static function updateUser($datos){
+    $conexion = Conexion::conectar();
+    try{
+       $id_usuario= (int) $datos['id'];
+       //Se creara la insercion a base de datos mediante el procedimiento almacenado 
+       $id_estado= (int) $datos['estado'];
+       $id_rol= (int) $datos['rol'];
+       
+
+        $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?,?)");
+        $statement->bind_param("issssiiss",
+        $id_usuario,
+        $datos["apellidoPaterno"],
+        $datos["apellidoMaterno"],
+        $datos["nombre"],
+        $datos["correo"],
+        $id_estado,
+        $id_rol,
+        $datos["fechaIngreso"],
+        $datos["password"]
+    );
+    
+    $statement->execute();
+    $statement->close();
+
+    
+     
+    }catch(Exception $e) {
+        echo 'Message: ' .$e->getMessage();
+      }
 }
 
 

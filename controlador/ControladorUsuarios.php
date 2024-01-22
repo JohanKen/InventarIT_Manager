@@ -36,8 +36,8 @@ class ControladorUsuarios {
     public static function borrarUsuarios(){
         if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarUsuario"){
             $id = $_GET ["id_usuario"];
-            $tabla = 'usuarios';
-            $objDelete = ModeloUsuarios::deleteUsuarios($tabla,$id);
+            
+            $objDelete = ModeloUsuarios::deleteUsuarios($id);
             if($objDelete>0){
                 echo    '
                 <script>
@@ -53,8 +53,6 @@ class ControladorUsuarios {
         if(isset($_GET["id_usuario"])){
         $tabla="usuarios";
         $id = $_GET["id_usuario"];
-
-
         $obj = ModeloUsuarios::selectUsuariosId($tabla, $id);
         $usuario = $obj->fetch_all();
         return $usuario;
@@ -168,52 +166,52 @@ class ControladorUsuarios {
         }
     }
 
-/*
-    static function UpdateUser($id){
-        if(isset($_POST["guardar"])){
 
+    static function UpdateUser(){
+        
+        if(isset($_POST["guardar"])){
+            
             try{
 
 
-                //Formateo
-                $fecha_creacion = $_POST["fecha_creacion"];
-                if (DateTime::createFromFormat('Y-m-d', $fecha_creacion) !== false ){
-                    $fecha_creacionFormateada = $fecha_creacion;
-                } else {
-                    echo 'Error en el formato de la fecha de creación';
-                    exit;
-                }
-
+                //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
                 $fecha_ingreso = $_POST["fecha_ingreso"];
-                if (DateTime::createFromFormat('Y-m-d', $fechaIngreso) !== false ){
-                    $fechaIngresoFormateada = $fecha_ingreso;
+                if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){
+                    $fecha_ingresoFormateada = $fecha_ingreso;
                 } else {
                     echo 'Error en el formato de la fecha de ingreso';
                     exit;
                 }
 
-                $datos = array ('id' => $_POST['id_usuario'],
+                
+
+                $datos = array ('id' => $_GET['id_usuario'],
                 'apellidoPaterno' => $_POST['apellido_paterno'],
                 'apellidoMaterno' => $_POST['apellido_materno'],
                 'nombre' => $_POST['nombre_usuario'],
                 'correo' => $_POST['correo'],
                 'estado' => $_POST['estado'],
                 'rol' => $_POST['rol'],
-                'fechaIngreso' => $_POST[$fecha_ingreso],
-                'fechaCreacion' => $_POST[$fecha_creacion],
-                'password' => $_POST[$password]
+                'fechaIngreso' => $_POST['fecha_ingreso'],
+                'password' => $_POST['password']
                 
             );
-                $respuesta = ModeloUsuario::UpdateUser($tabla, $datos);
+                $respuesta = ModeloUsuarios::updateUser($datos);
+                if($respuesta > 0){
+                    var_dump($datos);
                 }
+                }
+                catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                  }
         
             }       
             
-     
+        }
     
     
 
-}*/
 }
+
 
 ?>
