@@ -220,6 +220,7 @@ body {
         }
 
         .headerTabla {
+            
             backdrop-filter: blur(10px);
             margin-left: 10%;
             box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.1);

@@ -1,4 +1,4 @@
-dd<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,11 +23,18 @@ dd<!DOCTYPE html>
                     </div>
                 </form>
             </header>
+            <div class="imgbtn">
             <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
+            <div >
+                <br>
+           
+            </div>
+        </div>
+            
         </div>
 
-        <button class="custom-button" onclick="nuevoUsuario();">AGREGAR NUEVO USUARIO</button>
-    
+        <a href="index.php?seccion=nuevousuario" ><button type="button" class="btnAgregar">Agregar nuevo usuario</button></a>
+
         <div class="tabla">
             <table class="tabla">
                 <thead class="thead-dark">
@@ -89,18 +96,7 @@ dd<!DOCTYPE html>
             $agregar = new ControladorUsuarios;
             $agregar->agregarUsuarios();
         ?>
-        <!-- Modal para agregar a un nuevo usuario -->
-        <div class="modal2" id="nuevoUsuarioModal">
-            <div class="modal-content2">
-                <div class="tittleModal">
-                
-                <br><br>
-                    <h4 id="agregarTXT">Agregar a un nuevo usuario</h4>
-                </div>
-            
-                
-            </div>
-        </div>
+
 
     </div>
                     <?php

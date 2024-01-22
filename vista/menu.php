@@ -3,9 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Menú Lateral con Css</title>
-	<link rel="stylesheet" href="./estilos/estilosMenu.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="estilos/estilosMenu.css">
 </head>
 
 <!-- se va a rediseñar en navbar con el menu en general -->
@@ -14,21 +12,26 @@
 	<header class="header">
 		<div class="container">
 			<div class="btn-menu">
-				<label for="btn-menu" style="color: black;">☰</label>
+				<label for="btn-menu" style="color: black;"><img src="images/bar.svg" alt="" id="imgBar"></label>
 			</div>
 			<div class="logo">
 				<h1 id="logoInven"><img src="./images/logoinventarit.png" alt="imgLogo" id="logoInventarit"></h1>
 			</div>
-			<nav class="menu">
+			
+			
+			
+			
+			<div class="menu">
 				<div class="search">
-					<input type="text" placeholder="Buscar">
+					<input type="text" id="searchInput" placeholder="Buscar">
 				</div>
 				<div class="notifications">
-					<a href="#">🔔</a>
-</div> 
+					<img src="images/cam.png" id="imgCampana" alt="">
+				</div> 
 				<div class="messages">
-					<a href="#">📬</a>
+					
 				</div>
+				
 				<div class="user">
 					<a href="#">Usuario</a>
 					<ul class="user-menu">
@@ -37,7 +40,11 @@
 						<li><a href="logout.php" id="logout">Cerrar Sesión</a></li>
 					</ul>
 				</div>
-			</nav>
+			</div>
+		
+		
+		
+		
 		</div>
 	</header>
 	<div class="capa"></div>
@@ -54,11 +61,11 @@
 				<a href="index.php?seccion=inicio">Equipos</a>
 				<a href="index.php?seccion=usuarios">Usuarios</a>
 			</nav>
-			<label for="btn-menu">✖️</label>
+			<label for="btn-menu"><img src="images/imgclose.png" id="imgClose" alt=""></label>
 		</div>
 	</div>
 
-s
+
 	<script>
         document.addEventListener("DOMContentLoaded", function () {
             let header = document.querySelector(".header");
