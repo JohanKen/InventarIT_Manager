@@ -13,6 +13,7 @@ if (!isset($_SESSION['usuario'])) {
 include 'controlador/ControladorUsuarios.php';
 include 'controlador/controladorVistas.php';
 include 'controlador/ControladorDispositivos.php';
+include 'controlador/ControladorColaboradores.php';
 
 //Modelos
 include_once 'modelo/ModeloDispositivos.php';
