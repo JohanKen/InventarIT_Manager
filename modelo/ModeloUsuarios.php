@@ -58,6 +58,45 @@ static function deleteUsuarios($id){
     $res = Conexion::conectar()->query($sql);
     return $res;
 }
+static function comprobarUsuarioExistente($email) {
+    $sql = "SELECT * FROM usuarios WHERE correo_usuario = ?";
+    $conn = Conexion::conectar();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    return $res->num_rows > 0;
+}
+
+static function createUser($datos){
+    $conexion = Conexion::conectar();
+    try{
+        $statement = $conexion->prepare("CALL insertar_usuario(?,?,?,?,?,?,?);");
+        $statement->bind_param("sssssss",
+        $datos["apellido_paterno"],
+        $datos["apellido_materno"],
+        $datos["nombres"],
+        $datos["correo"],
+        $datos["rol"],
+        $datos["fecha_ingreso"],
+        $datos["password"]
+    );
+    $statement->execute();
+
+            if ($statement->error) {
+                echo 'Error al insertar el usuario: ' . $statement->error;
+                exit;
+             }
+
+$statement->close();
+
+
+    }catch(Exception $e) {
+        echo 'Message: ' .$e->getMessage();
+      }
+
+}
+
 
 static function updateUser($datos){
     $conexion = Conexion::conectar();

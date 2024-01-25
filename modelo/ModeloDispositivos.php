@@ -115,21 +115,10 @@ static function updateLaptop($datos) {
             $datos["procesador"],
             $datos["sistema_operativo"],
             $estado
-        );
-
-        // Muestra el array antes de ejecutar la sentencia preparada
-      
-
+        ); 
         $statement->execute();
         $statement->close();
        
-        
-        
-        //echo "ARRAY EN EL MODELO(datos)...($datos)";
-        //var_dump($datos);
-
-        // Mensaje de éxito
-        echo "Procedimiento almacenado ejecutado con éxito.";
 
     } catch (Exception $e) {
         // Manejar errores generales

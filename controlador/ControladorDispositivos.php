@@ -94,9 +94,7 @@
                                 exit;
                             }
                             
-                            // Obtén el valor directo del campo de precio 
-                            
-
+                           
                             $datos = array(
                                 "id_dispositivo" => (int)$_POST["id_dispositivo"],
                                 "modelo" => $_POST["modelo"],

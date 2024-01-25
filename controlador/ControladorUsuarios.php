@@ -8,21 +8,69 @@ class ControladorUsuarios {
         $arregloUsuario = $obj->fetch_all();
         return $arregloUsuario;
     }
-    public static function agregarUsuarios(){
-        $tabla = 'usuarios';
-        if (isset($_POST["agregar"])) {
+    public static function registrarUsuario(){
+        
+        if (isset($_POST["registrar"])) {
             try {
+
+
+                $password=$_POST['password'];
+                $ConfirmarPassword=$_POST['confirmar_password'];
+
+                if($password == $ConfirmarPassword){
+                    $passwordCorrect=$_POST['password'];
+                } else {
+                    echo '
+                    <script>
+                        alert("Las contraseñas no coinciden");
+                       
+                    </script>';    
+                    exit;
+                }
+                
+                    
+                    
+
                 // Validamos el formato de la fecha para evitar problemas al insertarla en la base de datos
-                $fechaIngreso = $_POST["fechaIngreso"];
+                $fechaIngreso = $_POST["fecha_ingreso"];
                 if (DateTime::createFromFormat('Y-m-d', $fechaIngreso) !== false ){
                     $fechaIngresoFormateada = $fechaIngreso;
                 } else {
                     echo 'Error en el formato de la fecha';
                     exit;
                 }
+
+
+
     
                 // Generamos un array que contiene todas las variables de los campos del formulario del usuario a editar
     
+
+
+                $datos = array(
+                    "apellido_paterno" =>  $_POST['apellido_paterno'],
+                    "apellido_materno" => $_POST['apellido_materno'],
+                    "nombres" => $_POST['nombres'],
+                    "correo" =>$_POST['correo'],
+                    "rol" =>$_POST['rol'],
+                    "password" => $passwordCorrect,
+                    "fecha_ingreso" => $fechaIngresoFormateada,
+                );
+                    $correoExistente = ModeloUsuarios::comprobarUsuarioExistente($_POST['correo']);
+
+                    if ($correoExistente) {
+                        echo '
+                            <script>
+                                alert("El correo electrónico ya está en uso. Por favor, elige otro.");
+                            </script>';
+                        exit;
+                    }
+
+
+                $insert = ModeloUsuarios::createUser($datos);
+                
+                
+
             } catch (Exception $e) {
                 // Manejo de excepciones
                 echo 'Error: ' . $e->getMessage();
@@ -48,6 +96,49 @@ class ControladorUsuarios {
             } 
         }
     } 
+
+    static function UpdateUser(){
+        
+        if(isset($_POST["guardar"])){
+            
+            try{
+
+
+                //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
+                $fecha_ingreso = $_POST["fecha_ingreso"];
+                if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){
+                    $fecha_ingresoFormateada = $fecha_ingreso;
+                } else {
+                    echo 'Error en el formato de la fecha de ingreso';
+                    exit;
+                }
+
+                
+
+                $datos = array ('id' => $_GET['id_usuario'],
+                'apellidoPaterno' => $_POST['apellido_paterno'],
+                'apellidoMaterno' => $_POST['apellido_materno'],
+                'nombre' => $_POST['nombre_usuario'],
+                'correo' => $_POST['correo'],
+                'estado' => $_POST['estado'],
+                'rol' => $_POST['rol'],
+                'fechaIngreso' => $_POST['fecha_ingreso'],
+                'password' => $_POST['password']
+                
+            );
+                $respuesta = ModeloUsuarios::updateUser($datos);
+                if($respuesta > 0){
+                    var_dump($datos);
+                }
+                }
+                catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                  }
+        
+            }       
+            
+        }
+    
 
     public static function detalleUsuario(){
         if(isset($_GET["id_usuario"])){
@@ -167,47 +258,6 @@ class ControladorUsuarios {
     }
 
 
-    static function UpdateUser(){
-        
-        if(isset($_POST["guardar"])){
-            
-            try{
-
-
-                //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
-                $fecha_ingreso = $_POST["fecha_ingreso"];
-                if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){
-                    $fecha_ingresoFormateada = $fecha_ingreso;
-                } else {
-                    echo 'Error en el formato de la fecha de ingreso';
-                    exit;
-                }
-
-                
-
-                $datos = array ('id' => $_GET['id_usuario'],
-                'apellidoPaterno' => $_POST['apellido_paterno'],
-                'apellidoMaterno' => $_POST['apellido_materno'],
-                'nombre' => $_POST['nombre_usuario'],
-                'correo' => $_POST['correo'],
-                'estado' => $_POST['estado'],
-                'rol' => $_POST['rol'],
-                'fechaIngreso' => $_POST['fecha_ingreso'],
-                'password' => $_POST['password']
-                
-            );
-                $respuesta = ModeloUsuarios::updateUser($datos);
-                if($respuesta > 0){
-                    var_dump($datos);
-                }
-                }
-                catch(Exception $e) {
-                    echo 'Message: ' .$e->getMessage();
-                  }
-        
-            }       
-            
-        }
     
     
 

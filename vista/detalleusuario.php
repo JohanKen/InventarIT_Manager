@@ -57,148 +57,173 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="estilos/estilosForms.css">
 </head>
 <body>
-    <h1>Editar Usuario</h1>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form class="row gy-2 gx-3 align-items-center" method="post">
-                    
-                    <div class="col-12">
-                        <label  for="id_usuario">Id Usuario:</label>
-                        <input type="text" class="form-control" id="id_usuario" name="id_usuario" readonly="true" value="<?php echo $datosUsuario[0]; ?>">
-                    </div>
-                    <div class="col-12">
-                        <label  for="apellido_paterno">Apellido Paterno:</label>
-                        <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>"  >
-                    </div>
-                    <div class="col-12">
-                        <label  for="apellido_materno">Apellido Materno:</label>
-                        <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" >
-                    </div>
-                    <div class="col-12">
-                        <label  for="nombre_usuario">Nombre(s):</label>
-                        <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="<?php echo $datosUsuario[3]; ?>" >
-                    </div>
-                    <div class="col-12">
-                        <label  for="correo">Correo Electronico:</label>
-                        <input type="text" class="form-control" id="correo" name="correo" value="<?php echo $datosUsuario[4]; ?>" >
-                    </div> 
+    <div class="headerr">
+    <h2>Editar Usuario</h2>
+    </div>
+   <br><br><br><br><br>
+    <div class="containerr">
+        
+    <h3><?php echo $datosUsuario[3] . ' ' . $datosUsuario[1]; ?></h3>
+    <h6><?php 
+    switch ($datosUsuario[6]) {
+        case 1:
+            echo "Administrador";
+            break;
+        case 2:
+            echo "Editor";
+            break;
+        case 3:
+            echo "Consultor";
+            break;
+        default:
+            echo "Desconocido";
+            break;
+    }
+?></h6>
+
+                <form action="" method="post" onsubmit="return validateForm()">
+                
+                    <div class="mb-3">
+                                    <div class="mb-3">
+                                        <label  for="id_usuario">Id Usuario:</label>
+                                        <input type="text" class="form-control"  id="lbl" name="id_usuario" readonly="true" value="<?php echo $datosUsuario[0]; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  for="apellido_paterno">Apellido Paterno:</label>
+                                        <input type="text" class="form-control" id="lbl" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>"  >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  for="apellido_materno">Apellido Materno:</label>
+                                        <input type="text" class="form-control" id="lbl" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  for="nombre_usuario">Nombre(s):</label>
+                                        <input type="text" class="form-control" id="lbl" name="nombre_usuario" value="<?php echo $datosUsuario[3]; ?>" >
+                                    </div>
+
+                    </div>    
+                    <div class="mb-3">            
+                                    <div class="mb-3">
+                                        <label  for="correo">Correo Electronico:</label>
+                                        <input type="text" class="form-control" id="lbl" name="correo" value="<?php echo $datosUsuario[4]; ?>" >
+                                    </div> 
 
 
 
 
-                    
-                    <!-- Crear metodo para obtener los estados por nombre y no por ID-->
-                    <div class="mb-3" id="formForm">
-                        <label for="estado" class="form-label">Estado del Usuario</label>
-                        <select class="form-select" name="estado">
-                            <?php
-                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
-                            $estados = array(
-                                1 => 1,
-                                2 => 2,
+                                    
+                                    <!-- Crear metodo para obtener los estados por nombre y no por ID-->
+                                    <div class="mb-3" id="formForm">
+                                        <label for="estado" class="form-label">Estado del Usuario</label>
+                                        <select class="form-select" id="lbl" name="estado">
+                                            <?php
+                                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
+                                            $estados = array(
+                                                1 => 1,
+                                                2 => 2,
+                                            
+                                            );
+                                            
+                                            foreach ($estados as $estadoId => $estadoLabel) {
+                                                // Verificar si el estado actual coincide con el estado del usuario
+                                                $selected = ($datosUsuario[5] == $estadoLabel) ? 'selected' : '';
+                                                echo "<option value='$estadoLabel' $selected>";
+
+                                                // Mostrar el nombre del estado en lugar del valor entero
+                                                switch ($estadoLabel) {
+                                                    case 1:
+                                                        echo "Activo";
+                                                        break;
+                                                    case 2:
+                                                        echo "Inactivo";
+                                                        break;
+                                                
+                                                    // En caso de que el estado no coincida con ningún caso
+                                                    default:
+                                                        echo "Desconocido";
+                                                        break;
+                                                }
+
+                                                // Cerrar la etiqueta de opción
+                                                echo "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+
+                                    
+
+                                    <div class="mb-3" id="formForm">
+                                        <label for="estado" class="form-label">Rol del Usuario</label>
+                                        <select class="form-select"  id="lbl" name="rol">
+                                            <?php
+                                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
+                                            $roles = array(
+                                                1 => 1,
+                                                2 => 2,
+                                                3 => 3
+                                            
+                                            );
+                                            
+                                            foreach ($roles as $rolId => $rolLabel) {
+                                                // Verificar si el rol actual coincide con el rol del usuario
+                                                $selected = ($datosUsuario[6] == $rolLabel) ? 'selected' : '';
+                                                echo "<option value='$rolLabel' $selected>";
+
+                                                // Mostrar el nombre del rol en lugar del valor entero
+                                                switch ($rolLabel) {
+                                                    case 1:
+                                                        echo "Administrador";
+                                                        break;
+                                                    case 2:
+                                                        echo "Editor";
+                                                        break;
+                                                    case 3:
+                                                        echo "Consultor";
+                                                        break;
+                                                    // En caso de que el rol no coincida con ningún caso
+                                                    default:
+                                                        echo "Desconocido";
+                                                        break;
+                                                }
+
+                                                // Cerrar la etiqueta de opción
+                                                echo "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+
+
+
+
+                                
+                                    <div class="col-12">
+                                        <label  for="fecha_ingreso" id="lbl">Fecha de Ingreso:</label>
+                                        <input type="date" class="form-control" id="fechaIngresoInput" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
+                                    </div>
+                                    
                                
-                            );
-                            
-                            foreach ($estados as $estadoId => $estadoLabel) {
-                                // Verificar si el estado actual coincide con el estado del usuario
-                                $selected = ($datosUsuario[5] == $estadoLabel) ? 'selected' : '';
-                                echo "<option value='$estadoLabel' $selected>";
-
-                                // Mostrar el nombre del estado en lugar del valor entero
-                                switch ($estadoLabel) {
-                                    case 1:
-                                        echo "Activo";
-                                        break;
-                                    case 2:
-                                        echo "Inactivo";
-                                        break;
-                                  
-                                    // En caso de que el estado no coincida con ningún caso
-                                    default:
-                                        echo "Desconocido";
-                                        break;
-                                }
-
-                                // Cerrar la etiqueta de opción
-                                echo "</option>";
-                            }
-                            ?>
-                        </select>
                     </div>
-
-
+                                            
+                <div class="mb_3">                            
                     
-
-                    <div class="mb-3" id="formForm">
-                        <label for="estado" class="form-label">Rol del Usuario</label>
-                        <select class="form-select" name="rol">
-                            <?php
-                            //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
-                            $roles = array(
-                                1 => 1,
-                                2 => 2,
-                                3 => 3
-                               
-                            );
-                            
-                            foreach ($roles as $rolId => $rolLabel) {
-                                // Verificar si el rol actual coincide con el rol del usuario
-                                $selected = ($datosUsuario[6] == $rolLabel) ? 'selected' : '';
-                                echo "<option value='$rolLabel' $selected>";
-
-                                // Mostrar el nombre del rol en lugar del valor entero
-                                switch ($rolLabel) {
-                                    case 1:
-                                        echo "Administrador";
-                                        break;
-                                    case 2:
-                                        echo "Editor";
-                                        break;
-                                    case 3:
-                                        echo "Consultor";
-                                        break;
-                                    // En caso de que el rol no coincida con ningún caso
-                                    default:
-                                        echo "Desconocido";
-                                        break;
-                                }
-
-                                // Cerrar la etiqueta de opción
-                                echo "</option>";
-                            }
-                            ?>
-                        </select>
+                <img class="imgEditUser" src="images/editUser.png" alt="">                   
+                    <div class="botones">
+                    <button type="button" class="btnCancelar" onclick="window.location.href='index.php?seccion=usuarios'" >Cancelar</button>
+                        <button type="submit" name="guardar" class="btnGuardar">Guardar Cambios</button>
+                        
                     </div>
-
-
-
-
-
-                   
-                    <div class="col-12">
-                        <label  for="fecha_ingreso">Fecha de Ingreso:</label>
-                        <input type="date" class="form-control" id="fechaIngresoInput" name="fecha_ingreso" value="<?php echo $datosUsuario[7]; ?>">
-                    </div>
-                  
-                    <div class="col-12">
-                        <label  for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $datosUsuario[9]; ?>" >
-                    </div>
+                    </div>   
+                    <div class="mb_3">  
+                        
+                    </div>   
                     
-                    <!--
-                    <div class="col-12">
-                        <label  for="repetir_password">Repetir Password:</label>
-                        <input type="password" class="form-control" id="repetir_password" name="repetir_password" value="<?php echo $datosUsuario[0]; ?>" placeholder="Repetir Password">
-                    </div>
--->
-                    <div class="col-12">
-                        <button type="submit" name="guardar" class="btn btn-primary">Guardar Cambios</button>
-                        <button type="button" class="btn btn-secondary">Cancelar</button>
-                    </div>
                 </form>
-            </div>
-        </div>
+            
+        
     </div>
 </body>
 

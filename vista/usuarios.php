@@ -53,32 +53,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $eliminarUsuario = new ControladorUsuarios;
-                    $eliminarUsuario->borrarUsuarios();
+                <?php
+                        $eliminarUsuario = new ControladorUsuarios;
+                        $eliminarUsuario->borrarUsuarios();
 
-                    $listaUsers = ControladorUsuarios::consultarUsuarios();
-                    foreach ($listaUsers as $item) {
-                        echo '
-                            <tr>
-                                <td>' . $item[0] . '</td>
-                                <td>' . $item[1] . '</td>
-                                <td>' . $item[2] . '</td>
-                                <td>' . $item[3] . '</td>
-                                <td>' . $item[4] . '</td>
-                                <td>' . $item[5] . '</td>
-                                <td>' . $item[6] . '</td>
-                                <td>' . $item[7] . '</td>
-                                <td>' . $item[8] . '</td>
-                                <td>' . $item[9] . '</td>
-                                <td class="actions">
-                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '">Editar</a>
-                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');">Borrar</a>
-                                </td>
-                            </tr>
-                        ';
-                    }
-                    ?>
+                        $listaUsers = ControladorUsuarios::consultarUsuarios();
+                        foreach ($listaUsers as $item) {
+                            echo '
+                                <tr>
+                                    <td>' . $item[0] . '</td>
+                                    <td>' . $item[1] . '</td>
+                                    <td>' . $item[2] . '</td>
+                                    <td>' . $item[3] . '</td>
+                                    <td>' . $item[4] . '</td>
+                                    <td>' . $item[5] . '</td>
+                                    <td>' . $item[6] . '</td>
+                                    <td>' . $item[7] . '</td>
+                                    <td>' . $item[8] . '</td>
+                                    <td>' . $item[9] . '</td>
+                                    <td class="actions">
+                                        <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
+                                        <hr>
+                                        <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');" id="enlaceBorrar">Borrar</a>
+                                    </td>
+                                </tr>
+                            ';
+                        }
+                        ?>
+
                 </tbody>
             </table>
         </div>
@@ -88,14 +90,12 @@
                 <span class="close-modal" onclick="cerrarModal()">&times;</span>
                 <h4>Confirmar Eliminación</h4>
                 <p>¿Estás seguro de que deseas eliminar a este usuario?</p>
-                <button class="btn-danger" id="btnBorrarModal">Eliminar</button>
-                <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button class="btncancel" id="btnCerrarModal"onclick="cerrarModal()">Regresar </button>
+                <button class="btneliminar" id="btnBorrarModal">Confirmar</button>
+                
             </div>
         </div>
-        <?php
-            $agregar = new ControladorUsuarios;
-            $agregar->agregarUsuarios();
-        ?>
+        
 
 
     </div>
@@ -118,6 +118,13 @@
                     ?>
     <script>
        
+      
+            function cerrarModal() {
+                document.getElementById('confirmarBorrarModal').style.display = 'none';
+            }
+
+
+
         function confirmarBorrar(id_usuario) {
             document.getElementById('confirmarBorrarModal').style.display = 'flex';
             document.getElementById('btnBorrarModal').onclick = function () {
@@ -125,13 +132,7 @@
             }
         }
 
-        function cerrarModal() {
-            var modal = document.getElementById('nuevoUsuarioModal');
-            modal.style.animationName = 'slideOut'; // Agrega la animación de cierre
-            setTimeout(function () {
-                modal.style.display = 'none';
-            }, 500); // Ajusta el tiempo para que coincida con la duración de la animación
-        }
+        
 
          
     </script>

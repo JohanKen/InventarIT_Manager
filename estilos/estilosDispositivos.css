@@ -13,7 +13,8 @@ body {
     margin-top: 0;
     padding: 100px;
     animation: slideDownContent 1s forwards;
-    }.headerTabla {
+    }
+.headerTabla {
     backdrop-filter: blur(10px);
     margin-left: 10%;
     box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.1);
@@ -139,7 +140,7 @@ color: #333;
 
 .header {
     animation: slideInHeader 1s forwards;
-    z-index: 2; 
+    z-index: 1;
 }
 
 .container-menu {
