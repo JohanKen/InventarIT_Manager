@@ -1,5 +1,5 @@
 <?php
-    include_once "modelo/ModeloColaboradores.php";
+    include_once "./modelo/ModeloColaboradores.php";
     class ControladorColaboradores{
         public static function consultarColaboradores(){
             $tabla = 'v_colaboradores';
@@ -22,6 +22,35 @@
                     ';
                 }
             }
+        }
+
+        static function detalleColaborador(){
+            if(isset($_GET["id_colaborador"])){
+                $id = $_GET["id_colaborador"];
+
+                $obj = ModeloColaboradores::selectColaborador($id);
+
+                if($obj instanceof mysqli_result){
+                    $colaborador = $obj->fetch_all(MYSQL_ASSOC);
+                }else{
+                    $colaborador = $obj;
+                }
+                return $colaborador;
+            }
+        }
+
+        static function getClientes(){
+            $tabla = "empresas";
+            $respesta = ModeloColaboradores::selectClientes($tabla);
+            $arreglo = $respesta->fetch_all();
+            return $arreglo;
+        }
+
+        static function getEstados(){
+            $tabla = "estados_colaboradores";
+            $respesta = ModeloColaboradores::selectClientes($tabla);
+            $arreglo = $respesta->fetch_all();
+            return $arreglo;
         }
     }
 ?>

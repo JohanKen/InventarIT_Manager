@@ -76,10 +76,10 @@
         </div>
 
         <script>
-        function confirmarBorrar(id_dispositivo) {
+        function confirmarBorrar(id_colaborador) {
             document.getElementById('confirmarBorrarModal').style.display = 'flex';
             document.getElementById('btnBorrarModal').onclick = function () {
-                window.location.href = "index.php?seccion=dispositivos&accion=eliminarColaborador&id_colaborador=" + id_dcolaborador;
+                window.location.href = "index.php?seccion=dispositivos&accion=eliminarColaborador&id_colaborador=" + id_colaborador;
             };
         }
 
