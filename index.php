@@ -9,6 +9,8 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 
+;
+
 //Controladores
 include 'controlador/ControladorUsuarios.php';
 include 'controlador/controladorVistas.php';

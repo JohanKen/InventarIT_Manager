@@ -1,14 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   
 }
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat Alternates', sans-serif;
     background-image: url("../images/bg.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -28,7 +27,7 @@ body {
 #imgCampana{
  width: 30px;
  height: 30px;
- margin-left: 20px;
+ 
 }
 
 .header {
@@ -40,16 +39,11 @@ body {
 
 }
 
-.container {
-    width: 90%;
-    max-width: auto;
-    margin: auto;
-    height: auto;
-}
+
 
 .container .btn-menu, .logo {
     float: left;
-    line-height:100px;
+   
 }
 
 .container .btn-menu label {
@@ -66,7 +60,6 @@ body {
 }
 
 .container .menu {
-    float: right;
     line-height: 100px;
 }
 
@@ -212,20 +205,22 @@ body {
     margin-top: -20px;
     width: 300px;
     height: 150px;
+    margin-right: 100px;
 }
 
 .menu {
-    
+    margin-left: 100px;
     background-color: #333;
     color: #fff;
-    
+    width: auto;
     display: flex;
-    justify-content: space-between;
+   
     align-items: center; 
-	height: 60px;
-
+	height: 70px;
+    z-index: 2;
+    
     padding: 10px 20px;
-    flex-direction: row;
+    
 }
 
 .menu a {
@@ -249,7 +244,7 @@ body {
 .search:hover {
     display: flex;
     align-items: center;
-    transform: scale(1.4);
+    transform: scale(1.1r);
     border: transparent;
     box-shadow: 0px 0px 10px blue;
 }
@@ -275,21 +270,28 @@ body {
 
 .user-menu {
     margin-top: 350px;
-    margin-right: 80px;
-    display: none;
+    
+    
     position: absolute;
     margin-left: -50px;
     background-color: #333;
     
     list-style: none;
-    padding: 10px;
+    padding: 2px;
 }
+
+#imgLogout{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
 
 .user-menu a {
     text-decoration: none;
     color: #0026ff;
     display: block;
-    margin-bottom: 5px;
+   
 }
 
 .user:hover .user-menu {

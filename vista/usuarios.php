@@ -24,7 +24,7 @@
                 </form>
             </header>
             <div class="imgbtn">
-            <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
+             <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
             <div >
                 <br>
            

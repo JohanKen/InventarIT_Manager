@@ -1,4 +1,7 @@
 
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,13 @@
 
 <body>
     <div class="contentSeccion">
-        <p>PAGINA DE DASHBOARDS</p>
+        <p>
+            
+        <?php
+print_r($_SESSION);
+?>
+
+        </p>
     </div>
 
 </body>

@@ -22,24 +22,24 @@
 			
 			
 			<div class="menu">
-				<div class="search">
+				
 					<input type="text" id="searchInput" placeholder="Buscar">
-				</div>
-				<div class="notifications">
-					<img src="images/cam.png" id="imgCampana" alt="">
-				</div> 
+				
+				
+					<a href=""><img src="images/cam.png" id="imgCampana" alt=""></a>
+				
 				<div class="messages">
 					
-				</div>
 				
-				<div class="user">
-					<a href="#">Usuario</a>
-					<ul class="user-menu">
-						<li><a href="#">Perfil</a></li>
-						<li><a href="#">Configuración</a></li>
-						<li><a href="logout.php" id="logout">Cerrar Sesión</a></li>
-					</ul>
-				</div>
+				
+				
+					<a href="#"><?php ?></a>
+					
+						<a href="#">Perfil</a>
+						<a href="#">Configuración</a>
+						 
+						 <a href="logout.php" id="logout"><img id="imgLogout" src="images/logout.jpg" alt=""></a>
+				
 			</div>
 		
 		
