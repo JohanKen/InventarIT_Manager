@@ -2,7 +2,7 @@
 class ModeloUsuarios {
 
 static function login($email, $password) {
-    $sql = "SELECT id_rol, id_estado_usuario FROM usuarios WHERE correo_usuario = ? AND password = ?;";
+    $sql = "SELECT * FROM usuarios WHERE correo_usuario = ? AND password = ?;";
     $conn = Conexion::conectar();
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $email, $password);
@@ -107,8 +107,8 @@ static function updateUser($datos){
        $id_rol= (int) $datos['rol'];
        
 
-        $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?,?)");
-        $statement->bind_param("issssiiss",
+        $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?)");
+        $statement->bind_param("issssiis",
         $id_usuario,
         $datos["apellidoPaterno"],
         $datos["apellidoMaterno"],
@@ -116,8 +116,7 @@ static function updateUser($datos){
         $datos["correo"],
         $id_estado,
         $id_rol,
-        $datos["fechaIngreso"],
-        $datos["password"]
+        $datos["fechaIngreso"]
     );
     
     $statement->execute();

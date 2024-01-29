@@ -122,8 +122,7 @@ class ControladorUsuarios {
                 'correo' => $_POST['correo'],
                 'estado' => $_POST['estado'],
                 'rol' => $_POST['rol'],
-                'fechaIngreso' => $_POST['fecha_ingreso'],
-                'password' => $_POST['password']
+                'fechaIngreso' => $_POST['fecha_ingreso']
                 
             );
                 $respuesta = ModeloUsuarios::updateUser($datos);
@@ -167,8 +166,16 @@ class ControladorUsuarios {
             if ($count > 0) {
                 $arreglo = $usuario->fetch_all(MYSQLI_ASSOC);
                 if (isset($arreglo[0]['id_rol']) && isset($arreglo[0]['id_estado_usuario'])) {
-                    $rol_usuario = $arreglo[0]['id_rol'];
+                    $id_usuario = $arreglo[0]['id_usuario'];
+                    $apellido_paterno_usuario = $arreglo[0]['apellido_materno_usuario'];
+                    $nombre_usuario = $arreglo[0]['nombre_usuario'];
+                    $correo_usuario = $arreglo[0]['correo_usuario'];
                     $estado_usuario = $arreglo[0]['id_estado_usuario'];
+                    $rol_usuario = $arreglo[0]['id_rol'];
+                    $fechaIngreso = $arreglo[0]['fecha_ingreso_usuario'];
+                    $fechaCreacion = $arreglo[0]['fecha_creacion_usuario'];
+                    $password = $arreglo[0]['password'];
+                    
                     
                     // Configurar la variable de sesión con los datos del usuario
                     $_SESSION['usuario'] = $arreglo[0];

@@ -33,9 +33,10 @@
 				
 				
 				
-					<a href="#"><?php ?></a>
+				<a href="index.php?seccion=perfil"><?php echo $_SESSION["usuario"]["nombre_usuario"] . ' ' . $_SESSION["usuario"]["apellido_paterno_usuario"];?></a>
+
 					
-						<a href="#">Perfil</a>
+						
 						<a href="#">Configuración</a>
 						 
 						 <a href="logout.php" id="logout"><img id="imgLogout" src="images/logout.jpg" alt=""></a>

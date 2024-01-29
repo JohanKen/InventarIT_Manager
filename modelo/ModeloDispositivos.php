@@ -100,7 +100,6 @@ static function updateLaptop($datos) {
         $estado = (int) $datos["estado"];
         $precio = (double) $datos["precio"];
 
-        //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
         $statement = $conexion->prepare("CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $statement->bind_param("issiisssissi",
             $id_dispositivo,

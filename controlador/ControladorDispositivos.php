@@ -103,7 +103,7 @@
                                 "procesador" => $_POST["procesador"],
                                 "sistema_operativo" => $_POST["sistema_operativo"],
                                 "id_marca" => (int)$_POST["marca"],
-                                "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  // Se usa el precio procesado como double
+                                "precio" =>$_POST["precio"] ,  
                                 "estado" => (int)$_POST["estado"],
                                 "fecha_compra" => $fechaCompraFormateada,
                                 "nota" => $_POST["nota"],
