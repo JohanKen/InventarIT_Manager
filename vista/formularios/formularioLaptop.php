@@ -58,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarLaptop();
-        header('Location:index.php?seccion=dispositivos');
+        echo  '<script>
+                    alert("Actualizacion realizada con exito!");
+                    window.location.href="index.php?seccion=dispositivos";
+                </script>';
         exit;
         
     }
@@ -236,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    /*document.addEventListener('DOMContentLoaded', function () {
         var precioInput = document.getElementById('precioInput');
         precioInput.addEventListener('input', function () {
             // Reemplaza todos los caracteres que no son dígitos o puntos
@@ -245,7 +248,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var precioFormateado = '$' + new Intl.NumberFormat().format(parseFloat(precioNumerico));
             precioInput.value = precioFormateado;
         });
-    });
+    });*/
 </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {

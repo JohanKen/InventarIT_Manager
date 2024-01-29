@@ -188,17 +188,9 @@ static function updateLaptop($datos) {
         $statement->close();
        
         
-        
-        //echo "ARRAY EN EL MODELO(datos)...($datos)";
-        //var_dump($datos);
-
-        // Mensaje de éxito
-        echo "Procedimiento almacenado ejecutado con éxito.";
 
     } catch (Exception $e) {
-        // Manejar errores generales
-        echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
-        error_log("Error en updateLaptop: " . $e->getMessage());
+        echo 'Message: ' .$e->getMessage();
     }
 }
 
@@ -237,12 +229,11 @@ static function updateDispositivo($datos) {
         //var_dump($datos);
 
         // Mensaje de éxito
-        echo "Procedimiento almacenado ejecutado con éxito.";
+        
 
     } catch (Exception $e) {
         // Manejar errores generales
-        echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
-        error_log("Error en updateLaptop: " . $e->getMessage());
+        echo 'Message: ' .$e->getMessage();
     }
 }
     
@@ -289,12 +280,11 @@ static function updateIMac($datos) {
         //var_dump($datos);
 
         // Mensaje de éxito
-        echo "Procedimiento almacenado ejecutado con éxito.";
+        
 
     } catch (Exception $e) {
         // Manejar errores generales
-        echo "Error al intentar insertar los datos en el procedimiento almacenado: " . $e->getMessage();
-        error_log("Error en updateLaptop: " . $e->getMessage());
+        echo 'Message: ' .$e->getMessage();
     }
 }
 

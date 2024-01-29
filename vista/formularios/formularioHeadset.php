@@ -58,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarDispositivo();
-        header('Location:index.php?seccion=dispositivos');
+        echo  '<script>
+                    alert("Actualizacion realizada con exito!");
+                    window.location.href="index.php?seccion=dispositivos";
+                </script>';
         exit;
         
     }
@@ -169,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 
                 <div class="mb-3" id="formForm">
-                    <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
+                    <a class="btn btn-danger" href="index.php?seccion=dispositivos">Cancelar</a>
                     <input type="submit" class="btn btn-primary" name="guardarDispositivo" value="Actualizar Dispositivo">
                 </div>
                         

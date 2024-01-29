@@ -58,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarIMac();
-        header('Location:index.php?seccion=dispositivos');
+        echo  '<script>
+                    alert("Actualizacion realizada con exito!");
+                    window.location.href="index.php?seccion=dispositivos";
+                </script>';
         exit;
         
     }

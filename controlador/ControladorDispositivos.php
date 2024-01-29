@@ -160,19 +160,10 @@
 
                 $insert = ModeloDispositivos::updateLaptop($datos);
 
-                if ($insert > 0) {
-                    echo '
-                        <script>
-                            alert("Dispositivo actualizado correctamente");
-                            window.location.href="index.php?seccion=dispositivos";
-                        </script>
-                    ';
-                } else {
-                    echo 'Error al intentar actualizar el dispositivo.';
-                }
+                
             } catch (mysqli_sql_exception $e) {
                 // Manejar excepciones de MySQL
-                echo 'Error en la conexión a la base de datos.';
+                echo 'Message: ' .$e->getMessage();
             }
         } else {
             echo 'Por favor, introduce una imagen';
@@ -226,19 +217,10 @@ if (isset($_POST["guardarDispositivo"])) {
 
             $insert = ModeloDispositivos::updateDispositivo($datos);
 
-            if ($insert > 0) {
-                echo '
-                    <script>
-                        alert("Dispositivo actualizado correctamente");
-                        window.location.href="index.php?seccion=dispositivos";
-                    </script>
-                ';
-            } else {
-                echo 'Error al intentar actualizar el dispositivo.';
-            }
+            
         } catch (mysqli_sql_exception $e) {
             // Manejar excepciones de MySQL
-            echo 'Error en la conexión a la base de datos.';
+            echo 'Message: ' .$e->getMessage();
         }
     } else {
         echo 'Por favor, introduce una imagen';
@@ -299,22 +281,13 @@ static function editarIMac()
 
                 $insert = ModeloDispositivos::updateIMac($datos);
 
-                if ($insert > 0) {
-                    echo '
-                        <script>
-                            alert("Dispositivo actualizado correctamente");
-                            window.location.href="index.php?seccion=dispositivos";
-                        </script>
-                    ';
-                } else {
-                    echo 'Error al intentar actualizar el dispositivo.';
-                }
+                
             } catch (mysqli_sql_exception $e) {
                 // Manejar excepciones de MySQL
                 echo 'Error en la conexión a la base de datos.';
             }
         } else {
-            echo 'Por favor, introduce una imagen';
+            echo 'Message: ' .$e->getMessage();
         }
 
         echo "ARRAY EN EL CONTROLADOR (datos)...";
