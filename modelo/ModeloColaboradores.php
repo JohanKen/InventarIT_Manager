@@ -48,6 +48,32 @@
             return $res;
         }
         
+        static function updateColaborador($datos){
+            $conexion = Conexion::conectar();
+            try{
+                $id_colaborador = (int) $datos["id_colaborador"];
+                $id_cliente = (int) $datos["id_empresa"];
+                $estado = (int) $datos["estado"];
+
+                $statement = $conexion->prepare("CALL editar_colaborador(?,?,?,?,?,?,?)");
+                $statement->bind_param("issisis",
+                    $id_colaborador,
+                    $datos["nombre_colaborador"],
+                    $datos["apellido_paterno_colaborador"],
+                    $id_cliente,
+                    $datos["departamento"],
+                    $estado,
+                    $datos["fecha_ingreso_colaborador"]
+                );
+
+                $statement->execute();
+                $statement->close();
+                
+
+            }catch(Exception $e){
+                echo 'Message: ' .$e->getMessage();
+            }
+        }
     }
 
 ?>
