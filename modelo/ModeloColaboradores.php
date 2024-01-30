@@ -74,6 +74,35 @@
                 echo 'Message: ' .$e->getMessage();
             }
         }
+
+        static function createColaborador($datos){
+            $conexion = Conexion::conectar();
+            try{
+
+                $id_cliente = (int) $datos["id_empresa"];
+
+                $statement = $conexion->prepare("CALL insertar_colaborador(?,?,?,?,?)");
+                $statement->bind_param("ssiss",
+                    $datos["nombre_colaborador"],
+                    $datos["apellido_paterno_colaborador"],
+                    $id_cliente,
+                    $datos["departamento"],
+                    $datos["fecha_ingreso_colaborador"]
+                );
+
+                $statement->execute();
+                
+                if ($statement->error) {
+                    echo 'Error al insertar el colaborador: ' . $statement->error;
+                    exit;
+                }
+
+                $statement->close();
+
+            }catch(Exception $e){
+                echo 'Message: ' .$e->getMessage();
+            }
+        }
     }
 
 ?>

@@ -1,0 +1,181 @@
+body{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.headerr{
+    margin-top: 6%;
+   
+    width: 100%;
+    display: flex;
+    align-items: end;
+    
+}
+.headerr h2 {
+    margin-left: 35%;
+     font-size: 50px;
+     
+     
+}
+
+
+
+
+#imgNewUser{
+    width:200px;
+    height: 200px;
+    margin-left: 25%;
+}
+
+:root {
+    --colorr: #0023a2; 
+    --hover: #27bbff; 
+    --colori: #8a0101;
+    --hoveri: #ff1515;
+  }
+.btnRegistrar {
+    cursor: pointer;
+    height: 60px;
+    width: 120px;
+    margin-left: 50px;
+    margin-top: 15px;
+    color: white;
+    background-color: rgba(11, 29, 231, 0.782);
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow:
+      0.3em 0.3em 0 0 var(--colorr),
+      inset 0.3em 0.3em 0 0 var(--colorr);
+  }
+  
+  .btnRegistrar:hover,
+  .btnRegistrar:focus {
+    transform: scale(1.1, 1.1);
+    transition: all;
+    background-color: blue;
+    box-shadow:
+      inset 0 0 0 2em var(--hover);
+  }
+
+  .btnCancelar {
+    cursor: pointer;
+    height: 60px;
+    width: 120px;
+    margin-left: 50px;
+    color: white;
+    background-color: rgba(107, 0, 0, 0.782);
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow:
+      0.3em 0.3em 0 0 var(--colori),
+      inset 0.3em 0.3em 0 0 var(--colori);
+  }
+  
+  .btnCancelar:hover,
+  .btnCancelar:focus {
+    transform: scale(1.1, 1.1);
+    transition: all;
+    box-shadow:
+      inset 0 0 0 2em var(--hoveri);
+  }
+  
+
+.botones{
+    display: block;
+    
+    
+    padding: 10px;
+    
+}
+
+form {
+    width:fix-content !important;
+     display:inline-flex;
+     gap: 30px;
+     align-items: center !important;
+ 
+     
+ }
+label {
+    font-weight: bold;
+    color: white;
+
+}
+
+.error-message{
+    color: #ff2323;
+    text-decoration: double;
+    font-size: 20px;
+    background-color: white;
+}
+#lbl{
+    width: 310px;
+}
+#password{
+    width: 390px;
+}
+#confirmar_password{
+    width: 390px;
+}
+input:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    border-color: rgb(34, 18, 207) !important;
+    border-style: groove !important;
+}
+
+
+.containerr {
+    width:auto;
+    margin-bottom: 100px;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px  rgb(25, 0, 255) !important;
+}
+
+@keyframes slideInHeader {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownMenu {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(50);
+    }
+}
+
+@keyframes slideDownContent {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(50);
+    }
+}
+
+.headerr {
+    animation: slideInHeader 1s forwards;
+    z-index: 2;
+}
+
+.containerr {
+    animation: slideDownMenu 1s forwards;
+    z-index: 3;
+}
+
+.headerr h1 {
+    margin-top: 300px; /* Ajusta el valor según sea necesario */
+}

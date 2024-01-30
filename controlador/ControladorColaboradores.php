@@ -86,5 +86,36 @@
                 }
             }
         }
+
+        static function registrarColaborador(){
+            if(isset($_POST["Registrar"])){
+                try{
+
+                    $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                    Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                    $fechaIngreso = $_POST["fecha_ingreso_colaborador"];
+                    if (DateTime::createFromFormat('Y-m-d',$fechaIngreso) !==false){
+                        $fechaIngresoFormateada = $fechaIngreso;
+                    }else{
+                        echo 'Error en el formato de la fecha';
+                        exit;
+                    }
+
+                    $datos = array(
+                        "nombre_colaborador"=> $_POST["nombre_colaborador"],
+                        "apellido_paterno_colaborador"=> $_POST["apellido_paterno_colaborador"],
+                        "id_empresa"=> (int)$_POST["empresa"],
+                        "departamento"=> $_POST["departamento"],
+                        "fecha_ingreso_colaborador"=> $fechaIngresoFormateada,
+                    );
+
+                    $insert = ModeloColaboradores::createColaborador($datos);
+
+                }catch  (Exception $e){
+                    echo 'Error: ' . $e->getMessage();
+                }
+            }
+        }
     }
 ?>

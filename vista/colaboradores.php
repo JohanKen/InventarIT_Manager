@@ -24,6 +24,8 @@
             </header>
         </div>
 
+        <a href="index.php?seccion=nuevoColaborador" ><button class="custom-button" onclick="nuevoColaborador();">AGREGAR NUEVO COLANORADOR</button></a>
+
     <div class="tabla">
         <table class="tabla">
             <thead class ="thead-dark">
