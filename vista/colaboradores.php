@@ -58,7 +58,7 @@
                                 <td>'.$item[6].'</td>
                                 <td>
                                 <a href="index.php?seccion=editarColaborador&id_colaborador=' . $item[0] . '">Editar</a>
-                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');">Borrar</a>
+                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . '); "id="enlaceBorrar" >Borrar</a>
                                 </td>
                             </tr>
                         ';
@@ -67,32 +67,34 @@
             </tbody>
     </table>
 </div>
+
 <div class="modal" id="confirmarBorrarModal">
-            <div class="modal-content">
-                <span class="close-modal" onclick="cerrarModal()">&times;</span>
-                <h4>Confirmar Eliminación</h4>
-                <p>¿Estás seguro de que deseas eliminar al colaborador?</p>
-                <button class="btn-danger" id="btnBorrarModal">Eliminar</button>
-                <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
-            </div>
-        </div>
+    <div class="modal-content">
+        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <h4>Confirmar Eliminación</h4>
+        <p>¿Estás seguro de que deseas eliminar al colaborador?</p>
+        <button class="btn-danger" id="btnBorrarModal">Eliminar</button>
+        <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+    </div>
+</div>
 
-        <script>
-        function confirmarBorrar(id_colaborador) {
-            document.getElementById('confirmarBorrarModal').style.display = 'flex';
-            document.getElementById('btnBorrarModal').onclick = function () {
-                window.location.href = "index.php?seccion=dispositivos&accion=eliminarColaborador&id_colaborador=" + id_colaborador;
-            };
-        }
 
-        function cerrarModal() {
-            document.getElementById('confirmarBorrarModal').style.display = 'none';
-        }
+<script>
+    function confirmarBorrar(id_colaborador) {
+        document.getElementById('confirmarBorrarModal').style.display = 'flex';
+        document.getElementById('btnBorrarModal').onclick = function () {
+            window.location.href = "index.php?seccion=colaboradores&accion=eliminarColaborador&id_colaborador=" + id_colaborador;
+        };
+    }
 
-        function eliminarDispositivo() {
-            cerrarModal();
-        }
-    </script>
+    function cerrarModal() {
+        document.getElementById('confirmarBorrarModal').style.display = 'none';
+    }
+
+    function eliminarDispositivo() {
+        cerrarModal();
+    }
+</script>
 
 </body>
 </html>

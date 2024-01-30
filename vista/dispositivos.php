@@ -163,7 +163,7 @@
             document.getElementById('confirmarBorrarModal').style.display = 'none';
         }
 
-        function eliminarDispositivo() {
+        function eliminarColaborador() {
             cerrarModal();
         }
     </script>

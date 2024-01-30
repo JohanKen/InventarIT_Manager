@@ -11,13 +11,13 @@
         static function borrarColaboradores(){
             if(isset($_GET["accion"])&& $_GET["accion"] == "eliminarColaborador"){
                 $id = $_GET["id_colaborador"];
-                $tabla = 'colaboradores';
-                $delete = ModeloColaboradores::deleteColavorador($tabla,$id);
+
+                $delete = ModeloColaboradores::deleteColaborador($id);
                 if($delete>0){
                     echo '
                         <script>
                             alert("Colaborador eliminado correctamente");
-                            window.location.href="index.php?seccion=dispositivos";
+                            window.location.href="index.php?seccion=colaboradores";
                         </script>
                     ';
                 }
