@@ -9,8 +9,6 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-
-
     
 
 
@@ -137,7 +135,7 @@ class ModeloDispositivos extends Conexion {
 
     // Función para seleccionar marcas
     static function selectMarcas($tabla) {
-        $sql = "SELECT * FROM $tabla;";
+        $sql = "SELECT * FROM $tabla order by id_marca;";
         $res = Conexion::conectar()->query($sql);
         return $res;
     }

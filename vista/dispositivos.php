@@ -87,6 +87,9 @@
             </header>
             <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
         </div>
+
+        <a href="index.php?seccion=nuevoDispositivo"><button class="custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button></a>
+
         <div class="tabla">
             <table class="tabla">
                 <thead class="thead-dark">
