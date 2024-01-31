@@ -18,5 +18,7 @@
     <a href="index.php?seccion=formularios/newSwitch"><button class="custom-button" onclick="nuevoSwitch();">Switch</button></a>
     <a href="index.php?seccion=formularios/newImpresora"><button class="custom-button" onclick="nuevaImpresora();">Impresora</button></a>
     <a href="index.php?seccion=formularios/newOtro"><button class="custom-button" onclick="nuevoOtro();">Otro</button></a>
+    <br>
+    <a href="index.php?seccion=dispositivos"><button class="custom-button" onclick="volver();">Volver</button></a>
 </body>
 </html>
