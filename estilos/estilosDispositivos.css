@@ -8,12 +8,7 @@ body {
     display: flex;
     max-height: 300px;
 }
-.contentSeccion {
-    max-width: auto;
-    margin-top: 0;
-    padding: 100px;
-    animation: slideDownContent 1s forwards;
-    }
+
 .headerTabla {
     backdrop-filter: blur(10px);
     margin-left: 10%;
@@ -52,63 +47,63 @@ color: #333;
     margin: 5px;
 }
 
-.tabla {
-    margin-top: 60px;
-    width: 100%;
-    margin-left: 30px; /* Centra la tabla */
+.table {
+    margin-top: 60px !important;
+    width: 100% !important;
+     /* Centra la table */
 }
 
-.tabla th, .tabla td {
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
+.table th, .table td {
+    padding: 10px !important;
+    text-align: center !important;
+    font-size: 14px !important;
 }
 
 .thead-dark {
-    background-color: #333;
-    color: #fff;
+    background-color: #333 !important;
+    color: #fff !important;
 } 
 
-.tabla tbody tr:nth-child(even) {
-    color: black;
-    background-color: #f9f9f9;
+.table tbody tr:nth-child(even) {
+    color: black !important;
+    background-color: #f9f9f9 !important;
 }
 
-.tabla tbody tr:hover {
-    background: none;
-    background: linear-gradient(0deg, rgba(0,22,249,0.2553396358543417) 51%, rgba(0,151,249,0.7819502801120448) 100%);
-    color: #ffffff;
-    transform: scale(1.05); 
-    transition: transform 0.3s ease; 
+.table tbody tr:hover {
+    background: none !important;
+    background: linear-gradient(0deg, rgba(0,22,249,0.2553396358543417) 51%, rgba(0,151,249,0.7819502801120448) 100%) !important;
+    color: #ffffff !important;
+    transform: scale(1.05) !important; 
+    transition: transform 0.3s ease !important; 
 }
 
-.tabla tbody tr {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregado box-shadow a la transición */
+.table tbody tr {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important; /* Agregado box-shadow a la transición */
 }
 
-.tabla tbody tr:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+.table tbody tr:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important; 
 }
 
 
-.tabla a {
-    display: inline-block;
-    margin: 5px;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #333;
-    border-radius: 5px;
+.table a {
+    display: inline-block !important;
+    margin: 5px !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    background-color: #333 !important;
+    border-radius: 5px !important;
 }
 
 .header.hidden-header {
-    display: none;
+    display: none !important;
 }
 
-.tabla img {
-    max-width: 1900%;
-    height: auto;
+.table img {
+    max-width: 1900% !important;
+    height: auto !important;
 }
 
 @keyframes slideInHeader {
@@ -140,14 +135,12 @@ color: #333;
 
 .header {
     animation: slideInHeader 1s forwards;
-    z-index: 1;
+    
 }
 
 .container-menu {
     animation: slideDownMenu 1s forwards;
-    z-index: 3; 
+    
 }
 
-.header h1 {
-    margin-top: 300px; /* Ajusta el valor según sea necesario */
-}
+

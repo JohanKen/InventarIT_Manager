@@ -1,5 +1,10 @@
 
  /* Estilos del modal principal */
+ body{
+   
+    align-items: center !important;
+    text-align: center !important;
+ }
  .modal {
     display: none;
     position: fixed;
@@ -99,7 +104,7 @@ padding: 20px;
     font-size: 50px;
 }
 
-/* Estilos del modal secundario */
+
 .modal2 {
     display: none;
     position: fixed;
@@ -111,9 +116,9 @@ padding: 20px;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    animation-duration: 0.5s; /* Duración de la animación */
+    animation-duration: 0.5s; 
 
-    animation: slideIn 0.5s ease-out; /* Agrega una animación llamada slideIn */
+    animation: slideIn 0.5s ease-out;
 
 }
 
@@ -261,13 +266,15 @@ body {
         .up {
             display: flex;
             max-height: 300px;
+            
         }
 
         .contentSeccion {
             max-width: auto;
             margin-top: 0;
-            padding: 100px;
-            animation: slideDownContent 1s forwards;
+            padding: 10px;
+       
+            animation: slideDownContent 2s forwards;
         }
 
         .headerTabla {
@@ -284,7 +291,7 @@ body {
             padding: 5px;
             text-align: center;
             width: 80%;
-            width: 500px;
+           
             margin: 50px auto;
             position: relative;
             height: 100px;
@@ -304,49 +311,50 @@ body {
             width: 200px;
             height: 200px;
             margin-left: 150px;
+           
         }
 
         .input-group {
             margin: 5px;
         }
 
-        .tabla {
-            margin-top: 60px;
+        .table {
+            padding: 5%;
             width: 100%;
-            margin-left: 30px; /* Centra la tabla */
+            
         }
 
-        .tabla th, .tabla td {
-            padding: 10px;
+        .table th, .table td {
+            padding: 2%;
             text-align: center;
             font-size: 14px;
         }
 
         .thead-dark {
-            background-color: #333;
-            color: #fff;
+            background-color: #333 !important;
+            color: #fff !important;
         }
 
-        .tabla tbody tr:nth-child(even) {
+        .table tbody tr:nth-child(even) {
             color: black;
-            background-color: #f9f9f9;
+            background-color: #912828;
         }
 
-        .tabla tbody tr:hover {
-            background: none;
-            background: linear-gradient(0deg, rgba(0, 22, 249, 0.2553396358543417) 51%, rgba(0, 151, 249, 0.7819502801120448) 100%);
-            color: #ffffff;
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
+        .table tbody tr:hover {
+            background: none !important;
+            background: linear-gradient(0deg, rgba(0, 22, 249, 0.2553396358543417) 51%, rgba(0, 151, 249, 0.7819502801120448) 100%) !important;
+            color: #ffffff !important;
+            transform: scale(1.05) !important;
+            transition: transform 0.3s ease !important;
         }
 
-        .tabla tbody tr {
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregado box-shadow a la transición */
+        .table tbody tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease !important; /* Agregado box-shadow a la transición */
         }
 
-        .tabla tbody tr:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        .table tbody tr:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
         }
 
 
@@ -377,7 +385,7 @@ body {
         }
         
 
-        .tabla a {
+        .table a {
             display: inline-block;
             margin: 5px;
             padding: 5px 10px;
@@ -391,7 +399,7 @@ body {
             display: none;
         }
 
-        .tabla img {
+        .table img {
             max-width: 1900%;
             height: auto;
         }
@@ -425,14 +433,12 @@ body {
 
         .header {
             animation: slideInHeader 1s forwards;
-            z-index: 1;
+            
         }
         
         .container-menu {
             animation: slideDownMenu 1s forwards;
-            z-index: 3; 
+          
         }
 
-        .header h1 {
-            margin-top: 300px; /* Ajusta el valor según sea necesario */
-        }
+       

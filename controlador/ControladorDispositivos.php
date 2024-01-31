@@ -137,6 +137,45 @@
                
                 
                 }
+
+
+
+                static function registrarLaptop(){
+                    if(isset($_POST["Registrar"])){
+                        try{
+                            $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                            Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+            
+                            $fechaCompra = $_POST["fecha_compra"];
+                            if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                                $fechaCompraFormateada = $fechaCompra;
+                            } else { 
+                                echo 'Error en el formato de la fecha';
+                                exit;
+                            }
+            
+                            $datos = array(
+                                "modelo" => $_POST["modelo"],
+                                "numero_serie" => $_POST["numero_serie"],
+                                "ram" => (int)$_POST["ram"],
+                                "procesador" => $_POST["procesador"],
+                                "sistema_operativo" => $_POST["sistema_operativo"],
+                                "id_marca" => (int)$_POST["marca"],
+                                "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                                "fecha_compra" => $fechaCompraFormateada,
+                                "nota" => $_POST["nota"],
+                                "foto" => "foto",
+                            );
+            
+                            $insert = ModeloDispositivos::createLaptop($datos);
+            
+                        } catch(mysqli_sql_exception $e) {
+                            echo 'Message: ' .$e->getMessage();
+                        }
+                    }
+                }
+            
+
         //Funcion para consultar los tipos de dispositivos
            static function getTiposDispositivos(){
             $tabla = "tipos_dispositivos";
@@ -144,6 +183,42 @@
             $arreglo = $respuesta->fetch_all();
             return $arreglo;
         }
+        //funcion para registrar un nuevo dispositivo (pc)
+        static function registrarDesktop(){
+            if(isset($_POST["Registrar"])){
+                try{
+                    $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                    Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+    
+                    $fechaCompra = $_POST["fecha_compra"];
+                    if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                        $fechaCompraFormateada = $fechaCompra;
+                    } else { 
+                        echo 'Error en el formato de la fecha';
+                        exit;
+                    }
+    
+                    $datos = array(
+                        "modelo" => $_POST["modelo"],
+                        "numero_serie" => $_POST["numero_serie"],
+                        "ram" => (int)$_POST["ram"],
+                        "procesador" => $_POST["procesador"],
+                        "sistema_operativo" => $_POST["sistema_operativo"],
+                        "id_marca" => (int)$_POST["marca"],
+                        "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                        "fecha_compra" => $fechaCompraFormateada,
+                        "nota" => $_POST["nota"],
+                        "foto" => "foto",
+                    );
+    
+                    $insert = ModeloDispositivos::createDesktop($datos);
+    
+                } catch(mysqli_sql_exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
+            }
+        }
+    
         //Funcion para consultar la marca de los dispositivos
         static function getMarcas(){
             $tabla = "marcas";

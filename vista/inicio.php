@@ -29,8 +29,12 @@
         <p>
             
         <?php
-print_r($_SESSION);
+    echo "Datos del usuario que está logueado: <br>";
+    echo "<pre>";
+    print_r($_SESSION);
+    echo "</pre>";
 ?>
+
 
         </p>
     </div>

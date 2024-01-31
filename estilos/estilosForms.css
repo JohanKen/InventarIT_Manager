@@ -5,26 +5,28 @@ body{
 }
 .headerr{
     margin-top: 6%;
+    text-align: center;
+    
+    justify-content: center;
+    align-items: center;
+
    
-    width: 100%;
-    display: flex;
-    align-items: end;
     
 }
 
 h6{
-    font-size: 25px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.76);
 }
 
 h3{
-    font-size: 50px;
+    font-size: 40px;
     color: aliceblue;
 }
 
 .headerr h2 {
-     margin-left: 35%;
-     font-size: 50px;
+    
+     font-size: 40px;
 }
 input:hover {
     transform: scale(1.05);
@@ -34,8 +36,8 @@ input:hover {
 }
 
 .imgEditUser{
-    width:350px;
-    height: 300px;
+    width:250px;
+    height: 2r00px;
     margin-left: 10%;
 }
 label {
@@ -120,8 +122,8 @@ form {
   }
 .btnGuardar {
     cursor: pointer;
-    height: 60px;
-    width: 120px;
+    height: 40px;
+    width: 250px;
     margin-left: 50px;
     color: white;
     background-color: rgba(239, 255, 10, 0.782);
@@ -145,8 +147,8 @@ form {
 
   .btnCancelar {
     cursor: pointer;
-    height: 60px;
-    width: 120px;
+    height: 40px;
+    width: 150px;
     margin-left: 50px;
     color: white;
     background-color: rgba(107, 0, 0, 0.782);

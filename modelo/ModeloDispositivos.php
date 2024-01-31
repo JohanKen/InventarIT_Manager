@@ -10,9 +10,66 @@ class ModeloDispositivos extends Conexion {
         return $res;
     }
 
-
+    static function createLaptop($datos){
+        $conexion = Conexion::conectar();
+        try{
     
+            $id_marca = (int) $datos["id_marca"];
+            $ram = (int) $datos["ram"];
+            $precio = (double) $datos["precio"];
+    
+            $statement = $conexion->prepare("CALL insertar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->bind_param("ssiisssiss",
+                $datos["modelo"],
+                $datos["numero_serie"],
+                $id_marca,
+                $precio,
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"],
+                $ram,
+                $datos["procesador"],
+                $datos["sistema_operativo"]
+            );
+    
+            $statement->execute();
+            $statement->close();
+    
+        }catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+        }
+    }
 
+    //Funcion para agregar un nuevo desktop
+    static function createDesktop($datos){
+        $conexion = Conexion::conectar();
+        try{
+    
+            $id_marca = (int) $datos["id_marca"];
+            $ram = (int) $datos["ram"];
+            $precio = (double) $datos["precio"];
+    
+            $statement = $conexion->prepare("CALL insertar_desktop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->bind_param("ssiisssiss",
+                $datos["modelo"],
+                $datos["numero_serie"],
+                $id_marca,
+                $precio,
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"],
+                $ram,
+                $datos["procesador"],
+                $datos["sistema_operativo"]
+            );
+    
+            $statement->execute();
+            $statement->close();
+    
+        }catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+        }
+    }
 
 
 

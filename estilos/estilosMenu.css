@@ -1,10 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 body {
     margin: 0;
     padding: 0;
@@ -12,38 +5,22 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    overflow-x: hidden; 
-}
-    .capa {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.068);
-    z-index: -1;
-    top: 0;
-    left: 0;
+    overflow-x: hidden;
 }
 
-#imgCampana{
- width: 30px;
- height: 30px;
- 
+.container{
+    display: contents;
 }
 
 .header {
     width: 100%;
-    height: 100px;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-}
-
-
-
-.container .btn-menu, .logo {
-    float: left;
    
+}
+    
+
+.container .btn-menu,
+.logo {
+    float: left;
 }
 
 .container .btn-menu label {
@@ -84,12 +61,13 @@ body {
     display: none;
     color: #1c1c1c;
 }
+
 :root {
-    --color: #254ac7; 
-    --hover: #3dc51b; 
-  }
-  
-  .btnAgregar {
+    --color: #254ac7;
+    --hover: #3dc51b;
+}
+
+.btnAgregar {
     cursor: pointer;
     margin-left: 100px;
     color: white;
@@ -97,59 +75,92 @@ body {
     border: none;
     padding: 10px;
     border-radius: 2px;
-    box-shadow:
-      0.3em 0.3em 0 0 var(--color),
-      inset 0.3em 0.3em 0 0 var(--color);
-  }
-  
-  .btnAgregar:hover,
-  .btnAgregar:focus {
+    box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+}
+.menu {
+    position: relative;
+    display: inline-block;
+}
+
+#userMenuButton {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+
+    position: absolute;
+    background-color: #333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+.dropdown-contents {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    box-shadow: 0 8px 16px rgb(0, 3, 207);
+    z-index: 5; 
+}
+
+
+.dropdown-contents a {
+    color: white;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    width: 100%; 
+    z-index: 10;
+}
+
+.dropdown-contents a:hover {
+    background-color: #555;
+    z-index: 10;
+}
+
+.btnAgregar:hover,
+.btnAgregar:focus {
     transform: scale(1.1, 1.1);
     transition: all;
-    box-shadow:
-      inset 0 0 0 2em var(--hover);
-  }
-  
-  
-  
+    box-shadow: inset 0 0 0 2em var(--hover);
+}
 
-#imgBar{
+#imgBar {
     margin-top: 25px;
     width: 50px;
     height: 50px;
 }
 
-.container-menu {
-    position: fixed;
-    background-color:rgba(0, 0, 0, 0.589);
-    box-shadow: 5px 5px 3px 5px #33333398;
-    width: 300px; /* Ajusta el ancho según tus preferencias */
-    height: 700px; /* Ajusta la altura según tus preferencias */
-    top: 0;
-    backdrop-filter: blur(10px);
-    left: 0;
-    transition: all 50ms ease;
-   
-    
-    visibility: hidden;
-    background-size: 100% 100%; /* Ajusta el tamaño del fondo negro */
-}
 
-#btn-menu:checked ~ .container-menu {
-    opacity: 1 !important ;
+#btn-menu:checked~.container-menu {
+    opacity: 1 !important;
     visibility: visible !important;
     z-index: 1;
 }
 
-#imgClose{
+#imgClose {
     margin: 10px;
     width: 50px;
     height: 50px;
 }
 
-#imgClose:hover{
-    transform:translateX(-20%);       
-    transform: scale(1.3,1.3);
+#imgClose:hover {
+    transform: translateX(-20%);
+    transform: scale(1.3, 1.3);
 }
 
 .cont-menu {
@@ -157,12 +168,12 @@ body {
     max-width: 300px;
     height: 1000px;
     border-bottom-right-radius: 30px;
-    position:fixed;
+    position: fixed;
     transition: all 500ms ease;
     transform: translateX(-100%);
 }
 
-#btn-menu:checked ~ .container-menu .cont-menu {
+#btn-menu:checked~.container-menu .cont-menu {
     transform: translateX(0%);
 }
 
@@ -189,67 +200,57 @@ body {
 
 .cont-menu label {
     position: absolute;
-    right: 5px;
-    top: 10px;
     color: #fff;
     cursor: pointer;
     font-size: 18px;
 }
 
 #logoInventarit {
-    width:100%;
-    height: 100%;
+    width: 85%;
+    height: 40%;
 }
 
-#logoInven {
-    margin-top: -20px;
-    width: 300px;
-    height: 150px;
-    margin-right: 100px;
-}
+
 
 .menu {
-    margin-left: 100px;
+   
     background-color: #333;
     color: #fff;
-    width: auto;
+    width:min-content;
     display: flex;
-   
-    align-items: center; 
-	height: 70px;
-    z-index: 2;
-    
-    padding: 10px 20px;
-    
+    align-items: center;
 }
+
+#imgCampana{
+    width: 30px;
+    height: 30px;
+}
+
+
 
 .menu a {
     text-decoration: none;
     color: #fff;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 .search {
-    
     align-items: center;
     transition: transform 0.30s ease;
 }
 
-
-#searchInput{
+#searchInput {
     width: 400px;
-	height: 30px;
+    height: 30px;
 }
 
 .search:hover {
     display: flex;
     align-items: center;
-    transform: scale(1.1r);
+    transform: scale(1.1);
     border: transparent;
     box-shadow: 0px 0px 10px blue;
 }
-
-
 
 .notifications {
     display: flex;
@@ -261,37 +262,18 @@ body {
     align-items: center;
 }
 
-.user {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-}
 
-.user-menu {
-    margin-top: 350px;
-    
-    
-    position: absolute;
-    margin-left: -50px;
-    background-color: #333;
-    
-    list-style: none;
-    padding: 2px;
-}
 
-#imgLogout{
-    width: 50px;
-    height: 50px;
+#imgLogout {
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
 }
-
 
 .user-menu a {
     text-decoration: none;
     color: #0026ff;
     display: block;
-   
 }
 
 .user:hover .user-menu {
