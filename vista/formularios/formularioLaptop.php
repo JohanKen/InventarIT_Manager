@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="procesador" class="form-label">Procesador</label>
                     <select class="form-select" name="procesador">
                         <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",'Intel core i5');
+                        $procesadoresBaseDatos = array('Intel core i5',"Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",);
 
                         foreach ($procesadoresBaseDatos as $procesador) {
                             $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';

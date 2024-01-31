@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="procesador" class="form-label">Procesador</label>
                     <select class="form-select" name="procesador">
                         <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1");
+                        $procesadoresBaseDatos = array('Intel core i5',"Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1");
 
                         foreach ($procesadoresBaseDatos as $procesador) {
                             $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
@@ -216,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </select>
                 </div>
                 <div class="mb-3" id="formForm">
-                    <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
+                    <a class="btn btn-danger" href="index.php?seccion=Dispositivos">Cancelar</a>
                     <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
                 </div>
                         
