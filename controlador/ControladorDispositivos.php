@@ -394,6 +394,43 @@ static function editarIMac()
             }
         }
     }
+    static function registrarImac(){
+        if(isset($_POST["Registrar"])){
+            try{
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                $fechaCompra = $_POST["fecha_compra"];
+                if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                    $fechaCompraFormateada = $fechaCompra;
+                } else { 
+                    echo 'Error en el formato de la fecha';
+                    exit;
+                }
+
+                $datos = array(
+                    "modelo" => $_POST["modelo"],
+                    "numero_serie" => $_POST["numero_serie"],
+                    "ram" => (int)$_POST["ram"],
+                    "procesador" => $_POST["procesador"],
+                    "sistema_operativo" => $_POST["sistema_operativo"],
+                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                    "fecha_compra" => $fechaCompraFormateada,
+                    "nota" => $_POST["nota"],
+                    "foto" => "foto",
+                    "Keyboard_model"=>"Keyboard_model",
+                    "keyboard_ns"=>"keyboard_ns",
+                    "mouse_model"=>"mouse_model",
+                    "mouse_ns"=>"mouse_ns",
+                );
+
+                $insert = ModeloDispositivos::createImac($datos);
+
+            } catch(mysqli_sql_exception $e) {
+                echo 'Message: ' .$e->getMessage();
+            }
+        }
+    }
 
     }
 

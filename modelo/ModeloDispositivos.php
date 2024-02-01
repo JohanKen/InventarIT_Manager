@@ -346,5 +346,37 @@ static function createDesktop($datos){
     }
 }
 
+static function createImac($datos){
+    $conexion = Conexion::conectar();
+    try{
+
+        $ram = (int) $datos["ram"];
+        $precio = (double) $datos["precio"];
+
+        $statement = $conexion->prepare("CALL insertar_imac(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->bind_param("ssisssissssss",
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+            $ram,
+            $datos["procesador"],
+            $datos["sistema_operativo"],
+            $datos["Keyboard_model"],
+            $datos["keyboard_ns"],
+            $datos["mouse_model"],
+            $datos["mouse_ns"]
+        );
+
+        $statement->execute();
+        $statement->close();
+
+    }catch(Exception $e){
+        echo 'Message: ' .$e->getMessage();
+    }
+}
+
 }
 ?>
