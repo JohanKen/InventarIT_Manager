@@ -70,7 +70,7 @@
         .btn-secondary {
             background: #4169e1;
             color: #fff;
-        }v
+        }
 
         .btn-danger:hover,
         .btn-secondary:hover {
@@ -92,7 +92,9 @@
             </header>
             <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
         </div>
-        <a href="index.php?seccion=nuevoDispositivo"><button class="custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button></a>
+        <a href="index.php?seccion=nuevoDispositivo">
+    <button class="btn custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button>
+</a>
         <div class="table">
             <table class="table">
                 <thead class="thead-dark">
@@ -157,7 +159,13 @@
 </div>
 
 
-    <script>
+    
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var headerTabla = document.querySelector('.headerTabla');
+            headerTabla.classList.add('show');
+        });
+
         function confirmarBorrar(id_dispositivo) {
             document.getElementById('confirmarBorrarModal').style.display = 'flex';
             document.getElementById('btnBorrarModal').onclick = function () {

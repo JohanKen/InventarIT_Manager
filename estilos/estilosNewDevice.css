@@ -1,0 +1,153 @@
+
+
+ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.anclaDis {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.imgDis {
+    text-decoration: none;
+    width: 250px !important;
+    height: 150px !important;
+    transition: transform 0.3s, filter 0.3s;
+}
+.imgDiss {
+    text-decoration: none;
+    width: 100px !important;
+    height: 150px !important;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.label {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3498db; /* Color azul */
+    color: #fff;
+    padding: 10px; /* Aumenté el tamaño del padding para un estilo más llamativo */
+    border-radius: 5px; /* Esquinas redondeadas */
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
+}
+
+
+.anclaDis:hover .imgDis {
+    transform: scale(1.1);
+    filter: brightness(70%);
+}
+.anclaDis:hover .imgDiss {
+    transform: scale(1.1);
+    filter: brightness(70%);
+}
+
+.header {
+    animation: slideInHeader 1s forwards;
+    
+}
+
+.container-menu {
+    animation: slideDownMenu 1s forwards;
+    
+}
+@keyframes slideInHeader {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownMenu {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownContent {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.anclaDis:hover .label {
+    opacity: 1;
+}
+.anclaa{
+  
+  
+    text-align: center;
+    
+}
+
+.btnn {
+    background-color: #b42626; /* Cambia el color de fondo según tu preferencia */
+    color: white;
+    padding: 15px 30px; /* Ajusta el espacio interno según tu preferencia */
+    font-size: 24px; /* Ajusta el tamaño del texto según tu preferencia */
+    border: none;
+    border-radius: 8px; /* Ajusta el radio del borde según tu preferencia */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Agrega una transición suave al color de fondo */
+}
+
+.btnn:hover {
+    background-color: #ff0000; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+
+#h1 {
+    padding: 10px;
+    padding-left: 30px;
+    font-size: 25px;
+    left: 0;
+    background-color: #333;
+    width: 600px;
+    color: #fff;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s, transform 1s;
+}
+
+
+.containerr {
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
+
+.flexx,
+.flexxa,
+.flexxb {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s, border-radius 0.5s, background-color 0.5s; /* Ajusta la duración de la animación aquí */
+}
+
+.flexx:hover,
+.flexxa:hover,
+.flexxb:hover {
+    transform: scale(1.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+}

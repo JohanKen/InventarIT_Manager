@@ -277,6 +277,45 @@ body {
             animation: slideDownContent 2s forwards;
         }
 
+        .header {
+            animation: slideInHeader 1s forwards;
+            
+        }
+        
+        .container-menu {
+            animation: slideDownMenu 1s forwards;
+            
+        }
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideDownMenu {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideDownContent {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .anclaDis:hover .label {
+            opacity: 1;
+        }
         .headerTabla {
             background-color: #ffffff77;
             backdrop-filter: blur(10px);

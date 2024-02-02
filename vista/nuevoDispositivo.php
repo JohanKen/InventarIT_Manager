@@ -7,47 +7,105 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="estilos/estilosNewDevice.css">
 </head>
 <body>
-    <br><br><br><br><br><br><br><br>
-    
-  
-    <div class="container">
-        <div class="mb-3">
-            <label for="tipoDispositivo" class="form-label">Selecciona tipo de dispositivo a agregar:</label>
-            <select class="form-select" id="tipoDispositivo" onchange="seleccionarTipoDispositivo()">
-                <option selected disabled>Selecciona un tipo...</option>
-                <option value="formularios/newLaptop">Laptop</option>
-                <option value="formularios/newDesktop">Desktop</option>
-                <option value="formularios/newImac">iMac</option>
-                <option value="formularios/newTeclado">Teclado</option>
-                <option value="formularios/newMouse">Mouse</option>
-                <option value="formularios/newMonitor">Monitor</option>
-                <option value="formularios/newHeadset">Headset</option>
-                <option value="formularios/newCelular">Celular</option>
-                <option value="formularios/newSwitch">Switch</option>
-                <option value="formularios/newImpresora">Impresora</option>
-                <option value="formularios/newOtro">Otro</option>
-            </select>
-        </div>
+    <br><br>
+    <header>
+        <h1 id="h1" >Selecciona el tipo de dispositivo a agregar</h1>
+    </header>
+    <div class="containerr">
+        <!--cambio de select por imagenes para seleccionar que tipo de dispositivo se va a agregar-->
+        <ul class="flexx">
+            <li class="me-3">
+                <a class="anclaDis" href="index.php?seccion=formularios/newLaptop">
+                    <img class="imgDis" src="images/dis/laptop.png" alt="Laptop">
+                    <span class="label">Laptop</span>
+                </a>
+            </li>
 
-        <!-- Botón para volver -->
-        <a href="index.php?seccion=dispositivos"><button class="btn btn-secondary" onclick="volver()">Volver</button></a>
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newDesktop">
+                    <img class="imgDis" src="images/dis/desktop.png" alt="Desktop">
+                    <span class="label">Desktop</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newiMac">
+                    <img class="imgDis" src="images/dis/imac.png" alt="iMac">
+                    <span class="label">iMac</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="flexxa">
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newTeclado">
+                    <img class="imgDis" src="images/dis/teclado.png" alt="Teclado">
+                    <span class="label">Teclado</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newMouse">
+                    <img class="imgDis" src="images/dis/mouse.png" alt="Mouse">
+                    <span class="label">Mouse</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newMonitor">
+                    <img class="imgDis" src="images/dis/monitor.png" alt="Monitor">
+                    <span class="label">Monitor</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="flexxb">
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newCelular">
+                    <img class="imgDiss" src="images/dis/celular.png" alt="Celular">
+                    <span class="label">Celular</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newSwitches">
+                    <img class="imgDis" src="images/dis/switch.png" alt="Switches">
+                    <span class="label">Switches</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newImpresora">
+                    <img class="imgDis" src="images/dis/impresora.png" alt="Impresora">
+                    <span class="label">Impresora</span>
+                </a>
+            </li>
+
+            <li class="me-3">
+                <a class="anclaDis" href="formularios/newOtro">
+                    <img class="imgDis" src="images/dis/otros.png" alt="Otro">
+                    <span class="label">Otro</span>
+                </a>
+            </li>
+        </ul>
+
+     
     </div>
+<div class="anclaa">
+    <a href="index.php?seccion=dispositivos" ><button class="btnn">Volver</button></a>
 
-    <!-- Bootstrap JS, Popper.js, y jQuery (necesarios para ciertas funciones de Bootstrap) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</div>
     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        function seleccionarTipoDispositivo() {
-            var tipoDispositivo = document.getElementById("tipoDispositivo").value;
-            window.location.href = tipoDispositivo;
-        }
-
-        function volver() {
-            // Puedes personalizar esta función según tus necesidades
-            alert("Implementa tu lógica de volver aquí");
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var h1 = document.getElementById('h1');
+            h1.style.opacity = '1';
+            h1.style.transform = 'translateX(0)';
+        });
     </script>
 </body>
 </html>

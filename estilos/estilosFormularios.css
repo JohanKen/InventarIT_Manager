@@ -1,17 +1,76 @@
 body {
     background-color: #f2f2f2;
     font-family: 'Arial', sans-serif;
+    text-align: center;
+    
 }
 
 .contentSeccion {
     margin: 50px auto;
-    background-color: #ff0000;
+    background-color: #ffffff;
     border-radius: 10px;
     width: 600px;
     padding: 30px;
-    box-shadow: 0 0 20px rgb(255, 0, 0);
+    box-shadow: 0 0 20px #333;
+}
+.fle{
+    width: 100%;
+    display: flex;
 }
 
+.headd {
+    display: flex;
+    margin-top: 20px;
+    height: 130px;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: fadeInFromLeft 1s ease-out forwards;
+}
+
+@keyframes fadeInFromLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.headd h1 {
+    text-align: left;
+    color: #fff;
+    width: 300px;
+    padding: 10px;
+    background-color: #333;
+    height: fit-content;
+}
+
+.heaad {
+    
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.heaad img {
+    margin-left: 900px;
+    width: 300px;
+}
+
+.contain{
+    display: flex;
+}
+.container mt-52{
+    padding: 5px;
+}
+.col-3{
+    padding: 5px;
+}
+.container mb-3{
+    padding: 5px;
+}
+form{
+    display: flex;
+    padding: 30px;
+}
 #formForm {
     width: 100%;
     margin-top: 20px;
@@ -55,11 +114,13 @@ body {
 }
 
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #da0d21;
+    color: #ffffff;
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #66ff00;
+    color: #333;
 }
 
 .btn:hover {
