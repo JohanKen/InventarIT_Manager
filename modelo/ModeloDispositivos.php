@@ -430,5 +430,31 @@ static function createMouse($datos){
    }
 }
 
+static function createMonitor($datos){
+    $conexion = Conexion::conectar();
+    try{
+
+        $precio = (double) $datos["precio"];
+        $id_marca = (int) $datos["id_marca"];
+
+        $statement = $conexion->prepare("CALL insertar_monitor(?, ?, ?, ?, ?, ?, ?)");
+        $statement ->bind_param("ssiisss",
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+        );
+
+        $statement->execute();
+        $statement->close();
+        
+   }catch(Exception $e){
+        echo 'Message: ' .$e->getMessage();
+   }
+}
+
 }
 ?>

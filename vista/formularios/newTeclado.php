@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilos/estilosFormularios.css">
+    
 </head>
 
 <body>
@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="" method="post" encytype="multipart/form-data">
 
             <div class="mb-3" id="formForm">
-                <label for="modelo" class="form-label">Modelo</lable>
+                <label for="modelo" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo">
             </div> 
 
