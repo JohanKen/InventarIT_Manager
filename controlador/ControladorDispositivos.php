@@ -528,6 +528,38 @@ static function editarIMac()
 
     }
 
+    static function registrarHeadsets(){
+        if(isset($_POST["Registrar"])){
+            try{
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                $fechaCompra = $_POST["fecha_compra"];
+                if(DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false){
+                    $fechaCompraFormateada = $fechaCompra;
+                } else {
+                    echo 'Error en el formato de la fecha';
+                }
+
+                $datos = array(
+                    "modelo" => $_POST["modelo"],
+                    "numero_serie" => $_POST["numero_serie"],
+                    "id_marca" => (int)$_POST["marca"],
+                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,
+                    "fecha_compra" => $fechaCompraFormateada,
+                    "nota" => $_POST["nota"],
+                    "foto" => "foto",
+                );
+
+                $insert = ModeloDispositivos::createHeadset($datos);
+
+            }catch (mysqli_sql_exception $e) {
+                echo 'Message: ' .$e->getMessage();
+            }
+
+        } 
+    }
+
     }
 
 ?>
