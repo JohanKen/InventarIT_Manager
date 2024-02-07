@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,43 +84,46 @@
                                 $rolString = "Desconocido";
                                 break;
                         }
-
                         echo '
-                                <tr>
-                                    <td>' . $item[0] . '</td>
-                                    <td>' . $item[1] . '</td>
-                                    <td>' . $item[2] . '</td>
-                                    <td>' . $item[3] . '</td>
-                                    <td>' . $item[4] . '</td>
-                                    <td>' . $estadoString . '</td>
-                                    <td>' . $rolString . '</td>
-                                    <td>' . $item[7] . '</td>
-                                    <td>' . $item[8] . '</td>
-                                    <td>' . $item[9] . '</td>
-                                    <td class="actions">
-                                        <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
-                                        <hr>
-                                        <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');" id="enlaceBorrar">Borrar</a>
-                                    </td>
-                                </tr>
-                            ';
+                        <tr>
+                            <td>' . $item[0] . '</td>
+                            <td>' . $item[1] . '</td>
+                            <td>' . $item[2] . '</td>
+                            <td>' . $item[3] . '</td>
+                            <td>' . $item[4] . '</td>
+                            <td>' . $estadoString . '</td>
+                            <td>' . $rolString . '</td>
+                            <td>' . $item[7] . '</td>
+                            <td>' . $item[8] . '</td>
+                            <td>' . $item[9] . '</td>
+                            <td class="actions">
+                                <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
+                                <hr>
+                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar">Borrar</a>
+                            </td>
+                        </tr>
+                    ';
+                    
+                    
                     }
                     ?>
 
                 </tbody>
             </table>
         </div>
-        <!--modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario-->
-        <div class="modal" id="confirmarBorrarModal">
-            <div class="modal-content">
-                <span class="close-modal" onclick="cerrarModal()">&times;</span>
-                <h4>Confirmar Eliminación</h4>
-                <p>¿Estás seguro de que deseas eliminar a este usuario?</p>
-                <button class="btncancel" id="btnCerrarModal" onclick="cerrarModal()">Regresar </button>
-                <button class="btneliminar" id="btnBorrarModal">Confirmar</button>
-
-            </div>
+       <!-- Modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario -->
+<div class="modal" id="confirmarBorrarModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <h4>Confirmar Eliminación</h4>
+        <p>¿Estás seguro de que deseas eliminar a <span id="nombreUsuario"></span>?</p>
+        <div class="bon">
+            <button class="btncancel" id="btnCerrarModal" onclick="cerrarModal()">Regresar</button>
+            <button class="btneliminar" id="btnBorrarModal">Confirmar</button>
         </div>
+    </div>
+</div>
+
 
     </div>
     <?php
@@ -139,12 +143,14 @@
             document.getElementById('confirmarBorrarModal').style.display = 'none';
         }
 
-        function confirmarBorrar(id_usuario) {
-            document.getElementById('confirmarBorrarModal').style.display = 'flex';
-            document.getElementById('btnBorrarModal').onclick = function () {
-                window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
-            }
-        }
+        function confirmarBorrar(id_usuario, nombreUsuario) {
+    document.getElementById('confirmarBorrarModal').style.display = 'flex';
+    document.getElementById('btnBorrarModal').onclick = function () {
+        window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
+    }
+    document.getElementById('nombreUsuario').innerText = nombreUsuario;
+}
+
     </script>
 </body>
 

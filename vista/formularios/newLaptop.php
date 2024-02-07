@@ -14,25 +14,19 @@
 </head>
 
 <body>
-  
 
-   
-
-
-<div class="container-fluid">
-    <div class="row fle">
-        <div class="col-md-6 headd">
-            <h1>Nueva Laptop</h1>
-        </div>
-        <div class="col-md-6 heaad">
-            <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
+    <div class="container-fluid">
+        <div class="row fle">
+            <div class="col-md-6 headd">
+                <h1>Nueva Laptop</h1>
+            </div>
+            <div class="col-md-6 heaad">
+                <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
+            </div>
         </div>
     </div>
-</div>
 
-   
-<div class="container mt-52">
-        
+    <div class="container mt-52">
         <form action="" method="post" enctype="multipart/form-data">
             <div class="col-3">
                 <div class="mb-3">
@@ -53,13 +47,13 @@
                         foreach ($marcas as $row => $item) {
                             echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
                         }
-                    ?>
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="mb-3">
-                    <label for="precio" class="form-label">Precio</label>
+                    <label id="lblNew" for="labelrecio" class="form-label">Precio</label>
                     <input type="text" class="form-control" name="precio" id="precioInput" value="">
                 </div>
 
@@ -78,7 +72,7 @@
                             $ramValue = intval(preg_replace('/[^0-9]/', '', $ramOption));
                             echo "<option value='$ramValue'>$ramOption</option>";
                         }
-                    ?>
+                        ?>
                     </select>
                 </div>
 
@@ -86,16 +80,26 @@
             <div class="col-3">
                 <div class="mb-3">
                     <label for="procesador" class="form-label">Procesador</label>
-                    <select class="form-select" name="procesador">
+                    <select class="form-select" name="procesador" id="procesador">
                         <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",'Intel core i5');
+                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1", "Intel core i5");
                         foreach ($procesadoresBaseDatos as $procesador) {
                             echo "<option value='$procesador'>$procesador</option>";
                         }
-                    ?>
+                        ?>
+                        <option value="otro">Agregar otro procesador</option>
                     </select>
                 </div>
 
+                <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
+                    <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
+                    <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador" placeholder="Ingresa el nuevo procesador">
+                </div>
+
+                <input type="hidden" name="procesador_seleccionado" id="procesador_seleccionado">
+
+           
+           
                 <div class="mb-3">
                     <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
                     <select class="form-select" name="sistema_operativo">
@@ -107,70 +111,83 @@
                         foreach ($sistemasOperativosBaseDatos as $sistemaOperativo) {
                             echo "<option value='$sistemaOperativo'>$sistemaOperativo</option>";
                         }
-                    ?>
+                        ?>
                     </select>
                 </div>
-
+                </div>
+                <div class="col-3">
                 <div class="mb-3">
                     <label for="nota" class="form-label">Notas (opcional)</label>
                     <textarea class="form-control" name="nota" rows="4"></textarea>
                 </div>
-
-
-            </div>
-            <div class="mb-3">
+            
+          
                 <div class="mb-3">
                     <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
                         required="true">Imagen del dispositivo (opcional)</label>
                     <input type="file" class="form-control" name="foto">
-                </div> <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
-                <br><br><br>
+                </div> 
+                <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
+                
                 <hr>
                 <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
-
-            </div>
+           
         </form>
     </div>
-
+                 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var fechaCompraInput = document.getElementById('fechaCompraInput');
-        var fechaCompraHidden = document.getElementById('fechaCompraHidden');
+        document.getElementById('procesador').addEventListener('change', function() {
+            var select = document.getElementById('procesador');
+            var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
+            var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
 
-        fechaCompraInput.addEventListener('focus', function() {
-            if (fechaCompraInput.value === '') {
-                fechaCompraInput.placeholder = 'Selecciona una fecha';
+            if (select.value === 'otro') {
+                nuevoProcesadorDiv.style.display = 'block';
+                procesadorSeleccionadoInput.value = '';
+            } else {
+                nuevoProcesadorDiv.style.display = 'none';
+                procesadorSeleccionadoInput.value = select.value;
             }
         });
 
-        fechaCompraInput.addEventListener('blur', function() {
-            if (fechaCompraInput.value === '') {
-                fechaCompraInput.placeholder = 'Selecciona una fecha';
+        document.addEventListener('DOMContentLoaded', function() {
+            var fechaCompraInput = document.getElementById('fechaCompraInput');
+            var fechaCompraHidden = document.getElementById('fechaCompraHidden');
+
+            fechaCompraInput.addEventListener('focus', function() {
+                if (fechaCompraInput.value === '') {
+                    fechaCompraInput.placeholder = 'Selecciona una fecha';
+                }
+            });
+
+            fechaCompraInput.addEventListener('blur', function() {
+                if (fechaCompraInput.value === '') {
+                    fechaCompraInput.placeholder = 'Selecciona una fecha';
+                }
+            });
+
+            fechaCompraInput.addEventListener('click', function() {
+                fechaCompraHidden.style.display = 'block';
+                fechaCompraInput.style.display = 'none';
+            });
+
+            fechaCompraHidden.addEventListener('change', function() {
+                var fechaSeleccionada = new Date(fechaCompraHidden.value);
+                var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
+                fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
+                    fechaSeleccionada.getFullYear();
+                fechaCompraHidden.style.display = 'none';
+                fechaCompraInput.style.display = 'block';
+            });
+
+            function obtenerNombreMes(numeroMes) {
+                var meses = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ];
+                return meses[numeroMes];
             }
         });
-
-        fechaCompraInput.addEventListener('click', function() {
-            fechaCompraHidden.style.display = 'block';
-            fechaCompraInput.style.display = 'none';
-        });
-
-        fechaCompraHidden.addEventListener('change', function() {
-            var fechaSeleccionada = new Date(fechaCompraHidden.value);
-            var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
-            fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
-                fechaSeleccionada.getFullYear();
-            fechaCompraHidden.style.display = 'none';
-            fechaCompraInput.style.display = 'block';
-        });
-
-        function obtenerNombreMes(numeroMes) {
-            var meses = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-            return meses[numeroMes];
-        }
-    });
     </script>
 </body>
 

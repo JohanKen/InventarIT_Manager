@@ -154,6 +154,17 @@
                                 exit;
                             }
             
+                            $procesadorSeleccionado = isset($_POST['procesador']) ? $_POST['procesador'] : "";
+                            $procesadorNuevo = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
+                            
+                            if (empty($procesadorSeleccionado)) {
+                                $procesador = $procesadorNuevo;
+                            } else {
+                                $procesador = $procesadorSeleccionado;
+                            }
+                            
+                         
+
                             $datos = array(
                                 "modelo" => $_POST["modelo"],
                                 "numero_serie" => $_POST["numero_serie"],

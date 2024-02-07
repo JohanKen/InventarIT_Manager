@@ -70,6 +70,7 @@ body {
 form{
     display: flex;
     padding: 30px;
+    
 }
 #formForm {
     width: 100%;
@@ -77,7 +78,7 @@ form{
 }
 
 .form-label {
-    color: #333;
+    color: #fff;
     margin-bottom: 10px;
     display: block;
 }
@@ -100,6 +101,7 @@ form{
     box-sizing: border-box;
     background-color: #f8f9fa;
 }
+
 
 .btn {
     padding: 10px 20px;

@@ -49,7 +49,7 @@
 
             <li class="me-3">
                 <a class="anclaDis" href="formularios/newMouse">
-                    <img class="imgDis" src="images/dis/mouse.png" alt="Mouse">
+                    <img class="imgDiis" src="images/dis/mouse.png" alt="Mouse">
                     <span class="label">Mouse</span>
                 </a>
             </li>

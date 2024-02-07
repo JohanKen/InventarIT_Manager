@@ -18,12 +18,22 @@ ul {
     height: 150px !important;
     transition: transform 0.3s, filter 0.3s;
 }
-.imgDiss {
+.form-label{
+    color: #fff !important;
+}
+.imgDiis {
     text-decoration: none;
-    width: 100px !important;
-    height: 150px !important;
+    width: 120px !important;
+    height: 90px !important;
     transition: transform 0.3s, filter 0.3s;
 }
+.imgDiss {
+    text-decoration: none;
+    width: 90px !important;
+    height: 13r0px !important;
+    transition: transform 0.3s, filter 0.3s;
+}
+
 
 .label {
     position: absolute;
@@ -32,6 +42,7 @@ ul {
     transform: translateX(-50%);
     background-color: #3498db; /* Color azul */
     color: #fff;
+    
     padding: 10px; /* Aumenté el tamaño del padding para un estilo más llamativo */
     border-radius: 5px; /* Esquinas redondeadas */
     opacity: 0;
@@ -39,8 +50,16 @@ ul {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
 }
 
+#lblNew{
+    color: #fff;
+}
+
 
 .anclaDis:hover .imgDis {
+    transform: scale(1.1);
+    filter: brightness(70%);
+}
+.anclaDis:hover .imgDiis {
     transform: scale(1.1);
     filter: brightness(70%);
 }
@@ -107,7 +126,7 @@ ul {
 }
 
 .btnn:hover {
-    background-color: #ff0000; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+    background-color: #a04545; /* Cambia el color de fondo al pasar el ratón sobre el botón */
 }
 
 
@@ -139,6 +158,7 @@ ul {
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
+    background-color: #ffffff7a;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.5s, border-radius 0.5s, background-color 0.5s; /* Ajusta la duración de la animación aquí */
