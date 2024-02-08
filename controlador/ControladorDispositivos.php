@@ -145,7 +145,7 @@
                         try{
                             $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                             Conexion::conectar()->query($sqlSetMaxAllowedPacket);
-            
+                
                             $fechaCompra = $_POST["fecha_compra"];
                             if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
                                 $fechaCompraFormateada = $fechaCompra;
@@ -153,42 +153,71 @@
                                 echo 'Error en el formato de la fecha';
                                 exit;
                             }
-            
-                            $procesadorSeleccionado = isset($_POST['procesador']) ? $_POST['procesador'] : "";
-                            $procesadorNuevo = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
+
+                                // Obtener el valor de la marca seleccionada
+                                $marcaSeleccionada = $_POST['marca'];
+
+                                // Si la marca seleccionada es "otro"
+                                if ($marcaSeleccionada === "otro") {
+                                    $nuevaMarca = isset($_POST['nueva_marca']) ? $_POST['nueva_marca'] : "";
+                                    
+                                    // Verificar si la nueva marca ya existe en la base de datos
+                                    $idMarca = ModeloDispositivos::obtenerIdMarca($nuevaMarca);
                             
-                            if (empty($procesadorSeleccionado)) {
-                                $procesador = $procesadorNuevo;
+                                    // Si la marca no existe, insertarla en la base de datos
+                                    if(empty($idMarca)) {
+                                        $idMarca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+                                    }
+
+                                    $marca = $idMarca;
+                                } else {
+                                    $marca = $marcaSeleccionada; // Usar el ID de la marca seleccionada
+                                }
+
+
+                            // Obtener el valor del sistema operativo seleccionado
+                            $sistemaOperativoSeleccionado = $_POST['sistema_operativo'];
+
+                            // Si el sistema operativo seleccionado es "otro", usar el nuevo sistema operativo ingresado
+                            if ($sistemaOperativoSeleccionado === "otro") {
+                                $sistemaOperativo = isset($_POST['nuevo_sistema_operativo']) ? $_POST['nuevo_sistema_operativo'] : "";
+                            } else {
+                                $sistemaOperativo = $sistemaOperativoSeleccionado;
+                            }
+                            // Obtener el valor del procesador seleccionado
+                            $procesadorSeleccionado = $_POST['procesador'];
+                
+                            // Si el procesador seleccionado es "otro", usar el nuevo procesador
+                            if ($procesadorSeleccionado === "otro") {
+                                $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
                             } else {
                                 $procesador = $procesadorSeleccionado;
                             }
-                            
-                         
-
+                
                             $datos = array(
                                 "modelo" => $_POST["modelo"],
                                 "numero_serie" => $_POST["numero_serie"],
                                 "ram" => (int)$_POST["ram"],
-                                "procesador" => $_POST["procesador"],
-                                "sistema_operativo" => $_POST["sistema_operativo"],
-                                "id_marca" => (int)$_POST["marca"],
+                                "procesador" => $procesador,
+                                "sistema_operativo" => $sistemaOperativo,
+                                "id_marca" => $marca,
                                 "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
                                 "fecha_compra" => $fechaCompraFormateada,
                                 "nota" => $_POST["nota"],
                                 "foto" => "foto",
                             );
-            
+                
                             $insert = ModeloDispositivos::createLaptop($datos);
-            
+                
                         } catch(mysqli_sql_exception $e) {
                             echo 'Message: ' .$e->getMessage();
+                            echo '<script>alert("No se enviaron los datos correctamente al modelo...");</script>';
                         }
-                    }
+                    
                 }
-            
-
+            }
         //Funcion para consultar los tipos de dispositivos
-           static function getTiposDispositivos(){
+        static function getTiposDispositivos(){
             $tabla = "tipos_dispositivos";
             $respuesta = ModeloDispositivos::selectTiposDispositivos($tabla);
             $arreglo = $respuesta->fetch_all();
@@ -208,7 +237,7 @@
                         echo 'Error en el formato de la fecha';
                         exit;
                     }
-    
+  
                     $datos = array(
                         "modelo" => $_POST["modelo"],
                         "numero_serie" => $_POST["numero_serie"],

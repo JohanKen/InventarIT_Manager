@@ -128,13 +128,58 @@ class ModeloDispositivos extends Conexion {
             // throw new Exception("Error al ejecutar la consulta: " . $e->getMessage());
         }
     }
+
+    // Método para obtener el ID de una marca basándose en su nombre
+    public static function obtenerIdMarca($nuevaMarca) {
+        try {
+            // Preparar la consulta SQL
+            $sql = "SELECT id_marca FROM marcas WHERE marca = ?";
+            $stmt = Conexion::conectar()->prepare($sql);
+    
+            // Ejecutar la consulta con el valor pasado como parámetro
+            $stmt->execute([$nuevaMarca]);
+    
+            // Obtener el resultado
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Verificar si se encontraron resultados
+            if ($resultado !== false) {
+                // Retornar el ID de la marca
+                return $resultado['id_marca'];
+            } else {
+                // Retornar false si la marca no se encontró
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Manejar el error en caso de excepción
+            echo "Error al obtener el ID de la marca: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    
+
     // Función para seleccionar marcas
     static function selectMarcas($tabla) {
         $sql = "SELECT * FROM $tabla order by id_marca asc;";
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-
+    //insertar nueva marca...
+    public static function insertarNuevaMarca($nuevaMarca) {
+        try {
+            $query = "INSERT INTO marcas (marca) VALUES (?)";
+            $stmt = Conexion::conectar()->prepare($query);
+            $stmt->bindParam(1, $nuevaMarca, PDO::PARAM_STR);
+            $stmt->execute();
+            return Conexion::conectar()->lastInsertId();
+        } catch (PDOException $e) {
+            // Manejar el error de inserción aquí, si es necesario
+            echo "<script>alert('Error al insertar nueva marca: ".$e->getMessage()."');</script>";
+            return false; // Retornar false en caso de error
+        }
+    }
+    
 
     // Función para seleccionar los distintos tipos de estados
     static function selectEstados($tabla) {
@@ -183,6 +228,6 @@ static function updateLaptop($datos) {
     }
 }
 
-    
+   
 }
 ?>
