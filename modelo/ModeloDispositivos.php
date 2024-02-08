@@ -533,5 +533,31 @@ static function createSwitch($datos){
         echo 'Message: '.$e ->getMessage();
     }
 }
+
+static function createImpresora($datos){
+    $conexion = Conexion::conectar();
+    try{
+
+        $precio = (double) $datos["precio"];
+        $id_marca = (int) $datos["id_marca"];
+
+        $statement = $conexion -> prepare("CALL insertar_impresora(?, ?, ?, ?, ?, ?, ?)");
+        $statement ->bind_param("ssiisss",
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+        );
+
+        $statement ->execute();
+        $statement ->close();
+
+    }catch (Exception $e){
+        echo 'Message: '.$e ->getMessage();
+    }
+}
 }
 ?>
