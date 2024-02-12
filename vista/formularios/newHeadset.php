@@ -57,7 +57,7 @@
             </div>
 
             <div class="mb-3" id="formForm">
-                <label for="numero_serie" class="foem-label">Número de serie</label>
+                <label for="numero_serie" class="form-label">Número de serie</label>
                 <input type="text" class="form-control" name="numero_serie">
             </div>
 
