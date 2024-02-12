@@ -697,7 +697,7 @@ static function editarIMac()
     }
 
     static function borrarHerramienta(){
-        if(isset($_GET["accion"])&& $_GET["accion"]=="eliminarColaborador"){
+        if(isset($_GET["accion"])&& $_GET["accion"]=="eliminarHerramienta"){
             $id = $_GET["id_herramienta"];
 
             $delete = ModeloDispositivos::deleteHerramienta($id);
