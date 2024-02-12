@@ -688,6 +688,30 @@ static function editarIMac()
         }
     }
 
+    public static function consultaHerramientas(){
+        $tabla = 'herramientas';
+        $obj = ModeloDispositivos::selectHerramienta($tabla);
+        $arregloHerramientas = $obj->fetch_all();
+        return $arregloHerramientas;
+
+    }
+
+    static function borrarHerramienta(){
+        if(isset($_GET["accion"])&& $_GET["accion"]=="eliminarColaborador"){
+            $id = $_GET["id_herramienta"];
+
+            $delete = ModeloDispositivos::deleteHerramienta($id);
+            if($delete>0){
+                echo '
+                        <script>
+                            alert("Herramienta eliminada correctamente");
+                            window.location.href="index.php?seccion=herramientas";
+                        </script>
+                    ';
+            }
+        }
+    }
+
     }
 
 ?>

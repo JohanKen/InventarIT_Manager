@@ -586,5 +586,19 @@ static function createOtro($datos){
         echo 'Message: '.$e ->getMessage();
     }
 }
+
+static function selectHerramienta($tabla){
+    $sql = "SELECT * FROM inventarit_manager.$tabla;";
+    $res = Conexion::conectar()->query($sql);
+    return $res;
+}
+
+static function deleteHerramienta($id){
+    $id_herramienta = (int)$id;
+    $sql = "CALL inventarit_manager.eliminar_herramienta('$id');";
+    $res = Conexion::conectar()->query($sql);
+    return $res;
+}
+
 }
 ?>
