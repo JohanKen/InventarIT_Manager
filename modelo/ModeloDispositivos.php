@@ -588,7 +588,7 @@ static function createOtro($datos){
 }
 
 static function selectHerramienta($tabla){
-    $sql = "SELECT * FROM inventarit_manager.$tabla;";
+    $sql = "SELECT * FROM inventarit_manager.$tabla order by id_herramienta desc;";
     $res = Conexion::conectar()->query($sql);
     return $res;
 }
@@ -598,6 +598,31 @@ static function deleteHerramienta($id){
     $sql = "CALL inventarit_manager.eliminar_herramienta('$id');";
     $res = Conexion::conectar()->query($sql);
     return $res;
+}
+
+static function createHerramienta($datos){
+    $conexion = Conexion::conectar();
+    try{
+
+        
+        $numero_piezas = (int) $datos["numero_piezas"];
+
+        $statement = $conexion -> prepare("CALL insertar_herramienta(?, ?, ?, ?, ?)");
+        $statement ->bind_param("sisss",
+            $datos["nombre_herramienta"],
+            $numero_piezas,
+            $datos["ubicacion"],
+            $datos["fecha_compra"],
+            $datos["descripcion"]
+
+        );
+
+        $statement -> execute();
+        $statement -> close();
+
+    }catch (Exception $e){
+        echo 'Message: '.$e ->getMessage();
+    }
 }
 
 }

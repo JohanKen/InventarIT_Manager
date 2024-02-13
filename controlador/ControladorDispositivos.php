@@ -712,6 +712,36 @@ static function editarIMac()
         }
     }
 
+    static function registrarHerramienta(){
+        if(isset($_POST["Registrar"])){
+            try{
+
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                $fechaCompra = $_POST["fecha_compra"];
+                if(DateTime::createFromFormat('Y-m-d', $fechaCompra) !==false){
+                    $fechaCompraFormateada = $fechaCompra;
+                }else{
+                    echo 'Error en el formato de la fecha';
+                }
+
+                $datos = array(
+                    "nombre_herramienta" => $_POST["nombre_herramienta"],
+                    "numero_piezas" => (int)$_POST["numero_piezas"],
+                    "ubicacion" => $_POST["ubicacion"],
+                    "fecha_compra" => $fechaCompraFormateada,
+                    "descripcion" => $_POST["descripcion"],
+                );
+
+                $insert = ModeloDispositivos::createHerramienta($datos);
+
+            } catch (mysqli_sql_exception $e){
+                echo 'Message: '.$e->getMessage();
+            }
+        }
+    }
+
     }
 
 ?>
