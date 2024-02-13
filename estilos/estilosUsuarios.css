@@ -18,6 +18,11 @@
     align-items: center;
 }
 
+.actions{
+    margin: 4px !important;
+    padding: 5px !important;
+}
+
 .modal-content {
 background-color: #333;    
 padding: 20px;
@@ -30,9 +35,6 @@ padding: 20px;
     color: #fff;
 }
 
-.bon{
-    display: flex;
-}
 
 #btnCerrarModal{
     cursor: pointer;
@@ -269,19 +271,6 @@ body {
             background-color: #f4f4f4;
         }
 
-        .up {
-            display: flex;
-            max-height: 300px;
-            
-        }
-
-        .contentSeccion {
-            max-width: auto;
-            margin-top: 0;
-            padding: 10px;
-       
-            animation: slideDownContent 2s forwards;
-        }
 
         .header {
             animation: slideInHeader 1s forwards;
@@ -319,89 +308,68 @@ body {
             }
         }
         
-        .anclaDis:hover .label {
-            opacity: 1;
-        }
-        .headerTabla {
-            background-color: #ffffff77;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            margin-left: 10%;
-            box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.322);
-            margin-top: 100px;
-            font-size: 24px; 
-            border-radius: 5px;
-            padding: 5px;
-            text-align: center;
-            width: 80%;
-           
-            margin: 50px auto;
-            position: relative;
-            height: 100px;
-        }
-
-        .headerTabla h1 {
-            font-size: 60px;
-            color: #333;
-        }
-
-        .form-inline {
-            display: flex;
-            justify-content: center;
-        }
+      
 
         #IMGlaptop {
-            width: 200px;
-            height: 200px;
-            margin-left: 150px;
-           
+            max-width: 100%; /* Establece el ancho máximo al 100% del contenedor */
+            height: auto; /* Hace que la altura se ajuste automáticamente para mantener la proporción de aspecto */
+            width: auto; /* Establece el ancho automático para mantener la proporción de aspecto */
+            max-height: 200px; /* Establece una altura máxima para la imagen */
         }
+        
+        
 
         .input-group {
             margin: 5px;
         }
 
-        .table {
-            padding: 5%;
-            width: 100%;
-            
-        }
+     
 
         .table th, .table td {
             padding: 2%;
+            background-color: #333;
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
+        }
+        .table th, .table td {
+            padding: 10px; /* Aumenta el espacio alrededor del contenido de las celdas */
+            vertical-align: middle; /* Centra verticalmente el contenido de las celdas */
         }
 
-        .thead-dark {
+        .table thead th {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #333; /* Cambia el color de fondo de las filas impares */
+        }
+
+        .table tbody tr:hover {
+            background-color: #444; /* Cambia el color de fondo al pasar el ratón por encima */
+        }
+        
+        .btnAgregar {
+            margin-bottom: 20px; /* Añade espacio debajo del botón */
+        }
+        
+        #enlaceEditar,
+        #enlaceBorrar {
+            padding: 6px 12px; /* Ajusta el relleno de los enlaces */
+            margin-right: 5px; /* Añade espacio entre los enlaces */
+        }
+
+        .thead-dark{
             background-color: #333 !important;
             color: #fff !important;
         }
 
         .table tbody tr:nth-child(even) {
             color: black;
-            background-color: #912828;
+            background-color: #912828 !important;
         }
 
-        .table tbody tr:hover {
-            background: none !important;
-            background: linear-gradient(0deg, rgba(0, 22, 249, 0.2553396358543417) 51%, rgba(0, 151, 249, 0.7819502801120448) 100%) !important;
-            color: #ffffff !important;
-            transform: scale(1.05) !important;
-            transition: transform 0.3s ease !important;
-        }
-
-        .table tbody tr {
-            transition: transform 0.3s ease, box-shadow 0.3s ease !important; /* Agregado box-shadow a la transición */
-        }
-
-        .table tbody tr:hover {
-            transform: scale(1.05) !important;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
-        }
-
+    
 
         #enlaceEditar {
             color: white;

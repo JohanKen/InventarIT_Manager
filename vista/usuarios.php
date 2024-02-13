@@ -11,44 +11,58 @@
   
     <title>Usuarios</title>
     <style>
-    </style>
+    .disabled-btn {
+        color: #6c757d; /* Color gris */
+        cursor: not-allowed; /* Cursor de no permitido */
+        pointer-events: none; /* Deshabilitar eventos de puntero */
+        background-color: gray !important;
+    }
+    h1{
+        font-size: 45px;
+        color: #333
+    }
+</style>
+
 </head>
 
 <body>
-<br><br><br><br><br>
-    <div class="contentSeccion">
+<br><br>
+<div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
                 <h1>Usuarios</h1>
-              
+                
             </header>
             <div class="imgbtn">
+
                 <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
+
                 <div>
+                <a href="index.php?seccion=nuevousuario" class="btn btn-success btn-lg mb-3">Agregar nuevo usuario</a>
+
                     <br>
                 </div>
             </div>
         </div>
 
-        <a href="index.php?seccion=nuevousuario"><button type="button" class="btnAgregar">Agregar nuevo usuario</button></a>
-
-        <div class="table">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Id Usuario</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Nombre de Usuario</th>
-                        <th>Correo</th>
-                        <th>Estado</th>
-                        <th>Rol</th>
-                        <th>Fecha de Ingreso</th>
-                        <th>Fecha de Creación</th>
-                        <th>Password</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
+    </div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id Usuario</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Nombre de Usuario</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Rol</th>
+                <th>Fecha de Ingreso</th>
+                <th>Fecha de Creación</th>
+                
+                <th>Acciones</th>
+            </tr>
+        </thead>
                 <tbody>
                     <?php
                     $eliminarUsuario = new ControladorUsuarios;
@@ -94,15 +108,29 @@
                             <td>' . $estadoString . '</td>
                             <td>' . $rolString . '</td>
                             <td>' . $item[7] . '</td>
-                            <td>' . $item[8] . '</td>
-                            <td>' . $item[9] . '</td>
-                            <td class="actions">
-                                <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
-                                <hr>
-                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar">Borrar</a>
-                            </td>
-                        </tr>
-                    ';
+                            <td>' . $item[9] . '</td>';
+                            $usuarioLogueado = $_SESSION['usuario']['id_usuario'];
+                            if ($item[0] == $usuarioLogueado) {
+                                // Si es el mismo usuario, mostrar los botones de edición y borrado deshabilitados visualmente
+                                echo '
+                                <td class="actionss">
+                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" class="disabled-btn" id="enlaceEditar">Editar</a>
+                                    <hr>
+                                    <a href="javascript:void(0);" class="disabled-btn" id="enlaceBorrar">Borrar</a>
+                                </td>';
+                            } else {
+                                // Si no es el mismo usuario, mostrar los botones de edición y borrado habilitados
+                                echo  '
+                                <td class="actions">
+                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
+                                    <hr>
+                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar">Borrar</a>
+                                </td>';
+                            }
+                    
+                    echo '
+                        </tr>';
+                    
                     
                     
                     }

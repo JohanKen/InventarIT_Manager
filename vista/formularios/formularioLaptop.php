@@ -217,7 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
             <div class="mb-3" id="formForm">
-                <a class="btn btn-danger" href="index.php?seccion=editarDispositivos">Cancelar</a>
+                <a class="btn btn-danger" href="index.php?seccion=dispositivos">Cancelar</a>
                 <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
             </div>
 

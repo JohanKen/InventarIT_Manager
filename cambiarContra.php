@@ -7,51 +7,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recupera tu contraseña</title>
     <link rel="icon" href="./images/logoNav.png">
-    <link rel="stylesheet" href="./estilos/estilosLogin.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style>
-        body{
-            background: gray;
-        }
-        .login-container {
-            display: flex;
-            align-items: center; /* Centra verticalmente los elementos */
+        body {
+            background-image: url("./images/perro3.jfif");
+            background-size: contain;
+            
+            background-position: center;
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
 
-        .login-container img {
-            margin-top:3px;
-            width: 420px;
-            height: 501px;
-            border-radius:10px;
-            margin-right: 20px; /* Espacio entre la imagen y el formulario */
+        .login-container {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente los elementos */
+            align-items: center; /* Centra verticalmente los elementos */
+            height: 100vh;
         }
 
         .login-form {
-            /* Estilos para el formulario (como en tu código original) */
+            background-color: rgba(255, 255, 255, 0.9); /* Color de fondo con opacidad */
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .login-form h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .login-form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .login-form p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-form a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-form a:hover {
+            color: #0056b3;
         }
     </style>
 </head>
 
 <body>
-    
+
     <div class="login-container">
-        <div>
-            <img src="./images/perro3.jfif" alt="">
-        </div>
         <div class="login-form">
             <h2>Recupera tu contraseña</h2>
             <form action="./config/cambiarContra.php" method="POST">
 
                 <input type="text" id="correo" name="new_password" required placeholder="Nueva contraseña">
                 <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-                <button type="submit">Enviar Contraseña</button>
-                
+                <button type="submit" class="btn btn-primary">Enviar Contraseña</button>
+
                 <hr>
 
                 <p>¿Ya tienes una cuenta? <a href="login.php" id="inicia">Inicia sesión</a></p>
             </form>
         </div>
     </div>
+
+    <!-- Bootstrap JS (opcional, solo si necesitas funcionalidad de Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

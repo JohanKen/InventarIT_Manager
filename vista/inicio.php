@@ -15,7 +15,7 @@
            
             margin-left:100px;
             border-radius:10px;
-            z-index: -1;
+            z-index: 10;
             max-width:1180px;
             height: 2080px;
         }

@@ -1,7 +1,7 @@
 <?php 
 include_once "modelo/ModeloUsuarios.php";
 class ControladorUsuarios {
-    
+
     public static function consultarUsuarios(){
         $tabla= 'usuarios';
         $obj = ModeloUsuarios::seleccionarUsuario($tabla);
@@ -85,6 +85,15 @@ class ControladorUsuarios {
         if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarUsuario"){
             $id = $_GET ["id_usuario"];
             
+              // Obtener el ID del usuario logueado
+             
+              $usuarioLogueado = $_SESSION['usuario']['id_usuario'];
+
+              // Validar que el usuario que intenta eliminar no sea el mismo que está logueado
+              if ($id == $usuarioLogueado) {
+                  echo '<script>alert("No puedes eliminar tu propia cuenta."); window.location.href="index.php?seccion=usuarios";</script>';
+                  exit;
+              }
             $objDelete = ModeloUsuarios::deleteUsuarios($id);
             if($objDelete>0){
                 echo    '

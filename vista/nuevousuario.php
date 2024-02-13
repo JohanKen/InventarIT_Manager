@@ -1,25 +1,16 @@
 <?php
-
-  
-
-
-//verificamos cuando se presiona el boton de registrar para irnos al controlador
+// Verificamos cuando se presiona el botón de registrar para irnos al controlador
 if(isset($_POST['registrar'])){
-                
-                    
     $registrar = new ControladorUsuarios;
     $registrar->registrarUsuario();
     echo '
-        <script>
-            alert("Usuario creado correctamente");
-            window.location.href = "index.php?seccion=usuarios";
-        </script>';
+    <script>
+        alert("Usuario creado correctamente");
+        window.location.href = "index.php?seccion=usuarios";
+    </script>';
     exit;
-    
-               
-   }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -27,101 +18,163 @@ if(isset($_POST['registrar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="estilos/estilosMenu.css">
-    <link rel="stylesheet" href="estilos/estilosNewUser.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .headerr h2 {
+            margin-top: 10px;
+            font-size: 40px;
+        }
+        
+      div{
+            padding: 5px;
+        }
+
+        .containerr {
+            margin-bottom: 100px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 3px 3px 3px rgb(25, 0, 255);
+        }
+
+        label {
+            font-weight: bold;
+            color: white;
+        }
+
+        .imgdiv{
+            display: flex ;
+        }
+
+        .error-message {
+            color: #ff2323;
+            font-size: 20px;
+        }
+
+        input:hover {
+            border-color: rgb(34, 18, 207) !important;
+            border-style: groove !important;
+        }
+
+        .m{
+            color: #333;
+            font-size: 22px;
+            
+        }
+
+        .mm{
+            margin-top: 35px;
+            color: #333;
+            font-size: 20px;
+            
+        }
+        .mmm{
+            color: #333;
+            font-size: 16px;
+            
+        }
+       
+        #inputConfirmar{
+            margin-top: 33px;
+            
+        }
+
+    </style>
 </head>
 <body>
 <div class="headerr">
-<h2>Registro de nuevo usuario</h2>
-
+    <h2>Registro de nuevo usuario</h2>
 </div>
-<br><br><br><br><br>
-    <div class="containerr">
 
-    <form action="" method="POST" onsubmit="return validateForm()">
-            <div class="mb-3">
-                    <div class="mb-3">
-                        <label for="apellido_paterno" class="form-label">Apellido Paterno:</label>
-                        <input type="text" class="form-control" id="lbl" name="apellido_paterno" required>
-                    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <form action="" method="POST" onsubmit="return validateForm()" class="credit-card-div">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="imgdiv">
+        <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Nombre(s)" name="nombres" required>
+                </div>
+           
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellido_paterno" required>
+                </div>
+                
 
-                    <div class="mb-3">
-                        <label for="apellido_materno" class="form-label">Apellido Materno:</label>
-                        <input type="text" class="form-control" id="lbl" name="apellido_materno" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="nombres" class="form-label">Nombre(s):</label>
-                        <input type="text" class="form-control" id="lbl" name="nombres" required>
-                    </div>
-            </div>
-            <div class="mb-3">
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo:</label>
-                <input type="email" class="form-control" id="lbl" name="correo" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="rol" class="form-label">Rol:</label>
-                <select class="form-select" id="lbl" name="rol" required>
-                    <option value="1">Administrador</option>
-                    <option value="2">Editor</option>
-                    <option value="3">Consultor</option>
-                    
-                </select>
-            </div>
-
-            
-
-            <div class="mb-3">
-                <label for="fecha_ingreso" class="form-label">Fecha de Ingreso:</label>
-                <input type="date" class="form-control" id="lbl" name="fecha_ingreso" required>
-            </div>
-            </div>
-            <br><br><br><br><br>
-            <div class="mb-3" >
-            <div class="mb-3" >
-                <label for="password" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            
-
-            <div class="mb-3">
-                <label for="confirmar_password" class="form-label">Confirmar Contraseña:</label>
-                <input type="password" class="form-control" id="confirmar_password" name="confirmar_password" required>
-                <br>
-                <div id="errorMessage" class="error-message"></div>
-                <br>
-            </div>
-            </div>
-            <?php
-                 
-            ?>
-            <div class="mb-3">
-            <div class="botones">
-            <img src="images/newUser.png" id="imgNewUser" alt="">
-                <button type="button" class="btnCancelar" onclick="window.location.href='index.php?seccion=usuarios'">Cancelar</button>
-                <button type="submit" class="btnRegistrar" name="registrar">Registrar</button>
                 
                 </div>
-            </div>
-        
+                <div class="imgdiv">
+         
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Apellido Materno" name="apellido_materno" required>
+                </div>
+                
+                <div class="col-md-6 col-sm-3 col-xs-3">
+                   
+                   <input type="email" class="form-control" placeholder="Correo" name="correo" required>
+               </div>
+           
+               </div>
+            <div class="row">
+                
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <h8 class="m">Rol:</h8>
+                    <select class="form-select" name="rol" required>
+                        <option value="1">Administrador</option>
+                        <option value="2">Editor</option>
+                        <option value="3">Consultor</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <h8 class="mm">Fecha de Ingreso:</h8>
+                    <input type="date" class="form-control" placeholder="Fecha de Ingreso" name="fecha_ingreso" required>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                <h8 class="m">Contraseña:</h8>
+
+                    <input type="password" class="form-control" placeholder="" name="password" required>
+                </div>
+         
             
-            
-        </form>
-        
+                <div class="col-md-3 col-sm-3 col-xs-3">
+              
+                    <input type="password" id="inputConfirmar" class="form-control" placeholder="Confirmar contraseña" style="font-size:14px" name="confirmar_password" required>
+                </div>
     </div>
-   
-    <script>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <div id="errorMessage" class="error-message"></div>
+                </div>
+            
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='index.php?seccion=usuarios'">Cancelar</button>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <button type="submit" class="btn btn-warning btn-block" name="registrar">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    
     function validateForm() {
         // Limpiar mensaje de error al principio
         document.getElementById("errorMessage").innerHTML = "";
 
         // Obtener los valores de los campos de contraseña
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirmar_password").value;
+        var password = document.getElementsByName("password")[0].value;
+        var confirmPassword = document.getElementsByName("confirmar_password")[0].value;
 
         // Verificar si las contraseñas coinciden
         if (password !== confirmPassword) {
@@ -132,10 +185,19 @@ if(isset($_POST['registrar'])){
             return false;
         }
 
-        // Validar la fortaleza de la contraseña
-        if (password.length < 8 || !/[A-Z]/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        // Verificar si la contraseña tiene más de 8 caracteres
+        if (password.length < 8) {
             // Mostrar mensaje de error
-            document.getElementById("errorMessage").innerHTML = "La contraseña debe tener al menos 8 caracteres, una mayúscula y un símbolo";
+            document.getElementById("errorMessage").innerHTML = "La contraseña debe tener al menos 8 caracteres";
+
+            // Detener el envío del formulario
+            return false;
+        }
+
+        // Verificar si la contraseña contiene al menos un número
+        if (!/\d/.test(password)) {
+            // Mostrar mensaje de error
+            document.getElementById("errorMessage").innerHTML = "La contraseña debe contener al menos un número";
 
             // Detener el envío del formulario
             return false;
@@ -145,13 +207,7 @@ if(isset($_POST['registrar'])){
         return true;
     }
 
-    function updateErrorMessage() {
-        // Actualizar mensaje de error antes de realizar la validación
-        validateForm();
-    }
+
 </script>
-
-
-    
 </body>
 </html>

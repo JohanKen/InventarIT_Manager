@@ -65,7 +65,7 @@ if(isset($_POST['Registrar'])){
                             echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
                         }
                         ?>
-                            <option value="otro">Otra marca</option>
+                        <!--    <option value="otro">Otra marca</option>   -->
                         </select>
                     </div>
 
@@ -122,9 +122,8 @@ if(isset($_POST['Registrar'])){
                             "Intel Core i5-12400 (12va generación)",
                             "Intel Core i7-12700K (12va generación)",
                             "Intel Core i5-13400 (13va generación)",
-                            "Intel Core i7-13700K (13va generación)",                            "AMD Ryzen 5 1600X (1ra generación)",
-                
-                          
+                            "Intel Core i7-13700K (13va generación)",                           
+                            "AMD Ryzen 5 1600X (1ra generación)",
                             "AMD Ryzen 5 5600X (5ta generación)",
                             "AMD Ryzen 7 5800X (5ta generación)",
                             "AMD Ryzen 9 5900X (5ta generación)",
