@@ -57,7 +57,7 @@
             </div>
 
             <div class="mb-3" id="formForm">
-                <label for="descripcion" class="form-label">Descripcion</label>
+                <label for="descripcion" class="form-label">Nota (opcional)</label>
                 <textarea class="form-control" name="descripcion" rows="4"></textarea>
             </div>
 
