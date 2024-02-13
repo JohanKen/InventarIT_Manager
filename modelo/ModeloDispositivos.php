@@ -671,5 +671,11 @@ static function updateHerramienta($datos){
     }
 }
 
+static function selectCctvs($tabla){
+    $sql = "SELECT * FROM inventarit_manager.$tabla;";
+    $res = Conexion::conectar()->query($sql);
+    return $res;
+}
+
 }
 ?>

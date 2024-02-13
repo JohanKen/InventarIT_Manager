@@ -788,6 +788,13 @@ static function editarIMac()
         }
     }
 
+    static function consultaCctvs(){
+        $tabla = 'v_inv_cctv';
+        $obj = ModeloDispositivos::selectCctvs($tabla);
+        $arregloDispositivos = $obj->fetch_all();
+        return $arregloDispositivos;
+    }
+
     }
 
 ?>

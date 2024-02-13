@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo 'Editar cctv';?>
+    <?php echo 'registrar cctv'; ?>
 </body>
 </html>
