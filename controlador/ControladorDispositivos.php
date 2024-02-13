@@ -689,8 +689,8 @@ static function editarIMac()
     }
 
     public static function consultaHerramientas(){
-        $tabla = 'herramientas';
-        $obj = ModeloDispositivos::selectHerramienta($tabla);
+        $tabla = 'v_inv_herramientas';
+        $obj = ModeloDispositivos::selectHerramientas($tabla);
         $arregloHerramientas = $obj->fetch_all();
         return $arregloHerramientas;
 
@@ -737,6 +737,52 @@ static function editarIMac()
                 $insert = ModeloDispositivos::createHerramienta($datos);
 
             } catch (mysqli_sql_exception $e){
+                echo 'Message: '.$e->getMessage();
+            }
+        }
+    }
+
+    static function detalleHerramienta(){
+        if(isset($_GET["id_herramienta"])){
+            $id = $_GET["id_herramienta"];
+
+            $obj = ModeloDispositivos::selectHerramienta($id);
+
+            if($obj instanceof mysqli_result){
+                $colaborador = $obj->fetch_all(MYSQL_ASSOC);
+            }else{
+                $colaborador = $obj;
+            }
+            return $colaborador;
+
+        }
+    }
+
+    static function editarHerramienta(){
+        if(isset($_POST["guardarHerramienta"])){
+            try{
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar($sqlSetMaxAllowedPacket);
+
+                $fechaCompra =$_POST["fecha_compra"];
+                if(DateTime::createFromFormat('Y-m-d', $fechaCompra) !==false){
+                    $fechaCompraFormateada = $fechaCompra;
+                } else {
+                    echo 'Error en el formato de la fecha';
+                }
+
+                $datos = array(
+                    "id_herramienta" => (int)$_POST["id_herramienta"],
+                    "nombre_herramienta" => $_POST["nombre_herramienta"],
+                    "numero_piezas" => (int)$_POST["numero_piezas"],
+                    "ubicacion" => $_POST["ubicacion"],
+                    "fecha_compra" => $fechaCompraFormateada,
+                    "descripcion" => $_POST["descripcion"],
+                );
+
+                $insert = ModeloDispositivos::updateHerramienta($datos);
+
+            }catch (mysqli_sql_exception $e){
                 echo 'Message: '.$e->getMessage();
             }
         }

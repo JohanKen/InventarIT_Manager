@@ -34,7 +34,7 @@
                     <th>Numero De Piezas</th>
                     <th>Ubicacion</th>
                     <th>Fecha de compra</th>
-                    <th>Descripcion</th>
+                    <th>Notas</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -67,31 +67,32 @@
     </div>
 
     <div class="modal" id="confirmarBorrarModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="cerrarModal()">&times;</span>
-            <h4>Confirmar Eliminacion</h4>
-            <p>¿Estás seguro de que deseas eliminar al colaborador?</p>
-            <button class="btn-danger" id="btnBorrarModal">Eliminar</buttom>
-            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
-        </div>
+    <div class="modal-content">
+        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <h4>Confirmar Eliminación</h4>
+        <p>¿Estás seguro de que deseas eliminar la herramienta?</p>
+        <button class="btn-danger" id="btnBorrarModal">Eliminar</button>
+        <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
     </div>
+</div>
 
-    <script>
-        function confirmarBorrar(id_herramienta){
-            document.getElementById('confirmarBorrarModal').styles.display = 'flex';
-            document.getElementById('btnBorrarModal').onclick = function(){
-                window.location.href="index.php?seccion=herramientas&accion=eliminarHerramienta&id_herramienta="+id_herramienta;
-            };
-        }
 
-        function cerrarModal(){
-            document.getElementById('confirmarBorrarModal').style.display ='nome';
-        }
+<script>
+    function confirmarBorrar(id_herramienta) {
+        document.getElementById('confirmarBorrarModal').style.display = 'flex';
+        document.getElementById('btnBorrarModal').onclick = function () {
+            window.location.href = "index.php?seccion=herramientas&accion=eliminarHerramienta&id_herramienta=" + id_herramienta;
+        };
+    }
 
-        function eliminarHerramienta(){
-            cerrarModal();
-        }
-    </script>
+    function cerrarModal() {
+        document.getElementById('confirmarBorrarModal').style.display = 'none';
+    }
+
+    function eliminarDispositivo() {
+        cerrarModal();
+    }
+</script>
 
 </body>
 </html>

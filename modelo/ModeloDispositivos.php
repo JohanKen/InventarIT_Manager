@@ -587,8 +587,8 @@ static function createOtro($datos){
     }
 }
 
-static function selectHerramienta($tabla){
-    $sql = "SELECT * FROM inventarit_manager.$tabla order by id_herramienta desc;";
+static function selectHerramientas($tabla){
+    $sql = "SELECT * FROM inventarit_manager.$tabla;";
     $res = Conexion::conectar()->query($sql);
     return $res;
 }
@@ -622,6 +622,52 @@ static function createHerramienta($datos){
 
     }catch (Exception $e){
         echo 'Message: '.$e ->getMessage();
+    }
+}
+
+static function selectHerramienta($id){
+    try{
+        $conexion = Conexion::conectar();
+
+        $stmt = $conexion ->prepare("CALL inventarit_manager.datos_herramienta(?)");
+        $stmt -> bind_param('i',$id);
+        $stmt ->execute();
+
+        $result = $stmt->get_result();
+
+        if($result !== false){
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }else{
+            echo "Error";
+            return null;
+        }
+
+    }catch (mysqli_sql_esception $e){
+        echo 'Erroe en la consulta:' .$e->getMessage();
+    }
+}
+
+static function updateHerramienta($datos){
+    $conexion = Conexion::conectar();
+    try{
+        $id_herramienta = (int) $datos["id_herramienta"];
+        $numero_piezas = (int) $datos["numero_piezas"];
+
+        $statement = $conexion->prepare("CALL editar_herramienta(?,?,?,?,?,?)");
+        $statement->bind_param("isisss",
+            $id_herramienta,
+            $datos["nombre_herramienta"],
+            $numero_piezas,
+            $datos["ubicacion"],
+            $datos["fecha_compra"],
+            $datos["descripcion"]
+        );
+
+        $statement->execute();
+        $statement->close(); 
+
+    }catch (Exception $e){
+        echo 'Message: ' .$e->getMessage();
     }
 }
 
