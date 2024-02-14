@@ -705,5 +705,12 @@ static function createCctv($datos){
     }
 }
 
+static function deleteCctv($id){
+    $id_dispositivo = (int)$id;
+    $sql = "CALL inventarit_manager.eliminar_cctv('$id');";
+    $res = Conexion::conectar()->query($sql);
+    return $res;
+}
+
 }
 ?>

@@ -828,6 +828,22 @@ static function editarIMac()
         }
     }
 
+    static function borrarCctv(){
+        if(isset($_GET["accion"])&& $_GET["accion"]=="eliminar"){
+            $id = $_GET["id_dispositivo"];
+
+            $delete = ModeloDispositivos::deleteCctv($id);
+            if($delete>0){
+                echo '
+                    <script>
+                        alert("CCTV eliminado correctamente");
+                        window.location.href="index.php?seccion=cctvs";
+                    </script>
+                ';
+            }
+        }
+    }
+
     }
 
 ?>
