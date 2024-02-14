@@ -40,9 +40,24 @@ if ($result->num_rows > 0) {
             $body = '
     <div style="background: linear-gradient(90deg, rgba(255,255,255,1) 7%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 75%, rgba(255,255,255,1) 93%); padding: 20px; text-align: center;">
     <img src="https://i.postimg.cc/GmKXV8kz/logo-Inventarit.png" alt="LOGO" style="width: 300px; display: block; margin: 0 auto;">
+    <p style="font-size: 28px; color: white; font-weight: bold; margin-bottom: 5px;">Recuperación de contraseña</p>
     </div>
-    <div style="text-align: center; padding: 20px; font-family: Arial, sans-serif; background: linear-gradient(90deg, rgba(255,255,255,1) 7%, rgba(34,221,236,0.6362920168067228) 25%, rgba(0,236,255,0.5858718487394958) 50%, rgba(34,221,236,0.4962359943977591) 75%, rgba(255,255,255,1) 93%);">
-        <p style="font-size: 28px; color: #333; font-weight: bold; margin-bottom: 20px;">Recuperación de contraseña</p>
+    <div style="text-align: center; padding: 20px; font-family: Arial, sans-serif; background-image:url(https://i.postimg.cc/C5Pw1LDg/dogi.jpg);">
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
         <p style="font-size: 20px; color: #555; margin-bottom: 20px;">Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
         <a href="http://localhost/InventarIT_Manager/cambiarContra.php?id=' . $row['id_usuario'] . '" style="background-color: #3498db; color: white; padding: 14px 28px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Restablecer Contraseña</a>
     </div>

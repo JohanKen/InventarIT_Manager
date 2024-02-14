@@ -57,6 +57,11 @@
         #olvideContra:hover {
             color: #0056b3; 
         }
+        #olvideContra:hover {
+            background-color: #333;
+            color: white;
+        }
+
     </style>
 </head>
 
@@ -118,7 +123,9 @@
                             </div>
                             <hr>
                             <div class="text-center">
-                                <a href="olvideContra.php" id="olvideContra" name="entrar">Olvidé mi contraseña</a>
+                            <p class="text-center" style="margin-top: 20px;">
+    <a href="olvideContra.php" id="olvideContra" name="entrar" style="text-decoration: none; color: #3498db; font-size: 16px; border: 1px solid #3498db; padding: 8px 16px; border-radius: 3px; transition: all 0.3s ease;">Olvidé mi contraseña</a>
+</p>
                             </div>
                         </form>
                     </div>

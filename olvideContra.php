@@ -25,6 +25,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
         }
+        #inicia:hover { 
+    background-color: #333;
+    color: white;
+    
+}
 
         .card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -81,7 +86,11 @@
                             <button type="submit" class="btn btn-primary btn-block">Enviar Contraseña</button>
                             <hr>
                         </form>
-                        <p class="text-center">¿Ya tienes una cuenta? <a href="login.php" id="inicia">Inicia sesión</a></p>
+                        <p class="text-center" style="margin-top: 20px;">
+                            <a href="login.php" id="inicia" style="text-decoration: none; color: #3498db; font-size: 16px; border: 1px solid #3498db; padding: 8px 16px; border-radius: 3px; transition: all 0.3s ease;">Volver a Inicio de sesión</a>
+                        </p>
+
+
                     </div>
                 </div>
             </div>

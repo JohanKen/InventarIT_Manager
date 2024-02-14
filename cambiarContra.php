@@ -76,6 +76,11 @@
         .login-form a:hover {
             color: #0056b3;
         }
+        #inicia:hover {
+    background-color: #333;
+    color: white;
+    
+}
     </style>
 </head>
 
@@ -92,7 +97,9 @@
 
                 <hr>
 
-                <p>¿Ya tienes una cuenta? <a href="login.php" id="inicia">Inicia sesión</a></p>
+                <p class="text-center" style="margin-top: 20px;">
+                            <a href="login.php" id="inicia" style="text-decoration: none; color: #3498db; font-size: 16px; border: 1px solid #3498db; padding: 8px 16px; border-radius: 3px; transition: all 0.3s ease;">Volver a Inicio de sesión</a>
+                        </p>
             </form>
         </div>
     </div>
