@@ -205,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-md-3 col-sm-3 col-xs-3">
                 <label for="rol" class="form-label">Rol del Usuario</label>
-                <select class="form-select" id="lbl" name="rol">
+                 <select class="form-select" id="lbl" name="rol">
                     <?php
                              $roles = array(
                                  1 => 1,

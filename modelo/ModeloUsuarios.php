@@ -11,6 +11,8 @@ static function login($email, $password) {
     return $res;
 }
 
+
+
 static function comprobarUsuario($email) {
     $sql = "SELECT * FROM usuarios WHERE correo_usuario = ?";
     $conn = Conexion::conectar();
@@ -97,6 +99,35 @@ $statement->close();
 
 }
 
+static function actualizarUsuario($datos){
+    $conexion = Conexion::conectar();
+    try{
+       $id_usuario= (int) $datos['id'];
+     
+       $id_rol= (int) $datos['rol'];
+       
+
+        $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?)");
+        $statement->bind_param("isssssis",
+        $id_usuario,
+        $datos["apellidoPaterno"],
+        $datos["apellidoMaterno"],
+        $datos["nombre"],
+        $datos["correo"],
+        $datos["password"],
+        $id_rol,
+        $datos["fechaIngreso"]
+    );
+    
+    $statement->execute();
+    $statement->close();
+
+    
+     
+    }catch(Exception $e) {
+        echo 'Message: ' .$e->getMessage();
+      }
+}
 
 static function updateUser($datos){
     $conexion = Conexion::conectar();
@@ -106,7 +137,7 @@ static function updateUser($datos){
        $id_estado= (int) $datos['estado'];
        $id_rol= (int) $datos['rol'];
        
-
+        /*APLICAR NUEVO PROCEDIMIENTO ALMACENADO PARA ACTUALIZAR USUARIO*/
         $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?)");
         $statement->bind_param("issssiis",
         $id_usuario,

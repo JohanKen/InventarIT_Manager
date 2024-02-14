@@ -55,13 +55,12 @@
                             <li>
                                 
                             <div class="messages" id="userMenu">
-                            <a href="index.php?seccion=perfil" id="usuarioLink" style="color: #fff;">
+                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" id="usuarioLink" style="color: #fff;">
                                 <?php echo $_SESSION["usuario"]["nombre_usuario"] . ' ' . $_SESSION["usuario"]["apellido_paterno_usuario"];?>
                             </a>
                             <div class="dropdown-content" id="userDropdown">
                              
-                                <a href="index.php?seccion=dispositivos">Perfil</a>
-                                <a href="logout.php">Cerrar sesión</a>
+                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>">Perfil</a>                                <a href="logout.php">Cerrar sesión</a>
                             </div>
                        
                         </div>
