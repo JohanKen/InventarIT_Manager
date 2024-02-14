@@ -10,18 +10,23 @@ $marcas = array(
     31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 => 35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
 );
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_POST['Registrar'])){
-        $registrar - new ControladorDispositivos;
+        $registrar = new ControladorDispositivos;
 
         $marcaSeleccionada = $_POST['marca'];
-            $idMarca = $marcas[$marcaSeleccionada];
-            $dispositivoInfo[0]['id_marca'] = $idMarca;
-    
-            $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
-            $dispositivoInfo[0]['precio'] = $precio;
+        $idMarca = $marcas[$marcaSeleccionada];
+        $dispositivoInfo[0]['id_marca'] = $idMarca;
 
-        //$registrar -> registrar
+        $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
+        $dispositivoInfo[0]['precio'] = $precio;
+
+        $registrar -> registrarCctv();
+        echo  '<script>
+                    alert("Registro realizado con exito!");
+                    window.location.href="index.php?seccion=cctvs";
+                </script>';
+        exit;
     }
 }
 ?>
@@ -94,8 +99,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             </div>
 
             <div class="mb-3" id="formForm">
-                <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
-                <input type="submit" class="btn btn-primary" name="Registrar" value="Registar Dispositivo">
+                <a class="btn btn-danger" href="index.php?seccion=cctvs">Cancelar</a>
+                <input type="submit" class="btn btn-primary" name="Registrar" value="Registar CCTV">
             </div>
 
         </form>
