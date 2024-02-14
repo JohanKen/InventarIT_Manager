@@ -153,7 +153,7 @@ class ControladorUsuarios {
                 
                 try{
     
-    
+                  
                     //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
                     $fecha_ingreso = $_POST["fecha_ingreso"];
                     if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){

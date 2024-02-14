@@ -55,8 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Actualizar la contraseña del usuario en la base de datos
                     $obj = new ControladorUsuarios();
                     $obj->UpdatePerfil();
-                    echo '<script>window.location.href = "index.php?seccion=usuarios";</script>';
-                    exit;
+                    echo '<script>
+                            alert("El usuario se actualizó correctamente");
+                            window.location.href = "index.php?seccion=usuarios";
+                        </script>';
+                                    
+                exit;
                 }
             }
         } else {
@@ -107,15 +111,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="row pt-1">
                                         <div class="col-md-6 mb-3">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datosUsuario[3]; ?>" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre_usuario" value="<?php echo $datosUsuario[3]; ?>" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="apellido">Apellido Paterno</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $datosUsuario[1]; ?>" required>
+                                            <input type="text" class="form-control" id="apellido" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="apellido">Apellido Materno</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $datosUsuario[2]; ?>" required>
+                                            <input type="text" class="form-control" id="apellido" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" required>
                                         </div>
                                         <div class="col-md-6 col-sm-3 col-xs-3">
                                             <label for="fecha_ingreso" id="lbl">Fecha de Ingreso:</label>

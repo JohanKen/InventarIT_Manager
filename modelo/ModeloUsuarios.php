@@ -107,12 +107,12 @@ static function actualizarUsuario($datos){
        $id_rol= (int) $datos['rol'];
        
 
-        $statement = $conexion->prepare("CALL editar_usuario(?,?,?,?,?,?,?,?)");
+        $statement = $conexion->prepare("CALL editar_usuario2(?,?,?,?,?,?,?,?)");
         $statement->bind_param("isssssis",
         $id_usuario,
         $datos["apellidoPaterno"],
         $datos["apellidoMaterno"],
-        $datos["nombre"],
+        $datos["nombre"], 
         $datos["correo"],
         $datos["password"],
         $id_rol,

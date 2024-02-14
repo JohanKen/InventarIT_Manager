@@ -15,12 +15,18 @@
         color: #6c757d; /* Color gris */
         cursor: not-allowed; /* Cursor de no permitido */
         pointer-events: none; /* Deshabilitar eventos de puntero */
-        background-color: gray !important;
+      
+    }
+    .actions{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
     h1{
         font-size: 45px;
         color: #333
     }
+    
 </style>
 
 </head>
@@ -46,11 +52,11 @@
         </div>
 
     </div>
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="thead-dark">
+<div class="table-responsive" style="padding:15px">
+<table class="table  table-light table-hover ">
+        <thead class="table-dark align-middle border-dark">
             <tr>
-                <th>Id Usuario</th>
+             
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Nombre de Usuario</th>
@@ -98,9 +104,11 @@
                                 $rolString = "Desconocido";
                                 break;
                         }
+                    
                         echo '
+                        
                         <tr>
-                            <td>' . $item[0] . '</td>
+                           
                             <td>' . $item[1] . '</td>
                             <td>' . $item[2] . '</td>
                             <td>' . $item[3] . '</td>
@@ -108,7 +116,7 @@
                             <td>' . $estadoString . '</td>
                             <td>' . $rolString . '</td>
                             <td>' . $item[7] . '</td>
-                            <td>' . $item[9] . '</td>';
+                            <td>' . $item[8] . '</td>';
                             $usuarioLogueado = $_SESSION['usuario']['id_usuario'];
                             if ($item[0] == $usuarioLogueado) {
                                 // Si es el mismo usuario, mostrar los botones de edición y borrado deshabilitados visualmente
@@ -122,9 +130,9 @@
                                 // Si no es el mismo usuario, mostrar los botones de edición y borrado habilitados
                                 echo  '
                                 <td class="actions">
-                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar">Editar</a>
+                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar"><button type="button" class="btn btn-primary">Editar</button></a>
                                     <hr>
-                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar">Borrar</a>
+                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
                                 </td>';
                             }
                     
