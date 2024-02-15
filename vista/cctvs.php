@@ -33,6 +33,7 @@
                         <th>Modelo</th>
                         <th>Numero Serie</th>
                         <th>Marca</th>
+                        <th>Estado</th>
                         <th>Precio</th>
                         <th>Fecha de Compra</th>
                         <th>Nota</th>
@@ -60,6 +61,7 @@
                                 <td>'.$item[8].'</td>
                                 <td>'.$item[9].'</td>
                                 <td>'.$item[10].'</td>
+                                <td>'.$item[11].'</td>
                                 <td>
                                 <a href="index.php?seccion=formularios/formularioCctv&id_dispositivo=' .$item[0]. '">Editar</a>
                                 <a href="javascript:void(0);" onclick="confirmarBorrar('.$item[0].'); "id="enlaceBorrar">Borrar</a>

@@ -844,6 +844,57 @@ static function editarIMac()
         }
     }
 
+    static function editarCctv(){
+        if(isset($_POST["guardar"])){
+            try{
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+                $fechaIngreso = $_POST["fecha_ingreso_colaborador"];
+                if (DateTime::createFromFormat('Y-m-d',$fechaIngreso) !==false){
+                    $fechaIngresoFormateada = $fechaIngreso;
+                }else{
+                    echo 'Error en el formato de la fecha';
+                    exit;
+                }
+
+                $datos = array(
+                    "id_dispositivo" => (int)$_POST["id_dispositivo"],
+                    "modelo" => $_POST["modelo"],
+                    "numero_serie" => $_POST["numero_serie"],
+                    "id_marca" => (int)$_POST["id_marca"],
+                    "estado" => (int)$_POST["estado"],
+                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,
+                    "fecha_compra"=> $fechaIngresoFormateada,
+                    "nota" => $_POST("nota"),
+                    "foto" => "foto.png",
+                    "producto" => $_POST["producto"],
+                    "ubicacion" => $_POST["ubicacion"]
+                );
+
+                $insert = ModeloDispositivos::updateCctv($datos);
+
+            }catch (mysqli_sql_exception){
+                echo 'Message: '.$e->getMessage();
+            }
+        }
+    }
+
+    static function detalleCctv(){
+        if(isset($_GET["id_dispositivo"])){
+            $id = $_GET["id_dispositivo"];
+
+            $obj = ModeloDispositivos::selectCctv($id);
+
+            if($obj instanceof mysqli_result){
+                $dispositivo = $obj->fecht_all(MYSQL_ASSOC);
+            }else{
+                $dispositivo = $obj;
+            }
+            return $dispositivo;
+        }
+    }
+
     }
 
 ?>

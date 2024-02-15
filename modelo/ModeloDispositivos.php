@@ -712,5 +712,58 @@ static function deleteCctv($id){
     return $res;
 }
 
+static function updateCctv($datos){
+    $conexion = Conexion::conectar();
+    try{
+        $id_dispositivo = (int) $datos["id_dispositivo"];
+        $precio = (double) $datos["precio"];
+        $id_marca = (int) $datos["id_marca"];
+        $estado = (int) $datos["estado"];
+
+        $statement = $conexion->prepare("CALL editar_cctv(?,?,?,?,?,?,?,?,?,?,?)");
+        $statement->bind_param("issiiisssss",
+            $id_dispositivo,
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $estado,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+            $datos["producto"],
+            $datos["ubicacion"]
+        );
+
+        $statement->execute();
+        $statement->close();
+
+    }catch(Exception $e){
+        echo 'Message: '.$e->getMessage();
+    }
+}
+
+static function selectCctv($id){
+    try{
+        $conexion = Conexion::conectar();
+
+        $stmt = $conexion->prepare("CALL inventarit_manager.datos_cctv(?)");
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if($result !== false){
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }else{
+            echo "Error: No se pudo obtener el resultado de la consulta.";
+            return null;
+        }
+
+    }catch (mysqli_sql_exception){
+        echo "Error: ".$e->getMessage();
+    }
+}
+
 }
 ?>
