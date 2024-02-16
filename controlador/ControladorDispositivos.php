@@ -850,9 +850,9 @@ static function editarIMac()
                 $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                 Conexion::conectar()->query($sqlSetMaxAllowedPacket);
 
-                $fechaIngreso = $_POST["fecha_ingreso_colaborador"];
-                if (DateTime::createFromFormat('Y-m-d',$fechaIngreso) !==false){
-                    $fechaIngresoFormateada = $fechaIngreso;
+                $fechaCompra = $_POST["fecha_compra"];
+                if (DateTime::createFromFormat('Y-m-d',$fechaCompra) !==false){
+                    $fechaCompraFormateada = $fechaCompra;
                 }else{
                     echo 'Error en el formato de la fecha';
                     exit;
@@ -860,16 +860,16 @@ static function editarIMac()
 
                 $datos = array(
                     "id_dispositivo" => (int)$_POST["id_dispositivo"],
+                    "producto" => $_POST["producto"],
+                    "ubicacion" => $_POST["ubicacion"],
                     "modelo" => $_POST["modelo"],
                     "numero_serie" => $_POST["numero_serie"],
-                    "id_marca" => (int)$_POST["id_marca"],
+                    "id_marca" => (int)$_POST["marca"],
                     "estado" => (int)$_POST["estado"],
                     "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,
-                    "fecha_compra"=> $fechaIngresoFormateada,
-                    "nota" => $_POST("nota"),
+                    "fecha_compra"=> $fechaCompraFormateada,
+                    "nota" => $_POST["nota"],
                     "foto" => "foto.png",
-                    "producto" => $_POST["producto"],
-                    "ubicacion" => $_POST["ubicacion"]
                 );
 
                 $insert = ModeloDispositivos::updateCctv($datos);

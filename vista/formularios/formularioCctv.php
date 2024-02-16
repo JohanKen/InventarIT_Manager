@@ -17,6 +17,31 @@ $estados = array(
     2 => 2,
     3 => 3
 );
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if(isset($_POST['guardar'])){
+        $update = new ControladorDispositivos;
+
+        $marcaSeleccinada = $_POST['marca'];
+        $idMarca = $marcas[$marcaSeleccinada];
+        $dispositivoInfo[0]["id_marca"] = $idMarca;
+
+        $estadoSeleccionado = $_POST['estado'];
+        $idEstado = $estados[$estadoSeleccionado];
+        $dispositivoInfo[0]['id_estado']=$idEstado;
+
+        $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
+        $dispositivoInfo[0]['precio'] = $precio;
+
+        $update->editarCctv();
+
+        echo  '<script>
+                    alert("Actualizacion realizada con exito!");
+                    window.location.href="index.php?seccion=cctvs";
+                </script>';
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +62,7 @@ $estados = array(
 
                 <div class="mb-3" id="formForm">
                     <label for="id_dispositivo" class="form-label">ID</label>
-                    <input type="text" class="form-control" name="modelo" value="<?=$dispositivoInfo[0]["id_dispositivo"]?>" readonly>
+                    <input type="text" class="form-control" name="id_dispositivo" value="<?=$dispositivoInfo[0]["id_dispositivo"]?>" readonly>
                 </div>
 
                 <div class="mb-3" id="formForm">
@@ -115,6 +140,11 @@ $estados = array(
                 </div>
 
                 <div class="mb-3" id="formForm">
+                    <label for="nota" class="form-label">Notas</label>
+                    <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
+                </div>
+
+                <div class="mb-3" id="formForm">
                     <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;" required="true">Imagen del dispositivo</label>
                     <input type="file" class="form-control" name="foto">
                 </div>
@@ -131,6 +161,48 @@ $estados = array(
             echo "EL array \$dispositivoInfo no esta definido o no tiene la estructura esperada. ";
         }
         ?>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var fechaCompraInput = document.getElementById('fechaCompraInput');
+                var fechaCompraHidden = document.getElementById('fechaCompraHidden');
+
+                fechaCompraInput.addEventListener('focus', function () {
+                    if (fechaCompraInput.value === '') {
+                        fechaCompraInput.placeholder = 'Selecciona una fecha';
+                    }
+                });
+
+                fechaCompraInput.addEventListener('blur', function () {
+                    if (fechaCompraInput.value === '') {
+                        fechaCompraInput.placeholder = 'Selecciona una fecha';
+                    }
+                });
+
+                fechaCompraInput.addEventListener('click', function () {
+                    fechaCompraHidden.style.display = 'block';
+                    fechaCompraInput.style.display = 'none';
+                });
+
+                fechaCompraHidden.addEventListener('change', function () {
+                    var fechaSeleccionada = new Date(fechaCompraHidden.value);
+                    var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
+                    fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
+                        fechaSeleccionada.getFullYear();
+                    fechaCompraHidden.style.display = 'none';
+                    fechaCompraInput.style.display = 'block';
+                });
+
+                function obtenerNombreMes(numeroMes) {
+                    var meses = [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ];
+                    return meses[numeroMes];
+                }
+            });
+        </script>
+
     </div>
 </body>
 </html>
