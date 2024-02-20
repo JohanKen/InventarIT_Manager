@@ -17,9 +17,18 @@
             </header>
         </div>
 
+        <a href="index.php?seccion=asignaciones/asignarPaso1"><button class="custom-button" onclick="newAsignacion();">CREAR NUEVA ASIGNACION</button></a>
+
         <div class="tabla">
             <table class="tabla">
                 <thead class="thead-dark">
+                    <tr>
+                        <! Separacion de encabezados para hecer sub encabezados >
+                        <th colspan="1"></th>
+                        <th colspan="5">Asignado a</th>
+                        <th colspan="7">Dispositivo Asignado</th>
+                        <th colspan="1"></th>
+                    </tr>
                     <tr>
                         <th>ID Asignacion</th>
                         <th>ID Colaborador</th>
