@@ -9,6 +9,12 @@
             return $res;
         }
 
+        static function selectUltimoColaborador($tabla){
+            $sql = "SELECT * FROM inventarit_manager.$tabla;";
+            $res = Conexion::conectar()->query($sql);
+            return $res;
+        }
+
         static function deleteColaborador($id){
             $id_colaborador = (int)$id;
             $sql = "CALL inventarit_manager.eliminar_colaborador('$id');";

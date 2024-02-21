@@ -7,6 +7,13 @@
             $arregloColaboradores = $obj->fetch_all();
             return $arregloColaboradores;
         }
+
+        public static function consultarUltimoColaborador(){
+            $tabla = 'v_ultimo_colaborador';
+            $obj = ModeloColaboradores::selectUltimoColaborador($tabla);
+            $arregloColaborador = $obj->fetch_all();
+            return $arregloColaborador;
+        }
         
         static function borrarColaboradores(){
             if(isset($_GET["accion"])&& $_GET["accion"] == "eliminarColaborador"){
