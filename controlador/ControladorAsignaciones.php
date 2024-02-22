@@ -14,7 +14,7 @@
             if(isset($_GET["accion"])&& $_GET["accion"] == "eliminar"){
                 $id = $_GET["id_asignacion"];
 
-                /*$delete = ModeloAsignaciones::deleteAsignacion($id);
+                $delete = ModeloAsignaciones::deleteAsignacion($id);
                 if($delete>0){
                     echo'
                         <script>
@@ -22,7 +22,7 @@
                             window.location.href="index.php?seccion=asignaciones/asignaciones";
                         </script>
                     ';
-                }*/
+                }
             }
         }
 
