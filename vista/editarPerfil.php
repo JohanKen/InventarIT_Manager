@@ -33,41 +33,66 @@ function ObtenerDatosUsuario($id){
         echo "No se pudo obtener ningún ID de usuario";
         return null;
     }
-}// Verificar si se envió el formulario para editar el usuario
+}
+// Verificar si se envió el formulario para editar el usuario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar que se presionó el botón guardar del formulario
     if(isset($_POST['actualizarPerfil'])) {
-        // Verificar que se enviaron las contraseñas
-        if(isset($_POST['passwordInput']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-            $passwordActual = $_POST['passwordInput'];
-            $nuevaPassword = $_POST['password'];
-            $confirmarPassword = $_POST['confirm_password'];
+        // Verificar si el usuario seleccionó "No" en el campo de selección "Cambiar Contraseña"
+        if ($_POST['changePassword'] === 'no') {
 
-            // Verificar que la contraseña actual sea correcta
-            if ($passwordActual !== $datosUsuario[9]) {
-                echo '<script>alert("La contraseña actual es incorrecta.");</script>';
-            } else {
-                // Verificar que la nueva contraseña y la confirmación coincidan
-                if ($nuevaPassword !== $confirmarPassword) {
-                    echo '<script>alert(La nueva contraseña y la confirmación no coinciden.");</script>';
-                } else {
-
-                    // Actualizar la contraseña del usuario en la base de datos
-                    $obj = new ControladorUsuarios();
-                    $obj->UpdatePerfil();
-                    echo '<script>
-                            alert("El usuario se actualizó correctamente");
-                            window.location.href = "index.php?seccion=usuarios";
-                        </script>';
-                                    
-                exit;
-                }
-            }
+            
+            // Actualizar el perfil del usuario sin cambiar la contraseña
+            $obj = new ControladorUsuarios();
+            $obj->UpdatePerfil();
+            echo '<script>
+                    alert("El usuario se actualizó correctamente");
+                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                </script>';
+       
         } else {
-            echo "Por favor, complete todos los campos de contraseña.";
+            // Verificar que se enviaron las contraseñas
+            if(isset($_POST['passwordInput']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
+                $passwordActual = $_POST['passwordInput'];
+                $nuevaPassword = $_POST['password'];
+                $confirmarPassword = $_POST['confirm_password'];
+
+                // Verificar que la contraseña actual sea correcta
+                if ($passwordActual !== $datosUsuario[9]) {
+                    echo '<script>alert("La contraseña actual es incorrecta.");</script>';
+                } else {
+                    // Verificar que la nueva contraseña y la confirmación coincidan
+                    if ($nuevaPassword !== $confirmarPassword) {
+                        echo '<script>alert(La nueva contraseña y la confirmación no coinciden.");</script>';
+                    } else {
+                        // Actualizar la contraseña del usuario en la base de datos solo si se proporciona una nueva contraseña
+                        if ($nuevaPassword !== '') {
+                            $obj = new ControladorUsuarios();
+                            $obj->UpdatePerfil();
+                            echo '<script>
+                                    alert("El usuario se actualizó correctamente");
+                                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                                </script>';
+                            exit;
+                        } else {
+                            // Si no se proporciona una nueva contraseña, no se actualiza la contraseña
+                            $obj = new ControladorUsuarios();
+                            $obj->UpdatePerfil();
+                            echo '<script>
+                                    alert("El usuario se actualizó correctamente");
+                                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                                </script>';
+                            exit;
+                        }
+                    }
+                }
+            } else {
+                echo "Por favor, complete todos los campos de contraseña.";
+            }
         }
     }
 }
+
         ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,8 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col col-lg-9 mb-4 mb-lg-0">
                 <div class="card mb-3" style="border-radius: .5rem;">
                     <div class="row g-0">
-                        <div class="col-md-4 gradient-custom text-center text-white"
-                             style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                        <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                             <img src="images/perro.jpg" class="rounded-circle" style="width: 150px; max-height:180px; margin:5px"  alt="" />
                             <h5><?php echo "$datosUsuario[3] $datosUsuario[1]";?></h5>
                         <?php
@@ -115,11 +139,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="apellido">Apellido Paterno</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>" required>
+                                            <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="<?php echo $datosUsuario[1]; ?>" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="apellido">Apellido Materno</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" required>
+                                            <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<?php echo $datosUsuario[2]; ?>" required>
                                         </div>
                                         <div class="col-md-6 col-sm-3 col-xs-3">
                                             <label for="fecha_ingreso" id="lbl">Fecha de Ingreso:</label>
@@ -135,36 +159,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col-md-6 mb-3">
                                             <label for="rol">Rol</label>
                                             <select class="form-select" id="lbl" name="rol">
-                    <?php
-                                 // Define el array asociativo de roles
-                            $roles = array(
-                                1 => 1,
-                                2 => 2,
-                                3 => 3
-                            );
-                                foreach ($roles as $rolId => $rolLabel) {
-                                    $selected = ($datosUsuario[6] == $rolLabel) ? 'selected' : '';
-                                    echo "<option value='$rolLabel' $selected>";
-                                    switch ($rolLabel) {
-                                        case 1:
-                                            echo "Administrador";
-                                            break;
-                                        case 2:
-                                            echo "Editor";
-                                            break;
-                                        case 3:
-                                            echo "Consultor";
-                                            break;
-                                        default:
-                                            echo "Desconocido";
-                                            break;
-                                    }
-                                    echo "</option>";
-                                }
-                            ?>
-                </select>
+                                                <?php
+                                                            // Define el array asociativo de roles
+                                                        $roles = array(
+                                                            1 => 1,
+                                                            2 => 2,
+                                                            3 => 3
+                                                        );
+                                                            foreach ($roles as $rolId => $rolLabel) {
+                                                                $selected = ($datosUsuario[6] == $rolLabel) ? 'selected' : '';
+                                                                echo "<option value='$rolLabel' $selected>";
+                                                                switch ($rolLabel) {
+                                                                    case 1:
+                                                                        echo "Administrador";
+                                                                        break;
+                                                                    case 2:
+                                                                        echo "Editor";
+                                                                        break;
+                                                                    case 3:
+                                                                        echo "Consultor";
+                                                                        break;
+                                                                    default:
+                                                                        echo "Desconocido";
+                                                                        break;
+                                                                }
+                                                                echo "</option>";
+                                                            }
+                                                        ?>
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="row pt-1">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="changePassword">Cambiar Contraseña</label>
+                                            <select class="form-select" id="changePassword" name="changePassword">
+                                                <option value="no">No</option>
+                                                <option value="yes">Sí</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="passwordFields" style="display: none;">
                                     <div class="row pt-1">
                                     <div class="col-md-6 mb-3">
                                         
@@ -185,12 +219,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" required disabled>
                                         </div>
                                     </div>
+                                    </div>
                                     <div class="row pt-1">
                                         <div class="col-12">
                                             <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" class="btn btn-secondary" >Cancelar</a>
                                             <button type="submit" name="actualizarPerfil" class="btn btn-primary">Guardar Cambios</button>
 
                                         </div>
+                                    </div>
                                     </div>
                                 </form>
                             </div>
@@ -203,6 +239,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php var_dump($datosUsuario);?>
 </section>
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const changePasswordSelect = document.getElementById('changePassword');
+    const passwordFields = document.getElementById('passwordFields');
+
+    changePasswordSelect.addEventListener('change', function() {
+        if (this.value === 'yes') {
+            passwordFields.style.display = 'block';
+        } else {
+            passwordFields.style.display = 'none';
+        }
+    });
+});
 document.addEventListener('DOMContentLoaded', function() {
     const currentPassword = "<?php echo isset($datosUsuario[9]) ? $datosUsuario[9] : ''; ?>";
     const togglePassword = document.getElementById('togglePassword');

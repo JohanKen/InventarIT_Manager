@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,8 @@
     <link rel="stylesheet" href="estilos/estilosUsuarios.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <title>Usuarios</title>
     <style>
     .disabled-btn {
@@ -18,6 +18,11 @@
       
     }
     .actions{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .actionss{
         align-items: center;
         justify-content: center;
         text-align: center;
@@ -122,10 +127,10 @@
                                 // Si es el mismo usuario, mostrar los botones de edición y borrado deshabilitados visualmente
                                 echo '
                                 <td class="actionss">
-                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" class="disabled-btn" id="enlaceEditar">Editar</a>
-                                    <hr>
-                                    <a href="javascript:void(0);" class="disabled-btn" id="enlaceBorrar">Borrar</a>
-                                </td>';
+                                <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" class="disabled-btn" id="enlaceEditar"><button type="button" class="btn btn-secondary">Editar</button></a>
+                                <hr>
+                                <a href="javascript:void(0);" class="disabled-btn" id="enlaceBorrar"><button type="button" class="btn btn-secondary">Eliminar</button></a>
+                            </td>';
                             } else {
                                 // Si no es el mismo usuario, mostrar los botones de edición y borrado habilitados
                                 echo  '
@@ -146,6 +151,7 @@
 
                 </tbody>
             </table>
+            <button onclick="mostrarAlerta()">Mostrar Alerta</button>
         </div>
        <!-- Modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario -->
 <div class="modal" id="confirmarBorrarModal">
@@ -175,6 +181,19 @@
     }
     ?>
     <script>
+
+
+
+function mostrarAlerta() {
+    swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+});
+}
+
+
+
         function cerrarModal() {
             document.getElementById('confirmarBorrarModal').style.display = 'none';
         }

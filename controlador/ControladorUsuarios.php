@@ -145,6 +145,15 @@ class ControladorUsuarios {
         
             }       
             
+        }static function getUser($id){
+            if(isset($id)){
+                $tabla = "usuarios";
+                $obj = ModeloUsuarios::selectUsuariosId($id);
+                $usuarioSeleccionado = $obj->fetch_all();
+                return $usuarioSeleccionado;
+            } else {
+                echo "No llego ningun id al controlador para poder llevar a cabo de manera correcta la consulta";
+            }
         }
 /* FUNCION PARA ACTUALIZAR USUARIO QUE INICIO SESION. */
         static function UpdatePerfil(){
@@ -152,8 +161,27 @@ class ControladorUsuarios {
             if(isset($_POST["actualizarPerfil"])){
                 
                 try{
-    
-                  
+
+                    /* Codigo para validar si el usuario quiere o no cambiar el password
+
+                     // Obtener el ID del usuario
+                    $id = $_SESSION['usuario']['id_usuario'];
+                    // Obtener los datos del usuario
+                    $datosUsuario = ControladorUsuarios::getUser($id);
+                    // Obtener la contraseña del usuario
+                    $passwordDatabase = $datosUsuario[0][9];
+
+                    var_dump ($passwordDatabase) ;
+
+
+                    if(empty($_POST["password"])){
+                        $passwordNew = $passwordDatabase; 
+ 
+                    }else{
+                      $passwordNew = $_POST['password']; 
+                    }
+
+                  */
                     //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
                     $fecha_ingreso = $_POST["fecha_ingreso"];
                     if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){
@@ -164,20 +192,19 @@ class ControladorUsuarios {
                     }
     
                     /*mediante $_session OBTENER EL RESTO DE DATOS PARA PROCEDIMIENTO ALMACENADO*/
-    
-                    $datos = array 
-                    ('id' => $_GET['id_usuario'],
-                    'apellidoPaterno' => $_POST['apellido_paterno'],
-                    'apellidoMaterno' => $_POST['apellido_materno'],
-                    'nombre' => $_POST['nombre_usuario'],
-                    'correo' => $_POST['correo'],
-                    'password' => $_POST['password'],
-                    'rol' => $_POST['rol'],
-                    'fechaIngreso' => $_POST['fecha_ingreso'],
                     
 
+                    $datos = array(
+                        'id' => $_GET['id_usuario'],
+                        'apellidoPaterno' => $_POST['apellido_paterno'],
+                        'apellidoMaterno' => $_POST['apellido_materno'],
+                        'nombre' => $_POST['nombre_usuario'],
+                        'correo' => $_POST['correo'],
+                        'password' => $passwordNew,
+                        'rol' => $_POST['rol'],
+                        'fechaIngreso' => $_POST['fecha_ingreso']
+                    );
                     
-                );
                     $respuesta = ModeloUsuarios::actualizarUsuario($datos);
                    
                     }
@@ -303,17 +330,8 @@ class ControladorUsuarios {
             }
         }
     }
-    
-    static function getUser($id){
-        if(isset($id)){
-            $tabla = "usuarios";
-            $obj = ModeloUsuarios::selectUsuariosId($id);
-            $usuarioSeleccionado = $obj->fetch_all();
-            return $usuarioSeleccionado;
-        } else {
-            echo "No llego ningun id al controlador para poder llevar a cabo de manera correcta la consulta";
-        }
-    }
+
+ 
 
 
     

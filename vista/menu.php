@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
@@ -60,7 +61,8 @@
                             </a>
                             <div class="dropdown-content" id="userDropdown">
                              
-                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>">Perfil</a>                                <a href="logout.php">Cerrar sesión</a>
+                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>">Perfil</a>                                
+                            <button onclick="cerrarSesion()">Cerrar sesión</button>
                             </div>
                        
                         </div>
@@ -77,6 +79,22 @@
             </nav>
         </div>
     </header>
+
+<script>
+function cerrarSesion() {
+  swal("¿Seguro que quieres cerrar sesión?", {
+    buttons: ["Cancerlar", "Si, Cerrar sesión."],
+  }).then((value) => {
+    if (value) {
+      window.location.href = "logout.php";
+    } else {
+      swal.close();    
+    }
+  });
+}
+
+
+</script>
 
 
 </body>

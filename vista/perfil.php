@@ -15,6 +15,7 @@ function ObtenerDatosUsuario($id){
     if($id >= 0){
         try {
             $UsuarioInfo = ControladorUsuarios::getUser($id);
+             
 
             // verificar si se obtuvieron correctamente los datos del usuario
             if(empty($UsuarioInfo[0])){
@@ -34,113 +35,116 @@ function ObtenerDatosUsuario($id){
         return null;
     }
 }
-//Verificar si se envio el formulario para editar el usuario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-//Verfificar con el metodo post que se presione el boton guardar del formulario
-    if(isset($_POST['guardar'])) {
-        $obj = new ControladorUsuarios();
-         $obj -> UpdateUser();
-        echo'
-         <script>
-             window.location.href = "index.php?seccion=usuarios";
-        </script>'; 
-        exit;     
-    }
-}
         ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil del usuario</title>
     <link rel="stylesheet" href="estilos/estilosPerfil.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <style>
 
     </style>
 </head>
-<body>
-<section class="vh-100" style="background:none">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-9 mb-4 mb-lg-0">
-        <div class="card mb-3" style="border-radius: .5rem;">
-          <div class="row g-0">
-            <div class="col-md-4 gradient-custom text-center text-white"
-              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <img src="images/perro.jpg" class="rounded-circle" style="width: 150px; max-height:180px; margin:5px"  alt="" />
 
-              <h5><?php echo $_SESSION["usuario"]["nombre_usuario"] . ' ' . $_SESSION["usuario"]["apellido_paterno_usuario"];?></h5>
-              
-              <p><?php 
-                 switch ($datosUsuario[6]) {
-                     case 1:
-                         echo "Administrador";
-                         break;
-                     case 2:
-                         echo "Editor";
-                         break;
-                     case 3:
-                         echo "Consultor";
-                         break;
-                     default:
+<body>
+    <section class="vh-100" style="background:none">
+  
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-9 mb-4 mb-lg-0">
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <div class="row g-0">
+                            <div class="col-md-4 gradient-custom text-center text-white"
+                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                <img src="images/perro.jpg" class="rounded-circle"
+                                    style="width: 150px; max-height:180px; margin:5px" alt="" />
+
+                                <h5><?php echo $datosUsuario[3] . ' ' . $datosUsuario[1];?>
+                                </h5>
+
+                                <p><?php 
+                switch ($datosUsuario[6]) {
+                    case 1:
+                        echo "Administrador";
+                        break;
+                    case 2:
+                     echo "Editor";
+                      break;
+                   case 3:
+                       echo "Consultor";
+                        break;
+                   default:
                          echo "Desconocido";
                          break;
                  }
              ?></p>
-              <i class="far fa-edit mb-5"></i>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body p-4">
-                <h6>Información del perfil</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6>Correo</h6>
-                    <p class="text-muted"><?php echo $_SESSION["usuario"]["correo_usuario"] ?></p>
-                  </div>
-                  <div class="col-6 mb-3">
-                    <h6>Fecha de ingreso</h6>
-                    <p class="text-muted"><?php echo $_SESSION["usuario"]["fecha_ingreso_usuario"] ?></p>
-                  </div>
-                </div>
-               
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                <div class="col-6 mb-3">
-    <h6>Contraseña</h6>
-          <div class="input-group">
-              <input type="password" id="passwordInput" class="form-control" value="<?php echo $_SESSION["usuario"]["password"] ?>" disabled>
-              <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                  <i class="fas fa-eye"></i>
-              </button>
-          </div>
-      </div>
+                                <i class="far fa-edit mb-5"></i>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <h6>Información del perfil</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Correo</h6>
+                                            <p class="text-muted"><?php echo $datosUsuario[4] ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Fecha de ingreso</h6>
+                                            <p class="text-muted">
+                                                <?php echo $datosUsuario[7] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Contraseña</h6>
+                                            <div class="input-group">
+                                                <input type="password" id="passwordInput" class="form-control"
+                                                    value="<?php echo $datosUsuario[9] ?>" disabled>
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    id="togglePassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
 
 
-                  <div class="col-6 mb-3">
-                    <h6>Fecha de creación</h6>
-                    <p class="text-muted"><?php echo $_SESSION["usuario"]["fecha_creacion_usuario"] ?></p>
-                  </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Fecha de creación</h6>
+                                            <p class="text-muted">
+                                                <?php echo $datosUsuario[8]?></p>
+                                        </div>
+                                    </div>
+                                    <a
+                                        href="index.php?seccion=editarPerfil&id_usuario=<?php echo $datosUsuario[0]; ?>"><button
+                                            type="button" class="btn btn-warning" id="btnWar">Actualizar
+                                            Información</button></a>
+                                    <div class="d-flex justify-content-start">
+                                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a href="index.php?seccion=editarPerfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>"><button type="button" class="btn btn-warning" id="btnWar">Actualizar Información</button></a>
-                <div class="d-flex justify-content-start">
-                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<script>
+    </section>
+    <script>
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('passwordInput');
 
@@ -150,7 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         this.querySelector('i').classList.toggle('fa-eye');
         this.querySelector('i').classList.toggle('fa-eye-slash');
     });
-</script>
+    </script>  
 
 </body>
+
 </html>
