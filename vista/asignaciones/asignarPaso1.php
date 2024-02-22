@@ -5,6 +5,13 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
     $colaboradorSeleccionado = $_POST['colaborador'];
+    if($colaboradorSeleccionado == ""){
+        echo  '<script>
+                alert("Por favor, seleccione un colaborador.");
+                window.location.href="index.php?seccion=asignaciones/asignarPaso1";
+            </script>';
+        exit;
+    }
     header("Location: index.php?seccion=asignaciones/asignarPaso2&id_colaborador=" . $colaboradorSeleccionado);
     exit();
 }
@@ -37,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                         //se consulta la informacion de los colabordores 
                         $colaboradores = ControladorColaboradores::consultarColaboradores();
                         foreach($colaboradores as $row => $item){
-                            $selectedOption = '';
+                            //$selectedOption = '';
                             //aparecen los colaboradores con su id, nombre, apellido y cliente 
                             echo '<option value="' . $item[0] . '" ' . $selectedOption . '>'
                                 .$item[0] . ' ' . $item[1] . ' ' . $item[2] . ' ' . $item[3] . '</option>';
@@ -45,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                     ?>
                 </select>
             </div>
-            
+            <?php /*
             <div class="mb-3" id="formForm">
                 <label name="cliente">Selecciona el cliente:</label>
                 <select name="cliente" id="cliente" onchange="cargarclientes()">
@@ -54,7 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                         <option value="2">Saela</option>
                 </select>
             </div>
-
+            */ ?>
+            
             <div class="mb-3" id="formForm">
                 <a href="index.php?seccion=asignaciones/asignarPaso1-2">Nuevo Colaborador</a>
             </div>
