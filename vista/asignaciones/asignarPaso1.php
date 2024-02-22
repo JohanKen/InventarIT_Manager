@@ -21,6 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
 <body>
     <div class="contentSeccion">
 
+            <div class="up">
+                <header class="headerTabla">
+                    <h1>Paso 1 - Elegir un Colaborador</h1>
+                </header>
+            </div>
+
         <form action="" method="post" enctype="multipart/form-data">
 
             <div class="mb-3" id="formForm">

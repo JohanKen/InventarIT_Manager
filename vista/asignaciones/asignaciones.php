@@ -48,6 +48,9 @@
                 <thead>
                 <tbody>
                     <?php  
+                        $eliminar = new ControladorAsignaciones;
+                        $eliminar -> borrarAsignacion();
+
                         $listaAsignaciones = ControladorAsignaciones::consultarAsignaciones();
                         foreach($listaAsignaciones as $item){
                             echo '
@@ -75,6 +78,35 @@
                 </tbody>
             </table>
         </div>
+
+    <div class="modal" id="confirmarBorrarModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <h4>Confirmar Eliminación</h4>
+            <p>¿Estás seguro de que deseas eliminar la asignacion?</p>
+            <button class="btn-danger" id="btnBorrarModal">Eliminar</button>
+            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+
+
+    <script>
+        function confirmarBorrar(id_asignacion) {
+            document.getElementById('confirmarBorrarModal').style.display = 'flex';
+            document.getElementById('btnBorrarModal').onclick = function () {
+                window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion;
+            };
+        }
+
+        function cerrarModal() {
+            document.getElementById('confirmarBorrarModal').style.display = 'none';
+        }
+
+        function eliminarDispositivo() {
+            cerrarModal();
+        }
+    </script>
+
     </div>
 </body>
 </html>

@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <br><br><br><br><br>
     <div class="contentSeccion">
         <header class="headerTabla">
-            <h1>Confirmar Asignacion</h1>
+            <h1>Paso 3 - Confirmar Asignacion</h1>
         </header>
             <?php if(isset($datoscolaborador) && is_array($datoscolaborador) && isset($datoscolaborador)){ ?>
                 

@@ -9,5 +9,12 @@
             return $res;
         }
 
+        static function deleteAsignacion($id){
+            $id_asignacion = (int)$id;
+            $sql = "CALL inventarit_manager.eliminar_asignacion('$id')";
+            $res = Conexion::conectar()->query($sql);
+            return $res;
+        }
+
     }
 ?>
