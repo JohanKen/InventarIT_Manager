@@ -16,7 +16,7 @@
             return $res;
         }
 
-        /*static function selectColaboradorPorCliente($clienteSeleccionado) {
+        static function selectColaboradorPorCliente($clienteSeleccionado) {
             try{
                 $conexion = Conexion::conectar();
                 
@@ -31,7 +31,7 @@
             }catch (mysqli_sql_exception $e){
                 echo "Error al ejecutar la consulta:" . $e->getMessage();
             }
-        }*/
+        }
 
         static function deleteColaborador($id){
             $id_colaborador = (int)$id;
