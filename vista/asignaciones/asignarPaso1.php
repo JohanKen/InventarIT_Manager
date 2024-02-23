@@ -4,7 +4,7 @@
  ini_set('display_errors','1'); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
-    $colaboradorSeleccionado = $_POST['colaborador'];
+    $colaboradorSeleccionado = $_POST['colaborador2'];
     if($colaboradorSeleccionado == ""){
         echo  '<script>
                 alert("Por favor, seleccione un colaborador.");
@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
 
         <form action="" method="post" enctype="multipart/form-data">
 
+        <?php /*
             <div class="mb-3" id="formForm">
                 <label for="colaborador" class="form-label">Elige el colaborador</label>
                 <select name="colaborador" id="" class="form-control">
@@ -46,22 +47,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                         foreach($colaboradores as $row => $item){
                             //$selectedOption = '';
                             //aparecen los colaboradores con su id, nombre, apellido y cliente 
-                            echo '<option value="' . $item[0] . '" ' . $selectedOption . '>'
+                            echo '<option value="' . $item[0] . '" >'
                                 .$item[0] . ' ' . $item[1] . ' ' . $item[2] . ' ' . $item[3] . '</option>';
                         }
                     ?>
                 </select>
             </div>
-            <?php /*
-            <div class="mb-3" id="formForm">
-                <label name="cliente">Selecciona el cliente:</label>
-                <select name="cliente" id="cliente" onchange="cargarclientes()">
-                    <option  value="" disabled selected>-- Seleccione un cliente --</option>
-                        <option value="1">RTS</option>
-                        <option value="2">Saela</option>
+            */?>
+            <div id="formForm">
+                <label for="cliente" class="form-label" >Selecciona el cliente:</label>
+                <select name="cliente" class="form-control"id="cliente" onchange="cargarVistasColaboradores()">
+                    <option  value="0" disabled selected>-- Seleccione un cliente --</option>
+                    <option value="1">RTS</option>
+                    <option value="2">Saela</option>
+                    <option value="3">Nutiliti</option>
+                    <option value="4">Ranger Design</option>
+                    <option value="5">Mega Fleet Corp</option>
+                    <option value="6">Pro Movers</option>
+                    <option value="7">Union Supply Group</option>
+                    <option value="8">Intouch</option>
                 </select>
             </div>
-            */ ?>
+
+            <div id="formForm">
+                <label for="colaborador2" class="form-label" id="formForm">Elige el colaborador</label>
+                <select name="colaborador2" id="colaborador2" class="form-control"></select>
+                
+            </div>
+
+            
             
             <div class="mb-3" id="formForm">
                 <a href="index.php?seccion=asignaciones/asignarPaso1-2">Nuevo Colaborador</a>
@@ -74,7 +88,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
 
         </form>
     </div>
+
+    <script>
+        function cargarVistasColaboradores() {
+            
+            console.log("cargarVistasColaboradores se está ejecutando");
+            var clienteSeleccionado = document.getElementById("cliente").value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        // Procesa la respuesta del servidor
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        document.getElementById("colaborador2").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+                var url = "controlador/controladorColaboradorCliente.php?cliente=" + clienteSeleccionado;
+                xhr.open("GET", url, true);
+                console.log("Solicitud AJAX enviada a: " + url);
+                xhr.send();
+        }
+    </script>
+   
 </body>
 </html>
+            
 
 

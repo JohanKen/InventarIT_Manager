@@ -3,6 +3,8 @@
     include 'modelo/conexion.php';
     include_once 'modelo/ModeloUsuarios.php';
     include 'controlador/ControladorUsuarios.php';
+    include 'controlador/ControladorColaboradores';
+    
     $login = new ControladorUsuarios;
     $login->validarLogin();
 ?>

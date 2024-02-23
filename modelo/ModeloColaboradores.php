@@ -9,11 +9,29 @@
             return $res;
         }
 
+        //con esta funcion se selcciona el colaborador que se acaba de registrar para poder tener si id en el paso1-2 y pasar al paso 2
         static function selectUltimoColaborador($tabla){
             $sql = "SELECT * FROM inventarit_manager.$tabla;";
             $res = Conexion::conectar()->query($sql);
             return $res;
         }
+
+        /*static function selectColaboradorPorCliente($clienteSeleccionado) {
+            try{
+                $conexion = Conexion::conectar();
+                
+                $stmt = $conexion->prepare("CALL inventarit_manager.Coloborador_por_cliente(?)");
+                $stmt -> bind_param('i',$clienteSeleccionado);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+
+                return $result->fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysqli_sql_exception $e){
+                echo "Error al ejecutar la consulta:" . $e->getMessage();
+            }
+        }*/
 
         static function deleteColaborador($id){
             $id_colaborador = (int)$id;
