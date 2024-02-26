@@ -11,20 +11,23 @@
         }
 
         public static function borrarAsignacion(){
-            if(isset($_GET["accion"])&& $_GET["accion"] == "eliminar"){
+            if(isset($_GET["accion"]) && $_GET["accion"] == "eliminar"){
                 $id = $_GET["id_asignacion"];
-
+                $cliente = isset($_GET["cliente"]) ? $_GET["cliente"] : '';
+        
                 $delete = ModeloAsignaciones::deleteAsignacion($id);
-                if($delete>0){
-                    echo'
+        
+                if($delete > 0){
+                    echo '
                         <script>
-                            alert("Asignacion con Id: '.$id.' eliminada con exito");
-                            window.location.href="index.php?seccion=asignaciones/asignaciones";
+                            alert("Asignación con Id: ' . $id . ' eliminada con éxito");
+                            window.location.href = "index.php?seccion=asignaciones/asignaciones&cliente=" . encodeURIComponent("' . $cliente . '");
                         </script>
                     ';
                 }
             }
         }
+        
 
     }
 ?>

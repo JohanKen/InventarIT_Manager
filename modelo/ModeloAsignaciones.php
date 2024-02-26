@@ -32,5 +32,21 @@
             }
         }
 
+        static function selectAsignacionesPorCliente($clienteSeleccionado){
+            try{
+                $conexion = Conexion::conectar();
+
+                $stmt = $conexion->prepare("CALL inventarit_manager.asignaciones_por_cliente(?)");
+                $stmt -> bind_param('i',$clienteSeleccionado);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+                return $result ->fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysqli_sql_exception $e){
+                echo "Error al ehecutar la consulta: ".$e->getMessage();
+            }
+        }
+
     }
 ?>

@@ -19,8 +19,23 @@
 
         <a href="index.php?seccion=asignaciones/asignarPaso1"><button class="custom-button" onclick="newAsignacion();">CREAR NUEVA ASIGNACION</button></a>
 
+        <div>
+            <label for="cliente">Filtrar por Cliente</label>
+            <select name="cliente" id="cliente" onchange="cargarVistasColaboradores()">
+                <option value="0">Todos</option>
+                <option value="1">RTS</option>
+                <option value="2">Saela</option>
+                <option value="3">Nutiliti</option>
+                <option value="4">Ranger Design</option>
+                <option value="5">Mega Fleet Corp</option>
+                <option value="6">Pro Movers</option>
+                <option value="7">Union Supply Group</option>
+                <option value="8">Intouch</option>
+            </select>
+        </div>
+
         <div class="tabla">
-            <table class="tabla">
+            <table class="tabla" id="asignaciones">
                 <thead class="thead-dark">
                     <tr>
                         <! Separacion de encabezados para hecer sub encabezados >
@@ -92,11 +107,14 @@
 
     <script>
         function confirmarBorrar(id_asignacion) {
-            document.getElementById('confirmarBorrarModal').style.display = 'flex';
-            document.getElementById('btnBorrarModal').onclick = function () {
-                window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion;
-            };
-        }
+        var clienteSeleccionado = document.getElementById("cliente").value;
+
+        document.getElementById('confirmarBorrarModal').style.display = 'flex';
+        document.getElementById('btnBorrarModal').onclick = function () {
+            window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion + "&cliente=" + clienteSeleccionado;
+        };
+    }
+
 
         function cerrarModal() {
             document.getElementById('confirmarBorrarModal').style.display = 'none';
@@ -104,6 +122,32 @@
 
         function eliminarDispositivo() {
             cerrarModal();
+        }
+    </script>
+
+    <script>
+        function cargarVistasColaboradores() {
+            var clienteSeleccionado = document.getElementById("cliente").value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        // Procesa la respuesta del servidor
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        // Cambia el contenido de la tabla con el nuevo HTML recibido
+                        document.getElementById("asignaciones").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/controladorColaboradorClienteTabla.php?cliente=" + clienteSeleccionado;
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
         }
     </script>
 
