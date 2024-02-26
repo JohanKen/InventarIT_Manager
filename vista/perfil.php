@@ -50,6 +50,9 @@ function ObtenerDatosUsuario($id){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
 
     </style>
@@ -108,17 +111,7 @@ function ObtenerDatosUsuario($id){
 
                                     <hr class="mt-0 mb-4">
                                     <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>Contraseña</h6>
-                                            <div class="input-group">
-                                                <input type="password" id="passwordInput" class="form-control"
-                                                    value="<?php echo $datosUsuario[9] ?>" disabled>
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    id="togglePassword">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
 
 
                                         <div class="col-6 mb-3">
@@ -127,10 +120,8 @@ function ObtenerDatosUsuario($id){
                                                 <?php echo $datosUsuario[8]?></p>
                                         </div>
                                     </div>
-                                    <a
-                                        href="index.php?seccion=editarPerfil&id_usuario=<?php echo $datosUsuario[0]; ?>"><button
-                                            type="button" class="btn btn-warning" id="btnWar">Actualizar
-                                            Información</button></a>
+                                    <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class="btn btn-warning" id="btnWar">Actualizar Información</a>
+
                                     <div class="d-flex justify-content-start">
                                         <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
                                         <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
@@ -145,6 +136,46 @@ function ObtenerDatosUsuario($id){
         </div>
     </section>
     <script>
+   function solicitarPassword(idUsuario) {
+    Swal.fire({
+        title: 'Ingrese su contraseña',
+        input: 'password',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        showLoaderOnConfirm: true,
+        preConfirm: (password) => {
+            return new Promise((resolve, reject) => {
+                // Comparar la contraseña ingresada con la contraseña almacenada
+                if (password === '<?php echo $datosUsuario[9]; ?>') {
+                    resolve();
+                } else {
+                    reject('Contraseña incorrecta. Por favor, inténtelo de nuevo.');
+                }
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirigir al usuario si la contraseña es correcta
+            window.location.href = "index.php?seccion=editarPerfil&id_usuario=" + idUsuario;
+        }
+    }).catch((error) => {
+        // Mostrar un mensaje de error si la contraseña es incorrecta
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error
+        });
+    });
+}
+
+
+
+
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('passwordInput');
 

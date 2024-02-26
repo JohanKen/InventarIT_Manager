@@ -96,12 +96,22 @@ class ControladorUsuarios {
               }
             $objDelete = ModeloUsuarios::deleteUsuarios($id);
             if($objDelete>0){
-                echo    '
-                <script>
-                    alert("Usuario eliminado correctamente");
-                    window.location.href="index.php?seccion=usuarios";
-                </script>
-            ';
+               
+                echo '
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        Swal.fire({
+                            title: "Usuario eliminado correctamente",
+                            icon: "success",
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function () {
+                            window.location.href = "index.php?seccion=usuarios";
+                        });
+                    </script>';
+                
+                
             } 
         }
     } 

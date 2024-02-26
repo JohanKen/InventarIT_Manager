@@ -7,16 +7,13 @@ body {
     background-position: center;
     overflow-x: hidden;
 }
-
 .header {
     width: 100%;
 }
-
 #logoInventarit {
     width: 120px;
     margin-right: 40px;
 }
-
 .menu {
     background-color: #333;
     color: #fff;
@@ -29,6 +26,11 @@ body {
 .menu h1 {
     margin-right: 20px;
 } n
+}
+
+#btnCerrarSesion{
+    color: #ff0000c4 ;
+}
 
 .menu a {
     text-decoration: none;
@@ -37,6 +39,15 @@ body {
     transition: all 0.3s ease;
 }
 
+.dark-list {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  /* Personaliza el color de fondo de los elementos de la lista */
+  .dark-list li {
+    background-color: #343a40;
+    color: #ffffff;
+  }
 .menu a:hover {
     color: #3dc51b;
 }
@@ -48,6 +59,7 @@ body {
     width: 250px;
     height: 40px;
 }
+
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
     margin: 8px 0; 
@@ -86,16 +98,18 @@ body {
     z-index: 10 !important;
     display: none;
 }
-
 #userDropdown a {
     color: white;
     padding: 10px 14px;
     text-decoration: none;
     display: block;
 }
-
 #userDropdown a:hover {
     background-color: #555;
+}
+
+#btnUserDropDown{
+    color: #333 !important;
 }
 
 .messages:hover #userDropdown {

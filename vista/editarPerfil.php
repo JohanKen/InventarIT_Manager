@@ -101,10 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil del Usuario</title>
     <link rel="stylesheet" href="estilos/estilosPerfil.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <section class="vh-100" style="background:none">
@@ -224,7 +224,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col-12">
                                             <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" class="btn btn-secondary" >Cancelar</a>
                                             <button type="submit" name="actualizarPerfil" class="btn btn-primary">Guardar Cambios</button>
-
                                         </div>
                                     </div>
                                     </div>
@@ -237,13 +236,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <?php var_dump($datosUsuario);?>
+
 </section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
     const changePasswordSelect = document.getElementById('changePassword');
     const passwordFields = document.getElementById('passwordFields');
-
     changePasswordSelect.addEventListener('change', function() {
         if (this.value === 'yes') {
             passwordFields.style.display = 'block';
@@ -258,18 +258,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordInput = document.getElementById('passwordInput');
     const newPasswordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm_password');
-
     togglePassword.addEventListener('click', function() {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
         this.querySelector('i').classList.toggle('fa-eye');
         this.querySelector('i').classList.toggle('fa-eye-slash');
     });
-
     passwordInput.addEventListener('input', function() {
         // Obtener la contraseña ingresada por el usuario
         const enteredPassword = this.value;
-
         if (currentPassword === enteredPassword) {
             // Habilitar los campos de nueva contraseña y confirmar contraseña
             newPasswordInput.removeAttribute('disabled');
@@ -282,6 +279,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 </body>
 </html>

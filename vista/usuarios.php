@@ -151,7 +151,7 @@
 
                 </tbody>
             </table>
-            <button onclick="mostrarAlerta()">Mostrar Alerta</button>
+   
         </div>
        <!-- Modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario -->
 <div class="modal" id="confirmarBorrarModal">
@@ -183,14 +183,6 @@
     <script>
 
 
-
-function mostrarAlerta() {
-    swal({
-  title: "Good job!",
-  text: "You clicked the button!",
-  icon: "success",
-});
-}
 
 
 

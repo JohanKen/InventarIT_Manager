@@ -3,11 +3,21 @@
 if(isset($_POST['registrar'])){
     $registrar = new ControladorUsuarios;
     $registrar->registrarUsuario();
-    echo '
+   
+echo '
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        alert("Usuario creado correctamente");
-        window.location.href = "index.php?seccion=usuarios";
+        Swal.fire({
+            title: "Usuario creado correctamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(function () {
+            window.location.href = "index.php?seccion=usuarios";
+        });
     </script>';
+
+
     exit;
 }
 ?>
@@ -19,6 +29,7 @@ if(isset($_POST['registrar'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             text-align: center;
