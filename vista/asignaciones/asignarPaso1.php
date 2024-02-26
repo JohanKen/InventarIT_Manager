@@ -53,8 +53,9 @@
 
             <div class="mb-3" id="formForm">
                 <label for="colaborador2" class="form-label">Elige el colaborador</label>
-                <select name="colaborador2" id="colaborador2" class="form-control"></select>
-                
+                <select name="colaborador2" id="colaborador2" class="form-control">
+                <option value="" disabled selected>-- Primero Seleccione un Cliente --</option>
+                </select>
             </div>
             
             <div class="mb-3" id="formForm">

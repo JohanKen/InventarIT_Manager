@@ -38,24 +38,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
 
 
             <div action="mb-3" method="formForm" >
-                <label for="nombre_colaborador" class="form-label">Nombre: <?=$datoscolaborador[0]["nombre_colaborador"] ,' ',$datoscolaborador[0]["apellido_paterno_colaborador"]?></label>
-                <input type="text" class="form-control" name="nombre_colaborador" value="<?=$datoscolaborador[0]["nombre_colaborador"]?>" readonly>
-                <input type="text" class="form-control" name="apellido_paterno_colaborador" value="<?=$datoscolaborador[0]["apellido_paterno_colaborador"]?>" readonly>
+                <label for="nombre_colaborador" class="form-label">Colaborador Seleccionado:</label>
+                <input type="text" class="form-control" name="nombre_colaborador" value="<?=$datoscolaborador[0]["nombre_colaborador"],' ',$datoscolaborador[0]["apellido_paterno_colaborador"]?>" readonly>
+                
+            </div>
+
+            <?php 
+                } else {
+                    echo "El array \$datoscolaborador no está definido o no tiene la estructura esperada.";
+                }
+            ?>
+
+            <div class="mb-3" id="formForm">
+                <label for="tipo_dispositivo" class="form-label">Selecciona un Tipo de Dispositivo a Asignar</label>
+                <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
+                    <option value="0" disabled selected>-- Seleccione el Tipo de Dispositivo --</option>
+                    <option value="1">Laptop</option>
+                    <option value="2">Descktop</option>
+                    <option value="3">iMac</option>
+                    <option value="4">Teclado</option>
+                    <option value="5">Mouse</option>
+                    <option value="6">Monitor</option>
+                    <option value="7">Headset</option>
+                    <option value="8">Celular</option>
+                    <option value="9">Switches</option>
+                    <option value="12">otro</option>
+                </select>
             </div>
 
             <div action="mb-3" method="formForm">
-                <label class="dispositivo" class="form-label">Elige el dispositivo</label>
-                <select name="dispositivo" id="form-lebel" class="form-control">
+                <label for="dispositivo" class="form-label">Elige el dispositivo</label>
+                <select name="dispositivo" id="dispositivo" class="form-control">
                     <option value="" disabled selected>-- Seleccione un Dispositivo --</option>
-                    <?php
-                        // se utiliza otra funcion para que aparescan solo los dispositivos disponibles
-                        $dispositivosDisponible = ControladorDispositivos::consultaDispositivosDiponibles();
-                        foreach($dispositivosDisponible as $row => $item){
-                            $selectedOption ='';
-                            echo '<option value="'.$item[0].'"'.$selectedOption.'>'
-                            .$item[0].' '.$item[1].' ' . $item[2] . ' ' . $item[3] . ' ' . $item[4] .'</option>';
-                        }
-                    ?>
+                    
                 </select>
             </div>
 
@@ -67,12 +82,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
 
         </form>
 
-        <?php 
-            } else {
-                echo "El array \$dispositivoInfo no está definido o no tiene la estructura esperada.";
-            }
-        ?>
-
     </div>
+    
+    <script>
+        function cargarDispositivos(){
+
+            console.log("La funcion cargarDispositivos se esta ejecutando");
+            var tipoSeleccionado = document.getElementById("tipo_dispositivo").value;
+            var xhr = new XMLHttpRequest();
+            
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    console.log("Respueta del servidor: ",xhr.status,xhr.statusText);
+                    if(xhr.status === 200){
+                        console.log("Contenido de la respuesta: ",xhr.responseText);
+                        document.getElementById("dispositivo").innerHTML = xhr.responseText;
+                    }else{
+                        console.error("Erro en la respueta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/controladorDispositivoTipo.php?tipo="+tipoSeleccionado;
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: "+url);
+            xhr.send();
+        }
+    </script>
 </body>
 </html>
