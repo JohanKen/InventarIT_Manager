@@ -28,7 +28,11 @@ body {
 
 .menu h1 {
     margin-right: 20px;
-} n
+}
+
+#btnCerrarSesion{
+    color: #ff0000c4 ;
+}
 
 .menu a {
     text-decoration: none;
@@ -36,45 +40,27 @@ body {
     margin-right: 20px;
     transition: all 0.3s ease;
 }
-
+.dark-list {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  /* Personaliza el color de fondo de los elementos de la lista */
+  .dark-list li {
+    background-color: #343a40;
+    color: #ffffff;
+  }
 .menu a:hover {
     color: #3dc51b;
 }
 
-.search {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    width: 250px;
-    height: 40px;
-}
+
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
     margin: 8px 0; 
 }
 
 
-.messages {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-left: 5px;
-    margin-top: 8px;
-}
 
-.messages a {
-
-    text-decoration: none;
-}
-
-#imgCampana {
-    max-height: 30px; 
-    width: auto; 
-    max-width: 100%;
-    height: auto; 
-    margin-left: 10px;
-}
 
 
 #userDropdown {
@@ -96,6 +82,10 @@ body {
 
 #userDropdown a:hover {
     background-color: #555;
+}
+
+#btnUserDropDown{
+    color: #333 !important;
 }
 
 .messages:hover #userDropdown {
