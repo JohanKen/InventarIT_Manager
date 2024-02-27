@@ -142,7 +142,7 @@ class ControladorUsuarios {
                 'estado' => $_POST['estado'],
                 'rol' => $_POST['rol'],
                 'fechaIngreso' => $_POST['fecha_ingreso']
-                
+
             );
                 $respuesta = ModeloUsuarios::updateUser($datos);
                 if($respuesta > 0){
@@ -171,27 +171,17 @@ class ControladorUsuarios {
             if(isset($_POST["actualizarPerfil"])){
                 
                 try{
-
-                    /* Codigo para validar si el usuario quiere o no cambiar el password
-
-                     // Obtener el ID del usuario
-                    $id = $_SESSION['usuario']['id_usuario'];
-                    // Obtener los datos del usuario
-                    $datosUsuario = ControladorUsuarios::getUser($id);
-                    // Obtener la contraseña del usuario
-                    $passwordDatabase = $datosUsuario[0][9];
-
-                    var_dump ($passwordDatabase) ;
-
-
                     if(empty($_POST["password"])){
+                       
+                        // Obtener la contraseña del usuario
+                        $passwordDatabase = $_POST['oldPassword'];
                         $passwordNew = $passwordDatabase; 
  
                     }else{
                       $passwordNew = $_POST['password']; 
                     }
 
-                  */
+                  
                     //Formateo de fechas para que se vayan al modelo como las necesita la base de datos
                     $fecha_ingreso = $_POST["fecha_ingreso"];
                     if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false ){

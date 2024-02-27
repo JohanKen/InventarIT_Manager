@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar si el usuario seleccionó "No" en el campo de selección "Cambiar Contraseña"
         if ($_POST['changePassword'] === 'no') {
 
-            
+           
             // Actualizar el perfil del usuario sin cambiar la contraseña
             $obj = new ControladorUsuarios();
             $obj->UpdatePerfil();
@@ -105,6 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
 <section class="vh-100" style="background:none">
@@ -213,6 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col-md-6 mb-3">
                                             <label for="password">Nueva Contraseña</label>
                                             <input type="password" class="form-control" id="password" name="password" value="<?php echo $datosUsuario[9]; ?>" pattern="^(?=.*\d).{8,}$" title="La contraseña debe tener al menos 8 caracteres y contener al menos un número" required disabled>
+                                            <input type="hidden" name="oldPassword" value="<?php echo $datosUsuario[9]; ?>">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="confirm_password">Confirmar Contraseña</label>
@@ -235,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
-    <?php var_dump($datosUsuario);?>
+  
 
 </section>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

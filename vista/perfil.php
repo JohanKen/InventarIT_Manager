@@ -52,6 +52,7 @@ function ObtenerDatosUsuario($id){
     </script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <style>
 
@@ -153,7 +154,7 @@ function ObtenerDatosUsuario($id){
                 if (password === '<?php echo $datosUsuario[9]; ?>') {
                     resolve();
                 } else {
-                    reject('Contraseña incorrecta. Por favor, inténtelo de nuevo.');
+                    reject('Intente de nuevo');
                 }
             });
         },
@@ -167,7 +168,7 @@ function ObtenerDatosUsuario($id){
         // Mostrar un mensaje de error si la contraseña es incorrecta
         Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Contraseña incorrecta',
             text: error
         });
     });

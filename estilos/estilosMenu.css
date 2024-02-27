@@ -10,6 +10,9 @@ body {
 .header {
     width: 100%;
 }
+.container{
+    z-index: 100;
+}
 #logoInventarit {
     width: 120px;
     margin-right: 40px;
@@ -25,11 +28,11 @@ body {
 
 .menu h1 {
     margin-right: 20px;
-} n
-}
+} 
 
 #btnCerrarSesion{
     color: #ff0000c4 ;
+    z-index: 10 !important;
 }
 
 .menu a {
@@ -102,14 +105,17 @@ body {
     color: white;
     padding: 10px 14px;
     text-decoration: none;
+    z-index: 10 !important;
     display: block;
 }
 #userDropdown a:hover {
     background-color: #555;
+    z-index: 10 !important;
 }
 
 #btnUserDropDown{
     color: #333 !important;
+    z-index: 10 !important;
 }
 
 .messages:hover #userDropdown {

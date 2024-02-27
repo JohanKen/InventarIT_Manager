@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         /* Ajusta el tamaño de la imagen de la campana */
@@ -105,16 +106,37 @@
     </header>
 <script>
 function cerrarSesion() {
-  swal("¿Seguro que quieres cerrar sesión?", {
-    buttons: ["Cancerlar", "Si, Cerrar sesión."],
-  }).then((value) => {
+  swal({
+    title: "¿Seguro que quieres cerrar sesión?",
+    text: "Se cerrará la sesión actual.",
+    icon: "warning",
+    buttons: {
+      cancel: {
+        text: "Cancelar",
+        value: null,
+        visible: true,
+        className: "",
+        closeModal: true,
+      },
+      confirm: {
+        text: "Sí, Cerrar sesión",
+        value: true,
+        visible: true,
+        className: "",
+        closeModal: false
+      }
+    },
+    dangerMode: true,
+  })
+  .then((value) => {
     if (value) {
       window.location.href = "logout.php";
     } else {
-      swal.close();    
+      swal.close();
     }
   });
 }
+
 </script>
 </body>
 </html>

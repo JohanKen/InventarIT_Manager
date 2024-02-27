@@ -78,7 +78,7 @@ form{
 }
 
 .form-label {
-    color: #fff;
+    color: #333 !important;
     margin-bottom: 10px;
     display: block;
 }
