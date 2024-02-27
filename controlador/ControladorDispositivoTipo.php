@@ -58,6 +58,8 @@
                                     <td>' . $item['ram'].' GB'.'</td>
                                     <td>' . $item['procesador'].'</td>
                                     <td>' . $item['sistema_operativo'].'</td>
+                                    <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\')">Agregar</button></td>
+
                                 </tr>
                             ';
                         }
@@ -71,6 +73,8 @@
                                     <td>' . $item['modelo'] . '</td>
                                     <td>' . $item['numero_serie'] . '</td>
                                     <td>' . $item['marca'] . '</td>
+                                    <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\')">Agregar</button></td>
+
                                 </tr>
                             ';
                         }
@@ -91,6 +95,8 @@
                                     <td>' . $item['keyboard_ns'].'</td>
                                     <td>' . $item['mouse_model'].'</td>
                                     <td>' . $item['mouse_ns'].'</td>
+                                    <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\')">Agregar</button></td>
+
                                 </tr>
                             ';
                         }
