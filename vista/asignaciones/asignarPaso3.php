@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Document</title>
 </head>
 <body>
-    <br><br><br><br><br>
+    <br><br><br><br><br> <! Eliminar esta linea>
     <div class="contentSeccion">
         <header class="headerTabla">
             <h1>Paso 3 - Confirmar Asignacion</h1>

@@ -21,9 +21,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paso 2 de la asinacion</title>
-    <link rel="stylesheet" href="estilos/estilosFormularios.css">
+    
 </head>
 <body>
+   
+    <br><br><br><br><br> <! Eliminar esta linea>
     <div class="contentSeccion">
 
             <div class="up">
@@ -65,14 +67,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
                     <option value="12">otro</option>
                 </select>
             </div>
+            <?php /*
+                <div action="mb-3" method="formForm">
+                    <label for="dispositivo" class="form-label">Elige el dispositivo</label>
+                    <select name="dispositivo" id="dispositivo" class="form-control">
+                        <option value="" disabled selected>-- Seleccione un Dispositivo --</option>
+                        
+                    </select>
+                </div>
+            */ ?>
+            <table id="dispositivos2">
+                <! la tabla no aparce hasta que se selecciona un tipo de dispositivo>
+            </table>
 
-            <div action="mb-3" method="formForm">
-                <label for="dispositivo" class="form-label">Elige el dispositivo</label>
-                <select name="dispositivo" id="dispositivo" class="form-control">
-                    <option value="" disabled selected>-- Seleccione un Dispositivo --</option>
+            <table id="dispositivos_seleccionados">
+                <tr>
+                    <th>Id Dispositivo</th>
+                    <th>Tipo de dispositivo</th>
+                    <th>Modelo</th>
+                    <th>Número de Serie</th>
+                    <th>Marca</th>
+                </tr>
+                <tbody>
+                    <?php  
                     
-                </select>
-            </div>
+                    ?>
+                </tbody>
+            </table>
 
             <div action="mb-3" method="formForm">
                 <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
@@ -96,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
                     console.log("Respueta del servidor: ",xhr.status,xhr.statusText);
                     if(xhr.status === 200){
                         console.log("Contenido de la respuesta: ",xhr.responseText);
-                        document.getElementById("dispositivo").innerHTML = xhr.responseText;
+                        document.getElementById("dispositivos2").innerHTML = xhr.responseText;
                     }else{
                         console.error("Erro en la respueta del servidor");
                     }
@@ -109,5 +130,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])){
             xhr.send();
         }
     </script>
+
 </body>
 </html>
