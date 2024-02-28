@@ -10,7 +10,6 @@ $estados = array(
     2 => 2,
 
 );
-
 function ObtenerDatosUsuario($id){
     if($id >= 0){
         try {
@@ -47,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $obj->UpdatePerfil();
             echo '<script>
                     alert("El usuario se actualizó correctamente");
-                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                    window.location.href = "index.php?seccionvv=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
                 </script>';
        
         } else {
@@ -70,18 +69,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $obj = new ControladorUsuarios();
                             $obj->UpdatePerfil();
                             echo '<script>
-                                    alert("El usuario se actualizó correctamente");
-                                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
-                                </script>';
+                            Swal.fire({
+                                title: "El usuario se actualizó correctamente",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                            });
+                        </script>';
                             exit;
                         } else {
                             // Si no se proporciona una nueva contraseña, no se actualiza la contraseña
                             $obj = new ControladorUsuarios();
                             $obj->UpdatePerfil();
                             echo '<script>
-                                    alert("El usuario se actualizó correctamente");
-                                    window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                                    Swal.fire({
+                                        title: "El usuario se actualizó correctamente",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then(() => {
+                                        window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                                    });
                                 </script>';
+
                             exit;
                         }
                     }
@@ -108,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <section class="vh-100" style="background:none">
@@ -239,8 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
-  
-
+    <?php var_dump($datosUsuario);?>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

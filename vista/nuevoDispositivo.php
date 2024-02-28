@@ -27,14 +27,14 @@
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newDesktop">
+                <a class="anclaDis" href="index.php?seccion=formularios/newDesktop">
                     <img class="imgDis" src="images/dis/desktop.png" alt="Desktop">
                     <span class="label">Desktop</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newiMac">
+                <a class="anclaDis" href="index.php?seccion=formularios/newiMac">
                     <img class="imgDis" src="images/dis/imac.png" alt="iMac">
                     <span class="label">iMac</span>
                 </a>
@@ -43,21 +43,21 @@
 
         <ul class="flexxa">
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newTeclado">
+                <a class="anclaDis" href="index.php?seccion=formularios/newTeclado">
                     <img class="imgDis" src="images/dis/teclado.png" alt="Teclado">
                     <span class="label">Teclado</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newMouse">
+                <a class="anclaDis" href="index.php?seccion=formularios/newMouse">
                     <img class="imgDiis" src="images/dis/mouse.png" alt="Mouse">
                     <span class="label">Mouse</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newMonitor">
+                <a class="anclaDis" href="index.php?seccion=formularios/newMonitor">
                     <img class="imgDis" src="images/dis/monitor.png" alt="Monitor">
                     <span class="label">Monitor</span>
                 </a>
@@ -66,28 +66,28 @@
 
         <ul class="flexxb">
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newCelular">
+                <a class="anclaDis" href="index.php?seccion=formularios/newCelular">
                     <img class="imgDiss" src="images/dis/celular.png" alt="Celular">
                     <span class="label">Celular</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newSwitches">
+                <a class="anclaDis" href="index.php?seccion=formularios/newSwitches">
                     <img class="imgDis" src="images/dis/switch.png" alt="Switches">
                     <span class="label">Switches</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newImpresora">
+                <a class="anclaDis" href="index.php?seccion=formularios/newImpresora">
                     <img class="imgDis" src="images/dis/impresora.png" alt="Impresora">
                     <span class="label">Impresora</span>
                 </a>
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newOtro">
+                <a class="anclaDis" href="index.php?seccion=formularios/newOtro">
                     <img class="imgDis" src="images/dis/otros.png" alt="Otro">
                     <span class="label">Otro</span>
                 </a>

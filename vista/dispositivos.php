@@ -78,27 +78,25 @@
             background: #d32f2f;
         }
     </style>
-</head>
+</head> 
 
 <body>
-    <div class="contentSeccion">  
-        <div class="up">
-            <header class="headerTabla">
-                <h1>Dispositivos</h1>
-                <form class="form-inline" id="searchBar">
-                    <div class="input-group">
-                        <!-- Agrega aquí elementos de búsqueda si es necesario -->
-                    </div>
-                </form>
-            </header>
-            <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
+    <div class="container">
+        <div class="headerTabla text-center">
+            <h1>Dispositivos</h1>
+            <form class="form-inline">
+                <div class="input-group">
+                    <!-- Agrega aquí elementos de búsqueda si es necesario -->
+                </div>
+            </form>
         </div>
+        <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
         <a href="index.php?seccion=nuevoDispositivo">
-    <button class="btn custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button>
-</a>
-        <div class="table">
+            <button class="btn custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button>
+        </a>
+        <div class="table-responsive">
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="table-dark">
                     <tr>
                         <th>Id Dispositivo</th>
                         <th>Tipo de dispositivo</th>
@@ -115,13 +113,10 @@
                 </thead>
                 <tbody>
                     <?php
-                    
                     $eliminar = new ControladorDispositivos;
                     $eliminar->borrarDispositivos();
-
                     $lista = ControladorDispositivos::consultaDispositivos();
                     foreach ($lista as $row => $item) {
-                        
                         echo '
                             <tr>
                                 <td>' . $item[0] . '</td>
@@ -129,7 +124,7 @@
                                 <td>' . $item[2] . '</td>
                                 <td>' . $item[3] . '</td>
                                 <td>' . $item[4] . '</td>
-                                <td>$'. $item[5] . '</td>
+                                <td>$' . $item[5] . '</td>
                                 <td>' . $item[6] . '</td>
                                 <td>' . $item[7] . '</td>
                                 <td>' . $item[8] . '</td>
@@ -141,8 +136,6 @@
                             </tr>
                         ';
                     }
-                    
-                    
                     ?>
                 </tbody>
             </table>
@@ -150,15 +143,14 @@
     </div>
 
     <div class="modal" id="confirmarBorrarModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="cerrarModal()">&times;</span>
-        <h4>Confirmar Eliminación</h4>
-        <p>¿Estás seguro de que deseas eliminar este dispositivo?</p>
-        <button class="btn-danger" id="btnBorrarModal">Borrar</button>
-        <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <h4>Confirmar Eliminación</h4>
+            <p>¿Estás seguro de que deseas eliminar este dispositivo?</p>
+            <button class="btn-danger" id="btnBorrarModal">Borrar</button>
+            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+        </div>
     </div>
-</div>
-
 
     
 <script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Menú Lateral con Bootstrap Responsivo</title>
@@ -7,9 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         /* Ajusta el tamaño de la imagen de la campana */
@@ -28,7 +29,6 @@
 </head>
 
 <body>
-<header class="header">
     <header class="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -67,76 +67,49 @@
                             </li>
                             <hr>
                             <li>
-
-                            <div class="messages" id="userMenu">
-                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" id="usuarioLink" style="color: #fff;">
+                                
                             <li class="nav-item">
                             <a class="nav-link"href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" id="usuarioLink" style="color: #fff;">
                                 <?php echo $_SESSION["usuario"]["nombre_usuario"] . ' ' . $_SESSION["usuario"]["apellido_paterno_usuario"];?>
                             </a>
-                            <div class="dropdown-content" id="userDropdown">
-                             
-                            <a href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>">Perfil</a>                                
-                            <button onclick="cerrarSesion()">Cerrar sesión</button>
-                            </div>
-
                             <li>
                             <li class="nav-item">
 
                             <button id="btnCerrarSesion" type="button" class="btn btn-dark" onclick="cerrarSesion()">Cerrar sesión</button>
-
+                            
                             <li>
                         </div>
                         </li>
 
-                        </ul>
-                    </div>
-                    <div class="search">
-
-
+                     
+                    
                         <input type="text" id="searchInput" placeholder="Buscar" class="form-control">
                         <a href=""><img src="images/cam.png" id="imgCampana" alt=""></a>
-
                         </ul>
                     </div>
-
+                    
                 </div>
             </nav>
         </div>
     </header>
+
 <script>
 function cerrarSesion() {
-  swal({
-    title: "¿Seguro que quieres cerrar sesión?",
-    text: "Se cerrará la sesión actual.",
-    icon: "warning",
-    buttons: {
-      cancel: {
-        text: "Cancelar",
-        value: null,
-        visible: true,
-        className: "",
-        closeModal: true,
-      },
-      confirm: {
-        text: "Sí, Cerrar sesión",
-        value: true,
-        visible: true,
-        className: "",
-        closeModal: false
-      }
-    },
-    dangerMode: true,
-  })
-  .then((value) => {
+  swal("¿Seguro que quieres cerrar sesión?", {
+    buttons: ["Cancerlar", "Si, Cerrar sesión."],
+  }).then((value) => {
     if (value) {
       window.location.href = "logout.php";
     } else {
-      swal.close();
+      swal.close();    
     }
   });
 }
 
+
 </script>
+
+
 </body>
+
 </html>

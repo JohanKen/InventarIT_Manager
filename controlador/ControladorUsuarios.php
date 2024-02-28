@@ -200,7 +200,7 @@ class ControladorUsuarios {
                         'apellidoMaterno' => $_POST['apellido_materno'],
                         'nombre' => $_POST['nombre_usuario'],
                         'correo' => $_POST['correo'],
-                        'password' => $passwordNew,
+                        'password' => $_POST['password'],
                         'rol' => $_POST['rol'],
                         'fechaIngreso' => $_POST['fecha_ingreso']
                     );

@@ -28,11 +28,18 @@ body {
 
 .menu h1 {
     margin-right: 20px;
+<<<<<<< HEAD
 } 
 
 #btnCerrarSesion{
     color: #ff0000c4 ;
     z-index: 10 !important;
+=======
+}
+
+#btnCerrarSesion{
+    color: #ff0000c4 ;
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 }
 
 .menu a {
@@ -41,7 +48,10 @@ body {
     margin-right: 20px;
     transition: all 0.3s ease;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 .dark-list {
     background-color: #343a40;
     color: #ffffff;
@@ -55,6 +65,7 @@ body {
     color: #3dc51b;
 }
 
+<<<<<<< HEAD
 .search {
     margin-left: auto;
     display: flex;
@@ -62,6 +73,8 @@ body {
     width: 250px;
     height: 40px;
 }
+=======
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
@@ -69,27 +82,7 @@ body {
 }
 
 
-.messages {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-left: 5px;
-    margin-top: 8px;
-}
 
-.messages a {
-
-    text-decoration: none;
-}
-
-#imgCampana {
-    max-height: 30px; 
-    width: auto; 
-    max-width: 100%;
-    height: auto; 
-    margin-left: 10px;
-}
 
 
 #userDropdown {
@@ -116,6 +109,10 @@ body {
 #btnUserDropDown{
     color: #333 !important;
     z-index: 10 !important;
+}
+
+#btnUserDropDown{
+    color: #333 !important;
 }
 
 .messages:hover #userDropdown {

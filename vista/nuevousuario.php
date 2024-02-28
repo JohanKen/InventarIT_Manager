@@ -30,6 +30,8 @@ echo '
     <title>Registro de Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             text-align: center;
@@ -104,7 +106,7 @@ echo '
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <form action="" method="POST" onsubmit="return validateForm()" class="credit-card-div">
+        <form action="" method="POST" onsubmit="return validateForm()" id="form" class="credit-card-div">
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="imgdiv">
@@ -166,8 +168,10 @@ echo '
                     <button type="button" class="btn btn-danger" onclick="window.location.href='index.php?seccion=usuarios'">Cancelar</button>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                    <button type="submit" class="btn btn-warning btn-block" name="registrar">Registrar</button>
+                    <button type="button" id="btnreg" onclick="alertaRegistro()" class="btn btn-warning btn-block" name="registrar">Registrar</button>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -179,6 +183,22 @@ echo '
 
 <script>
     
+    function alertaRegistro() {
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Usuario registrado con exito",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            const button = document.getElementsByName("registrar")[0];
+            button.form.submit();
+            window.location.href='index.php?seccion=usuarios';
+        });
+    }
+
+
+
     function validateForm() {
         // Limpiar mensaje de error al principio
         document.getElementById("errorMessage").innerHTML = "";
