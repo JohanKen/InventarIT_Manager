@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once __DIR__ . '/../modelo/ModeloAsignaciones.php';
+include_once __DIR__ . '/../../modelo/ModeloAsignaciones.php';
 //include_once __DIR__ . '/../controlador/ControladorAsignaciones.php';
 
 // Obtener el cliente seleccionado

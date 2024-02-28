@@ -113,7 +113,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                     }
                 };
 
-                var url = "controlador/controladorDispositivoTipo.php?tipo=" + tipoSeleccionado;
+                var url = "controlador/ControladorFiltros/InventarioDisponiblePorTipo.php?tipo=" + tipoSeleccionado;
                 xhr.open("GET", url, true);
                 console.log("Solicitud AJAX enviada a: " + url);
                 xhr.send();

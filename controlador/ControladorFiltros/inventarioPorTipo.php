@@ -1,8 +1,8 @@
 <?php 
-    //este metodo es para filtar los dispoditivos por tipo rn la viasta dispositivos.phps
+    //este metodo es para filtar los dispoditivos por tipo en la viasta dispositivos.phps
     error_reporting(E_ALL);
     ini_set('display_errors',1);
-    include_once __DIR__ . '/../modelo/ModeloDispositivos.php';
+    include_once __DIR__ . '/../../modelo/ModeloDispositivos.php';
 
     $tipoSeleccionado = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 
@@ -13,11 +13,11 @@
          <table class="tabla" id="inventario_dispositivos">
             <thead class="thead-dark">
                 <tr>
-                        <th>Id Dispositivo</th>
-                        <th>Tipo de dispositivo</th>
-                        <th>Modelo</th>
-                        <th>Número de Serie</th>
-                        <th>Marca</th>
+                    <th>Id Dispositivo</th>
+                    <th>Tipo de dispositivo</th>
+                    <th>Modelo</th>
+                    <th>Número de Serie</th>
+                    <th>Marca</th>
                         <?php
                             if($tipoSeleccionado == 1 or $tipoSeleccionado == 2 or $tipoSeleccionado == 3){
                                 ?>
@@ -35,14 +35,13 @@
                                 }
                             }
                         ?>
-                        <th>Precio</th>
-                        <th>Estado del Dispositivo</th>
-                        <th>Fecha de Compra</th>
-                        <th>Notas</th>
-                        <th>Imagen</th>
-                        <th>Acciones</th>
-                   
-                    
+                    <th>Precio</th>
+                    <th>Estado del Dispositivo</th>
+                    <th>Fecha de Compra</th>
+                    <th>Notas</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+            
                 </tr>
                 <tbody>
                     <?php  

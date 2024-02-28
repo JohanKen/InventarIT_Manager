@@ -93,9 +93,9 @@
         </div>
 
         <a href="index.php?seccion=nuevoDispositivo"><button class="custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button></a>
-
+        <br><br>
         <div class="mb-3" id="formForm">
-            <label for="tipo_dispositivo" class="form-label">Filtrar por Tipo</label>
+            <label for="tipo_dispositivo" class="form-label">Filtrar por Tipo: </label>
             <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
                 <option value="100">Todos</option>
                 <option value="1">Laptop</option>
@@ -213,7 +213,7 @@
                 }
             };
 
-            var url = "controlador/ControladorInventarioTipo.php?tipo="+ tipoSeleccionado;
+            var url = "controlador/ControladorFiltros/inventarioPorTipo.php?tipo="+ tipoSeleccionado;
             xhr.open("GET", url, true);
             console.log("Solicitud AJAX enviada a: " + url);
             xhr.send();

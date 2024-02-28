@@ -144,7 +144,7 @@
                 }
             };
 
-            var url = "controlador/controladorColaboradorClienteTabla.php?cliente=" + clienteSeleccionado;
+            var url = "controlador/ControladorFiltros/AsignacionesPorCliente.php?cliente=" + clienteSeleccionado;
             xhr.open("GET", url, true);
             console.log("Solicitud AJAX enviada a: " + url);
             xhr.send();

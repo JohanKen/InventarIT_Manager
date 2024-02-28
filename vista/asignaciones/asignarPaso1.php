@@ -90,7 +90,7 @@
                 }
             };
 
-                var url = "controlador/controladorColaboradorCliente.php?cliente=" + clienteSeleccionado;
+                var url = "controlador/ControladorFiltros/ColaboradorPorCliente.php?cliente=" + clienteSeleccionado;
                 xhr.open("GET", url, true);
                 console.log("Solicitud AJAX enviada a: " + url);
                 xhr.send();
