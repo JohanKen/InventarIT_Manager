@@ -1,4 +1,5 @@
 <?php 
+    //este metodo es para la vista asignarPaso2.php que solo llamma los dispositivos disponibles 
     error_reporting(E_ALL);
     ini_set('display_errors',1);
     include_once __DIR__ . '/../modelo/ModeloAsignaciones.php';

@@ -1,4 +1,8 @@
+<?php 
+    error_reporting(E_ALL);
+    ini_set('display_errors',1);
 
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -90,8 +94,25 @@
 
         <a href="index.php?seccion=nuevoDispositivo"><button class="custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button></a>
 
+        <div class="mb-3" id="formForm">
+            <label for="tipo_dispositivo" class="form-label">Filtrar por Tipo</label>
+            <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
+                <option value="100">Todos</option>
+                <option value="1">Laptop</option>
+                <option value="2">Desktop</option>
+                <option value="3">iMac</option>
+                <option value="4">Teclado</option>
+                <option value="5">Mouse</option>
+                <option value="6">Monitor</option>
+                <option value="7">Headset</option>
+                <option value="8">Celular</option>
+                <option value="9">Switches</option>
+                <option value="12">Otro</option>
+            </select>
+        </div>
+
         <div class="tabla">
-            <table class="tabla">
+            <table class="tabla" id="inventario_dispositivos">
                 <thead class="thead-dark">
                     <tr>
                         <th>Id Dispositivo</th>
@@ -123,7 +144,7 @@
                                 <td>' . $item[2] . '</td>
                                 <td>' . $item[3] . '</td>
                                 <td>' . $item[4] . '</td>
-                                <td>$' . number_format($item[5], 2, ',', '.') . '</td>
+                                <td>$' . number_format($item[5], 2, '.', ',') . '</td>
                                 <td>' . $item[6] . '</td>
                                 <td>' . $item[7] . '</td>
                                 <td>' . $item[8] . '</td>
@@ -144,15 +165,15 @@
     </div>
 
     <div class="modal" id="confirmarBorrarModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="cerrarModal()">&times;</span>
-        <h4>Confirmar Eliminación</h4>
-        <p>¿Estás seguro de que deseas eliminar este dispositivo?</p>
-        <button class="btn-danger" id="btnBorrarModal">Borrar</button>
-        <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <h4>Confirmar Eliminación</h4>
+            <p>¿Estás seguro de que deseas eliminar este dispositivo?</p>
+            <button class="btn-danger" id="btnBorrarModal">Borrar</button>
+            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+        </div>
     </div>
-</div>
-
+    
 
     <script>
         function confirmarBorrar(id_dispositivo) {
@@ -169,7 +190,36 @@
         function eliminarColaborador() {
             cerrarModal();
         }
+        
     </script>
+
+    <script>
+        //cargarDispositivos();
+
+        function cargarDispositivos() {
+            console.log("La función cargarDispositivos se está ejecutando");
+            var tipoSeleccionado = document.getElementById("tipo_dispositivo").value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        document.getElementById("inventario_dispositivos").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/ControladorInventarioTipo.php?tipo="+ tipoSeleccionado;
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
+        }
+    </script>
+
 </body>
 
 </html>

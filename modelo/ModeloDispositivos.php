@@ -791,5 +791,21 @@ static function createAsignacion($datos){
     }
 }
 
+static function selectDispositivoTipo($tipoSeleccionado){
+    try{
+        $conexion = Conexion::conectar();
+
+        $stmt = $conexion->prepare("CALL inventarit_manager.inventario_dispositivo(?)");
+        $stmt -> bind_param('i',$tipoSeleccionado);
+        $stmt -> execute();
+
+        $result = $stmt->get_result();
+        return $result ->fetch_all(MYSQLI_ASSOC);
+
+    }catch (mysqli_sql_exception $e){
+        echo "Error al ehecutar la consulta: ".$e->getMessage();
+    }
+}
+
 }
 ?>
