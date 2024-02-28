@@ -7,13 +7,7 @@
 
     if(!empty($tipoSeleccionado)){
         $dispositivos  = ModeloAsignaciones::selectDispositivoTipo($tipoSeleccionado);
-        /*
-        $options = "";
-        foreach ($dispositivos as $item){
-            $options .= '<option value="' . $item['id_dispositivo'] . '">' .
-            $item['id_dispositivo'] . ' ' . $item['tipo'] . ' ' .$item['modelo']. ' '.$item['numero_serie'].' '.$item['marca'].'</option>';
-        }
-        */
+        
         ?>
         <table id="dispositivos2">
                 <tr>
@@ -39,7 +33,7 @@
                         }
                     }
                     ?>
-                    <th>Opciones</th>
+                    <th></th>
                 </tr>
                 <tbody>
                     <?php  
@@ -106,7 +100,7 @@
             </table>
         <?php
     } else {
-        echo 'Error: tipo no seleccionado. ';
+        echo 'Elige un tipo de dispositivo ';
     }
 
 ?>
