@@ -771,26 +771,6 @@ static function selectDispositivosDisponibles($tabla) {
     return $res;
 }
 
-static function createAsignacion($datos){
-    $conexion = Conexion::conectar();
-    try{
-        $id_dispositivo = (int) $datos["id_dispositivo"];
-        $id_colaborador = (int) $datos["id_colaborador"];
-
-        $statement = $conexion->prepare("CALL crear_asignacion(?,?)");
-        $statement->bind_param("ii",
-            $id_dispositivo,
-            $id_colaborador
-        );
-
-        $statement->execute();
-        $statement->close();
-
-    }catch (Exception $e){
-        echo 'Message: '.$e ->getMessage();
-    }
-}
-
 static function selectDispositivoTipo($tipoSeleccionado){
     try{
         $conexion = Conexion::conectar();

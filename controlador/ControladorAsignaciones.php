@@ -27,6 +27,23 @@
                 }
             }
         }
+
+        static function registrarAsignacion($dispositivo){
+            if(isset($_POST['aceptar'])){       
+                try{
+                    $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                    Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+    
+                    $datos = array(
+                        "id_dispositivo"=>$dispositivo,
+                        "id_colaborador"=>(int)$_POST["id_colaborador"],
+                    );
+                    $inset = ModeloAsignaciones::createAsignacion($datos);
+                }catch(Exeption $e){
+                    echo 'Message: '.$e ->getMessage();
+                }
+            }
+        }
         
 
     }

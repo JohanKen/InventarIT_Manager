@@ -81,7 +81,7 @@
                                     <td>'.$item[8].'</td>
                                     <td>'.$item[9].'</td>
                                     <td>'.$item[10].'</td>
-                                    <td>'.$item[11].'</td>
+                                    <td>$' . number_format($item[11], 2, '.', ',') . '</td>
                                     <td>'.$item[12].'</td>
                                     <td>
                                     <a href="javascript:void(0);" onclick="confirmarBorrar('.$item[0].'); "id"="enlaceBorrar">Borrar</a>
@@ -111,7 +111,7 @@
 
         document.getElementById('confirmarBorrarModal').style.display = 'flex';
         document.getElementById('btnBorrarModal').onclick = function () {
-            window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion + "&cliente=" + clienteSeleccionado;
+            window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion;
         };
     }
 

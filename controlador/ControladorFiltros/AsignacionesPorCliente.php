@@ -59,7 +59,7 @@ $listaAsignaciones = ModeloAsignaciones::selectAsignacionesPorCliente($clienteSe
                                     <td>'.$item['marca'].'</td>
                                     <td>'.$item['modelo'].'</td>
                                     <td>'.$item['numero_serie'].'</td>
-                                    <td>'.$item['precio'].'</td>
+                                    <td>$' . number_format($item['precio'], 2, '.', ',') . '</td>
                                     <td>'.$item['fecha_asignacion'].'</td>
                                     <td>
                                     <a href="javascript:void(0);" onclick="confirmarBorrar('.$item['id_asignacion'].'); "id"="enlaceBorrar">Borrar</a>

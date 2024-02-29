@@ -1,12 +1,11 @@
 <?php
 //este es asignarPaso3.php
 require_once 'controlador/ControladorColaboradores.php';
-require_once 'controlador/ControladorDispositivos.php';
+require_once 'controlador/ControladorAsignaciones.php';
 error_reporting(E_ALL);
-ini_set('dispaly_errors', '1');
+ini_set('display_errors', '1');
 
 $datoscolaborador = ControladorColaboradores::detalleColaborador();
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['volver'])) {
     $colaboradorSeleccionado = $datoscolaborador[0]["id_colaborador"];
@@ -17,14 +16,17 @@ $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecod
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['aceptar'])) {
-        $asignar = new ControladorDispositivos;
-        $asignar->registrarAsignacion();
-        echo  '<script>
+        $registar = new ControladorAsignaciones;
+        foreach ($dispositivosSeleccionados as $item){
+            $dispositivo =  $item['id_dispositivo'];
+            $registar -> registrarAsignacion($dispositivo);
+        }
+    }
+    echo  '<script>
                 alert("Asignacion realizada!");
                 window.location.href="index.php?seccion=asignaciones/asignaciones";
-            </script>';
-        exit;
-    }
+        </script>';
+    exit;
 }
 ?>
 
@@ -45,12 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form action="" method="post" enctype="multipart/form-data">
 
-                <div class="mb-3" id="formForm">
+                <div >
                     <label for="id_colaborador" class="form-label">ID Colaborador</label>
                     <input type="text" class="form-control" name="id_colaborador" value="<?= $datoscolaborador[0]["id_colaborador"] ?>" readonly>
                 </div>
 
-                <div class="mb-3" id="formForm">
+                <div >
                     <label for="colaborador">Colaborador</label>
                     <input type="text" class="form-control" name="colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"], ' ', $datoscolaborador[0]["apellido_paterno_colaborador"] ?>">
                 </div>
@@ -89,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </tbody>
                     </table>
                 </div>
+                
 
                 <div action="mb-3" method="formForm">
                     <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>

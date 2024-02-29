@@ -902,23 +902,6 @@ static function editarIMac()
         return $arregloDispositivos;
     }
 
-    static function registrarAsignacion(){
-        if(isset($_POST['aceptar'])){
-            try{
-                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
-                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
-
-                $datos = array(
-                    "id_dispositivo"=>(int)$_POST["id_dispositivo"],
-                    "id_colaborador"=>(int)$_POST["id_colaborador"],
-                );
-                $inset = ModeloDispositivos::createAsignacion($datos);
-            }catch(Exeption $e){
-                echo 'Message: '.$e ->getMessage();
-            }
-        }
-    }
-
     }
 
 ?>
