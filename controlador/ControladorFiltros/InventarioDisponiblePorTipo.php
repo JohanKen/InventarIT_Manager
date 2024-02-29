@@ -11,6 +11,7 @@
         
         ?>
         <table id="dispositivos2">
+            <thead>
                 <tr>
                     <th>Id Dispositivo</th>
                     <th>Tipo de dispositivo</th>
@@ -36,6 +37,8 @@
                     ?>
                     <th></th>
                 </tr>
+            </thead>
+            
                 <tbody>
                     <?php  
                     //$dispositivos = ControladorDispositivos::consultaDispositivos();

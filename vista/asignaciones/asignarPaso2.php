@@ -39,59 +39,65 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
         </div>
 
         <?php if (isset($datoscolaborador) && is_array($datoscolaborador) && isset($datoscolaborador)) : ?>
-            <div action="mb-3" method="formForm">
-                <label for="nombre_colaborador" class="form-label">Colaborador Seleccionado:</label>
-                <input type="text" class="form-control" name="nombre_colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"] ?>" readonly>
+        <form action ="" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="nombre_colaborador" class="form-label">Colaborador Seleccionado:</label>
+                    <input type="text" class="form-control" name="nombre_colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"] ?>" readonly>
+                </div>
+            <?php else : ?>
+                <p>El array $datoscolaborador no está definido o no tiene la estructura esperada.</p>
+            <?php endif; ?>
+
+            <div>
+                <label for="tipo_dispositivo" class="form-label">Selecciona un Tipo de Dispositivo a Asignar</label>
+                <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
+                    <option value="0" disabled selected>-- Seleccione el Tipo de Dispositivo --</option>
+                    <option value="1">Laptop</option>
+                    <option value="2">Desktop</option>
+                    <option value="3">iMac</option>
+                    <option value="4">Teclado</option>
+                    <option value="5">Mouse</option>
+                    <option value="6">Monitor</option>
+                    <option value="7">Headset</option>
+                    <option value="8">Celular</option>
+                    <option value="9">Switches</option>
+                    <option value="12">Otro</option>
+                </select>
             </div>
-        <?php else : ?>
-            <p>El array $datoscolaborador no está definido o no tiene la estructura esperada.</p>
-        <?php endif; ?>
+            
+            <div>
+                <table id="dispositivos2">
+                    <!-- La tabla no aparece hasta que se selecciona un tipo de dispositivo -->
+                </table>
+            </div>
 
-        <div class="mb-3" id="formForm">
-            <label for="tipo_dispositivo" class="form-label">Selecciona un Tipo de Dispositivo a Asignar</label>
-            <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
-                <option value="0" disabled selected>-- Seleccione el Tipo de Dispositivo --</option>
-                <option value="1">Laptop</option>
-                <option value="2">Desktop</option>
-                <option value="3">iMac</option>
-                <option value="4">Teclado</option>
-                <option value="5">Mouse</option>
-                <option value="6">Monitor</option>
-                <option value="7">Headset</option>
-                <option value="8">Celular</option>
-                <option value="9">Switches</option>
-                <option value="12">Otro</option>
-            </select>
-        </div>
+            <div>
+                <table id="dispositivos_seleccionados">
+                    <thead>
+                        <tr>
+                            <th>Id Dispositivo</th>
+                            <th>Tipo de dispositivo</th>
+                            <th>Modelo</th>
+                            <th>Número de Serie</th>
+                            <th>Marca</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Input oculto para almacenar datos de dispositivos seleccionados -->
+            <input type="hidden" name="id_colaborador" value="<?= $datoscolaborador[0]["id_colaborador"] ?>">
+            <input type="hidden" name="dispositivos_seleccionados">
+
+
+            <div action="mb-3" method="formForm">
+                <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
+                <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a>
+                <button type="button" class="btn btn-primary" onclick="continuar()">Continuar</button>
+            </div>
         
-        <div>
-            <table id="dispositivos2">
-                <!-- La tabla no aparece hasta que se selecciona un tipo de dispositivo -->
-            </table>
-        </div>
-
-        <div>
-            <table id="dispositivos_seleccionados">
-                <tr>
-                    <th>Id Dispositivo</th>
-                    <th>Tipo de dispositivo</th>
-                    <th>Modelo</th>
-                    <th>Número de Serie</th>
-                    <th>Marca</th>
-                </tr>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <!-- Input oculto para almacenar datos de dispositivos seleccionados -->
-        <input type="hidden" name="id_colaborador" value="<?= $datoscolaborador[0]["id_colaborador"] ?>">
-        <input type="hidden" name="dispositivos_seleccionados[]">
-
-        <div action="mb-3" method="formForm">
-            <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
-            <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a>
-            <button type="button" class="btn btn-primary" onclick="continuar()">Continuar</button>
-        </div>
+        </form>
 
         <script>
             cargarDispositivos();
@@ -121,19 +127,24 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
             function continuar() {
                 // Obtener datos de dispositivos seleccionados
-                var dispositivosSeleccionadosInput = document.querySelector('input[name="dispositivos_seleccionados[]"]');
-                dispositivosSeleccionadosInput.value = JSON.stringify(obtenerDatosTabla());
+                var dispositivosSeleccionadosInput = document.querySelector('input[name="dispositivos_seleccionados"]');
+                var datosTabla = obtenerDatosTabla();
+                
+                console.log("Datos de la tabla:", datosTabla);
+
+                dispositivosSeleccionadosInput.value = JSON.stringify(datosTabla);
 
                 // Redirigir a la nueva página
                 var queryParameters = "id_colaborador=" + document.querySelector('input[name="id_colaborador"]').value +
-                                      "&dispositivos=" + dispositivosSeleccionadosInput.value;
+                                    "&dispositivos=" + dispositivosSeleccionadosInput.value;
 
+                console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
                 window.location.href = "index.php?seccion=asignaciones/asignarPaso3&" + queryParameters;
             }
 
             function agregarDesdeTabla(id_dispositivo, tipo, modelo, serie, marca) {
                 // Obtener la tabla de dispositivos_seleccionados
-                var tablaSeleccionados = document.getElementById('dispositivos_seleccionados');
+                var tablaSeleccionados = document.getElementById('dispositivos_seleccionados').getElementsByTagName('tbody')[0];
 
                 // Crear una nueva fila
                 var nuevaFila = document.createElement('tr');
@@ -143,7 +154,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                                     '<td>' + serie + '</td>' +
                                     '<td>' + marca + '</td>';
 
-                // Agregar la nueva fila a la tabla de dispositivos_seleccionados
+                // Agregar la nueva fila al tbody de la tabla de dispositivos_seleccionados
                 tablaSeleccionados.appendChild(nuevaFila);
             }
 
@@ -171,6 +182,9 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
                 return datos;
             }
+
+
+
         </script>
     </div>
 </body>

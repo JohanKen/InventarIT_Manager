@@ -45,7 +45,7 @@
             <table class="tabla" id="colaboradores">
                 <thead class ="thead-dark">
                     <tr>
-                        <th>Id Colaborador</th>
+                        <th>ID Colaborador</th>
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Cliente</th>
