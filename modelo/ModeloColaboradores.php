@@ -16,6 +16,9 @@
             return $res;
         }
 
+        //esta funcion es para seleccionar solo los colaboradores activos
+        //es casi igual que la sigiente la diferencia es que el sigiente funcion
+        //es para consultar los colaboradores independientemente de su estado (es para la tabla de la vista colaboradores.php)
         static function selectColaboradorPorCliente($clienteSeleccionado) {
             try{
                 $conexion = Conexion::conectar();
@@ -32,6 +35,25 @@
                 echo "Error al ejecutar la consulta:" . $e->getMessage();
             }
         }
+
+        //Esta es para filtar los colaboradores en la vista de colaboradores.php
+        static function selectColaboradoresPorCliente($clienteSeleccionado) {
+            try{
+                $conexion = Conexion::conectar();
+                
+                $stmt = $conexion->prepare("CALL inventarit_manager.colaboradores_por_cliente(?)");
+                $stmt -> bind_param('i',$clienteSeleccionado);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+
+                return $result->fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysqli_sql_exception $e){
+                echo "Error al ejecutar la consulta:" . $e->getMessage();
+            }
+        }
+
 
         static function deleteColaborador($id){
             $id_colaborador = (int)$id;

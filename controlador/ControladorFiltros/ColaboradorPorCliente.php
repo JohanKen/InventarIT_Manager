@@ -1,5 +1,6 @@
 <?php
 //Este metodo es para la vista "asignarPaso3.php"
+//Cambia las opciones del select dependiendo del cliente seleccionado
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
