@@ -5,21 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 $datoscolaborador = ControladorColaboradores::detalleColaborador();
-//$dispositivosSeleccionados = [];
 
-/*if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
-    // Obtener datos de dispositivos seleccionados
-    $colaboradorSeleccionado = $datoscolaborador[0]["id_colaborador"];
-
-    // Redirigir a la nueva página y pasar datos como parámetros GET
-    $queryParameters = http_build_query([
-        'id_colaborador' => $colaboradorSeleccionado,
-        'dispositivos' => $dispositivosSeleccionados,
-    ]);
-
-    header("Location: index.php?seccion=asignaciones/asignarPaso3&$queryParameters");
-    exit();
-}*/
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +110,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 console.log("Solicitud AJAX enviada a: " + url);
                 xhr.send();
             }
-
+            
             function continuar() {
                 // Obtener datos de dispositivos seleccionados
                 var dispositivosSeleccionadosInput = document.querySelector('input[name="dispositivos_seleccionados"]');
@@ -141,6 +127,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
                 window.location.href = "index.php?seccion=asignaciones/asignarPaso3&" + queryParameters;
             }
+            
 
             function agregarDesdeTabla(id_dispositivo, tipo, modelo, serie, marca) {
                 // Obtener la tabla de dispositivos_seleccionados
@@ -183,9 +170,8 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 return datos;
             }
 
-
-
         </script>
+
     </div>
 </body>
 </html>

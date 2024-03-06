@@ -5,6 +5,7 @@ require_once 'controlador/ControladorAsignaciones.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+
 $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['volver'])) {
@@ -74,9 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </thead>
                         <tbody>
                             <?php
-                            // Convertir los datos de dispositivos seleccionados de JSON a un array
-                            //$dispositivosSeleccionados = json_decode(urldecode($_GET['dispositivos']), true);
-
                             // Mostrar los dispositivos seleccionados en la nueva tabla
                             foreach ($dispositivosSeleccionados as $dispositivo) {
                                 echo '<tr>';
