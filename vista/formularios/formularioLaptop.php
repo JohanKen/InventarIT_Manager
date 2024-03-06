@@ -54,9 +54,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarDispositivos();
-        echo '<script>
-            window.location.href = "index.php?seccion=dispositivos";
-        </script>';
+        echo "
+            <script>
+            const Swal = require('sweetalert2');
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: 'Dispositivo editado correctamente'
+            });
+            setTimeout(function(){
+                window.location.href='index.php?seccion=dispositivos';
+            }, 3000); 
+            </script>";
 
         exit;
         
@@ -68,24 +87,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar dispositivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="estilos/estilosFormularios.css">
-
 </head>
 
 
+
 <body>
-    <div class="contentSeccion">
+
+
+    <div class="container-fluid">
+                <div class="row fle">
+                    <div class="col-md-6 headd">
+                        <h1>Editar laptop</h1>
+                    </div>
+                    <div class="col-md-6 heaad">
+                        <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-52">
         <?php
         if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
             
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-
+        <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="id_dispositivo" class="form-label">ID</label>
                 <input type="text" class="form-control" name="id_dispositivo"
@@ -100,6 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" name="numero_serie"
                     value="<?= $dispositivoInfo[0]["numero_serie"] ?>">
             </div>
+            </div>
+            <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="marca" class="form-label">Marca</label>
                 <select name="marca" id="" class="form-control">
@@ -154,8 +191,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
 
-
-
+            </div>
+            <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="fecha_compra" class="form-label">Fecha de compra</label>
                 <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput"
@@ -171,6 +208,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     required="true">Imagen del dispositivo</label>
                 <input type="file" class="form-control" name="foto">
             </div>
+            </div>
+            <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="ram" class="form-label">RAM</label>
                 <select class="form-select" name="ram">
@@ -216,13 +255,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                 </select>
             </div>
-            <div class="mb-3" id="formForm">
-                <a class="btn btn-danger" href="index.php?seccion=dispositivos">Cancelar</a>
-                <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
             </div>
+            </div>
+            <div class="conn">
+            <div class="mb-3" id="formForm">
+            <input type="submit" class="btn btn-primary" name="guardar" value="Actualizar Dispositivo">
+
+            <hr>
+            <a class="btn btn-danger" href="index.php?seccion=dispositivos">Cancelar</a>
+
+                
+                <hr>
+            </div>
+            </div>
+           
 
 
-        </form>
+        </form> 
 
         <?php
     

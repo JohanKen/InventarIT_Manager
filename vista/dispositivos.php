@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
- 
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="estilos/estilosDispositivos.css">
     <style>
         .modal {
@@ -90,14 +90,16 @@
                     </div>
                 </form>
             </header>
+            <div>
             <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
+            </div>
         </div>
         <a href="index.php?seccion=nuevoDispositivo">
     <button class="btn custom-button" onclick="nuevoDispositivo();">AGREGAR NUEVO DISPOSITIVO</button>
 </a>
-        <div class="table">
+        <div class="table-responsive">
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="table-dark">
                     <tr>
                         <th>Id Dispositivo</th>
                         <th>Tipo de dispositivo</th>
@@ -113,32 +115,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    
+                <?php
                     $eliminar = new ControladorDispositivos;
-                    $eliminar->borrarDispositivos();
+                    $eliminado =  $eliminar->borrarDispositivos();
+
+                    if ($eliminado) {
+                        echo "
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                        <script>
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Dispositivo eliminado con exito',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        setTimeout(function() {
+                            window.location.href='index.php?seccion=dispositivos';
+                        }, 3000); </script>
+                        ";
+                    }
+
+
+                 
+                    
 
                     $lista = ControladorDispositivos::consultaDispositivos();
                     foreach ($lista as $row => $item) {
-                        
-                        echo '
-                            <tr>
-                                <td>' . $item[0] . '</td>
-                                <td>' . $item[1] . '</td>
-                                <td>' . $item[2] . '</td>
-                                <td>' . $item[3] . '</td>
-                                <td>' . $item[4] . '</td>
-                                <td>$'. $item[5] . '</td>
-                                <td>' . $item[6] . '</td>
-                                <td>' . $item[7] . '</td>
-                                <td>' . $item[8] . '</td>
-                                <td><img src="' . $item[9] . '" alt="" height="50"></td>
-                                <td>
-                                    <a href="index.php?seccion=editarDispositivos&id_dispositivo=' . $item[0] . '">Editar</a>
-                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');">Borrar</a>
-                                </td>
-                            </tr>
-                        ';
+                        echo "
+                        <tr>
+                            <td>{$item[0]}</td>
+                            <td>{$item[1]}</td>
+                            <td>{$item[2]}</td>
+                            <td>{$item[3]}</td>
+                            <td>{$item[4]}</td>
+                            <td>\${$item[5]}</td>
+                            <td>{$item[6]}</td>
+                            <td>{$item[7]}</td>
+                            <td>{$item[8]}</td>
+                            <td><img src='{$item[9]}' alt='' height='50'></td>
+                            <td>
+                                <button type='button' class='btn btn-info' onclick=\"window.location.href='index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}'\">Editar</button>
+                                <button type='button' class='btn btn-danger' onclick='confirmarBorrar({$item[0]});'>Borrar</button>
+                            </td>
+                        </tr>
+                    ";
+                    
                     }
                     
                     

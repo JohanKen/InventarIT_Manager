@@ -74,7 +74,7 @@ class ModeloDispositivos extends Conexion {
 
 
     // Función para eliminar un dispositivo
-    static function deleteDispositivos($tabla, $id) {
+    static function deleteDispositivos($id) {
         $sql = "CALL inventarit_manager.eliminar_dispositivo('$id');";
         $res = Conexion::conectar()->query($sql);
         return $res;

@@ -35,12 +35,16 @@ body {
 }
 
 .headd h1 {
-    text-align: left;
-    color: #fff;
-    width: 300px;
+    text-align: center;
+    color: #333;
+    text-shadow: 1px 4px rgb(255, 255, 255);
+
+    width: 600px;
     padding: 10px;
-    background-color: #333;
-    height: fit-content;
+    background: none;
+  
+    backdrop-filter: blur(10px);
+    
 }
 
 .heaad {
@@ -74,11 +78,14 @@ form{
 }
 #formForm {
     width: 100%;
+    padding: 10px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .form-label {
-    color: #fff;
+    color:#333;
+  
     margin-bottom: 10px;
     display: block;
 }

@@ -34,76 +34,44 @@ function ObtenerDatosUsuario($id){
     }
 }
 // Verificar si se envió el formulario para editar el usuario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar que se presionó el botón guardar del formulario
-    if(isset($_POST['actualizarPerfil'])) {
-        // Verificar si el usuario seleccionó "No" en el campo de selección "Cambiar Contraseña"
-        if ($_POST['changePassword'] === 'no') {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
 
-            
-            // Actualizar el perfil del usuario sin cambiar la contraseña
-            $obj = new ControladorUsuarios();
-            $obj->UpdatePerfil();
-            echo '<script>
-                    alert("El usuario se actualizó correctamente");
-                    window.location.href = "index.php?seccionvv=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
-                </script>';
-       
-        } else {
-            // Verificar que se enviaron las contraseñas
-            if(isset($_POST['passwordInput']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-                $passwordActual = $_POST['passwordInput'];
-                $nuevaPassword = $_POST['password'];
-                $confirmarPassword = $_POST['confirm_password'];
+   
+        if (isset($_POST['passwordInput'], $_POST['password'], $_POST['confirm_password'])) {
+            $passwordActual = $_POST['passwordInput'];
+            $nuevaPassword = $_POST['password'];
+            $confirmarPassword = $_POST['confirm_password'];
 
-                // Verificar que la contraseña actual sea correcta
-                if ($passwordActual !== $datosUsuario[9]) {
-                    echo '<script>alert("La contraseña actual es incorrecta.");</script>';
-                } else {
-                    // Verificar que la nueva contraseña y la confirmación coincidan
-                    if ($nuevaPassword !== $confirmarPassword) {
-                        echo '<script>alert(La nueva contraseña y la confirmación no coinciden.");</script>';
-                    } else {
-                        // Actualizar la contraseña del usuario en la base de datos solo si se proporciona una nueva contraseña
-                        if ($nuevaPassword !== '') {
-                            $obj = new ControladorUsuarios();
-                            $obj->UpdatePerfil();
-                            echo '<script>
-                            Swal.fire({
-                                title: "El usuario se actualizó correctamente",
-                                icon: "success",
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
-                            });
-                        </script>';
-                            exit;
-                        } else {
-                            // Si no se proporciona una nueva contraseña, no se actualiza la contraseña
-                            $obj = new ControladorUsuarios();
-                            $obj->UpdatePerfil();
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "El usuario se actualizó correctamente",
-                                        icon: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    }).then(() => {
-                                        window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
-                                    });
-                                </script>';
+            if ($passwordActual !== $datosUsuario[9]) {
+                echo '<script>Swal.fire({
+                    title:"La contraseña ingresada no es correcta";
 
-                            exit;
-                        }
-                    }
-                }
+                })</script>';
+            } elseif ($nuevaPassword !== $confirmarPassword) {
+                echo '<script>
+                    Swal.fire({
+                        icon: "error",
+                        title: "Contraseñas incorrectas",
+                        text: "Las nuevas contraseñas no coinciden",
+                    });</script>';
             } else {
-                echo "Por favor, complete todos los campos de contraseña.";
+                $obj = new ControladorUsuarios();
+                $obj->UpdatePerfil();
+                echo '<script>
+                        Swal.fire({
+                            title: "El usuario se actualizó correctamente",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            window.location.href = "index.php?seccion=perfil&id_usuario=' . $_SESSION['usuario']['id_usuario'] . '";
+                        });
+                    </script>';
+                exit;
             }
-        }
+        } 
     }
-}
+
 
         ?>
 <!DOCTYPE html>
@@ -143,6 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-8">
                             <div class="card-body p-4">
                                 <h6>Editar Información del perfil</h6>
+                                <?php
+                               
+                                foreach ($datosUsuario as $dato) {
+                                    echo $dato . "<br>"; 
+                                }
+                                ?>
+
                                 <hr class="mt-0 mb-4">
                                 <form action="#" method="POST">
                                     <div class="row pt-1">
@@ -206,11 +181,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="col-md-6 mb-3">
                                             <label for="changePassword">Cambiar Contraseña</label>
                                             <select class="form-select" id="changePassword" name="changePassword">
-                                                <option value="no">No</option>
+                                                <option value="<?php echo $datosUsuario[9]; ?>">No</option>
                                                 <option value="yes">Sí</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>  
+                                 
+
+                                <!-- Se agregara un nuevo boton para hacer la validacion de las contraseñas y primero preguntar isi es que se queire hacer el cambio -->
+
+                                <div class="col-md-6 mb-3">
+                                    <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class= "btn btn-warning" id="btnCambiarContra">Cambiar Contraseña</a>
+                                </div>
+
+
+
                                     <div id="passwordFields" style="display: none;">
                                     <div class="row pt-1">
                                     <div class="col-md-6 mb-3">
@@ -225,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="password">Nueva Contraseña</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="<?php echo $datosUsuario[9]; ?>" pattern="^(?=.*\d).{8,}$" title="La contraseña debe tener al menos 8 caracteres y contener al menos un número" required disabled>
+                                            <input type="password" class="form-control" id="password" name="password" value="" pattern="^(?=.*\d).{8,}$" title="La contraseña debe tener al menos 8 caracteres y contener al menos un número" required disabled>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="confirm_password">Confirmar Contraseña</label>
@@ -242,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div>\
                         </div>
                     </div>
                 </div>
@@ -253,6 +238,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </section>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
+    function solicitarPassword(idUsuario){
+        Swal.fire({
+            title : 'Ingrese su contraseña actual:',
+            input: 'password',
+            inputAttributes : {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            showLoaderOnConfirm: true,
+            preConfirm: (password) => {
+            return new Promise((resolve, reject) => {
+                // Comparar la contraseña ingresada con la contraseña almacenada
+                if (password === '<?php echo $datosUsuario[9]; ?>') {
+                    resolve();
+                } else {
+                    reject('Intente de nuevo');
+                }
+            });
+        },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir al usuario si la contraseña es correcta
+                    window.location.href = "index.php?seccion=editarPerfil&id_usuario=" + idUsuario;
+                }
+            }).catch((error) => {
+                // Mostrar un mensaje de error si la contraseña es incorrecta
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Contraseña incorrecta',
+                    text: error
+                });
+            });
+    }
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('passwordInput');
+
+    togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').classList.toggle('fa-eye');
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const changePasswordSelect = document.getElementById('changePassword');

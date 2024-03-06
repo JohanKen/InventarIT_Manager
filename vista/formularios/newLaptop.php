@@ -6,10 +6,27 @@ if(isset($_POST['Registrar'])){
     $registrar = new ControladorDispositivos;
     $registrar->registrarLaptop();
     echo '
-        <script>
-            alert("Dispositivo creado correctamente");
-            window.location.href = "index.php?seccion=dispositivos";
-        </script>';
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Dispositivo agregado correctamente"
+      });
+      setTimeout(function(){
+        window.location.href="index.php?seccion=dispositivos";
+      }, 3000); // Redireccionar después de 3 segundos
+    </script>';
+    
     exit;
     
                
@@ -22,11 +39,10 @@ if(isset($_POST['Registrar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro laptop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 
     <link rel="stylesheet" href="estilos/estilosFormularios.css">
     </head>
 
@@ -60,20 +76,15 @@ if(isset($_POST['Registrar'])){
                         <label for="marca" class="form-label">Marca</label>
                         <select name="marca" class="form-select" id="marca">
                             <?php
-                        $marcas = ControladorDispositivos::getMarcas();
-                        foreach ($marcas as $row => $item) {
-                            echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
-                        }
-                        ?>
-                        <!--    <option value="otro">Otra marca</option>   -->
+                            $marcas = ControladorDispositivos::getMarcas();
+                            foreach ($marcas as $row => $item) {
+                                echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
+                            }
+                            ?>
+                            <option value="otro">Otra marca</option>  
                         </select>
                     </div>
 
-                    <div class="mb-3" id="nuevaMarcaDiv" style="display: none;">
-                        <label for="nueva_marca" class="form-label">Nueva marca</label>
-                        <input type="text" class="form-control" id="nueva_marca" name="nueva_marca"
-                            placeholder="Ingresa la nueva marca...">
-                    </div>
 
 
                     <!------------------------------------------------------------------>
@@ -81,7 +92,7 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                 <div class="mb-3">
                     <label id="lblNew" for="labelrecio" class="form-label">Precio</label>
-                    <input type="text" class="form-control" name="precio" id="precioInput" value="" pattern="[0-9]*" title="Ingrese solo números">
+                    <input type="number" class="form-control" name="precio" id="precioInput" value="" pattern="[0-9]*" title="Ingrese solo números">
                 </div>
 
                     <div class="mb-3">
@@ -212,7 +223,7 @@ if(isset($_POST['Registrar'])){
 
             </form>
         </div>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
         <script>
 
         function validarCampos() {
@@ -225,16 +236,54 @@ if(isset($_POST['Registrar'])){
             // Agrega más validaciones si es necesario
             return true; // Permite el envío del formulario si todos los campos están llenos
         }
-        document.getElementById("marca").addEventListener("change", function() {
-            var nuevaMarcaDiv = document.getElementById("nuevaMarcaDiv");
-            var marcaSeleccionada = this.value;
+     
 
-            if (marcaSeleccionada === "otro") {
-                nuevaMarcaDiv.style.display = "block";
+        // Mapeo de marcas y sus IDs correspondientes
+const marcasIds = {
+    // Aquí debes definir tus marcas y sus IDs correspondientes
+};
+
+document.getElementById("marca").addEventListener("change", function() {
+    var marcaSeleccionada = this.value;
+
+    if (marcaSeleccionada === "otro") {
+        Swal.fire({
+            title: 'Nueva marca',
+            input: 'text',
+            inputPlaceholder: 'Ingresa la nueva marca...',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes ingresar una nueva marca';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var nuevaMarca = result.value;
+                // Obtener el elemento select de la marca
+                var selectMarca = document.getElementById("marca");
+                // Buscar el ID correspondiente en el mapeo de marcas
+                var nuevoId = marcasIds[nuevaMarca];
+                // Crear una nueva opción con el nuevo ID como valor y la nueva marca como texto
+                var option = document.createElement("option");
+                option.text = nuevaMarca;
+                option.value = nuevoId;
+                // Agregar la nueva opción al select
+                selectMarca.add(option);
+                // Seleccionar la nueva marca
+                selectMarca.value = nuevoId;
             } else {
-                nuevaMarcaDiv.style.display = "none";
+                // Si el usuario cancela, seleccionamos la primera opción
+                document.getElementById("marca").selectedIndex = 0;
             }
         });
+    }
+});
+
+
+
 
 
 

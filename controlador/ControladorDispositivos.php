@@ -13,19 +13,20 @@
         //funcion para eliminar dispositivos
         static function borrarDispositivos(){
             if(isset($_GET["accion"]) && $_GET["accion"] == "eliminarDispositivos"){
-                $id = $_GET["id_dispositivo"];
-                $tabla = 'dispositivos';                                                                                                                                                                    
-                $delete = ModeloDispositivos::deleteDispositivos($tabla, $id);
-                if($delete>0){
-                    echo '
-                        <script>
-                            alert("Dispositivo eliminado correctamente");
-                            window.location.href="index.php?seccion=dispositivos";
-                        </script>
-                    ';
+                $id = $_GET["id_dispositivo"];                                                                                                                                                               
+                $delete = ModeloDispositivos::deleteDispositivos($id);
+        
+                // Variable de control para evitar el bucle
+                $ejecutado = false;
+        
+                if ($delete > 0 && !$ejecutado) {
+                    $ejecutado = true; // Marcar como ejecutado para evitar el bucle
+                    return true;
                 }
             }
+            return false;
         }
+        
         
 
      
@@ -116,16 +117,6 @@
 
                             $insert = ModeloDispositivos::updateLaptop($datos);
 
-                            if ($insert > 0) {
-                                echo '
-                                    <script>
-                                        alert("Dispositivo actualizado correctamente");
-                                        window.location.href="index.php?seccion=dispositivos";
-                                    </script>
-                                ';
-                            } else {
-                                echo 'Error al intentar actualizar el dispositivo.';
-                            }
                         } catch (mysqli_sql_exception $e) {
                             // Manejar excepciones de MySQL
                             echo 'Error en la conexión a la base de datos.';
