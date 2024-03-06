@@ -5,7 +5,8 @@ ini_set('display_errors', '1');
 
 
 // Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
-$dispositivoInfo = ControladorDispositivos::detalleDispositivoGen();
+$tipo = 7;
+$dispositivoInfo = ControladorDispositivos::detalleDispositivo($tipo);
 
 // Array asociativo que mapea nombres de marcas a IDs 
 $marcas = array(

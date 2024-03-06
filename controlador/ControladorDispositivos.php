@@ -32,14 +32,23 @@
        
         //funcion para consultar los detalles de dispositivos de manera general sin especificar
         //que sea de algun tipo en especifico
-        static function detalleDispositivo(){
+        static function detalleDispositivo($tipo){
             if(isset($_GET["id_dispositivo"])){
-                $tabla = "v_inv_dispositivos";
                 $id = $_GET["id_dispositivo"];
-
-                $obj = ModeloDispositivos::selectDispositivosId($tabla, $id);
-                $dispositivo = $obj->fetch_all();
+                
+                $obj = ModeloDispositivos::selectDispositivo($id,$tipo);
+                
+                // Verificar si $obj es un objeto mysqli_result
+                if ($obj instanceof mysqli_result) {
+                    // Si es un objeto mysqli_result, aplicar fetch_all()
+                    $dispositivo = $obj->fetch_all(MYSQLI_ASSOC);
+                } else {
+                    // Si no es un objeto mysqli_result, asumir que ya es un array
+                    $dispositivo = $obj;
+                }
+                
                 return $dispositivo;
+                
             }
         }
 
@@ -877,21 +886,6 @@ static function editarIMac()
             }catch (mysqli_sql_exception){
                 echo 'Message: '.$e->getMessage();
             }
-        }
-    }
-
-    static function detalleCctv(){
-        if(isset($_GET["id_dispositivo"])){
-            $id = $_GET["id_dispositivo"];
-
-            $obj = ModeloDispositivos::selectCctv($id);
-
-            if($obj instanceof mysqli_result){
-                $dispositivo = $obj->fecht_all(MYSQL_ASSOC);
-            }else{
-                $dispositivo = $obj;
-            }
-            return $dispositivo;
         }
     }
 

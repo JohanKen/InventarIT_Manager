@@ -5,7 +5,8 @@ ini_set('display_errors', '1');
 
 
 // Obtener la información del dispositivo desde el controlador mediante la consulta con el proceso almacenado datos.laptop
-$dispositivoInfo = ControladorDispositivos::detalleDispositivoIMac();
+$tipo = 3;
+$dispositivoInfo = ControladorDispositivos::detalleDispositivo($tipo);
 
 // Array asociativo que mapea nombres de marcas a IDs 
 $marcas = array(
@@ -31,9 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (isset($_POST['guardarIMac'])) {
         $update = new ControladorDispositivos;
-
-
-
 
         //LAS SIGUIENTES LINEAS SON EMPAREJAMIENTOS DE VARIABLES Y ASIGNACIONES PARA QUE PUEDAN PASAR AL CONTROLADOR DEL TIPO 
         //QUE LAS ESPERA PARA QUE NO TENGA NINGUN INCONVENIENTE CON ELLO.

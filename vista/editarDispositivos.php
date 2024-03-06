@@ -2,20 +2,15 @@
 
 // Obtener el ID del dispositivo de la URL
 $id = $_GET['id_dispositivo'];
-
+$tipo = 4;
 
 
 // Obtener datos del dispositivo según el ID
-$datosDispositivo = obtenerDatosDispositivo($id);
+$datosDispositivo = obtenerDatosDispositivo($tipo);
 
-function obtenerDatosDispositivo($id) {
+function obtenerDatosDispositivo($tipo) {
     // Aquí consultamos la información del dispositivo desde la BD con su ID
-    if ($id>=3){
-        $DispositivoInfo = ControladorDispositivos::detalleDispositivoGen($id);
-    }else{
-        $DispositivoInfo = ControladorDispositivos::detalleDispositivo($id);
-    }
-    
+    $DispositivoInfo = ControladorDispositivos::detalleDispositivo($tipo);
 
     // Verificar si se obtuvieron datos
     if (!$DispositivoInfo || empty($DispositivoInfo[0])) {

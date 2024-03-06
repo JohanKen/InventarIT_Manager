@@ -3,7 +3,8 @@ require_once 'controlador/ControladorDispositivos.php';
 error_reporting();
 ini_set('display_errors','1');
 
-$dispositivoInfo = ControladorDispositivos::detalleCctv();
+$tipo = 14;
+$dispositivoInfo = ControladorDispositivos::detalleDispositivo($tipo);
 
 $marcas = array(
     1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10,
