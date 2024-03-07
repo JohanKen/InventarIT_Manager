@@ -21,7 +21,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
         $dispositivoInfo[0]['precio'] = $precio;
 
-        $registrar -> registrarImpresora();
+        $tipo = 10;
+    
+        $registrar -> registrarDispositivo($tipo);
         echo  '<script>
                     alert("Registro realizado con exito!");
                     window.location.href="index.php?seccion=dispositivos";

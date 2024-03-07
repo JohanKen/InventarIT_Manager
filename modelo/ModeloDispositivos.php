@@ -10,10 +10,6 @@ class ModeloDispositivos extends Conexion {
         return $res;
     }
     
-
-
-
-
     // Función para eliminar un dispositivo
     static function deleteDispositivos($tabla, $id) {
         $sql = "CALL inventarit_manager.eliminar_dispositivo('$id');";
@@ -82,46 +78,46 @@ class ModeloDispositivos extends Conexion {
 
     //funcion para insertar a base de datos directamente desde el modelo con datos precargados sin usar el formulario
     //esta funcion solo es de prueba debido a que la sentencia esta fallando desde el controlador (tipos de datos no coinciden y no hace nada la funcion en el modelo)
-// Función para actualizar las laptop mediante el id
-static function updateLaptop($datos) {
-    $conexion = Conexion::conectar();// Accede a la variable de conexión global
-    try {
-        // Crear variables para almacenar los valores
-        $id_dispositivo = (int) $datos["id_dispositivo"];
-        $id_marca = (int) $datos["id_marca"];
-        $ram = (int) $datos["ram"];
-        $estado = (int) $datos["estado"];
-        $precio = (double) $datos["precio"];
+    // Función para actualizar las laptop mediante el id
+    static function updateLaptop($datos) {
+        $conexion = Conexion::conectar();// Accede a la variable de conexión global
+        try {
+            // Crear variables para almacenar los valores
+            $id_dispositivo = (int) $datos["id_dispositivo"];
+            $id_marca = (int) $datos["id_marca"];
+            $ram = (int) $datos["ram"];
+            $estado = (int) $datos["estado"];
+            $precio = (double) $datos["precio"];
 
-        //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
-        $statement = $conexion->prepare("CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $statement->bind_param("issiisssissi",
-            $id_dispositivo,
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-            $ram,
-            $datos["procesador"],
-            $datos["sistema_operativo"],
-            $estado
-        );
+            //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
+            $statement = $conexion->prepare("CALL editar_laptop(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->bind_param("issiisssissi",
+                $id_dispositivo,
+                $datos["modelo"],
+                $datos["numero_serie"],
+                $id_marca,
+                $precio,
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"],
+                $ram,
+                $datos["procesador"],
+                $datos["sistema_operativo"],
+                $estado
+            );
 
-        // Muestra el array antes de ejecutar la sentencia preparada
-      
-
-        $statement->execute();
-        $statement->close();
-       
+            // Muestra el array antes de ejecutar la sentencia preparada
         
 
-    } catch (Exception $e) {
-        echo 'Message: ' .$e->getMessage();
+            $statement->execute();
+            $statement->close();
+        
+            
+
+        } catch (Exception $e) {
+            echo 'Message: ' .$e->getMessage();
+        }
     }
-}
 
 static function updateDispositivo($datos) {
     $conexion = Conexion::conectar();// Accede a la variable de conexión global
@@ -147,19 +143,14 @@ static function updateDispositivo($datos) {
         );
 
         // Muestra el array antes de ejecutar la sentencia preparada
-      
-
         $statement->execute();
         $statement->close();
-       
-        
-        
+
         //echo "ARRAY EN EL MODELO(datos)...($datos)";
         //var_dump($datos);
 
         // Mensaje de éxito
         
-
     } catch (Exception $e) {
         // Manejar errores generales
         echo 'Message: ' .$e->getMessage();
@@ -309,15 +300,15 @@ static function createImac($datos){
     }
 }
 
-static function createTeclado($datos){
+static function createDispositivo($datos){
     $conexion = Conexion::conectar();
     try{
 
         $precio = (double) $datos["precio"];
         $id_marca = (int) $datos["id_marca"];
 
-        $statement = $conexion->prepare("CALL insertar_teclado(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
+        $statement = $conexion->prepare("CALL insertar_dispositivo(?, ?, ?, ?, ?, ?, ?,?)");
+        $statement ->bind_param("ssiisssi",
             $datos["modelo"],
             $datos["numero_serie"],
             $id_marca,
@@ -325,6 +316,7 @@ static function createTeclado($datos){
             $datos["fecha_compra"],
             $datos["nota"],
             $datos["foto"],
+            $datos["tipo"],
         );
 
         $statement->execute();
@@ -333,189 +325,6 @@ static function createTeclado($datos){
    }catch(Exception $e){
         echo 'Message: ' .$e->getMessage();
    }
-}
-
-static function createMouse($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion->prepare("CALL insertar_mouse(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement->execute();
-        $statement->close();
-        
-   }catch(Exception $e){
-        echo 'Message: ' .$e->getMessage();
-   }
-}
-
-static function createMonitor($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion->prepare("CALL insertar_monitor(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement->execute();
-        $statement->close();
-        
-   }catch(Exception $e){
-        echo 'Message: ' .$e->getMessage();
-   }
-}
-
-static function createHeadset($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion -> prepare("CALL insertar_headsets(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement->execute();
-        $statement->close();
-
-    }catch(Expcetion $e){
-        echo 'Message:' .$e->getMessage();
-    }
-}
-
-static function createCelular($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion -> prepare("CALL insertar_celular(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement->execute();
-        $statement ->close();
-
-    }catch (Exception $e) {
-        echo 'Message: ' .$e->getMessage();
-    }
-}
-
-static function createSwitch($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion -> prepare("CALL insertar_switch(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement ->execute();
-        $statement ->close();
-
-    }catch (Exception $e){
-        echo 'Message: '.$e ->getMessage();
-    }
-}
-
-static function createImpresora($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion -> prepare("CALL insertar_impresora(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"],
-        );
-
-        $statement ->execute();
-        $statement ->close();
-
-    }catch (Exception $e){
-        echo 'Message: '.$e ->getMessage();
-    }
-}
-
-static function createOtro($datos){
-    $conexion = Conexion::conectar();
-    try{
-
-        $precio = (double) $datos["precio"];
-        $id_marca = (int) $datos["id_marca"];
-
-        $statement = $conexion -> prepare("CALL insertar_otro(?, ?, ?, ?, ?, ?, ?)");
-        $statement ->bind_param("ssiisss",
-            $datos["modelo"],
-            $datos["numero_serie"],
-            $id_marca,
-            $precio,
-            $datos["fecha_compra"],
-            $datos["nota"],
-            $datos["foto"]
-
-        );
-
-        $statement -> execute();
-        $statement -> close();
-
-    }catch (Exception $e){
-        echo 'Message: '.$e ->getMessage();
-    }
 }
 
 static function selectHerramientas($tabla){

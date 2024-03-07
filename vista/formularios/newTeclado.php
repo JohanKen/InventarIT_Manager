@@ -21,7 +21,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
         $dispositivoInfo[0]['precio'] = $precio;
 
-        $registrar ->registrarTeclado();
+        $tipo = 4;
+    
+        $registrar -> registrarDispositivo($tipo);
         echo  '<script>
                     alert("Registro realizado con exito!");
                     window.location.href="index.php?seccion=dispositivos";
@@ -38,7 +40,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
 </head>
 
 <body>
