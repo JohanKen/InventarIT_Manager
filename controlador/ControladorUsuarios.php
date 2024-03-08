@@ -78,7 +78,15 @@ class ControladorUsuarios {
         }
     }
     
+    public static function UpdatePassword(){
+        if(isset($_POST['cambiarContra'])){
+            $id = $_GET ['id_usuario'];
+            $newPassword = $_POST['password'];
 
+            $obj = ModeloUsuarios::actualizarPassword($id, $newPassword);
+           
+        }
+    }
     
 
     public static function borrarUsuarios(){
@@ -163,11 +171,9 @@ class ControladorUsuarios {
 
             static function UpdatePerfil() {
                 if(isset($_POST["actualizarPerfil"])) {
+                
                     try {
-                        
-                  
-                    
-                        
+                
                         // Formateo de fechas para que se vayan al modelo como las necesita la base de datos
                         $fecha_ingreso = $_POST["fecha_ingreso"];
                         if (DateTime::createFromFormat('Y-m-d', $fecha_ingreso) !== false) {
@@ -184,7 +190,6 @@ class ControladorUsuarios {
                             'apellidoMaterno' => $_POST['apellido_materno'],
                             'nombre' => $_POST['nombre_usuario'],
                             'correo' => $_POST['correo'],
-                            'password' => $_POST['password'],
                             'rol' => $_POST['rol'],
                             'fechaIngreso' => $fecha_ingresoFormateada
                         );

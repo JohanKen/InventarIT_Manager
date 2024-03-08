@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
     <style>
         .contentSeccion{
@@ -15,7 +16,7 @@
            
             margin-left:100px;
             border-radius:10px;
-            z-index: 10;
+            z-index: -2;
             max-width:1180px;
             height: 2080px;
         }
@@ -38,6 +39,7 @@
 
         </p>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

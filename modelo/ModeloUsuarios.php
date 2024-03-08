@@ -99,6 +99,23 @@ $statement->close();
 
 }
 
+
+    static function actualizarPassword($id, $newPassword){
+        $conexion = Conexion::conectar();
+        try {
+            $statement = $conexion->prepare("CALL inventarit_manager.cambiar_password(?,?)");
+            $statement->bind_param("is",
+            $id,
+            $newPassword);
+            
+        $statement->execute();
+        $statement->close();
+        
+        } catch(Exception $e) {
+            echo 'Message: ' .$e->getMessage();
+        }
+        }
+
 static function actualizarUsuario($datos){
     $conexion = Conexion::conectar();
     try{
@@ -107,14 +124,13 @@ static function actualizarUsuario($datos){
        $id_rol= (int) $datos['rol'];
        
 
-        $statement = $conexion->prepare("CALL editar_usuario2(?,?,?,?,?,?,?,?)");
-        $statement->bind_param("isssssis",
+        $statement = $conexion->prepare("CALL editar_usuario2(?,?,?,?,?,?,?)");
+        $statement->bind_param("issssis",
         $id_usuario,
         $datos["apellidoPaterno"],
         $datos["apellidoMaterno"],
         $datos["nombre"], 
         $datos["correo"],
-        $datos["password"],
         $id_rol,
         $datos["fechaIngreso"]
     );

@@ -36,25 +36,6 @@ function ObtenerDatosUsuario($id){
 // Verificar si se envió el formulario para editar el usuario
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
 
-   
-        if (isset($_POST['passwordInput'], $_POST['password'], $_POST['confirm_password'])) {
-            $passwordActual = $_POST['passwordInput'];
-            $nuevaPassword = $_POST['password'];
-            $confirmarPassword = $_POST['confirm_password'];
-
-            if ($passwordActual !== $datosUsuario[9]) {
-                echo '<script>Swal.fire({
-                    title:"La contraseña ingresada no es correcta";
-
-                })</script>';
-            } elseif ($nuevaPassword !== $confirmarPassword) {
-                echo '<script>
-                    Swal.fire({
-                        icon: "error",
-                        title: "Contraseñas incorrectas",
-                        text: "Las nuevas contraseñas no coinciden",
-                    });</script>';
-            } else {
                 $obj = new ControladorUsuarios();
                 $obj->UpdatePerfil();
                 echo '<script>
@@ -69,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
                     </script>';
                 exit;
             }
-        } 
-    }
+        
+    
 
 
         ?>
@@ -111,15 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
                         <div class="col-md-8">
                             <div class="card-body p-4">
                                 <h6>Editar Información del perfil</h6>
-                                <?php
-                               
-                                foreach ($datosUsuario as $dato) {
-                                    echo $dato . "<br>"; 
-                                }
-                                ?>
+                             
 
                                 <hr class="mt-0 mb-4">
-                                <form action="#" method="POST">
+                                <form action="" method="POST">
                                     <div class="row pt-1">
                                         <div class="col-md-6 mb-3">
                                             <label for="nombre">Nombre</label>
@@ -177,23 +153,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row pt-1">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="changePassword">Cambiar Contraseña</label>
-                                            <select class="form-select" id="changePassword" name="changePassword">
-                                                <option value="<?php echo $datosUsuario[9]; ?>">No</option>
-                                                <option value="yes">Sí</option>
-                                            </select>
-                                        </div>
-                                    </div>  
-                                 
+                                <!-- Se agregaran los multiple inputs para la parte de cambiar las contraseñas en el perfil -->
+                            
+
+                                
 
                                 <!-- Se agregara un nuevo boton para hacer la validacion de las contraseñas y primero preguntar isi es que se queire hacer el cambio -->
 
                                 <div class="col-md-6 mb-3">
-                                    <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class= "btn btn-warning" id="btnCambiarContra">Cambiar Contraseña</a>
-                                </div>
+                                <a href="javascript:void(0);" onclick="solicitarPassword('<?php echo $datosUsuario[0]; ?>');" class="btn btn-warning" id="btnCambiarContra">Cambiar Contraseña</a>
+                             
 
+                                </div>  
 
 
                                     <div id="passwordFields" style="display: none;">
@@ -202,20 +173,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
                                         
                                             <label for="passwordInput">Ingresa contraseña Actual</label>
                                             <div class="input-group">
-                                                <input type="password" id="passwordInput" class="form-control" name="passwordInput" required>
+                                                <input type="password" id="passwordInput" class="form-control" name="passwordInput" >
                                                 <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="password">Nueva Contraseña</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="" pattern="^(?=.*\d).{8,}$" title="La contraseña debe tener al menos 8 caracteres y contener al menos un número" required disabled>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="confirm_password">Confirmar Contraseña</label>
-                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required disabled>
-                                        </div>
+                                      
                                     </div>
                                     </div>
                                     <div class="row pt-1">
@@ -227,7 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
                                     </div>
                                     </div>
                                 </form>
-                            </div>\
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,11 +203,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
-    function solicitarPassword(idUsuario){
+function solicitarPassword(idUsuario) {
         Swal.fire({
-            title : 'Ingrese su contraseña actual:',
+            title: 'Ingrese su contraseña actual:',
             input: 'password',
-            inputAttributes : {
+            inputAttributes: {
                 autocapitalize: 'off'
             },
             showCancelButton: true,
@@ -251,30 +215,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizarPerfil'])) {
             cancelButtonText: 'Cancelar',
             showLoaderOnConfirm: true,
             preConfirm: (password) => {
-            return new Promise((resolve, reject) => {
-                // Comparar la contraseña ingresada con la contraseña almacenada
-                if (password === '<?php echo $datosUsuario[9]; ?>') {
-                    resolve();
-                } else {
-                    reject('Intente de nuevo');
-                }
-            });
-        },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Redirigir al usuario si la contraseña es correcta
-                    window.location.href = "index.php?seccion=editarPerfil&id_usuario=" + idUsuario;
-                }
-            }).catch((error) => {
-                // Mostrar un mensaje de error si la contraseña es incorrecta
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Contraseña incorrecta',
-                    text: error
+                return new Promise((resolve, reject) => {
+                    // Comparar la contraseña ingresada con la contraseña almacenada
+                    if (password === '<?php echo $datosUsuario[9]; ?>') {
+                        resolve();
+                    } else {
+                        reject('Intente de nuevo');
+                    }
                 });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir al usuario si la contraseña es correcta
+                window.location.href = "index.php?seccion=cambiarContraPerfil&id_usuario=" + idUsuario;
+            }
+        }).catch((error) => {
+            // Mostrar un mensaje de error si la contraseña es incorrecta
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña incorrecta',
+                text: error
             });
+        });
     }
+
+
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('passwordInput');
 
