@@ -175,4 +175,3 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
     </div>
 </body>
 </html>
-

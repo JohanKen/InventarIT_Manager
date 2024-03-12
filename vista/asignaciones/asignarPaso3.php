@@ -95,6 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
+                    <! Para la carta de resposiva se tiene que accede sin index para no de confricto con el menu y java script>
+                    <a class="btn btn-danger" href="vista/asignaciones/cartaResponsiva.php">Carta resposiva</a>
                 </div>
             </form>
 
