@@ -96,18 +96,23 @@ function fechaActual(){
     $pdf->Cell(45,6.5,utf8_decode('NÚMERO DE SERIE'),1,1,'C',0);
 
     $pdf->SetFont('calibri-bold','', 9);
+    $pdf->SetTextColor(103,103,103);
     foreach ($dispositivosSeleccionados as $dispositivo) {
         $pdf->setX(26);
-        $pdf->Cell(30, 6.5, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
-        $pdf->Cell(55, 6.5, isset($dispositivo['marca']) ? utf8_decode($dispositivo['marca']) : '', 1, 0, "L", 0);
-        $pdf->Cell(45, 6.5, isset($dispositivo['modelo']) ? utf8_decode($dispositivo['modelo']) : '', 1, 0, "L", 0);
-        $pdf->Cell(45, 6.5, isset($dispositivo['serie']) ? utf8_decode($dispositivo['serie']) : '', 1, 1, "L", 0);
+        $pdf->Cell(30, 6.2, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
+        $pdf->Cell(55, 6.2, isset($dispositivo['marca']) ? utf8_decode($dispositivo['marca']) : '', 1, 0, "L", 0);
+        $pdf->Cell(45, 6.2, isset($dispositivo['modelo']) ? utf8_decode($dispositivo['modelo']) : '', 1, 0, "L", 0);
+        $pdf->Cell(45, 6.2, isset($dispositivo['serie']) ? utf8_decode($dispositivo['serie']) : '', 1, 1, "L", 0);
     }
     
-    $pdf->setX(26);
+    $pdf->SetX(26);
     $pdf->SetFillColor(217,217,217);//Cambio de color de texto a gris claro
-    $pdf->Cell(130,6.5,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
-    $pdf->Cell(45,6.5,utf8_decode('$ aqui va el costo'),1,0,"L",1);
+    $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
+    $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
+    $pdf->Cell(45,6,utf8_decode('$ aqui va el costo'),1,0,"L",1);
+
+    $pdf->SetXY(26,111);
+    $pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
 
 
     $pdf->Output();
