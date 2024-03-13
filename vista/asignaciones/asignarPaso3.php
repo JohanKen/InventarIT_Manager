@@ -62,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         ?>
 
-                <div class="vista_previa">
-                    <table class="vista_previa">
+                <div class="dispositivos_seleccionados">
+                    <table class="dispositivos_seleccionados">
                         <thead>
                             <tr>
                                 <th>ID Dispsositivo</th>
@@ -88,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             ?>
                         </tbody>
                     </table>
+
                 </div>
                 
 
@@ -96,9 +97,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
                     <! Para la carta de resposiva se tiene que accede sin index para no de confricto con el menu y java script>
-                    <a class="btn btn-danger" href="vista/asignaciones/cartaResponsiva.php">Carta resposiva</a>
+                    <a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>
                 </div>
+
+                <script>
+                    function continuar() {
+                        window.location.href = 'vista/asignaciones/cartaResponsiva.php?';
+                    }
+                </script>
+
             </form>
+
+            
 
         
     </div>
