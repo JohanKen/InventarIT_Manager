@@ -12,7 +12,8 @@ class PDF extends FPDF{
         //IMPORTANTE: se carga la imagen de la carpeta image si no esta al archivo no se pondra
         $this->Image('../../images/logoRemote.png', 1, 2, 65);//se daclara el echivo a insertar con su posicion en x ,y y el tamaño
 
-        $this->SetFont('Arial','B',13);
+        $this->AddFont('calibri-bold','',"calibri-bold.php");
+        $this->SetFont('calibri-bold','',13);
         $this->Cell(70);//espacion desde el anterior posicion
         // Título
         $this->Cell(60,13,'CARTA DE RESGUARDO',0,0,'C');
@@ -54,6 +55,7 @@ class PDF extends FPDF{
 }
 
 function fechaActual(){
+    //se crea un array donde se compara el numero de mes para imprimir el mismo mes en español
     $mes=[
         "01"=>"Enero",
         "02" =>"Febrero",
@@ -69,19 +71,44 @@ function fechaActual(){
         "12" => "Diciembre"
     ];
 
+    //Se declara el formato de la fecha lo devuelve
     $fecha = date("d").' de '.$mes[date("m")].' de '.date("Y");
     return $fecha;
 }
 
-    $pdf = new PDF('P','mm','Letter');
+    $pdf = new PDF('P','mm','Letter');// se daclara el archivo en pdf junto al formato en carta 
     $pdf->AddPage();
-    $pdf->AddFont('calibri-bold','',"calibri-bold.php");
-    $pdf->SetFont('calibri-bold','', 12);
+
+    $pdf->AddFont('calibri-bold','',"calibri-bold.php");//se carga la fuente que se incluyo aparta de la libreris fpdf
+    $pdf->SetFont('calibri-bold','', 11);
     
-    $pdf->SetXY(125,30);//cambio de ubicacion
+    $pdf->SetXY(117,32);//cambio de ubicacion
     //imprimir la fecha en que se hiso la asignacion
     $fechaActual = fechaActual();//se utiliza la fuincion de fechaActual()
-    $pdf->Cell(80, 7, utf8_decode('Torreón, Coahuila, a '.$fechaActual),0,0,'R',0);//muestra la localidad y la fecha
+    $pdf->SetTextColor(103,103,103);
+    $pdf->Cell(80, 6, utf8_decode('Torreón, Coahuila, a '.$fechaActual),0,0,'R',0);//muestra la localidad y la fecha
+
+    $pdf->SetXY(26,50.4);
+    $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
+    $pdf->Cell(30,6.5,utf8_decode('EQUIPO'),1,0,'C',0);
+    $pdf->Cell(55,6.5,utf8_decode('MARCA'),1,0,'C',0);
+    $pdf->Cell(45,6.5,utf8_decode('TIPO/MODELO'),1,0,'C',0);
+    $pdf->Cell(45,6.5,utf8_decode('NÚMERO DE SERIE'),1,1,'C',0);
+
+    $pdf->SetFont('calibri-bold','', 9);
+    foreach ($dispositivosSeleccionados as $dispositivo) {
+        $pdf->setX(26);
+        $pdf->Cell(30, 6.5, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
+        $pdf->Cell(55, 6.5, isset($dispositivo['marca']) ? utf8_decode($dispositivo['marca']) : '', 1, 0, "L", 0);
+        $pdf->Cell(45, 6.5, isset($dispositivo['modelo']) ? utf8_decode($dispositivo['modelo']) : '', 1, 0, "L", 0);
+        $pdf->Cell(45, 6.5, isset($dispositivo['serie']) ? utf8_decode($dispositivo['serie']) : '', 1, 1, "L", 0);
+    }
+    
+    $pdf->setX(26);
+    $pdf->SetFillColor(217,217,217);//Cambio de color de texto a gris claro
+    $pdf->Cell(130,6.5,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
+    $pdf->Cell(45,6.5,utf8_decode('$ aqui va el costo'),1,0,"L",1);
+
 
     $pdf->Output();
 
