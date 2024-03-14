@@ -138,34 +138,24 @@
                                 <td class="actions">
                                     <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar"><button type="button" class="btn btn-primary">Editar</button></a>
                                     <hr>
-                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ', \'' . $item[3] . ' ' . $item[1] . ' ' . $item[2] . '\');" id="enlaceBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
-                                </td>';
-                            }
+                                    <a href="javascript:void(0);" onclick="mostrarAlerta(<?php echo $item[0]; ?>,  '.$item[1]  . ')" id="btnBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                                    </td>'; 
+                            };
                     
                     echo '
                         </tr>';
                     
-                    
-                    
                     }
-                    ?>
-
+                        ?>
+                    
+                
                 </tbody>
             </table>
            
         </div>
-       <!-- Modal oculto que solo se muestra para confirmar que quieres o no eliminar a un usuario -->
-<div class="modal" id="confirmarBorrarModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="cerrarModal()">&times;</span>
-        <h4>Confirmar Eliminación</h4>
-        <p>¿Estás seguro de que deseas eliminar a <span id="nombreUsuario"></span>?</p>
-        <div class="bon">
-            <button class="btncancel" id="btnCerrarModal" onclick="cerrarModal()">Regresar</button>
-            <button class="btneliminar" id="btnBorrarModal">Confirmar</button>
-        </div>
-    </div>
-</div>
+
+
+
 
 
     </div>
@@ -184,13 +174,39 @@
     <script>
 
 
+const btn =document.getElementById("btnBorrar");
 
-function mostrarAlerta() {
-    swal({
-  title: "Good job!",
-  text: "You clicked the button!",
-  icon: "success",
-});
+function mostrarAlerta(id_usuario, nombreUsuario) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+        title: '¿Seguro que deseas eliminar a este usuario?',
+        text: 'No podrás deshacer esta acción',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, Deseo eliminarlo',
+        cancelButtonText: 'No, Cancelar.',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire({
+                title: 'Eliminado!',
+                text: 'El usuario fue eliminado correctamente',
+                icon: 'success'
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: 'Cancelado',
+                text: ':)',
+                icon: 'error'
+            });
+        }
+    });
 }
 
 

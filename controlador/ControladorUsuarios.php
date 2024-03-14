@@ -36,7 +36,21 @@ class ControladorUsuarios {
                 if (DateTime::createFromFormat('Y-m-d', $fechaIngreso) !== false ){
                     $fechaIngresoFormateada = $fechaIngreso;
                 } else {
-                    echo 'Error en el formato de la fecha';
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                        Swal.fire({
+                            title: 'Fecha incorrecta',
+                            text: 'Ingrese el formato de fecha correcto',
+                            icon: 'warning', 
+                        }).then(function(result) {
+                            if (result.isConfirmed) { // La condición se ha ajustado para verificar si el usuario confirma la advertencia
+                                window.location.href='index.php?seccion=nuevoUsuario';
+                            }
+                        });
+                    </script>
+                    
+                    ";
                     exit;
                 }
 
@@ -104,13 +118,45 @@ class ControladorUsuarios {
               }
             $objDelete = ModeloUsuarios::deleteUsuarios($id);
             if($objDelete>0){
-                echo    '
+                echo " 
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
                 <script>
-                    alert("Usuario eliminado correctamente");
-                    window.location.href="index.php?seccion=usuarios";
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        swalWithBootstrapButtons.fire({
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            icon: 'success'
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire({
+                            title: 'Cancelled',
+                            text: 'Your imaginary file is safe :)',
+                            icon: 'error'
+                        });
+                    }
+                });
                 </script>
-            ';
-            } 
+                
+                      
+                    
+                  ";
+            }
         }
     } 
 

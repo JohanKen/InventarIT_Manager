@@ -91,7 +91,19 @@
                                 $fechaCompraFormateada = $fechaCompra;
                             } else { 
                                 // Manejar el caso en que la fecha no tiene el formato correcto
-                                echo 'Error en el formato de la fecha';
+                                echo "
+                                <script> 
+                                    swal({
+                                        title: 'Fecha incorrecta';
+                                        text: 'Ingrese el formato de fecha correcto';
+                                        type: 'warning';
+                                    }).then(function(result)){
+                                        if (true){
+                                            window.location.href= 'index.php?seccion=nuevousuario';
+                                        }
+                                    })
+                                </script>
+                                ";
                                 exit;
                             }
                             

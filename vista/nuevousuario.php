@@ -3,10 +3,34 @@
 if(isset($_POST['registrar'])){
     $registrar = new ControladorUsuarios;
     $registrado= $registrar->registrarUsuario();
-    if ($registrado) {
-        echo "<script>Swal.fire('Usuario registrado con éxito', '', 'success');</script>";
-        echo "<script>window.location.href='index.php?seccion=usuarios';</script>";
-    }
+  
+        echo "<script>
+       
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Registrado con exito!'
+          }).then(function (result){
+                if (true){
+                    window.location.href='index.php?seccion=usuarios';
+                        }
+          }
+          ) 
+            
+          
+          </script>";
+          
+     
     
     
     
@@ -15,7 +39,7 @@ if(isset($_POST['registrar'])){
     exit;
 }
 ?>
-v
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,13 +47,9 @@ v
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
-"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
-" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             text-align: center;
@@ -109,11 +129,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
         <div class="panel-heading">
             <div class="imgdiv">
         <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Nombre(s)" name="nombres" required>
+                    <input type="text" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('solo puede ingresar caracteres alfabeticos.')" class="form-control"   placeholder="Nombre(s)"  minlength="2" name="nombres" required>
                 </div>
            
                 <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellido_paterno" required>
+                    <input type="text" class="form-control" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('solo puede ingresar caracteres alfabeticos.')" placeholder="Apellido Paterno"  minlength="2" name="apellido_paterno" required>
                 </div>
                 
 
@@ -122,7 +142,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
                 <div class="imgdiv">
          
                 <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Apellido Materno" name="apellido_materno" required>
+                    <input type="text" class="form-control" placeholder="Apellido Materno"  pattern="[a-zA-Z]+" oninvalid="setCustomValidity('solo puede ingresar caracteres alfabeticos.')" name="apellido_materno" required>
                 </div>
                 
                 <div class="col-md-6 col-sm-3 col-xs-3">
@@ -136,14 +156,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <h8 class="m">Rol:</h8>
                     <select class="form-select" name="rol" required>
-                        <option value="1">Administrador</option>
+                        <option value="1" >Administrador</option>
                         <option value="2">Editor</option>
                         <option value="3">Consultor</option>
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <h8 class="mm">Fecha de Ingreso:</h8>
-                    <input type="date" class="form-control" placeholder="Fecha de Ingreso" name="fecha_ingreso" required>
+                    <input type="date" class="form-control" id="fecha_ingreso" placeholder="Fecha de Ingreso" name="fecha_ingreso" required>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3">
                 <h8 class="m">Contraseña:</h8>
@@ -181,15 +201,20 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
         </div>
     </div>
 </div>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     
 
-    
+   
 
 
 
     function validateForm() {
+
+    
+
+
         // Limpiar mensaje de error al principio
         document.getElementById("errorMessage").innerHTML = "";
 

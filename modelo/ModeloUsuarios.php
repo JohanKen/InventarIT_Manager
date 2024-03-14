@@ -120,7 +120,7 @@ static function actualizarUsuario($datos){
     $conexion = Conexion::conectar();
     try{
        $id_usuario= (int) $datos['id'];
-     
+
        $id_rol= (int) $datos['rol'];
        
 

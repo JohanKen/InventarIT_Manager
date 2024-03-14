@@ -1,3 +1,36 @@
+<?php 
+
+    //obtener datos del usuario para setearlos en el menu
+    $id = $_SESSION['usuario']['id_usuario'];
+
+    $datosUsuario =  ObtenerDatosUsuarios($id);
+
+    function ObtenerDatosUsuarios ($id){
+        if ($id >= 0) {
+            try {
+                $UsuarioInfo = ControladorUsuarios::getUser($id);
+
+                //verificar si se obtuvieron correctamente los datos
+
+                if (empty($UsuarioInfo[0])) {
+                    echo "Erropr no se pudieropn obtener los datos del usuario";
+                    return null;
+                }
+
+                return $UsuarioInfo[0];
+
+            }catch (Exception $e) {
+                // Manejar la excepción, por ejemplo, registrándola o mostrándola
+                echo "Error al obtener datos del usuario: " . $e->getMessage();
+                return null;
+            }
+        }else{
+            echo "No se pudo obtener ningun ID de usuario";
+            return null;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,6 +44,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
+
 
     <style>
         /* Ajusta el tamaño de la imagen de la campana */
@@ -45,6 +79,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?seccion=inicio">Inicio</a>
                             </li>
+                          
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?seccion=asignaciones">Onboarding</a>
                             </li>
@@ -70,7 +105,7 @@
                                 
                             <li class="nav-item">
                             <a class="nav-link"href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" id="usuarioLink" style="color: #fff;">
-                                <?php echo $_SESSION["usuario"]["nombre_usuario"] . ' ' . $_SESSION["usuario"]["apellido_paterno_usuario"];?>
+                                <?php echo $datosUsuario[3] . ' ' . $datosUsuario[1];?>
                             </a>
                             <li>
                             <li class="nav-item">
@@ -93,21 +128,21 @@
         </div>
     </header>
 
-<script>
-function cerrarSesion() {
-  swal("¿Seguro que quieres cerrar sesión?", {
-    buttons: ["Cancerlar", "Si, Cerrar sesión."],
-  }).then((value) => {
-    if (value) {
-      window.location.href = "logout.php";
-    } else {
-      swal.close();    
+    <script>
+    function cerrarSesion() {
+    swal("¿Seguro que quieres cerrar sesión?", {
+        buttons: ["Cancerlar", "Si, Cerrar sesión."],
+    }).then((value) => {
+        if (value) {
+        window.location.href = "logout.php";
+        } else {
+        swal.close();    
+        }
+    });
     }
-  });
-}
 
 
-</script>
+    </script>
 
 
 </body>
