@@ -112,7 +112,8 @@ function fechaActual(){
     $pdf->Cell(45,6,utf8_decode('$ aqui va el costo'),1,0,"L",1);
 
     $pdf->SetXY(26,109);
-    $pdf->SetFont('calibri-bold','', 10);
+    $pdf->AddFont('calibri','',"calibri.php");
+    $pdf->SetFont('calibri','', 11);
     //$pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
     $txt = file_get_contents('Responsiva.txt');
     $pdf->MultiCell(0,5,utf8_decode($txt));
