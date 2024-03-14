@@ -106,14 +106,16 @@ function fechaActual(){
     }
     
     $pdf->SetX(26);
-    $pdf->SetFillColor(217,217,217);//Cambio de color de texto a gris claro
+    $pdf->SetFillColor(217,217,217);//Cambio de color del fondo a gris claro
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
     $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
     $pdf->Cell(45,6,utf8_decode('$ aqui va el costo'),1,0,"L",1);
 
-    $pdf->SetXY(26,111);
-    $pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
-
+    $pdf->SetXY(26,109);
+    $pdf->SetFont('calibri-bold','', 10);
+    //$pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
+    $txt = file_get_contents('Responsiva.txt');
+    $pdf->MultiCell(0,5,utf8_decode($txt));
 
     $pdf->Output();
 
