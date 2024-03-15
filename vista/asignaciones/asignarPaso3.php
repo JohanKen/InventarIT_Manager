@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Modelo</th>
                                 <th>Numero de Serie</th>
                                 <th>Marca</th>
-                                <th>Precio</th>
+                                <th>Marca</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
                     <! Para la carta de resposiva se tiene que accede sin index para no de confricto con el menu y java script>
-                    <a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>
+                    <a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?colaborador=<?= urlencode($datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]) ?>&dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>
                 </div>
 
                 <script>

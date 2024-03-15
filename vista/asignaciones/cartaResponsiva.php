@@ -1,7 +1,9 @@
 <?php
 require('../../fpdf/fpdf.php');
 
+
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
+//$colaborador = isset($_GET["colaborador"]) ? json_decode(urldecode($_GET['colaborador']),true) : [];
 
 class PDF extends FPDF{
 
@@ -118,7 +120,8 @@ function fechaActual(){
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
     $pdf->SetFont('calibri-bold','', 10);
     $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
-    $pdf->Cell(45,6,utf8_decode('$'.$sumaPrecios),1,0,"L",1);
+    $pdf->SetFont('calibri','', 10);
+    $pdf->Cell(45,6,utf8_decode('$ '. number_format($sumaPrecios, 2, '.', ',')),1,0,"L",1);
 
     $pdf->SetXY(26,109);
     
@@ -132,9 +135,10 @@ function fechaActual(){
 
     $pdf->SetXY(1,182);
     $pdf->Cell(214,4,'____________________________________________________',0,0,'C',0);
-
+    
     $pdf->SetXY(1,190);
-    $pdf->Cell(214,4,'',0,0,'C',0);
+    $nombreApellidoColaborador = isset($_GET['colaborador']) ? $_GET['colaborador'] : '';
+    $pdf->Cell(214,4, $nombreApellidoColaborador,0,0,'C',0);
 
     $pdf->SetXY(1,205);
     $pdf->Cell(214,4,'TRABAJADOR A QUIEN EL EQUIPO LE FUE ASIGNADO Y RESPONSABLE DEL MISMO',0,0,'C',0);
