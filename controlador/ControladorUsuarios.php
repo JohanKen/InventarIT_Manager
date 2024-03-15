@@ -199,7 +199,8 @@ class ControladorUsuarios {
         
             }       
             
-        }static function getUser($id){
+        }
+        static function getUser($id){
             if(isset($id)){
                 $tabla = "usuarios";
                 $obj = ModeloUsuarios::selectUsuariosId($id);

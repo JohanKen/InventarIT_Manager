@@ -69,7 +69,7 @@
                 <th>Correo</th>
                 <th>Estado</th>
                 <th>Rol</th>
-                <th>Fecha de Ingreso</th>
+                <th>Fecha de Ingreso</th>>
                 <th>Fecha de Creación</th>
                 
                 <th>Acciones</th>
