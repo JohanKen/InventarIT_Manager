@@ -16,6 +16,7 @@ class PDF extends FPDF{
         $this->SetFont('calibri-bold','',13);
         $this->Cell(70);//espacion desde el anterior posicion
         // Título
+        //$this->SetXY(30,50);
         $this->Cell(60,13,'CARTA DE RESGUARDO',0,0,'C');
         
     }
@@ -78,6 +79,7 @@ function fechaActual(){
 
     $pdf = new PDF('P','mm','Letter');// se daclara el archivo en pdf junto al formato en carta 
     $pdf->AddPage();
+    $pdf->AddFont('calibri','',"calibri.php");
 
     $pdf->AddFont('calibri-bold','',"calibri-bold.php");//se carga la fuente que se incluyo aparta de la libreris fpdf
     $pdf->SetFont('calibri-bold','', 11);
@@ -85,18 +87,20 @@ function fechaActual(){
     $pdf->SetXY(117,32);//cambio de ubicacion
     //imprimir la fecha en que se hiso la asignacion
     $fechaActual = fechaActual();//se utiliza la fuincion de fechaActual()
-    $pdf->SetTextColor(103,103,103);
+    //$pdf->SetTextColor(103,103,103);
+    $pdf->SetFont('calibri','', 11);
     $pdf->Cell(80, 6, utf8_decode('Torreón, Coahuila, a '.$fechaActual),0,0,'R',0);//muestra la localidad y la fecha
 
     $pdf->SetXY(26,50.4);
+    $pdf->SetFont('calibri-bold','', 11);
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
     $pdf->Cell(30,6.5,utf8_decode('EQUIPO'),1,0,'C',0);
     $pdf->Cell(55,6.5,utf8_decode('MARCA'),1,0,'C',0);
     $pdf->Cell(45,6.5,utf8_decode('TIPO/MODELO'),1,0,'C',0);
     $pdf->Cell(45,6.5,utf8_decode('NÚMERO DE SERIE'),1,1,'C',0);
 
-    $pdf->SetFont('calibri-bold','', 9);
-    $pdf->SetTextColor(103,103,103);
+    $pdf->SetFont('calibri','', 9);
+    //$pdf->SetTextColor(103,103,103);
     foreach ($dispositivosSeleccionados as $dispositivo) {
         $pdf->setX(26);
         $pdf->Cell(30, 6.2, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
@@ -108,15 +112,39 @@ function fechaActual(){
     $pdf->SetX(26);
     $pdf->SetFillColor(217,217,217);//Cambio de color del fondo a gris claro
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
+    $pdf->SetFont('calibri-bold','', 10);
     $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
     $pdf->Cell(45,6,utf8_decode('$ aqui va el costo'),1,0,"L",1);
 
     $pdf->SetXY(26,109);
-    $pdf->AddFont('calibri','',"calibri.php");
+    
     $pdf->SetFont('calibri','', 11);
     //$pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
     $txt = file_get_contents('Responsiva.txt');
     $pdf->MultiCell(0,5,utf8_decode($txt));
+    
+    $pdf->SetXY(1,165);
+    $pdf->Cell(214,4,'De conformidad con lo anterior,',0,0,'C',0);
+
+    $pdf->SetXY(1,182);
+    $pdf->Cell(214,4,'____________________________________________________',0,0,'C',0);
+
+    $pdf->SetXY(1,190);
+    $pdf->Cell(214,4,'',0,0,'C',0);
+
+    $pdf->SetXY(1,205);
+    $pdf->Cell(214,4,'TRABAJADOR A QUIEN EL EQUIPO LE FUE ASIGNADO Y RESPONSABLE DEL MISMO',0,0,'C',0);
+
+    $pdf->SetXY(1,226);
+    $pdf->Cell(214,4,'____________________________________________________',0,0,'C',0);
+    
+    $pdf->SetFont('calibri-bold','', 11);
+    $pdf->SetXY(1,234);
+    $pdf->Cell(214,4,'PEDRO ANTONIO BARBOGLIO MURRA',0,0,'C',0);
+    
+    $pdf->SetFont('calibri','', 11);
+    $pdf->SetXY(1,239);
+    $pdf->Cell(214,4,utf8_decode('DIRECCIÓN GENERAL'),0,0,'C',0);
 
     $pdf->Output();
 
