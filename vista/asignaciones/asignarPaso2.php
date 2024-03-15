@@ -66,6 +66,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                             <th>Modelo</th>
                             <th>Número de Serie</th>
                             <th>Marca</th>
+                            <th>Precio</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -129,7 +130,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
             }
             
 
-            function agregarDesdeTabla(id_dispositivo, tipo, modelo, serie, marca) {
+            function agregarDesdeTabla(id_dispositivo, tipo, modelo, serie, marca,precio) {
                 // Obtener la tabla de dispositivos_seleccionados
                 var tablaSeleccionados = document.getElementById('dispositivos_seleccionados').getElementsByTagName('tbody')[0];
 
@@ -139,7 +140,8 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                                     '<td>' + tipo + '</td>' +
                                     '<td>' + modelo + '</td>' +
                                     '<td>' + serie + '</td>' +
-                                    '<td>' + marca + '</td>';
+                                    '<td>' + marca + '</td>' +
+                                    '<td>' + precio + '</td>';
 
                 // Agregar la nueva fila al tbody de la tabla de dispositivos_seleccionados
                 tablaSeleccionados.appendChild(nuevaFila);
@@ -155,13 +157,14 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                     for (var i = 0; i < filas.length; i++) {
                         var celdas = filas[i].getElementsByTagName('td');
 
-                        if (celdas.length >= 5) {
+                        if (celdas.length >= 6) {
                             datos.push({
                                 id_dispositivo: celdas[0].innerText,
                                 tipo: celdas[1].innerText,
                                 modelo: celdas[2].innerText,
                                 serie: celdas[3].innerText,
-                                marca: celdas[4].innerText
+                                marca: celdas[4].innerText,
+                                precio: celdas[5].innerText
                             });
                         }
                     }

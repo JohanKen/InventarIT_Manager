@@ -71,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Modelo</th>
                                 <th>Numero de Serie</th>
                                 <th>Marca</th>
+                                <th>Precio</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo '<td>' . $dispositivo['modelo'] . '</td>';
                                 echo '<td>' . $dispositivo['serie'] . '</td>';
                                 echo '<td>' . $dispositivo['marca'] . '</td>';
+                                echo '<td>' . $dispositivo['precio'] . '</td>';
                                 echo '</tr>';
                             }
                             ?>

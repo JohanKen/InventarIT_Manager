@@ -101,20 +101,24 @@ function fechaActual(){
 
     $pdf->SetFont('calibri','', 9);
     //$pdf->SetTextColor(103,103,103);
+    $sumaPrecios = 0;
     foreach ($dispositivosSeleccionados as $dispositivo) {
         $pdf->setX(26);
         $pdf->Cell(30, 6.2, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
         $pdf->Cell(55, 6.2, isset($dispositivo['marca']) ? utf8_decode($dispositivo['marca']) : '', 1, 0, "L", 0);
         $pdf->Cell(45, 6.2, isset($dispositivo['modelo']) ? utf8_decode($dispositivo['modelo']) : '', 1, 0, "L", 0);
         $pdf->Cell(45, 6.2, isset($dispositivo['serie']) ? utf8_decode($dispositivo['serie']) : '', 1, 1, "L", 0);
+        if (isset($dispositivo['precio'])) {
+            $sumaPrecios += $dispositivo['precio'];
+        }
     }
-    
+
     $pdf->SetX(26);
     $pdf->SetFillColor(217,217,217);//Cambio de color del fondo a gris claro
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
     $pdf->SetFont('calibri-bold','', 10);
     $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
-    $pdf->Cell(45,6,utf8_decode('$ aqui va el costo'),1,0,"L",1);
+    $pdf->Cell(45,6,utf8_decode('$'.$sumaPrecios),1,0,"L",1);
 
     $pdf->SetXY(26,109);
     
