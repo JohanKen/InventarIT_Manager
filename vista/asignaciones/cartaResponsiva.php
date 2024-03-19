@@ -14,6 +14,8 @@ class PDF extends FPDF{
         //IMPORTANTE: se carga la imagen de la carpeta image si no esta al archivo no se pondra
         $this->Image('../../images/logoRemote.png', 1, 2, 65);//se daclara el echivo a insertar con su posicion en x ,y y el tamaño
 
+        $this->Image('../../images/Esquina.png',182.5,3.5,32);
+
         $this->AddFont('calibri-bold','',"calibri-bold.php");
         $this->SetFont('calibri-bold','',13);
         $this->Cell(70);//espacion desde el anterior posicion
@@ -104,12 +106,14 @@ function fechaActual(){
     $pdf->SetFont('calibri','', 9);
     //$pdf->SetTextColor(103,103,103);
     $sumaPrecios = 0;
+    //se genera una tabla con los dispositivos seleccionados
     foreach ($dispositivosSeleccionados as $dispositivo) {
         $pdf->setX(26);
         $pdf->Cell(30, 6.2, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
         $pdf->Cell(55, 6.2, isset($dispositivo['marca']) ? utf8_decode($dispositivo['marca']) : '', 1, 0, "L", 0);
         $pdf->Cell(45, 6.2, isset($dispositivo['modelo']) ? utf8_decode($dispositivo['modelo']) : '', 1, 0, "L", 0);
         $pdf->Cell(45, 6.2, isset($dispositivo['serie']) ? utf8_decode($dispositivo['serie']) : '', 1, 1, "L", 0);
+        //se suamn los precios de los dispostivos sin mostras el precio de cada uno
         if (isset($dispositivo['precio'])) {
             $sumaPrecios += $dispositivo['precio'];
         }
@@ -118,42 +122,55 @@ function fechaActual(){
     $pdf->SetX(26);
     $pdf->SetFillColor(217,217,217);//Cambio de color del fondo a gris claro
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
-    $pdf->SetFont('calibri-bold','', 10);
+    $pdf->SetFont('calibri-bold','', 10);//Cambio de fuente a calibri en negritas
     $pdf->Cell(130,6,utf8_decode('COSTO DEL EQUIPO'),1,0,"R",1);
-    $pdf->SetFont('calibri','', 10);
+    $pdf->SetFont('calibri','', 10);//Cambio de fuente a calibri normal
+    //imprime el precio total de los dispositivos
     $pdf->Cell(45,6,utf8_decode('$ '. number_format($sumaPrecios, 2, '.', ',')),1,0,"L",1);
 
-    $pdf->SetXY(26,109);
+    $pdf->SetXY(26,109);//cambio de ubicacion
     
     $pdf->SetFont('calibri','', 11);
     //$pdf->Cell(175,57,utf8_decode(''),1,0,'c',0);
     $txt = file_get_contents('Responsiva.txt');
     $pdf->MultiCell(0,5,utf8_decode($txt));
     
-    $pdf->SetXY(1,165);
+    $pdf->SetXY(1,165);//cambio de posicion 
     $pdf->Cell(214,4,'De conformidad con lo anterior,',0,0,'C',0);
 
-    $pdf->SetXY(1,182);
+    $pdf->SetXY(1,182);//cambio de posicion 
+    //espacio para firma
     $pdf->Cell(214,4,'____________________________________________________',0,0,'C',0);
     
-    $pdf->SetXY(1,190);
+    $pdf->SetXY(1,190);//cambio de posicion 
+    //Se optioene el colaborador
     $nombreApellidoColaborador = isset($_GET['colaborador']) ? $_GET['colaborador'] : '';
-    $pdf->Cell(214,4, $nombreApellidoColaborador,0,0,'C',0);
+    //imprime en colaborador con su nombre y apellido
+    $pdf->Cell(214,4, utf8_decode($nombreApellidoColaborador),0,0,'C',0);
 
-    $pdf->SetXY(1,205);
+    $pdf->SetXY(1,205);//cambio de posicion 
     $pdf->Cell(214,4,'TRABAJADOR A QUIEN EL EQUIPO LE FUE ASIGNADO Y RESPONSABLE DEL MISMO',0,0,'C',0);
 
-    $pdf->SetXY(1,226);
+    $pdf->SetXY(1,226);//cambio de posicion 
+    //espacio para firma
     $pdf->Cell(214,4,'____________________________________________________',0,0,'C',0);
     
+    //Cambio de feuente para que resalte el nombre cpn calibiri en negritas
     $pdf->SetFont('calibri-bold','', 11);
-    $pdf->SetXY(1,234);
+    $pdf->SetXY(1,234);//cambio de posicion 
     $pdf->Cell(214,4,'PEDRO ANTONIO BARBOGLIO MURRA',0,0,'C',0);
     
+    //Camnio de fuente a calibri sin estar en negritas
     $pdf->SetFont('calibri','', 11);
-    $pdf->SetXY(1,239);
+    $pdf->SetXY(1,239);//cambio de posicion 
     $pdf->Cell(214,4,utf8_decode('DIRECCIÓN GENERAL'),0,0,'C',0);
 
-    $pdf->Output();
+    //se indica en que modo se va a generar el pdf
+    //"I" para que se vea en el neavegador
+    $modo="I";
+    //genera en nombre del archivo predeterminado para descargar
+    $nombre_archivo="CartaResponasiva(".$nombreApellidoColaborador.").pdf";
+    //al utilizar Output para agregar el nombre y el modo
+    $pdf->Output($nombre_archivo,$modo);
 
 ?>
