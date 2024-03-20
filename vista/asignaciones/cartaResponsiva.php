@@ -2,6 +2,7 @@
 require('../../fpdf/fpdf.php');
 
 
+
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 //$colaborador = isset($_GET["colaborador"]) ? json_decode(urldecode($_GET['colaborador']),true) : [];
 
@@ -14,8 +15,10 @@ class PDF extends FPDF{
         //IMPORTANTE: se carga la imagen de la carpeta image si no esta al archivo no se pondra
         $this->Image('../../images/logoRemote.png', 1, 2, 65);//se daclara el echivo a insertar con su posicion en x ,y y el tamaño
 
+        //cuadrioto de la esquina superior izquierda
         $this->Image('../../images/Esquina.png',182.5,3.5,32);
 
+        //se carga la fuente calibri-bold para su uso
         $this->AddFont('calibri-bold','',"calibri-bold.php");
         $this->SetFont('calibri-bold','',13);
         $this->Cell(70);//espacion desde el anterior posicion
@@ -98,6 +101,7 @@ function fechaActual(){
     $pdf->SetXY(26,50.4);
     $pdf->SetFont('calibri-bold','', 11);
     $pdf->SetTextColor(0,0,0);//Cambio de color de texto a negro
+    //encabezaso de la tabla
     $pdf->Cell(30,6.5,utf8_decode('EQUIPO'),1,0,'C',0);
     $pdf->Cell(55,6.5,utf8_decode('MARCA'),1,0,'C',0);
     $pdf->Cell(45,6.5,utf8_decode('TIPO/MODELO'),1,0,'C',0);
@@ -106,7 +110,7 @@ function fechaActual(){
     $pdf->SetFont('calibri','', 9);
     //$pdf->SetTextColor(103,103,103);
     $sumaPrecios = 0;
-    //se genera una tabla con los dispositivos seleccionados
+    //se genera el cuerpo de la tabla con los dispositivos seleccionados
     foreach ($dispositivosSeleccionados as $dispositivo) {
         $pdf->setX(26);
         $pdf->Cell(30, 6.2, isset($dispositivo['tipo']) ? utf8_decode($dispositivo['tipo']) : '', 1, 0, "L", 0);
@@ -167,9 +171,9 @@ function fechaActual(){
 
     //se indica en que modo se va a generar el pdf
     //"I" para que se vea en el neavegador
-    $modo="I";
+    $modo="F";
     //genera en nombre del archivo predeterminado para descargar
-    $nombre_archivo="CartaResponasiva(".$nombreApellidoColaborador.").pdf";
+    $nombre_archivo="cartasResponsivas/CartaResponasiva(".$nombreApellidoColaborador.").pdf";
     //al utilizar Output para agregar el nombre y el modo
     $pdf->Output($nombre_archivo,$modo);
 
