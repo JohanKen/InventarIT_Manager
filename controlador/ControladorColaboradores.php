@@ -13,14 +13,7 @@
                 $id = $_GET["id_colaborador"];
 
                 $delete = ModeloColaboradores::deleteColaborador($id);
-                if($delete>0){
-                    echo '
-                        <script>
-                            alert("Colaborador eliminado correctamente");
-                            window.location.href="index.php?seccion=colaboradores";
-                        </script>
-                    ';
-                }
+          
             }
         }
 
@@ -98,7 +91,21 @@
                     if (DateTime::createFromFormat('Y-m-d',$fechaIngreso) !==false){
                         $fechaIngresoFormateada = $fechaIngreso;
                     }else{
-                        echo 'Error en el formato de la fecha';
+                        echo "
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                        <script>
+                            Swal.fire({
+                                title: 'Fecha incorrecta',
+                                text: 'Ingrese el formato de fecha correcto',
+                                icon: 'warning', 
+                            }).then(function(result) {
+                                if (result.isConfirmed) { 
+                                    window.location.href='index.php?seccion=nuevoColaborador';
+                                }
+                            });
+                        </script>
+                        
+                        ";
                         exit;
                     }
 

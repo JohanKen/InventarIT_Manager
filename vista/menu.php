@@ -38,15 +38,26 @@
     <meta charset="UTF-8">
     <title>Menú Lateral con Bootstrap Responsivo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
-
+    <link rel="stylesheet" href="@sweetalert2/themes/dark/dark.css">
+    <script src="sweetalert2/dist/sweetalert2.min.js"></script>
 
     <style>
+        body{
+            z-index: 15;
+        }
         /* Ajusta el tamaño de la imagen de la campana */
         #imgCampana {
             width: 20px;
@@ -128,21 +139,118 @@
         </div>
     </header>
 
-    <script>
+   <script>
     function cerrarSesion() {
-    swal("¿Seguro que quieres cerrar sesión?", {
-        buttons: ["Cancerlar", "Si, Cerrar sesión."],
-    }).then((value) => {
-        if (value) {
-        window.location.href = "logout.php";
-        } else {
-        swal.close();    
-        }
-    });
+        swal({
+            text: "¿Seguro que quieres cerrar sesión?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Cancelar",
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Sí, cerrar sesión",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true
+                }
+            },
+            dangerMode: true,
+            closeOnClickOutside: true,
+            closeOnEsc: true,
+            closeOnTimer: true,
+            timer: 0,
+            className: "",
+            escapeKey: "cancel",
+            focusCancel: false,
+            showCloseButton: false,
+            showConfirmButton: true,
+            showLoaderOnConfirm: false,
+            showLoaderOnCancel: false,
+            footer: "",
+            width: "",
+            padding: "",
+            background: "#FFFFFF",
+            backdrop: true,
+            timerProgressBar: false,
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            stopKeydownPropagation: true,
+            keydownListenerCapture: false,
+            position: "center",
+            grow: false,
+            backdropPadding: 0,
+            customClass: "",
+            animation: true,
+            confirmButtonText: "Sí, cerrar sesión",
+            confirmButtonAriaLabel: "",
+            cancelButtonText: "Cancelar",
+            cancelButtonAriaLabel: "",
+            buttonsStyling: true,
+            reverseButtons: false,
+            focusConfirm: true,
+            focusCancel: false,
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonClass: "",
+            cancelButtonClass: "",
+            confirmButtonStyle: "border: none; background-color: green;",
+            cancelButtonStyle: "border: none; background: transparent;",
+            confirmButtonText: "¡Sí, cerrar sesión!",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true,
+            closeOnCancel: true,
+            closeOnClose: true,
+            showCloseButton: false,
+            showLoaderOnConfirm: false,
+            showLoaderOnCancel: false,
+            reverseButtons: false,
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            customClass: "",
+            animation: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#aaa",
+            confirmButtonClass: "",
+            cancelButtonClass: "",
+            confirmButtonStyle: "border-radius: 20px;",
+            cancelButtonStyle: "border-radius: 20px;",
+            reverseButtons: false,
+            focusConfirm: true,
+            focusCancel: false,
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonAriaLabel: "",
+            cancelButtonAriaLabel: "",
+            confirmButtonText: "¡Sí, cerrar sesión!",
+            cancelButtonText: "Cancelar",
+            buttonsStyling: true,
+            closeOnConfirm: true,
+            closeOnCancel: true,
+            closeOnClose: true,
+            allowOutsideClick: true,
+            allowEscapeKey: true,
+            allowEnterKey: true,
+            customClass: "",
+            animation: true,
+            onOpen: null,
+            onClose: null,
+        }).then((value) => {
+            if (value) {
+                window.location.href = "logout.php";
+            }
+        });
     }
+</script>
 
-
-    </script>
 
 
 </body>

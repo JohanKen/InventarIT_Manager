@@ -54,14 +54,14 @@ body {
     height: 350px;
     margin-left: 100px;
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 400px){
     #IMGlaptop{
         width: 100%;
         height: 100%;
     }
 }
 
-@media screen and (max-height: 800px){
+@media screen and (max-height: 400px){
     #IMGlaptop{
         width: 100%;
         height: 100%;
@@ -155,8 +155,8 @@ body {
 
 @media screen and (max-height: 800px){
     .custom-button{
-        width: 100%;
-        height: 100%;
+        width: 10%;
+        height: 10%;
     }
 }
 

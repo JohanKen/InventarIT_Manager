@@ -1,3 +1,7 @@
+<?php
+    include_once 'controlador/ControladorUsuarios.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estilosUsuarios.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     
     <title>Usuarios</title>
     <style>
@@ -69,7 +78,7 @@
                 <th>Correo</th>
                 <th>Estado</th>
                 <th>Rol</th>
-                <th>Fecha de Ingreso</th>>
+                <th>Fecha de Ingreso</th>
                 <th>Fecha de Creación</th>
                 
                 <th>Acciones</th>
@@ -138,7 +147,7 @@
                                 <td class="actions">
                                     <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar"><button type="button" class="btn btn-primary">Editar</button></a>
                                     <hr>
-                                    <a href="javascript:void(0);" onclick="mostrarAlerta(<?php echo $item[0]; ?>,  '.$item[1]  . ')" id="btnBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                                    <a href="javascript:void(0);" onclick="mostrarAlerta(\'' . $item[0] . '\', \'' . $item[1] . '\')" id="btnBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
                                     </td>'; 
                             };
                     
@@ -154,10 +163,6 @@
            
         </div>
 
-
-
-
-
     </div>
     <?php
     // Código solo para verificar que las contraseñas que se ingresan en el formulario son iguales
@@ -172,9 +177,7 @@
     }
     ?>
     <script>
-
-
-const btn =document.getElementById("btnBorrar");
+const btn = document.getElementById("btnBorrar");
 
 function mostrarAlerta(id_usuario, nombreUsuario) {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -196,8 +199,13 @@ function mostrarAlerta(id_usuario, nombreUsuario) {
         if (result.isConfirmed) {
             swalWithBootstrapButtons.fire({
                 title: 'Eliminado!',
-                text: 'El usuario fue eliminado correctamente',
-                icon: 'success'
+                text: 'El usuario está siendo eliminado...',
+                icon: 'success',
+                timer: 1500, 
+                showConfirmButton: false 
+            }).then(() => {
+                // Redirigir a la página de eliminación después de mostrar la alerta de éxito
+                window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire({
@@ -210,19 +218,17 @@ function mostrarAlerta(id_usuario, nombreUsuario) {
 }
 
 
+function cerrarModal() {
+    document.getElementById('confirmarBorrarModal').style.display = 'none';
+}
 
-        function cerrarModal() {
-            document.getElementById('confirmarBorrarModal').style.display = 'none';
-        }
-
-        function confirmarBorrar(id_usuario, nombreUsuario) {
+function confirmarBorrar(id_usuario, nombreUsuario) {
     document.getElementById('confirmarBorrarModal').style.display = 'flex';
     document.getElementById('btnBorrarModal').onclick = function () {
         window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
     }
     document.getElementById('nombreUsuario').innerText = nombreUsuario;
 }
-
     </script>
 </body>
 
