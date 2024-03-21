@@ -1,5 +1,14 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require '../../PHPMailer/Exception.php';
+require '../../PHPMailer/PHPMailer.php';
+require '../../PHPMailer/SMTP.php';
+
 require('../../fpdf/fpdf.php');
+//require('../../PHPMailer/PHPMailer.php');
 
 
 
@@ -176,5 +185,30 @@ function fechaActual(){
     $nombre_archivo="cartasResponsivas/CartaResponasiva(".$nombreApellidoColaborador.").pdf";
     //al utilizar Output para agregar el nombre y el modo
     $pdf->Output($nombre_archivo,$modo);
+
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.office365.com';
+    $mail->SMTPAuth =true;
+    $mail->Username = 'guillermo.memo05@outlook.com';
+    $mail->Password = 'm.m.z.1999';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port= 587;
+
+    $mail->SetFrom('guillermo.memo05@outlook.com','guillermo');
+    $mail->addAddress('practicantes@remoteteamsolutions.com','practicantes');
+
+    $mail->Subject = 'Prueba pdf';
+    $mail->Body ='Prueba de enviar un pdf de carta de responsiva por pdf';
+
+    $mail->addAttachment($nombre_archivo);
+
+    
+    if(!$mail->send()) {
+        echo 'Error al enviar el correo: ' . $mail->ErrorInfo;
+    } else {
+        echo 'Correo enviado correctamente.';
+    }
 
 ?>
