@@ -39,10 +39,16 @@ if(isset($_POST['Registrar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro laptop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  
     <link rel="stylesheet" href="estilos/estilosFormularios.css">
     </head>
 
@@ -64,17 +70,17 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" name="modelo" value="">
+                        <input type="text" class="form-control" name="modelo" value="" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="numero_serie" class="form-label">Número de serie</label>
-                        <input type="text" class="form-control" name="numero_serie">
+                        <input type="text" class="form-control" name="numero_serie" required>
                     </div>
                     <!------------------------------------------------------------------>
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
-                        <select name="marca" class="form-select" id="marca">
+                        <select name="marca" class="form-select" id="marca" required>
                             <?php
                             $marcas = ControladorDispositivos::getMarcas();
                             foreach ($marcas as $row => $item) {
@@ -92,18 +98,18 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                 <div class="mb-3">
                     <label id="lblNew" for="labelrecio" class="form-label">Precio</label>
-                    <input type="number" class="form-control" name="precio" id="precioInput" value="" pattern="[0-9]*" title="Ingrese solo números">
+                    <input type="number" class="form-control" name="precio" id="precioInput" value="" pattern="[0-9]*" title="Ingrese solo números" required>
                 </div>
 
                     <div class="mb-3">
                         <label for="fecha_compra" class="form-label">Fecha de compra</label>
                         <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value=""
-                            placeholder="Selecciona una fecha">
+                            placeholder="Selecciona una fecha" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="ram" class="form-label">RAM</label>
-                        <select class="form-select" name="ram">
+                        <select class="form-select" name="ram" required>
                             <?php
                         $ramOptions = array("4GB", "8GB", "16GB", "32GB", "64GB");
                         foreach ($ramOptions as $ramOption) {
@@ -119,7 +125,7 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="procesador" class="form-label">Procesador</label>
-                        <select class="form-select" name="procesador" id="procesador">
+                        <select class="form-select" name="procesador" id="procesador" required>
                             <?php
                         $procesadoresBaseDatos = array(
                            "Intel Core i5-8600K (8va generación)",
@@ -149,14 +155,14 @@ if(isset($_POST['Registrar'])){
                             echo "<option value='$procesador'>$procesador</option>";
                         }
                         ?>
-                            <option value="otro">Otro...</option>
+                            <option value="otroProcesador">Otro procesador</option>
                         </select>
                     </div>
 
                     <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
                         <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
                         <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
-                            placeholder="Ingresa el nuevo procesador">
+                            placeholder="Ingresa el nuevo procesador" >
                     </div>
 
                     <input type="hidden" name="procesador_seleccionado" id="procesador_seleccionado">
@@ -165,7 +171,7 @@ if(isset($_POST['Registrar'])){
 
                     <div class="mb-3">
                         <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
-                        <select class="form-select" name="sistema_operativo" id="sistema_operativo">
+                        <select class="form-select" name="sistema_operativo" id="sistema_operativo" required>
                             <?php
                       $sistemasOperativosBaseDatos = array(
                         "Windows 10",
@@ -217,7 +223,7 @@ if(isset($_POST['Registrar'])){
                         <input type="file" class="form-control" name="foto">
                     </div>
                     <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo"
-                    onclick="return validarCampos()">
+                    >
                     <hr>
                     <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 
@@ -226,16 +232,6 @@ if(isset($_POST['Registrar'])){
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
         <script>
 
-        function validarCampos() {
-            var modelo = document.getElementById("modelo").value;
-            // Agrega aquí la validación de otros campos
-            if (modelo.trim() === "") {
-                alert("Por favor, ingrese el modelo.");
-                return false; // Evita que se envíe el formulario si el campo está vacío
-            }
-            // Agrega más validaciones si es necesario
-            return true; // Permite el envío del formulario si todos los campos están llenos
-        }
      
 
         // Mapeo de marcas y sus IDs correspondientes
@@ -282,6 +278,45 @@ document.getElementById("marca").addEventListener("change", function() {
     }
 });
 
+
+document.getElementById("procesador").addEventistener("change", function() {
+    var procesadorSeleccionado = this.value;
+
+    if (procesadorSeleccionado === "otroProcesador") {
+        Swal.fire({
+            title: 'Nuevo procesador',
+            input: 'text',
+            inputPlaceholder: 'Ingresa el nuevo procesador...',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes ingresar un nuevo procesador';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var nuevoProcesador = result.value;
+                // Obtener el elemento select de la marca
+                var selectProcesador = document.getElementById("procesador");
+                // Buscar el ID correspondiente en el mapeo de marcas
+                var nuevoId = procesadoresIds[nuevoProcesador];
+                // Crear una nueva opción con el nuevo ID como valor y la nueva marca como texto
+                var option = document.createElement("option");
+                option.text = nuevoProcesador;
+                option.value = nuevoId;
+                // Agregar la nueva opción al select
+                selectProcesador.add(option);
+                // Seleccionar la nueva marca
+                selectProcesador.value = nuevoId;
+            } else {
+                // Si el usuario cancela, seleccionamos la primera opción
+                document.getElementById("procesador").selectedIndex = 0;
+            }
+        });
+    }
+});
 
 
 

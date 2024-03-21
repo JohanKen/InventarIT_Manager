@@ -128,10 +128,11 @@
                         </li>
 
                      
-                    
+                    <!--Esta parte del menu (barra de busqueda y notificaciones seran adaptadas en la segunda version del sistema)
                         <input type="text" id="searchInput" placeholder="Buscar" class="form-control">
                         <a href=""><img src="images/cam.png" id="imgCampana" alt=""></a>
                         </ul>
+                        -->
                     </div>
                     
                 </div>

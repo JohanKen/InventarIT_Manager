@@ -54,14 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         
         $update->editarDispositivos();
-        echo "
+            echo "
             <script>
-            const Swal = require('sweetalert2');
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1500,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                 toast.onmouseenter = Swal.stopTimer;
@@ -78,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>";
 
         exit;
-        
+
     }
 }
 
@@ -121,25 +120,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
         <form action="" method="post" enctype="multipart/form-data">
         <div class="col-3">
+
+<!-------------------------------Id-------------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="id_dispositivo" class="form-label">ID</label>
                 <input type="text" class="form-control" name="id_dispositivo"
                     value="<?= $dispositivoInfo[0]["id_dispositivo"] ?>" readonly>
             </div>
+
+<!-------------------------------Modelo-------------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>">
+                <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>" required>
             </div>
+
+<!-----------------------------------Numero de serie---------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="numero_serie" class="form-label">Número de serie</label>
                 <input type="text" class="form-control" name="numero_serie"
-                    value="<?= $dispositivoInfo[0]["numero_serie"] ?>">
+                    value="<?= $dispositivoInfo[0]["numero_serie"] ?>" required>
             </div>
             </div>
+<!-------------------------------Marca-------------------------------------------->
             <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="marca" class="form-label">Marca</label>
-                <select name="marca" id="" class="form-control">
+                <select name="marca" id="" class="form-control" required>
                     <?php
                         $marcas = ControladorDispositivos::getMarcas();
 
@@ -152,12 +158,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                 </select>
             </div>
-
-
-
+<!--------------------------------Estado------------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="estado" class="form-label">Estado</label>
-                <select class="form-select" name="estado">
+                <select class="form-select" name="estado" required>
                     <?php
                                     foreach ($estados as $estadoId => $estadoLabel) {
                                         $selected = ($dispositivoInfo[0]["id_estado"] == $estadoId) ? 'selected' : '';
@@ -182,33 +186,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     ?>
                 </select>
             </div>
-
-
+<!------------------------------Precio-------------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="precio" class="form-label">Precio</label>
                 <input type="text" class="form-control" name="precio" id="precioInput"
-                    value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>">
+                    value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>" required>
             </div>
-
-
             </div>
+<!---------------------------------Fecha de compra------------------------------------------>
+
             <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="fecha_compra" class="form-label">Fecha de compra</label>
                 <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput"
-                    value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha">
+                    value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha" required>
             </div>
-
+<!-----------------------------------Notas---------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="nota" class="form-label">Notas</label>
                 <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
             </div>
+<!------------------------------------Imagen--------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
                     required="true">Imagen del dispositivo</label>
                 <input type="file" class="form-control" name="foto">
             </div>
             </div>
+<!-----------------------------------------RAM-------------------------------->
             <div class="col-3">
             <div class="mb-3" id="formForm">
                 <label for="ram" class="form-label">RAM</label>
@@ -223,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                 </select>
             </div>
+<!--------------------------------Procesador------------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="procesador" class="form-label">Procesador</label>
                 <select class="form-select" name="procesador">
@@ -236,6 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                 </select>
             </div>
+<!----------------------------------Sistema operativo----------------------------------------->
             <div class="mb-3" id="formForm">
                 <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
                 <select class="form-select" name="sistema_operativo">
@@ -255,6 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                 </select>
             </div>
+<!-------------------------------Botones-------------------------------------------->
             </div>
             </div>
             <div class="conn">
@@ -263,6 +271,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <hr>
             <a class="btn btn-danger" href="index.php?seccion=dispositivos">Cancelar</a>
+<!--------------------------------------------------------------------------->
 
                 
                 <hr>

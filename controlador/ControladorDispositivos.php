@@ -153,7 +153,21 @@
                             if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
                                 $fechaCompraFormateada = $fechaCompra;
                             } else { 
-                                echo 'Error en el formato de la fecha';
+                                echo "
+                                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                                <script>
+                                    Swal.fire({
+                                        title: 'Fecha incorrecta',
+                                        text: 'Ingrese el formato de fecha correcto',
+                                        icon: 'warning', 
+                                    }).then(function(result) {
+                                        if (result.isConfirmed) { 
+                                            window.location.href='index.php?seccion=formularios/newLaptop';
+                                        }
+                                    });
+                                </script>
+                                
+                                ";
                                 exit;
                             }
 
