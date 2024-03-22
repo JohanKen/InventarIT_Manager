@@ -31,7 +31,7 @@
             </li>
 
             <li class="me-3">
-                <a class="anclaDis" href="formularios/newDesktop">
+                <a class="anclaDis" href="index.php?seccion=formularios/newDesktop">
                     <img class="imgDis" src="images/dis/desktop.png" alt="Desktop">
                     <span class="label">Desktop</span>
                 </a>

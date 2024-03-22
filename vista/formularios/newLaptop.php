@@ -214,7 +214,7 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="nota" class="form-label">Notas (opcional)</label>
-                        <textarea class="form-control" name="nota" rows="4"></textarea>
+                        <textarea class="form-control" name="nota" rows="4" id="notas"></textarea>
                     </div>
 
 
@@ -231,8 +231,17 @@ if(isset($_POST['Registrar'])){
         </div>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
         <script>
+            const notasElemento= document.getElementById("notas");
 
-     
+            function guardarDatosPersonales(){
+
+                const notas =notasElemento.values;
+
+                if(notas.trim() !== ''){
+                    localStorage.setItem('notasGuardadas', notas);
+                }
+            }
+
 
         // Mapeo de marcas y sus IDs correspondientes
 const marcasIds = {
