@@ -67,6 +67,8 @@ if(isset($_POST['Registrar'])){
 
         <div class="container mt-52">
             <form action="" method="post" enctype="multipart/form-data">
+            <!------------------------------------------------------------------------>
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
@@ -222,8 +224,7 @@ if(isset($_POST['Registrar'])){
                         <label for="foto" class="form-label" required="true">Imagen del dispositivo (opcional)</label>
                         <input type="file" class="form-control" name="foto">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo"
-                    >
+                    <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
                     <hr>
                     <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 

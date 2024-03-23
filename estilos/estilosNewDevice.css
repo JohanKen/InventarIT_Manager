@@ -14,7 +14,7 @@ ul {
 
 .imgDis {
     text-decoration: none;
-    width: 250px !important;
+    
     height: 150px !important;
     transition: transform 0.3s, filter 0.3s;
 }
@@ -23,14 +23,14 @@ ul {
 }
 .imgDiis {
     text-decoration: none;
-    width: 120px !important;
+    width: 100px !important;
     height: 90px !important;
     transition: transform 0.3s, filter 0.3s;
 }
 .imgDiss {
     text-decoration: none;
     width: 90px !important;
-    height: 13r0px !important;
+    height: 130px !important;
     transition: transform 0.3s, filter 0.3s;
 }
 
