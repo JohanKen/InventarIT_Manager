@@ -2,6 +2,7 @@
 //este es asignarPaso3.php
 require_once 'controlador/ControladorColaboradores.php';
 require_once 'controlador/ControladorAsignaciones.php';
+//require_once 'cartaResponsiva.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -15,20 +16,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['volver'])) {
 }
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
+    $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
+    include 'cartaResponsiva.php'; // Incluye el archivo que contiene la función generarPDFyEnviarCorreo()
+    $generarPDF = new PDF;
+    $generarPDF->generarPDF($dispositivosSeleccionados, $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]);
+}
+
+/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['aceptar'])) {
+        $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
+
+        generarPDF($dispositivosSeleccionados, $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]);
         $registar = new ControladorAsignaciones;
         foreach ($dispositivosSeleccionados as $item){
             $dispositivo =  $item['id_dispositivo'];
             $registar -> registrarAsignacion($dispositivo);
         }
     }
-    echo  '<script>
+    /*echo  '<script>
                 alert("Asignacion realizada!");
                 window.location.href="index.php?seccion=asignaciones/asignaciones";
         </script>';
     exit;
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -93,25 +104,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 </div>
                 
-
                 <div action="mb-3" method="formForm">
                     <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
                     <! Para la carta de resposiva se tiene que accede sin index para no de confricto con el menu y java script>
-                    <a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?colaborador=<?= urlencode($datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]) ?>&dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>
+                    <?php/*<a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?colaborador=<?= urlencode($datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]) ?>&dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>*/?>
                 </div>
 
-                <script>
-                    function continuar() {
-                        window.location.href = 'vista/asignaciones/cartaResponsiva.php?';
-                    }
-                </script>
-
             </form>
-
-            
-
         
     </div>
 </body>
