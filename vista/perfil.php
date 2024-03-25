@@ -114,6 +114,7 @@ function ObtenerDatosUsuario($id){
                                     <hr class="mt-0 mb-4">
                                     <div class="row pt-1">
                                         
+                                        
 
 
                                         <div class="col-6 mb-3">
@@ -122,6 +123,8 @@ function ObtenerDatosUsuario($id){
                                                 <?php echo $datosUsuario[8]?></p>
                                         </div>
                                     </div>
+                                    <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class="btn btn-warning" id="btnWar">Actualizar Información</a>
+
                                     <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class="btn btn-warning" id="btnWar">Actualizar Información</a>
 
                                     <div class="d-flex justify-content-start">
@@ -138,6 +141,46 @@ function ObtenerDatosUsuario($id){
         </div>
     </section>
     <script>
+   function solicitarPassword(idUsuario) {
+    Swal.fire({
+        title: 'Ingrese su contraseña',
+        input: 'password',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        showLoaderOnConfirm: true,
+        preConfirm: (password) => {
+            return new Promise((resolve, reject) => {
+                // Comparar la contraseña ingresada con la contraseña almacenada
+                if (password === '<?php echo $datosUsuario[9]; ?>') {
+                    resolve();
+                } else {
+                    reject('Intente de nuevo');
+                }
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirigir al usuario si la contraseña es correcta
+            window.location.href = "index.php?seccion=editarPerfil&id_usuario=" + idUsuario;
+        }
+    }).catch((error) => {
+        // Mostrar un mensaje de error si la contraseña es incorrecta
+        Swal.fire({
+            icon: 'error',
+            title: 'Contraseña incorrecta',
+            text: error
+        });
+    });
+}
+
+
+
+
    function solicitarPassword(idUsuario) {
     Swal.fire({
         title: 'Ingrese su contraseña',

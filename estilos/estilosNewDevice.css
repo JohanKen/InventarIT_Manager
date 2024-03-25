@@ -133,12 +133,13 @@ ul {
 #h1 {
     padding: 10px;
     padding-left: 30px;
-    font-size: 25px;
+    font-size: 24px;
     left: 0;
-    background-color: #333;
+   background: #ffffff00;
     width: 600px;
-    color: #fff;
+    color: #333;
     opacity: 0;
+    
     transform: translateX(-100%);
     transition: opacity 1s, transform 1s;
 }
@@ -170,4 +171,42 @@ ul {
     transform: scale(1.1);
     border-radius: 10px;
     background-color: #ffffff;
+}
+
+
+@media (max-width: 768px) {
+    .flexx,
+    .flexxa,
+    .flexxb {
+        display: block; /* Cambia la disposición de los elementos a bloque */
+        margin-bottom: 20px; /* Añade espacio entre los elementos */
+    }
+
+    .flexx,
+    .flexxa,
+    .flexxb li {
+        margin-bottom: 10px; /* Añade espacio entre los elementos dentro de cada lista */
+    }
+
+    .anclaDis {
+        display: block; /* Cambia la disposición a bloque */
+        margin: 0 auto; /* Centra los elementos */
+    }
+
+    .imgDis,
+    .imgDiis,
+    .imgDiss {
+        width: 100%; /* Haz que las imágenes ocupen el ancho completo de su contenedor */
+        height: auto; /* Haz que la altura se ajuste automáticamente para mantener la proporción */
+    }
+
+    .label {
+        position: static; /* Elimina la posición absoluta */
+        transform: none; /* Elimina la transformación */
+        margin-top: 10px; /* Añade espacio entre la imagen y el texto */
+    }
+
+    .anclaa {
+        margin-top: 20px; /* Añade espacio encima del botón Volver */
+    }
 }

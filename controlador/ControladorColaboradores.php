@@ -1,11 +1,38 @@
 <?php
-    include_once "./modelo/ModeloColaboradores.php";
+    include_once './modelo/ModeloColaboradores.php';
+
+
     class ControladorColaboradores{
         public static function consultarColaboradores(){
             $tabla = 'v_colaboradores';
             $obj = ModeloColaboradores::selectColaboradores($tabla);
             $arregloColaboradores = $obj->fetch_all();
             return $arregloColaboradores;
+        }
+
+        public static function consultarUltimoColaborador(){
+            $tabla = 'v_ultimo_colaborador';
+            $obj = ModeloColaboradores::selectUltimoColaborador($tabla);
+            $arregloColaborador = $obj->fetch_all();
+            return $arregloColaborador;
+        }
+
+        public static function consultarColaboradorPorCliente() {
+            if (isset($_GET['cliente'])) {
+                $clienteSeleccionado = $_GET['cliente'];
+                
+                $colaboradores = ModeloColaboradores::selectColaboradorPorCliente($clienteSeleccionado);
+    
+                $options = "";
+                foreach ($colaboradores as $row => $item) {
+                    $options .= '<option value="' . $colaborador['id_colaborador'] . '">' 
+                    .$item[0] . ' ' . $item[1] . ' ' . $item[2] . '</option>';
+                }
+    
+                echo $options;
+            } else {
+                echo '<option value="">Error: Parámetro cliente no proporcionado</option>';
+            }
         }
         
         static function borrarColaboradores(){

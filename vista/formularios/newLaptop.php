@@ -27,6 +27,27 @@ if(isset($_POST['Registrar'])){
       }, 3000); // Redireccionar después de 3 segundos
     </script>';
     
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Dispositivo agregado correctamente"
+      });
+      setTimeout(function(){
+        window.location.href="index.php?seccion=dispositivos";
+      }, 3000); // Redireccionar después de 3 segundos
+    </script>';
+    
     exit;
     
                
@@ -84,6 +105,12 @@ if(isset($_POST['Registrar'])){
                         <label for="marca" class="form-label">Marca</label>
                         <select name="marca" class="form-select" id="marca" required>
                             <?php
+                            $marcas = ControladorDispositivos::getMarcas();
+                            foreach ($marcas as $row => $item) {
+                                echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
+                            }
+                            ?>
+                            <option value="otro">Otra marca</option>  
                             $marcas = ControladorDispositivos::getMarcas();
                             foreach ($marcas as $row => $item) {
                                 echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
@@ -230,6 +257,7 @@ if(isset($_POST['Registrar'])){
 
             </form>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
         <script>
             const notasElemento= document.getElementById("notas");

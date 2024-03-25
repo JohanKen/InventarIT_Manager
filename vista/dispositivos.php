@@ -116,7 +116,7 @@ margin-left: 3%;
         }
     }
     </style>
-</head>
+</head> 
 
 <body>
     <div class="contentSeccion">
@@ -144,6 +144,7 @@ margin-left: 3%;
                 
             </div>
         </div>
+        <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
         <a href="index.php?seccion=nuevoDispositivo">
 
         </a>
@@ -214,8 +215,6 @@ margin-left: 3%;
                     ";
                     
                     }
-                    
-                    
                     ?>
                     </tbody>
                 </table>

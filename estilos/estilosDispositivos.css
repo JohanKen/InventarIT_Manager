@@ -10,24 +10,24 @@ body {
 }
 
 .headerTabla {
-        background-color: #ffffff77;
-        backdrop-filter: blur(10px);
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        margin-left: 10%;
-        box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.322);
-        margin-top: 100px;
-        font-size: 36px; /* Ajusta el tamaño del texto según tu preferencia */
-        border-radius: 15px; /* Ajusta el radio del borde según tu preferencia */
-        padding: 15px; /* Ajusta el espacio interno según tu preferencia */
-        text-align: center;
-        width: 80%;
-        max-width: 900px;
-        margin: 50px auto;
-        position: relative;
-        height: 100px;
-    }
+    background-color: #ffffff77;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    box-shadow: 20px 18px 26px rgba(0, 0, 0, 0.322);
+    margin-top: 100px;
+    font-size: 36px; /* Ajusta el tamaño del texto según tu preferencia */
+    border-radius: 15px; /* Ajusta el radio del borde según tu preferencia */
+    padding: 15px; /* Ajusta el espacio interno según tu preferencia */
+    text-align: center;
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    position: relative;
+    height: 100px;
+}
 
     .headerTabla  {
         font-size: 60px; /* Ajusta el tamaño del texto según tu preferencia */
@@ -49,9 +49,9 @@ body {
     justify-content: center;
 }
 
-#IMGlaptop{
-    width: 680px;
-    height: 350px;
+#IMGlaptop {
+    max-width: 100%;
+    height: auto;
     margin-left: 100px;
 }
 @media screen and (max-width: 400px){

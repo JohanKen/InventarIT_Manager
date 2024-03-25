@@ -7,16 +7,16 @@ body {
     background-position: center;
     overflow-x: hidden;
 }
-
 .header {
     width: 100%;
 }
-
+.container{
+    z-index: 100;
+}
 #logoInventarit {
     width: 120px;
     margin-right: 40px;
 }
-
 .menu {
     background-color: #333;
     color: #fff;
@@ -28,10 +28,18 @@ body {
 
 .menu h1 {
     margin-right: 20px;
+<<<<<<< HEAD
+} 
+
+#btnCerrarSesion{
+    color: #ff0000c4 ;
+    z-index: 10 !important;
+=======
 }
 
 #btnCerrarSesion{
     color: #ff0000c4 ;
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 }
 
 .menu a {
@@ -40,6 +48,10 @@ body {
     margin-right: 20px;
     transition: all 0.3s ease;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 .dark-list {
     background-color: #343a40;
     color: #ffffff;
@@ -53,6 +65,16 @@ body {
     color: #3dc51b;
 }
 
+<<<<<<< HEAD
+.search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 40px;
+}
+=======
+>>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
@@ -72,16 +94,21 @@ body {
     z-index: 10 !important;
     display: none;
 }
-
 #userDropdown a {
     color: white;
     padding: 10px 14px;
     text-decoration: none;
+    z-index: 10 !important;
     display: block;
 }
-
 #userDropdown a:hover {
     background-color: #555;
+    z-index: 10 !important;
+}
+
+#btnUserDropDown{
+    color: #333 !important;
+    z-index: 10 !important;
 }
 
 #btnUserDropDown{
