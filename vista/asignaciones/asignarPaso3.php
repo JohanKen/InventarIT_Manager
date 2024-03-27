@@ -17,13 +17,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['volver'])) {
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
-    $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
+    $dispositivosSeleccionados = urlencode(json_encode($dispositivosSeleccionados));
+    $colaboradorSeleccionado = $datoscolaborador[0]["id_colaborador"];
+    //$nombreApellidoColaborador =  $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"];
+    header("Location: index.php?seccion=asignaciones/asignarPaso4&id_colaborador=" . $colaboradorSeleccionado."&dispositivos=".$dispositivosSeleccionados);
+    exit();
+    /*
     include 'cartaResponsiva.php'; // Incluye el archivo que contiene la función generarPDFyEnviarCorreo()
     $generarPDF = new PDF;
-    $generarPDF->generarPDF($dispositivosSeleccionados, $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]);
+    $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador);
+    */
 }
 
-/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
+/*
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['aceptar'])) {
         $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
@@ -108,8 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
                     <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
-                    <! Para la carta de resposiva se tiene que accede sin index para no de confricto con el menu y java script>
-                    <?php/*<a class="btn btn-primary" href="vista/asignaciones/cartaResponsiva.php?colaborador=<?= urlencode($datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"]) ?>&dispositivos=<?= urlencode(json_encode($dispositivosSeleccionados)) ?>" target="_blank">Carta Responsiva</a>*/?>
                 </div>
 
             </form>

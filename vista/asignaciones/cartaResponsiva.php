@@ -10,10 +10,7 @@ require_once './PHPMailer/SMTP.php';
 require_once('./fpdf/fpdf.php');
 //require('../../PHPMailer/PHPMailer.php');
 
-
-
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
-//$colaborador = isset($_GET["colaborador"]) ? json_decode(urldecode($_GET['colaborador']),true) : [];
 
 class PDF extends FPDF {
 
@@ -70,12 +67,7 @@ class PDF extends FPDF {
         $this->cell(28,5,utf8_decode('+1 880 449-0189'),0,0,'C');
     }
 
-    function generarPDF($dispositivosSeleccionados, $nombreApellidoColaborador){
-
-        //class PDF extends FPDF{
-  
-        //}
-
+    function generarPDF($dispositivosSeleccionados, $nombreApellidoColaborador,$correo){
         function fechaActual(){
             //se crea un array donde se compara el numero de mes para imprimir el mismo mes en español
             $mes=[
@@ -162,7 +154,7 @@ class PDF extends FPDF {
             
         $pdf->SetXY(1,190);//cambio de posicion 
         //Se optioene el colaborador
-        $nombreApellidoColaborador = isset($_GET['colaborador']) ? $_GET['colaborador'] : '';
+        //$nombreApellidoColaborador = isset($_GET['colaborador']) ? $_GET['colaborador'] : '';
         //imprime en colaborador con su nombre y apellido
         $pdf->Cell(214,4, utf8_decode($nombreApellidoColaborador),0,0,'C',0);
 
@@ -202,7 +194,7 @@ class PDF extends FPDF {
         $mail->Port= 587;
 
         $mail->SetFrom('guillermo.memo05@outlook.com','InventarIT Manager');
-        $mail->addAddress('practicantes@remoteteamsolutions.com','practicantes');
+        $mail->addAddress($correo,'practicantes');
 
         $mail->Subject = 'Prueba pdf';
         $mail->Body ='Prueba de enviar un pdf de carta de responsiva por pdf';
