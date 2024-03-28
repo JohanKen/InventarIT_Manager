@@ -11,25 +11,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
 
     $nombreApellidoColaborador =  $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"];
     $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
-    include 'cartaResponsiva.php'; // Incluye el archivo que contiene la función generarPDFyEnviarCorreo()
-    $correo = $_POST['correo'];
-    //echo $correo;
-    $generarPDF = new PDF;
-    $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador,$correo);
+    $correos = json_decode($_POST['correos_json'], true);
 
     /*$registar = new ControladorAsignaciones;
     foreach ($dispositivosSeleccionados as $item){
         $dispositivo =  $item['id_dispositivo'];
         $registar -> registrarAsignacion($dispositivo);
+    }*/
+
+    include 'cartaResponsiva.php';
+    $generarPDF = new PDF;
+    foreach ($correos as $correo) {
+        $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador,$correo);
     }
 
-    echo  '<script>
+    /*echo  '<script>
             alert("Asignacion drealizada!");
             window.location.href="index.php?seccion=asignaciones/asignaciones";
         </script>';
-    exit;
-    */
+    exit;*/
+    
     }
+
+    
     
 ?>
 
@@ -47,19 +51,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
             <h1>Paso 4 - Enviar por correo a:</h1>
         </header>
         <form action="" method="post" enctype="multipart/form-data">
-            <div action="mb-3" method="formForm">
-                <label for="correo" class="form-label">Correo</label>
-                <input type="text" class="form-control" name="correo">
+            <div id="contenedor-correos">
+                <!-- Campo de entrada inicial -->
+                <div class="form-group">
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="text" class="form-control" name="correo[]">
+                </div>
             </div>
 
-            <div action="mb-3" method="formForm">
-                <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
-            </div>
-
+            <button type="button" class="btn btn-primary" onclick="agregarCampo()">Agregar</button>
+            
+            <button type="submit" class="btn btn-primary" name="aceptar" onclick="guardarCorreos()">Confirmar Asignacion</button>
+            
+            <input type="hidden" name="correos_json" id="correos_json">
         </form>
+
+        <script>
+            // Función para agregar un nuevo campo de entrada de texto
+            function agregarCampo() {
+                var contenedor = document.getElementById("contenedor-correos");
+                var nuevoCampo = document.createElement("div");
+                nuevoCampo.classList.add("form-group"); // Agrega la clase form-group al nuevo campo
+                nuevoCampo.innerHTML = `
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="text" class="form-control" name="correo[]">
+                `;
+                contenedor.appendChild(nuevoCampo); // Agrega el nuevo campo al contenedor
+            }
+
+            function guardarCorreos() {
+                var correos = [];
+                var camposCorreo = document.querySelectorAll('input[name="correo[]"]');
+                camposCorreo.forEach(function(input) {
+                    correos.push(input.value);
+                });
+                document.getElementById('correos_json').value = JSON.stringify(correos);
+            }
+        </script>
 
     </div>
 
-
 </body>
 </html>
+

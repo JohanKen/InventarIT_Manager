@@ -12,6 +12,28 @@ require_once('./fpdf/fpdf.php');
 
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
+function fechaActual(){
+    //se crea un array donde se compara el numero de mes para imprimir el mismo mes en español
+    $mes=[
+        "01"=>"Enero",
+        "02" =>"Febrero",
+        "03" => "Marzo",
+        "04" => "Abril",
+        "05" => "Mayo",
+        "06" => "Junio",
+        "07" => "Julio",
+        "08" => "Agosto",
+        "09" => "Septiembre",
+        "10" => "Octubre",
+        "11" => "Noviembre",
+        "12" => "Diciembre"
+    ];
+
+    //Se declara el formato de la fecha lo devuelve
+    $fecha = date("d").' de '.$mes[date("m")].' de '.date("Y");
+    return $fecha;
+}
+
 class PDF extends FPDF {
 
     //Encabezado de la paguina
@@ -68,27 +90,6 @@ class PDF extends FPDF {
     }
 
     function generarPDF($dispositivosSeleccionados, $nombreApellidoColaborador,$correo){
-        function fechaActual(){
-            //se crea un array donde se compara el numero de mes para imprimir el mismo mes en español
-            $mes=[
-                "01"=>"Enero",
-                "02" =>"Febrero",
-                "03" => "Marzo",
-                "04" => "Abril",
-                "05" => "Mayo",
-                "06" => "Junio",
-                "07" => "Julio",
-                "08" => "Agosto",
-                "09" => "Septiembre",
-                "10" => "Octubre",
-                "11" => "Noviembre",
-                "12" => "Diciembre"
-            ];
-
-            //Se declara el formato de la fecha lo devuelve
-            $fecha = date("d").' de '.$mes[date("m")].' de '.date("Y");
-            return $fecha;
-        }
         
         $pdf = new PDF('P','mm','Letter');// se daclara el archivo en pdf junto al formato en carta 
         $pdf->AddPage();
@@ -196,7 +197,7 @@ class PDF extends FPDF {
         $mail->SetFrom('guillermo.memo05@outlook.com','InventarIT Manager');
         $mail->addAddress($correo,'practicantes');
 
-        $mail->Subject = 'Prueba pdf';
+        $mail->Subject = 'Carta de responsiva';
         $mail->Body ='Prueba de enviar un pdf de carta de responsiva por pdf';
 
         $mail->addAttachment($nombre_archivo);
