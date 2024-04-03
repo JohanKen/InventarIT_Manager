@@ -144,7 +144,7 @@ margin-left: 3%;
                 
             </div>
         </div>
-        <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
+        
         <a href="index.php?seccion=nuevoDispositivo">
 
         </a>

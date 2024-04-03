@@ -25,30 +25,11 @@ if(isset($_POST['Registrar'])){
       setTimeout(function(){
         window.location.href="index.php?seccion=dispositivos";
       }, 3000); // Redireccionar después de 3 segundos
-    </script>';
+    </script>;
     
-    <script>
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Dispositivo agregado correctamente"
-      });
-      setTimeout(function(){
-        window.location.href="index.php?seccion=dispositivos";
-      }, 3000); // Redireccionar después de 3 segundos
-    </script>';
     
-    exit;
+    
+    exit';
     
                
    }
@@ -60,16 +41,15 @@ if(isset($_POST['Registrar'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro laptop</title>
+     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
 
-  
+    
     <link rel="stylesheet" href="estilos/estilosFormularios.css">
     </head>
 
@@ -110,12 +90,7 @@ if(isset($_POST['Registrar'])){
                                 echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
                             }
                             ?>
-                            <option value="otro">Otra marca</option>  
-                            $marcas = ControladorDispositivos::getMarcas();
-                            foreach ($marcas as $row => $item) {
-                                echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
-                            }
-                            ?>
+                           
                             <option value="otro">Otra marca</option>  
                         </select>
                     </div>
@@ -169,16 +144,7 @@ if(isset($_POST['Registrar'])){
                             "Intel Core i7-12700K (12va generación)",
                             "Intel Core i5-13400 (13va generación)",
                             "Intel Core i7-13700K (13va generación)",                           
-                            "AMD Ryzen 5 1600X (1ra generación)",
-                            "AMD Ryzen 5 5600X (5ta generación)",
-                            "AMD Ryzen 7 5800X (5ta generación)",
-                            "AMD Ryzen 9 5900X (5ta generación)",
-                            "AMD Ryzen 5 6600X (6ta generación)",
-                            "AMD Ryzen 7 6700X (6ta generación)",
-                            "Apple M1 ",
-                            "Apple M1 Pro ",
-                            "Apple M1 Max ",
-                            "Apple M2"
+                           
                         );
                         foreach ($procesadoresBaseDatos as $procesador) {
                             echo "<option value='$procesador'>$procesador</option>";
@@ -188,15 +154,6 @@ if(isset($_POST['Registrar'])){
                         </select>
                     </div>
 
-                    <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
-                        <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
-                        <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
-                            placeholder="Ingresa el nuevo procesador" >
-                    </div>
-
-                    <input type="hidden" name="procesador_seleccionado" id="procesador_seleccionado">
-
-                    <!------------------------------------------------------------------>
 
                     <div class="mb-3">
                         <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
@@ -257,8 +214,7 @@ if(isset($_POST['Registrar'])){
 
             </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script>
+        
         <script>
             const notasElemento= document.getElementById("notas");
 
@@ -296,18 +252,28 @@ document.getElementById("marca").addEventListener("change", function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 var nuevaMarca = result.value;
-                // Obtener el elemento select de la marca
-                var selectMarca = document.getElementById("marca");
-                // Buscar el ID correspondiente en el mapeo de marcas
-                var nuevoId = marcasIds[nuevaMarca];
-                // Crear una nueva opción con el nuevo ID como valor y la nueva marca como texto
-                var option = document.createElement("option");
-                option.text = nuevaMarca;
-                option.value = nuevoId;
-                // Agregar la nueva opción al select
-                selectMarca.add(option);
-                // Seleccionar la nueva marca
-                selectMarca.value = nuevoId;
+                const req = new XMLHttpRequest();
+            
+                //realizar una svlicitud ajax al servidor para agregar la nueva marca
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "controlador/ControladorDispositivos.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // La marca ya se agregó correctamente
+                        // Agregar la nueva marca al select
+                        var select = document.getElementById("marca");
+                        var option = document.createElement("option");
+                        option.value = nuevaMarca;
+                        option.text = nuevaMarca;
+                        select.appendChild(option);
+                        // Seleccionar la nueva marca recién agregada
+                        select.value = nuevaMarca;
+                    }
+                };
+
+                xhr.send("nueva_marca=" + nuevaMarca);
+
             } else {
                 // Si el usuario cancela, seleccionamos la primera opción
                 document.getElementById("marca").selectedIndex = 0;
@@ -317,7 +283,7 @@ document.getElementById("marca").addEventListener("change", function() {
 });
 
 
-document.getElementById("procesador").addEventistener("change", function() {
+document.getElementById("procesador").addEventListener("change", function() {
     var procesadorSeleccionado = this.value;
 
     if (procesadorSeleccionado === "otroProcesador") {

@@ -76,6 +76,9 @@
             }
         }
 
+        
+
+
         static function editarDispositivos()
                 {
                 if (isset($_POST["guardar"])) {
@@ -141,6 +144,27 @@
                 
                 }
 
+        // Función para manejar el registro de una nueva marca
+        function registrarNuevaMarca() {
+            // Verificar si la solicitud POST contiene una nueva marca
+            if (isset($_POST['nueva_marca'])) {
+                $nuevaMarca = $_POST['nueva_marca'];
+
+                // Verificar si la nueva marca ya existe en la base de datos
+                $idMarca = ModeloDispositivos::obtenerIdMarca($nuevaMarca);
+
+                // Si la marca no existe, insertarla en la base de datos
+                if (empty($idMarca)) {
+                    $idMarca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+                }
+
+                // Devolver el ID de la marca insertada
+                return $idMarca;
+            }
+
+            // Si no se proporciona una nueva marca, retornar null o manejar según sea necesario
+            return null;
+        }
 
 
                 static function registrarLaptop(){

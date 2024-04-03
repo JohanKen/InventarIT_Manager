@@ -15,6 +15,10 @@ class ModeloDispositivos extends Conexion {
         try{
     
             $id_marca = (int) $datos["id_marca"];
+
+            //crear un procedimiento donde primero veamos que la marca no existe ya en la base de datos
+            
+
             $ram = (int) $datos["ram"];
             $precio = (double) $datos["precio"];
     
@@ -168,17 +172,23 @@ class ModeloDispositivos extends Conexion {
     //insertar nueva marca...
     public static function insertarNuevaMarca($nuevaMarca) {
         try {
-            $query = "INSERT INTO marcas (marca) VALUES (?)";
+            $query = "CALL insertar_marca(?)";
             $stmt = Conexion::conectar()->prepare($query);
             $stmt->bindParam(1, $nuevaMarca, PDO::PARAM_STR);
             $stmt->execute();
+    
+            // Si la ejecución del procedimiento almacenado no arroja errores,
+            // consideramos que la marca se ha insertado correctamente.
+            echo "<script>alert('NUEVA MARCA INSERTADA CON ÉXITO.');</script>";
+    
             return Conexion::conectar()->lastInsertId();
         } catch (PDOException $e) {
             // Manejar el error de inserción aquí, si es necesario
-            echo "<script>alert('Error al insertar nueva marca: ".$e->getMessage()."');</script>";
+            echo "<script>alert('Error al insertar nueva marca: " . $e->getMessage() . "');</script>";
             return false; // Retornar false en caso de error
         }
     }
+    
     
 
     // Función para seleccionar los distintos tipos de estados

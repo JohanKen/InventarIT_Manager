@@ -23,11 +23,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         $tipo = 2;
         $registrar ->registrarPc($tipo);
-        echo  '<script>
-                    alert("Registro realizado con exito!");
+        echo '
+            <script>
+                const Toast = Swal.mixin({
+                    toast : true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Dispositivo agregado correctamente"
+                });
+                setTimeout(function()){
                     window.location.href="index.php?seccion=dispositivos";
-                </script>';
-        exit;
+
+                }, 3000); //redireccionar de igual forma despues de 3 segundos
+            </script>
+       
+            exit;
+            '
+        
     }
 }
 
