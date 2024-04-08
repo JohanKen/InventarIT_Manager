@@ -96,7 +96,6 @@ if(isset($_POST['Registrar'])){
                     </div>
 
 
-
                     <!------------------------------------------------------------------>
                 </div>
                 <div class="col-3">
@@ -208,7 +207,7 @@ if(isset($_POST['Registrar'])){
                         <label for="foto" class="form-label" required="true">Imagen del dispositivo (opcional)</label>
                         <input type="file" class="form-control" name="foto">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
+                    <input type="submit" class="btn btn-primary" name="Registrar" onclick="datosEnviados" value="Registrar Dispositivo">
                     <hr>
                     <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 
@@ -216,6 +215,37 @@ if(isset($_POST['Registrar'])){
         </div>
         
         <script>
+
+
+            function datosEnviados(){
+                document.getElementById("registrar").addEventListener("click").value;
+                Swal.fire({
+            title: 'Nueva marca',
+            input: 'text',
+            inputPlaceholder: 'Ingresa la nueva marca...',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes ingresar una nueva marca';
+                }
+            }
+        })
+
+            }
+
+            function validarCampos() {
+                        var modelo = document.getElementById("modelo").value;
+                        // Agrega aquí la validación de otros campos
+                        if (modelo.trim() === "") {
+                            alert("Por favor, ingrese el modelo.");
+                            return false; // Evita que se envíe el formulario si el campo está vacío
+                        }
+                        // Agrega más validaciones si es necesario
+                        return true; // Permite el envío del formulario si todos los campos están llenos
+                    }
+
             const notasElemento= document.getElementById("notas");
 
             function guardarDatosPersonales(){
@@ -232,6 +262,13 @@ if(isset($_POST['Registrar'])){
 const marcasIds = {
     // Aquí debes definir tus marcas y sus IDs correspondientes
 };
+
+
+
+
+
+
+
 
 document.getElementById("marca").addEventListener("change", function() {
     var marcaSeleccionada = this.value;
@@ -253,27 +290,25 @@ document.getElementById("marca").addEventListener("change", function() {
             if (result.isConfirmed) {
                 var nuevaMarca = result.value;
                 const req = new XMLHttpRequest();
-            
-                //realizar una svlicitud ajax al servidor para agregar la nueva marca
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "controlador/ControladorDispositivos.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
-                        // La marca ya se agregó correctamente
-                        // Agregar la nueva marca al select
                         var select = document.getElementById("marca");
+                        // Eliminar la opción "Otra marca" existente
+                        select.remove(select.selectedIndex);
+                        // Agregar la nueva marca al select
                         var option = document.createElement("option");
-                        option.value = nuevaMarca;
+                        option.value = "otro";
                         option.text = nuevaMarca;
-                        select.appendChild(option);
+                        select.add(option);
                         // Seleccionar la nueva marca recién agregada
-                        select.value = nuevaMarca;
+                        select.value = "otro";
+                        
                     }
                 };
-
-                xhr.send("nueva_marca=" + nuevaMarca);
-
+                xhr.send("otro=" + nuevaMarca);
             } else {
                 // Si el usuario cancela, seleccionamos la primera opción
                 document.getElementById("marca").selectedIndex = 0;
@@ -281,6 +316,7 @@ document.getElementById("marca").addEventListener("change", function() {
         });
     }
 });
+
 
 
 document.getElementById("procesador").addEventListener("change", function() {
@@ -302,18 +338,25 @@ document.getElementById("procesador").addEventListener("change", function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 var nuevoProcesador = result.value;
-                // Obtener el elemento select de la marca
-                var selectProcesador = document.getElementById("procesador");
-                // Buscar el ID correspondiente en el mapeo de marcas
-                var nuevoId = procesadoresIds[nuevoProcesador];
-                // Crear una nueva opción con el nuevo ID como valor y la nueva marca como texto
-                var option = document.createElement("option");
-                option.text = nuevoProcesador;
-                option.value = nuevoId;
-                // Agregar la nueva opción al select
-                selectProcesador.add(option);
-                // Seleccionar la nueva marca
-                selectProcesador.value = nuevoId;
+                const req = new XMLHttpRequest();
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "controlador/ControladorDispositivos.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var select = document.getElementById("procesador");
+                        // Eliminar la opción "Otro procesador" existente
+                        select.remove(select.selectedIndex);
+                        // Agregar el nuevo procesador al select
+                        var option = document.createElement("option");
+                        option.value = nuevoProcesador;
+                        option.text = nuevoProcesador;
+                        select.add(option);
+                        // Seleccionar el nuevo procesador recién agregado
+                        select.value = nuevoProcesador;
+                    }
+                };
+                xhr.send("otroProcesador=" + nuevoProcesador);
             } else {
                 // Si el usuario cancela, seleccionamos la primera opción
                 document.getElementById("procesador").selectedIndex = 0;
@@ -322,35 +365,51 @@ document.getElementById("procesador").addEventListener("change", function() {
     }
 });
 
+document.getElementById("sistema_operativo").addEventListener("change", function() {
+    var sistemaOperativoSeleccionado = this.value;
 
-
-
-
-        document.getElementById("sistema_operativo").addEventListener("change", function() {
-            var nuevoSistemaOperativoDiv = document.getElementById("nuevoSistemaOperativoDiv");
-            var sistemaOperativoSeleccionado = this.value;
-
-            if (sistemaOperativoSeleccionado === "otro") {
-                nuevoSistemaOperativoDiv.style.display = "block";
+    if (sistemaOperativoSeleccionado === "otro") {
+        Swal.fire({
+            title: 'Nuevo sistema operativo',
+            input: 'text',
+            inputPlaceholder: 'Ingresa el nuevo sistema operativo...',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes ingresar un nuevo sistema operativo';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var nuevoSistemaOperativo = result.value;
+                const req = new XMLHttpRequest();
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "controlador/ControladorDispositivos.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var select = document.getElementById("sistema_operativo");
+                        // Eliminar la opción "Otro..." existente
+                        select.remove(select.selectedIndex);
+                        // Agregar el nuevo sistema operativo al select
+                        var option = document.createElement("option");
+                        option.value = nuevoSistemaOperativo;
+                        option.text = nuevoSistemaOperativo;
+                        select.add(option);
+                        // Seleccionar el nuevo sistema operativo recién agregado
+                        select.value = nuevoSistemaOperativo;
+                    }
+                };
+                xhr.send("otroSistemaOperativo=" + nuevoSistemaOperativo);
             } else {
-                nuevoSistemaOperativoDiv.style.display = "none";
+                // Si el usuario cancela, seleccionamos la primera opción
+                document.getElementById("sistema_operativo").selectedIndex = 0;
             }
         });
-
-
-        document.getElementById('procesador').addEventListener('change', function() {
-            var select = document.getElementById('procesador');
-            var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
-            var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
-
-            if (select.value === 'otro') {
-                nuevoProcesadorDiv.style.display = 'block';
-                procesadorSeleccionadoInput.value = '';
-            } else {
-                nuevoProcesadorDiv.style.display = 'none';
-                procesadorSeleccionadoInput.value = select.value;
-            }
-        });
+    }
+});
 
         document.addEventListener('DOMContentLoaded', function() {
             var fechaCompraInput = document.getElementById('fechaCompraInput');
