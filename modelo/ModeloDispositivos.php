@@ -134,7 +134,7 @@ class ModeloDispositivos extends Conexion {
     public static function obtenerIdMarca($nuevaMarca) {
         try {
             // Preparar la consulta SQL
-            $sql = "SELECT id_marca FROM marcas WHERE marca = ?";
+            $sql = "SELECT marca FROM marcas WHERE marca = ?";
             $stmt = Conexion::conectar()->prepare($sql);
     
             // Ejecutar la consulta con el valor pasado como parámetro
@@ -146,7 +146,7 @@ class ModeloDispositivos extends Conexion {
             // Verificar si se encontraron resultados
             if ($resultado !== false) {
                 // Retornar el ID de la marca
-                return $resultado['id_marca'];
+                return $resultado['marca'];
             } else {
                 // Retornar false si la marca no se encontró
                 return false;

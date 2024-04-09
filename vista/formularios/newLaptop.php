@@ -73,7 +73,7 @@ if(isset($_POST['Registrar'])){
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" name="modelo" value="" required>
+                        <input type="text" class="form-control" id="modelo" name="modelo" value="" required>
                     </div>
 
                     <div class="mb-3">
@@ -112,7 +112,7 @@ if(isset($_POST['Registrar'])){
 
                     <div class="mb-3">
                         <label for="ram" class="form-label">RAM</label>
-                        <select class="form-select" name="ram" required>
+                        <select class="form-select" id="ram" name="ram" required>
                             <?php
                         $ramOptions = array("4GB", "8GB", "16GB", "32GB", "64GB");
                         foreach ($ramOptions as $ramOption) {
@@ -189,11 +189,6 @@ if(isset($_POST['Registrar'])){
                         </select>
                     </div>
 
-                    <div class="mb-3" id="nuevoSistemaOperativoDiv" style="display: none;">
-                        <label for="nuevo_sistema_operativo" class="form-label">Nuevo Sistema Operativo</label>
-                        <input type="text" class="form-control" id="nuevo_sistema_operativo"
-                            name="nuevo_sistema_operativo" placeholder="Ingresa el nuevo sistema operativo">
-                    </div>
 
                 </div>
                 <div class="col-3">
@@ -205,9 +200,10 @@ if(isset($_POST['Registrar'])){
 
                     <div class="mb-3">
                         <label for="foto" class="form-label" required="true">Imagen del dispositivo (opcional)</label>
-                        <input type="file" class="form-control" name="foto">
+                        <input type="file" class="form-control" id="foto" name="foto">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="Registrar" onclick="datosEnviados" value="Registrar Dispositivo">
+                    <input type="button" class=="btn btn-danger" name="mostrarDatos" id="mostrarDatos"  value="Datos ">
+                    <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
                     <hr>
                     <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 
@@ -216,60 +212,7 @@ if(isset($_POST['Registrar'])){
         
         <script>
 
-
-            function datosEnviados(){
-                document.getElementById("registrar").addEventListener("click").value;
-                Swal.fire({
-            title: 'Nueva marca',
-            input: 'text',
-            inputPlaceholder: 'Ingresa la nueva marca...',
-            showCancelButton: true,
-            confirmButtonText: 'Aceptar',
-            cancelButtonText: 'Cancelar',
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'Debes ingresar una nueva marca';
-                }
-            }
-        })
-
-            }
-
-            function validarCampos() {
-                        var modelo = document.getElementById("modelo").value;
-                        // Agrega aquí la validación de otros campos
-                        if (modelo.trim() === "") {
-                            alert("Por favor, ingrese el modelo.");
-                            return false; // Evita que se envíe el formulario si el campo está vacío
-                        }
-                        // Agrega más validaciones si es necesario
-                        return true; // Permite el envío del formulario si todos los campos están llenos
-                    }
-
-            const notasElemento= document.getElementById("notas");
-
-            function guardarDatosPersonales(){
-
-                const notas =notasElemento.values;
-
-                if(notas.trim() !== ''){
-                    localStorage.setItem('notasGuardadas', notas);
-                }
-            }
-
-
-        // Mapeo de marcas y sus IDs correspondientes
-const marcasIds = {
-    // Aquí debes definir tus marcas y sus IDs correspondientes
-};
-
-
-
-
-
-
-
-
+            
 document.getElementById("marca").addEventListener("change", function() {
     var marcaSeleccionada = this.value;
 
@@ -300,11 +243,11 @@ document.getElementById("marca").addEventListener("change", function() {
                         select.remove(select.selectedIndex);
                         // Agregar la nueva marca al select
                         var option = document.createElement("option");
-                        option.value = "otro";
+                        option.value = nuevaMarca;
                         option.text = nuevaMarca;
                         select.add(option);
                         // Seleccionar la nueva marca recién agregada
-                        select.value = "otro";
+                        select.value = nuevaMarca;
                         
                     }
                 };
@@ -316,6 +259,84 @@ document.getElementById("marca").addEventListener("change", function() {
         });
     }
 });
+        
+
+
+
+
+       //id=mostrarDatos
+
+    document.getElementById("mostrarDatos").addEventListener("click", function (){
+
+
+        //variables de datos que se van a imprimir...
+        const modelo =document.getElementById("modelo").value;
+        const marca = document.getElementById("marca").value;
+        const precio =document.getElementById("precioInput").value;
+        const fechaCompra =document.getElementById("fechaCompraInput").value;
+        const ram = document.getElementById("ram").value;
+        const procesador = document.getElementById("procesador").value;
+        const sistemaOperativo = document.getElementById("sistema_operativo").value;
+        const notas =document.getElementById("notas").value;
+        const foto =document.getElementById("foto").value;
+        //Alert que mostrara los datos
+        /*Swal.fire({
+            title: 'Datos enviados...',
+            input:'text',
+            inputPlaceholder: 'Datos que se estan enviando aqui..',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value){
+                    return 'Debes ingresar la nueva marca';
+                }
+            }
+        });*/
+
+        console.log(
+                "modelo: " + modelo, 
+                "marca: " + marca, 
+                "precio: " + precio, 
+                "fechaCompra: " + fechaCompra, 
+                "ram: " + ram, 
+                "procesador: " + procesador, 
+                "sistemaOperativo: " + sistemaOperativo, 
+                "notas: " + notas, 
+                "foto: " + foto
+            );
+
+    });
+
+
+
+
+            
+
+            const notasElemento= document.getElementById("notas");
+
+            function guardarDatosPersonales(){
+
+                const notas =notasElemento.values;
+
+                if(notas.trim() !== ''){
+                    localStorage.setItem('notasGuardadas', notas);
+                }
+            }
+
+
+        // Mapeo de marcas y sus IDs correspondientes
+const marcasIds = {
+    // Aquí debes definir tus marcas y sus IDs correspondientes
+};
+
+
+
+
+
+
+
+
 
 
 

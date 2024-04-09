@@ -144,41 +144,26 @@
                 
                 }
 
+
+
+                
+        static function getMarcas(){
+            $tabla = "marcas";
+            $respuesta = ModeloDispositivos::selectMarcas($tabla);
+            $arreglo = $respuesta->fetch_all();
+            return $arreglo;
+        }
+
         // Función para manejar el registro de una nueva marca
         static function registrarLaptop(){
             if(isset($_POST["Registrar"])){
 
 
-                // Verificar si la solicitud POST contiene una nueva marca
-            if (isset($_POST['nuevaMarcaSeleccionada'])) {
-                $nuevaMarca = $_POST['nuevaMarcaSeleccionada'];
-        
-                // Verificar si la nueva marca ya existe en la base de datos
-                $idMarca = ModeloDispositivos::obtenerIdMarca($nuevaMarca);
-        
-                // Si la marca no existe, insertarla en la base de datos
-                if (empty($idMarca)) {
-                    $idMarca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
-                }
-        
-                // Devolver el ID de la marca insertada
-                echo json_encode(array("idMarca" => $idMarca));
-            } else {
-                // Si no se proporciona una nueva marca, retornar un mensaje de error
-                echo json_encode(array("error" => "No se proporcionó una nueva marca"));
-            }
-
-
-
-
-
-
-
-            
-                try{
+               try{
                     $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                     Conexion::conectar()->query($sqlSetMaxAllowedPacket);
         
+                    //formatear la fecha de la compra..
                     $fechaCompra = $_POST["fecha_compra"];
                     if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
                         $fechaCompraFormateada = $fechaCompra;
@@ -187,26 +172,35 @@
                         exit;
                     }
 
-                        // Obtener el valor de la marca seleccionada
+
+                    if (isset($_POST['marca'])) {
                         $marcaSeleccionada = $_POST['marca'];
+                    //Verificar si la nueva marca tiene el valor de 'la nueva marca en el value'..
+                     
+                    $tabla = "marcas";
+                    $respuesta = ModeloDispositivos::selectMarcas($tabla);
+                    $arreglo = $respuesta->fetch_all();
+                    return $arreglo;
+                    //verificar que se seteo un nombre que no existe en el select de marca
+                    if ($marcaSeleccionada != 'otro') {
+                            $nuevaMarca = $marcaSeleccionada;
 
-                        // Si la marca seleccionada es "otro"
-                        if ($marcaSeleccionada === "otro") {
-                            $nuevaMarca = isset($_POST['nueva_marca']) ? $_POST['nueva_marca'] : "";
-                            
-                            // Verificar si la nueva marca ya existe en la base de datos
-                            $idMarca = ModeloDispositivos::obtenerIdMarca($nuevaMarca);
-                    
-                            // Si la marca no existe, insertarla en la base de datos
-                            if(empty($idMarca)) {
-                                $idMarca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+                            $marca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+
+                            if (!empty($marca) && isset($marca['marca'])) {
+                                $nombreMarca = $marca['marca'];
+                            } else {
+                                echo "No se obtuvo la marca insertada correctamente"
                             }
-
-                            $marca = $idMarca;
+                            
                         } else {
                             $marca = $marcaSeleccionada; // Usar el ID de la marca seleccionada
                         }
-
+                    }else{
+                        echo'
+                            no se selecciono ninguna marca
+                        ';
+                    }
 
                     // Obtener el valor del sistema operativo seleccionado
                     $sistemaOperativoSeleccionado = $_POST['sistema_operativo'];
@@ -220,6 +214,8 @@
                     // Obtener el valor del procesador seleccionado
                     $procesadorSeleccionado = $_POST['procesador'];
         
+
+
                     // Si el procesador seleccionado es "otro", usar el nuevo procesador
                     if ($procesadorSeleccionado === "otro") {
                         $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
@@ -233,7 +229,7 @@
                         "ram" => (int)$_POST["ram"],
                         "procesador" => $procesador,
                         "sistema_operativo" => $sistemaOperativo,
-                        "id_marca" => $marca,
+                        "marca" => $marca,
                         "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
                         "fecha_compra" => $fechaCompraFormateada,
                         "nota" => $_POST["nota"],
@@ -293,12 +289,6 @@
         }
     
         //Funcion para consultar la marca de los dispositivos
-        static function getMarcas(){
-            $tabla = "marcas";
-            $respuesta = ModeloDispositivos::selectMarcas($tabla);
-            $arreglo = $respuesta->fetch_all();
-            return $arreglo;
-        }
         //funcion para consultar los tipos de estados
         static function getEstados(){
             $tabla = "estados_dispositivos";
