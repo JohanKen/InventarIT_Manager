@@ -88,34 +88,34 @@
         </form>
     </div>
 
-    <script>
-        function cargarVistasColaboradores() {
-            
-            console.log("cargarVistasColaboradores se está ejecutando");
-            var clienteSeleccionado = document.getElementById("cliente").value;
-            var xhr = new XMLHttpRequest();
+        <script>
+            function cargarVistasColaboradores() {
+                
+                console.log("cargarVistasColaboradores se está ejecutando");
+                var clienteSeleccionado = document.getElementById("cliente").value;
+                var xhr = new XMLHttpRequest();
 
-            xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
-                    if (xhr.status === 200) {
-                        // Procesa la respuesta del servidor
-                        console.log("Contenido de la respuesta:", xhr.responseText);
-                        document.getElementById("colaborador2").innerHTML = xhr.responseText;
-                    } else {
-                        console.error("Error en la respuesta del servidor");
+                xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                        console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                        if (xhr.status === 200) {
+                            // Procesa la respuesta del servidor
+                            //console.log("Contenido de la respuesta:", xhr.responseText);
+                            document.getElementById("colaborador2").innerHTML = xhr.responseText;
+                        } else {
+                            console.error("Error en la respuesta del servidor");
+                        }
                     }
-                }
-            };
+                };
 
                 var url = "controlador/ControladorFiltros/ColaboradorPorCliente.php?cliente=" + clienteSeleccionado;
                 xhr.open("GET", url, true);
-                console.log("Solicitud AJAX enviada a: " + url);
+                //console.log("Solicitud AJAX enviada a: " + url);
                 xhr.send();
-        }
-    </script>
+            }
+        </script>
    
-</body>
+    </body>
 </html>
             
 

@@ -19,14 +19,8 @@ $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecod
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
     $dispositivosSeleccionados = urlencode(json_encode($dispositivosSeleccionados));
     $colaboradorSeleccionado = $datoscolaborador[0]["id_colaborador"];
-    //$nombreApellidoColaborador =  $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"];
     header("Location: index.php?seccion=asignaciones/asignarPaso4&id_colaborador=" . $colaboradorSeleccionado."&dispositivos=".$dispositivosSeleccionados);
     exit();
-    /*
-    include 'cartaResponsiva.php'; // Incluye el archivo que contiene la función generarPDFyEnviarCorreo()
-    $generarPDF = new PDF;
-    $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador);
-    */
 }
 
 /*
@@ -112,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 
                 <div action="mb-3" method="formForm">
-                    <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
+                    <button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a></button>
                     <button type="submit" class="btn btn-primary" name="volver">Volver</button>
                     <button type="submit" class="btn btn-primary" name="aceptar">Confirmar Asignacion</button>
                 </div>

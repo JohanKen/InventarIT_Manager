@@ -28,7 +28,7 @@
             }
         }
 
-        static function registrarAsignacion($dispositivo){
+        static function registrarAsignacion($dispositivo,$colaborador){
             if(isset($_POST['aceptar'])){       
                 try{
                     $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
@@ -36,7 +36,7 @@
     
                     $datos = array(
                         "id_dispositivo"=>$dispositivo,
-                        "id_colaborador"=>(int)$_POST["id_colaborador"],
+                        "id_colaborador"=>$colaborador
                     );
                     $inset = ModeloAsignaciones::createAsignacion($datos);
                 }catch(Exeption $e){

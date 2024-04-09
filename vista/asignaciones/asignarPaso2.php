@@ -79,8 +79,8 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
 
             <div action="mb-3" method="formForm">
-                <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
-                <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a>
+                <button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a></button>
+                <button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a></button>
                 <button type="button" class="btn btn-primary" onclick="continuar()">Continuar</button>
             </div>
         
@@ -89,26 +89,31 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
         <script>
             cargarDispositivos();
 
+            var dispositivosOmitidos = [];
+
             function cargarDispositivos() {
                 console.log("La función cargarDispositivos se está ejecutando");
                 var tipoSeleccionado = document.getElementById("tipo_dispositivo").value;
                 var xhr = new XMLHttpRequest();
 
+
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
-                        console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                        //console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
                         if (xhr.status === 200) {
-                            console.log("Contenido de la respuesta:", xhr.responseText);
+                            //.log("Contenido de la respuesta:", xhr.responseText);
                             document.getElementById("dispositivos2").innerHTML = xhr.responseText;
+                            console.log("Lista de dispositivos omitidos:", dispositivosOmitidos);
                         } else {
                             console.error("Error en la respuesta del servidor");
                         }
                     }
                 };
 
-                var url = "controlador/ControladorFiltros/InventarioDisponiblePorTipo.php?tipo=" + tipoSeleccionado;
+                var url = "controlador/ControladorFiltros/InventarioDisponiblePorTipo.php?tipo=" + tipoSeleccionado+"&omitidos=" + dispositivosOmitidos;
+                
                 xhr.open("GET", url, true);
-                console.log("Solicitud AJAX enviada a: " + url);
+                //console.log("Solicitud AJAX enviada a: " + url);
                 xhr.send();
             }
             
@@ -117,7 +122,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 var dispositivosSeleccionadosInput = document.querySelector('input[name="dispositivos_seleccionados"]');
                 var datosTabla = obtenerDatosTabla();
                 
-                console.log("Datos de la tabla:", datosTabla);
+                //console.log("Datos de la tabla:", datosTabla);
 
                 dispositivosSeleccionadosInput.value = JSON.stringify(datosTabla);
 
@@ -125,26 +130,37 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 var queryParameters = "id_colaborador=" + document.querySelector('input[name="id_colaborador"]').value +
                                     "&dispositivos=" + dispositivosSeleccionadosInput.value;
 
-                console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
+                //console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
                 window.location.href = "index.php?seccion=asignaciones/asignarPaso3&" + queryParameters;
             }
             
 
             function agregarDesdeTabla(id_dispositivo, tipo, modelo, serie, marca,precio) {
+                // Agregar el ID del dispositivo a la lista de omitidos
+                dispositivosOmitidos.push(id_dispositivo);
+
                 // Obtener la tabla de dispositivos_seleccionados
                 var tablaSeleccionados = document.getElementById('dispositivos_seleccionados').getElementsByTagName('tbody')[0];
 
                 // Crear una nueva fila
                 var nuevaFila = document.createElement('tr');
-                nuevaFila.innerHTML = '<td>' + id_dispositivo + '</td>' +
-                                    '<td>' + tipo + '</td>' +
-                                    '<td>' + modelo + '</td>' +
-                                    '<td>' + serie + '</td>' +
-                                    '<td>' + marca + '</td>' +
-                                    '<td>' + precio + '</td>';
+                nuevaFila.id = 'fila_seleccionada_' + id_dispositivo;
+                nuevaFila.innerHTML =   '<td>' + id_dispositivo + '</td>' +
+                                        '<td>' + tipo + '</td>' +
+                                        '<td>' + modelo + '</td>' +
+                                        '<td>' + serie + '</td>' +
+                                        '<td>' + marca + '</td>' +
+                                        '<td>' + precio + '</td>'+
+                                        '<td><button type="button" onclick="eliminarFila(this, ' + id_dispositivo + '); cargarDispositivos()">Quitar</button></td>';
 
                 // Agregar la nueva fila al tbody de la tabla de dispositivos_seleccionados
                 tablaSeleccionados.appendChild(nuevaFila);
+
+                var filaDispositivo = document.getElementById('fila_dispositivo_' + id_dispositivo);
+                if (filaDispositivo) {
+                    filaDispositivo.parentNode.removeChild(filaDispositivo);
+                }
+
             }
 
             function obtenerDatosTabla() {
@@ -171,6 +187,33 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 }
 
                 return datos;
+            }
+
+            //funcion para quitar en dispositivo en dispositivos selecionados
+            function eliminarFila(botonQuitar, id_dispositivo) {
+                // Eliminar la fila de la tabla de dispositivos seleccionados
+                var filaSeleccionada = botonQuitar.parentNode.parentNode;
+                filaSeleccionada.parentNode.removeChild(filaSeleccionada);
+
+                // Restaurar la fila correspondiente en la tabla de dispositivos disponibles
+                var tablaDisponibles = document.getElementById('dispositivos2').getElementsByTagName('tbody')[0];
+                var filasDisponibles = tablaDisponibles.getElementsByTagName('tr');
+
+                for (var i = 0; i < filasDisponibles.length; i++) {
+                    var id = filasDisponibles[i].getElementsByTagName('td')[0].innerText;
+                    if (id === id_dispositivo) {
+                        // La fila a restaurar se encontró, así que la agregamos nuevamente
+                        tablaDisponibles.appendChild(filasDisponibles[i]);
+                        break;
+                    }
+                }
+
+                // Eliminar el ID del dispositivo de la lista de omitidos
+                var index = dispositivosOmitidos.indexOf(id_dispositivo);
+                if (index !== -1) {
+                    dispositivosOmitidos.splice(index, 1);
+                }
+
             }
 
         </script>

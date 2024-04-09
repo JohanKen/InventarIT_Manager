@@ -13,27 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
     $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
     $correos = json_decode($_POST['correos_json'], true);
 
-    /*$registar = new ControladorAsignaciones;
+    //se crea la signacion en la base de datos
+    $colaborador = $datoscolaborador[0]["id_colaborador"];
+    $registar = new ControladorAsignaciones;
     foreach ($dispositivosSeleccionados as $item){
         $dispositivo =  $item['id_dispositivo'];
-        $registar -> registrarAsignacion($dispositivo);
-    }*/
+        $registar -> registrarAsignacion($dispositivo,$colaborador);
+    }
 
     include 'cartaResponsiva.php';
     $generarPDF = new PDF;
-    foreach ($correos as $correo) {
-        $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador,$correo);
-    }
-
-    /*echo  '<script>
-            alert("Asignacion drealizada!");
+    $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador,$correos);
+    
+    echo  '<script>
+            alert("Asignacion realizada!");
             window.location.href="index.php?seccion=asignaciones/asignaciones";
         </script>';
-    exit;*/
+    exit;
     
     }
-
-    
     
 ?>
 
@@ -45,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
     <title>Document</title>
 </head>
 <body>
-    <br><br><br><br><br>
+    <br><br><br><br><br> <!-- Eliminar esta línea --><!-- Eliminar esta línea -->
     <div class="contenSeccion">
         <header>
             <h1>Paso 4 - Enviar por correo a:</h1>

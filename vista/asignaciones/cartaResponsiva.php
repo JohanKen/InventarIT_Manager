@@ -10,7 +10,7 @@ require_once './PHPMailer/SMTP.php';
 require_once('./fpdf/fpdf.php');
 //require('../../PHPMailer/PHPMailer.php');
 
-$dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
+//$dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
 function fechaActual(){
     //se crea un array donde se compara el numero de mes para imprimir el mismo mes en español
@@ -89,7 +89,7 @@ class PDF extends FPDF {
         $this->cell(28,5,utf8_decode('+1 880 449-0189'),0,0,'C');
     }
 
-    function generarPDF($dispositivosSeleccionados, $nombreApellidoColaborador,$correo){
+    function generarPDF($dispositivosSeleccionados, $nombreApellidoColaborador, $correos){
         
         $pdf = new PDF('P','mm','Letter');// se daclara el archivo en pdf junto al formato en carta 
         $pdf->AddPage();
@@ -195,7 +195,18 @@ class PDF extends FPDF {
         $mail->Port= 587;
 
         $mail->SetFrom('guillermo.memo05@outlook.com','InventarIT Manager');
-        $mail->addAddress($correo,'practicantes');
+        
+        //Se debe de agregar el correo de RH y descomentar la siguiente linea para que se mande siempre de manera predeterminada
+        //$mail->addAddress('');
+
+        foreach ($correos as $correo) { 
+            if(!empty($correo)){
+                $mail->addAddress($correo);
+            }else{
+                
+            }
+        }
+
 
         $mail->Subject = 'Carta de responsiva';
         $mail->Body ='Prueba de enviar un pdf de carta de responsiva por pdf';
@@ -206,7 +217,7 @@ class PDF extends FPDF {
         if(!$mail->send()) {
             echo 'Error al enviar el correo: ' . $mail->ErrorInfo;
         } else {
-            echo 'Correo enviado correctamente.';
+            //echo 'Correo enviado correctamente.';
         }
     }
 }
