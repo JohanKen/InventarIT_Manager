@@ -121,17 +121,20 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 // Obtener datos de dispositivos seleccionados
                 var dispositivosSeleccionadosInput = document.querySelector('input[name="dispositivos_seleccionados"]');
                 var datosTabla = obtenerDatosTabla();
+
+                if (datosTabla.length === 0) {  
+                    alert("No se a Seleccionado ningun dispositivo");
+                }else{
+                    dispositivosSeleccionadosInput.value = JSON.stringify(datosTabla);
+
+                    // Redirigir a la nueva página
+                    var queryParameters = "id_colaborador=" + document.querySelector('input[name="id_colaborador"]').value +
+                                        "&dispositivos=" + dispositivosSeleccionadosInput.value;
+
+                    //console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
+                    window.location.href = "index.php?seccion=asignaciones/asignarPaso3&" + queryParameters;
+                }
                 
-                //console.log("Datos de la tabla:", datosTabla);
-
-                dispositivosSeleccionadosInput.value = JSON.stringify(datosTabla);
-
-                // Redirigir a la nueva página
-                var queryParameters = "id_colaborador=" + document.querySelector('input[name="id_colaborador"]').value +
-                                    "&dispositivos=" + dispositivosSeleccionadosInput.value;
-
-                //console.log("Redirigiendo a: index.php?seccion=asignaciones/asignarPaso3&" + queryParameters);
-                window.location.href = "index.php?seccion=asignaciones/asignarPaso3&" + queryParameters;
             }
             
 
