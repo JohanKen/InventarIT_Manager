@@ -44,10 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     window.location.href="index.php?seccion=dispositivos";
 
                 }, 3000); //redireccionar de igual forma despues de 3 segundos
-            </script>
+            </script>';
        
             exit;
-            '
+            
         
     }
 }
