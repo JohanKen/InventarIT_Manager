@@ -157,8 +157,6 @@
         // Función para manejar el registro de una nueva marca
         static function registrarLaptop(){
             if(isset($_POST["Registrar"])){
-
-
                try{
                     $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                     Conexion::conectar()->query($sqlSetMaxAllowedPacket);
@@ -172,17 +170,21 @@
                         exit;
                     }
 
-
+                    //obtener la marca seleccionada del formulario
                     if (isset($_POST['marca'])) {
                         $marcaSeleccionada = $_POST['marca'];
                     //Verificar si la nueva marca tiene el valor de 'la nueva marca en el value'..
                      
                     $tabla = "marcas";
-                    $respuesta = ModeloDispositivos::selectMarcas($tabla);
+                    $respuesta = ModeloDispositivos::selectMarcas($tabla, $marcaSeleccionada);
                     $arreglo = $respuesta->fetch_all();
                     return $arreglo;
                     //verificar que se seteo un nombre que no existe en el select de marca
-                    if ($marcaSeleccionada != 'otro') {
+                    //recorrer arreglo para comparar la marca seteada con las de la base de datos 
+                    
+                   
+
+                    if ($marcaSeleccionada === 'otro') {
                             $nuevaMarca = $marcaSeleccionada;
 
                             $marca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
