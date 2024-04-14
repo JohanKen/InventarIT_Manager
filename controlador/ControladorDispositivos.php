@@ -182,6 +182,20 @@
                     //verificar que se seteo un nombre que no existe en el select de marca
                     //recorrer arreglo para comparar la marca seteada con las de la base de datos 
                     
+                    //impresion de arreglo para ver que es l oque esta devolviendo
+                    echo "
+                                <script> 
+                                    swal({
+                                        title: 'Fecha incorrecta';
+                                        text: '".$arreglo."';
+                                        type: 'warning';
+                                    }).then(function(result)){
+                                        if (true){
+                                            window.location.href= 'index.php?seccion=nuevousuario';
+                                        }
+                                    })
+                                </script>
+                                ";
                    
 
                     if ($marcaSeleccionada === 'otro') {

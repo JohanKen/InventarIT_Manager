@@ -13,96 +13,103 @@
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- <link rel="stylesheet" href="estilos/estilosNewDevice.css">
+        <link rel="stylesheet" href="estilos/estlosNuevoDispositivo.css">
+ 
+
 </head>
 <body>
     <br><br>
     <header>
-        <h1 id="h1" >Selecciona el tipo de dispositivo a agregar</h1>
+    <h1 class="fw-bolder" style="color: #7f8c8d; padding: 5px; font-size: 30px; background: linear-gradient(90deg, #7f8c8d, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Selecciona el tipo de dispositivo a agregar</h1>
     </header>
-    <div class="containerr">
-        <!--cambio de select por imagenes para seleccionar que tipo de dispositivo se va a agregar-->
-        <ul class="flexx">
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newLaptop">
-                    <img class="imgDis" src="images/dis/laptop.png" alt="Laptop">
-                    <span class="label">Laptop</span>
-                </a>
-            </li>
+    <div class="container bg-dark text-center" style="border-radius:5px;" >
+    
+        
+        <div class="row">  
+                <div class="col "> 
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newLaptop">
+                        <img class="imgLaptop" src="images/dis/laptop.png" alt="Laptop">
+                        <span class="label anima-label">Laptop</span>
+                    </a>
+                    </div>
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newDesktop">
-                <a class="anclaDis" href="index.php?seccion=formularios/newDesktop">
-                    <img class="imgDis" src="images/dis/desktop.png" alt="Desktop">
-                    <span class="label">Desktop</span>
-                </a>
-            </li>
+                    <div class="col">
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newDesktop">
+                        <img class="imgDis" src="images/dis/desktop.png" alt="Desktop">
+                        <span class="label anima-label">Desktop</span>
+                    </a>
+                </div>
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newiMac">
-                    <img class="imgDis" src="images/dis/imac.png" alt="iMac">
-                    <span class="label">iMac</span>
-                </a>
-            </li>
-        </ul>
+                <div class="col">
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newiMac">
+                        <img class="imgDis" src="images/dis/imac.png" alt="iMac">
+                        <span class="label anima-label">iMac</span>
+                    </a>
+                    </div>
+                    <div class="col">
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newTeclado">
+                        <img class="imgTeclado" src="images/dis/teclado.png" alt="Teclado">
+                        <span class="label anima-label">Teclado</span>
+                    </a>
+                    </div>
+                    
+                    <div class="col">
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newMouse">
+                        <img class="imgMouse" src="images/dis/logi.png" alt="Mouse">
+                        <span class="label anima-label">Mouse</span>
+                    </a>
+                    </div>
+            </div>
+            </div>
 
-        <ul class="flexxa">
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newTeclado">
-                    <img class="imgDis" src="images/dis/teclado.png" alt="Teclado">
-                    <span class="label">Teclado</span>
-                </a>
-            </li>
+            <div class="container bg-dark text-center" style="border-radius:5px;" >
+        <div class="row">
+          
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newMouse">
-                    <img class="imgDiis" src="images/dis/mouse.png" alt="Mouse">
-                    <span class="label">Mouse</span>
-                </a>
-            </li>
+                    <div class="col">
+                    <a class="anclaDiss" href="index.php?seccion=formularios/newMonitor">
+                        <img class="imgMonitor" src="images/dis/monitor.png" alt="Monitor">
+                        <span class="label anima-label">Monitor</span>
+                    </a>
+                    </div>
+        
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newMonitor">
-                    <img class="imgDis" src="images/dis/monitor.png" alt="Monitor">
-                    <span class="label">Monitor</span>
+    
+            <div class="col">
+                <a class="anclaDiss" href="index.php?seccion=formularios/newCelular">
+                    <img class="imgCelular" src="images/dis/celular.png" alt="Celular">
+                    <span class="label anima-label">Celular</span>
                 </a>
-            </li>
-        </ul>
+            </div>
 
-        <ul class="flexxb">
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newCelular">
-                    <img class="imgDiss" src="images/dis/celular.png" alt="Celular">
-                    <span class="label">Celular</span>
+            <div class="col">
+                <a class="anclaDiss" href="index.php?seccion=formularios/newSwitches">
+                    <img class="imgSwitches" src="images/dis/cisco.png" alt="Switches">
+                    <span class="label anima-label">Switch</span>
                 </a>
-            </li>
+            </div>
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newSwitches">
-                    <img class="imgDis" src="images/dis/switch.png" alt="Switches">
-                    <span class="label">Switches</span>
+            <div class="col">
+                <a class="anclaDiss" href="index.php?seccion=formularios/newImpresora">
+                    <img class="imgImpresora" src="images/dis/hp.png" alt="Impresora">
+                    <span class="label anima-label">Impresora</span>
                 </a>
-            </li>
+            </div>
 
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newImpresora">
-                    <img class="imgDis" src="images/dis/impresora.png" alt="Impresora">
-                    <span class="label">Impresora</span>
+            <div class="col">
+                <a class="anclaDiss" href="index.php?seccion=formularios/newOtro">
+                    <img class="imgOtro" src="images/dis/otros.png" alt="Otro">
+                    <span class="label anima-label">Otro...</span>
                 </a>
-            </li>
-
-            <li class="me-3">
-                <a class="anclaDis" href="index.php?seccion=formularios/newOtro">
-                    <img class="imgDis" src="images/dis/otros.png" alt="Otro">
-                    <span class="label">Otro</span>
-                </a>
-            </li>
-        </ul>
+            </div>
+        
+            </div>
 
      
     </div>
+    </div>
 <div class="anclaa">
-    <a href="index.php?seccion=dispositivos" ><button class="btnn">Volver</button></a>
+    <a href="index.php?seccion=dispositivos"><button class="btnn">Volver</button></a>
 
 </div>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

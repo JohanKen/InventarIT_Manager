@@ -1,0 +1,158 @@
+
+    
+
+.imgDis{
+    margin: 10%;
+    width: 50%;
+}
+.imgMouse{
+    width: 150px;
+}
+.imgCelular{
+    width: 150px;
+}
+.container.bg-dark {
+background-color: black; 
+
+}
+.container .row {
+margin-top: 20px; 
+padding: 20px;
+}
+
+.container .col {
+
+    margin-top: 10px;    margin-bottom: 20px; 
+}
+
+.container .anclaDiss {
+    
+text-decoration: none; 
+color: white; 
+}
+
+
+
+.container .imgDis,
+.container .imgCelular {
+width: 120px; 
+margin: 0 auto; 
+display: block; 
+}
+
+.container .imgMouse {
+    width: 120px; 
+    margin-top: 10px;
+    margin: 0 auto; 
+    display: block; 
+    }
+
+.container .label {
+display: block; 
+color: white; 
+font-weight: bold; 
+margin-top: 10px; 
+}
+
+.container .imgDis,
+.container .imgImpresora,
+.container .imgOtro,
+.container .imgMonitor {
+width: 180px; 
+margin: 10px; 
+display: block; 
+}
+
+
+.container .imgTeclado {
+width: 290px; 
+}
+
+.container .imgSwitches {
+width: 270px; 
+}
+.container .imgLaptop
+{
+width: 290px; 
+}
+.container .anclaDiss {
+position: relative; 
+}
+.container .label {
+color: white; /* Color del texto */
+font-weight: bold; /* Negrita */
+font-size: 16px; /* Tamaño de fuente base */
+opacity: 0; /* Inicialmente oculto */
+visibility: hidden; /* Inicialmente oculto */
+transition: all 0.3s ease; /* Animación de transición */
+}
+
+
+
+
+.container .anclaDiss:hover .label {
+opacity: 1; /* Muestra el texto al hacer hover */
+visibility: visible; /* Muestra el texto al hacer hover */
+font-size: 24px; /* Tamaño de fuente aumentado */
+color: blue; /* Color del texto al hacer hover */
+}
+
+.anima-label {
+position: relative;
+font-family: sans-serif;
+text-transform: uppercase;
+font-size: 2em; /* Ajusta el tamaño de fuente según sea necesario */
+letter-spacing: 4px;
+overflow: hidden;
+background: linear-gradient(90deg, #808080, #555555);
+background-repeat: no-repeat;
+background-size: 80%;
+animation: animate 3s linear infinite;
+-webkit-background-clip: text;
+-webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+.anclaDiss:hover .col {
+background-color: #3498db !important; /* Color de fondo azul al pasar el mouse */
+transition: background-color 0.5s ease !important; /* Transición suave */
+
+}
+
+.anclaDiss:hover .label {
+color: #808080; /* Color de texto gris */
+transition: color 0.5s ease; /* Transición suave */
+}
+
+.anima-label-grande {
+font-size: 6em; /* Tamaño de fuente más grande */
+}
+
+@keyframes animate {
+0% {
+background-position: -500%;
+}
+100% {
+background-position: 500%;
+}
+}
+
+.anclaDiss:hover .imgLaptop,
+.anclaDiss:hover .imgCelular,
+.anclaDiss:hover .imgDis,
+.anclaDiss:hover .imgTeclado,
+.anclaDiss:hover .imgMouse,
+.anclaDiss:hover .imgMonitor,
+.anclaDiss:hover .imgSwitches,
+.anclaDiss:hover .imgImpresora,
+.anclaDiss:hover .imgOtro {
+    background-color: #3498db; /* Color de fondo azul */
+    transition: background-color 0.5s ease, transform 0.3s ease; /* Transición suave para el color de fondo y la escala */
+    transform: scale(1.1); /* Escala un 10% más grande al hacer hover */
+    border-radius: 5px;
+    
+}
+
+.anclaDiss:hover .label {
+background-color: #3498db; /* Color de fondo azul */
+transition: background-color 0.5s ease; /* Transición suave */
+}
+
