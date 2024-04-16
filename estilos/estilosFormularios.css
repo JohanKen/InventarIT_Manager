@@ -80,20 +80,20 @@ form{
     width: 100%;
     padding: 10px;
     margin-top: 20px;
-    margin-bottom: 20px;
+   
 }
 
 .form-label {
     color:#333;
   
-    margin-bottom: 10px;
+   
     display: block;
 }
 
 .form-control {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+   
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -102,7 +102,7 @@ form{
 .form-select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+   
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -139,7 +139,7 @@ form{
 textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+   
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;

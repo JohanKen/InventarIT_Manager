@@ -167,18 +167,18 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-    //insertar nueva marca,...
+    //insertar nueva marca
     public static function insertarNuevaMarca($nuevaMarca) {
         try {
             $query = "CALL insertar_marca(?)";
             $stmt = Conexion::conectar()->prepare($query);
-            $stmt->bindParam(1, $nuevaMarca, PDO::PARAM_STR);
+           
+            $stmt->bind_param("s", $nuevaMarca);
             $stmt->execute();
-            return Conexion::conectar()->lastInsertId();
+            return Conexion::conectar()->insert_id;
         } catch (PDOException $e) {
-            // Manejar el error de inserción aquí, si es necesario
             echo "<script>alert('Error al insertar nueva marca: ".$e->getMessage()."');</script>";
-            return false; // Retornar false en caso de error
+            return false; 
         }
     }
     

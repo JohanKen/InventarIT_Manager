@@ -157,66 +157,57 @@
         // Función para manejar el registro de una nueva marca
         static function registrarLaptop(){
             if(isset($_POST["Registrar"])){
-               try{
+                try{
                     $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                     Conexion::conectar()->query($sqlSetMaxAllowedPacket);
         
-                    //formatear la fecha de la compra..
                     $fechaCompra = $_POST["fecha_compra"];
                     if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
                         $fechaCompraFormateada = $fechaCompra;
                     } else { 
-                        echo 'Error en el formato de la fecha';
+                        echo "
+                        <script> 
+                            Swal.fire({
+                                title: 'Fecha incorrecta';
+                                text: 'Ingrese el formato de fecha correcto';
+                                type: 'warning';
+                            }).then(function(result)){
+                                if (true){
+                                    window.location.href='index.php?seccion=formularios/newLaptop';
+                                }
+                            })
+                        </script>
+                        ";
+                        
+                        
                         exit;
                     }
 
-                    //obtener la marca seleccionada del formulario
-                    if (isset($_POST['marca'])) {
-                        $marcaSeleccionada = $_POST['marca'];
-                    //Verificar si la nueva marca tiene el valor de 'la nueva marca en el value'..
-                     
-                    $tabla = "marcas";
-                    $respuesta = ModeloDispositivos::selectMarcas($tabla, $marcaSeleccionada);
-                    $arreglo = $respuesta->fetch_all();
-                    return $arreglo;
-                    //verificar que se seteo un nombre que no existe en el select de marca
-                    //recorrer arreglo para comparar la marca seteada con las de la base de datos 
-                    
-                    //impresion de arreglo para ver que es l oque esta devolviendo
-                    echo "
-                                <script> 
-                                    swal({
-                                        title: 'Fecha incorrecta';
-                                        text: '".$arreglo."';
-                                        type: 'warning';
-                                    }).then(function(result)){
-                                        if (true){
-                                            window.location.href= 'index.php?seccion=nuevousuario';
-                                        }
-                                    })
-                                </script>
-                                ";
-                   
 
-                    if ($marcaSeleccionada === 'otro') {
-                            $nuevaMarca = $marcaSeleccionada;
 
-                            $marca = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+/* codigo para insertar una nueva marca, hace falta revisar que si esta regresando un id
+de la base de datos y verificar que se esta recorriendo de manera adecuada dicho id..
 
-                            if (!empty($marca) && isset($marca['marca'])) {
-                                $nombreMarca = $marca['marca'];
-                            } else {
-                                echo "No se obtuvo la marca insertada correctamente";
-                            }
-                            
+
+                    if ($marcaSeleccionada === "otro") {
+                        $nuevaMarca= isset($_POST['nueva_marca']) ? $_POST['nueva_marca'] :'';
+                        $insert = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+                        if ($insert) {
+                            $marca = $insert;
                         } else {
-                            $marca = $marcaSeleccionada; // Usar el ID de la marca seleccionada
+                            echo '<script>alert("Error al insertar la nueva marca. Por favor, inténtalo de nuevo.");</script>';
+                            // Redireccionar al usuario nuevamente al formulario
+                            header("Location: index.php?seccion=formularios/newLaptop");
+                            exit();
                         }
-                    }else{
-                        echo'
-                            no se selecciono ninguna marca
-                        ';
+                    } else {
+                        $marca = $marcaSeleccionada;
                     }
+                    
+
+*/
+
+
 
                     // Obtener el valor del sistema operativo seleccionado
                     $sistemaOperativoSeleccionado = $_POST['sistema_operativo'];
@@ -227,11 +218,10 @@
                     } else {
                         $sistemaOperativo = $sistemaOperativoSeleccionado;
                     }
+                    
                     // Obtener el valor del procesador seleccionado
                     $procesadorSeleccionado = $_POST['procesador'];
         
-
-
                     // Si el procesador seleccionado es "otro", usar el nuevo procesador
                     if ($procesadorSeleccionado === "otro") {
                         $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
@@ -239,13 +229,16 @@
                         $procesador = $procesadorSeleccionado;
                     }
         
+
+                    $marca = $_POST["marca"];
+
                     $datos = array(
                         "modelo" => $_POST["modelo"],
                         "numero_serie" => $_POST["numero_serie"],
                         "ram" => (int)$_POST["ram"],
                         "procesador" => $procesador,
                         "sistema_operativo" => $sistemaOperativo,
-                        "marca" => $marca,
+                        "id_marca" => $marca,
                         "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
                         "fecha_compra" => $fechaCompraFormateada,
                         "nota" => $_POST["nota"],
@@ -261,6 +254,108 @@
             
         }
     }
+
+
+
+    static function registrarDesktop(){
+        if(isset($_POST["Registrar"])){
+            try{
+                $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+    
+                $fechaCompra = $_POST["fecha_compra"];
+                if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                    $fechaCompraFormateada = $fechaCompra;
+                } else { 
+                    echo "
+                    <script> 
+                        Swal.fire({
+                            title: 'Fecha incorrecta';
+                            text: 'Ingrese el formato de fecha correcto';
+                            type: 'warning';
+                        }).then(function(result)){
+                            if (true){
+                                window.location.href='index.php?seccion=formularios/newDesktop';
+                            }
+                        })
+                    </script>
+                    ";
+                    
+                    
+                    exit;
+                }
+
+
+
+/* codigo para insertar una nueva marca, hace falta revisar que si esta regresando un id
+de la base de datos y verificar que se esta recorriendo de manera adecuada dicho id..
+
+
+                if ($marcaSeleccionada === "otro") {
+                    $nuevaMarca= isset($_POST['nueva_marca']) ? $_POST['nueva_marca'] :'';
+                    $insert = ModeloDispositivos::insertarNuevaMarca($nuevaMarca);
+                    if ($insert) {
+                        $marca = $insert;
+                    } else {
+                        echo '<script>alert("Error al insertar la nueva marca. Por favor, inténtalo de nuevo.");</script>';
+                        // Redireccionar al usuario nuevamente al formulario
+                        header("Location: index.php?seccion=formularios/newLaptop");
+                        exit();
+                    }
+                } else {
+                    $marca = $marcaSeleccionada;
+                }
+                
+
+*/
+
+
+
+                // Obtener el valor del sistema operativo seleccionado
+                $sistemaOperativoSeleccionado = $_POST['sistema_operativo'];
+
+                // Si el sistema operativo seleccionado es "otro", usar el nuevo sistema operativo ingresado
+                if ($sistemaOperativoSeleccionado === "otro") {
+                    $sistemaOperativo = isset($_POST['nuevo_sistema_operativo']) ? $_POST['nuevo_sistema_operativo'] : "";
+                } else {
+                    $sistemaOperativo = $sistemaOperativoSeleccionado;
+                }
+                
+                // Obtener el valor del procesador seleccionado
+                $procesadorSeleccionado = $_POST['procesador'];
+    
+                // Si el procesador seleccionado es "otro", usar el nuevo procesador
+                if ($procesadorSeleccionado === "otro") {
+                    $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
+                } else {
+                    $procesador = $procesadorSeleccionado;
+                }
+    
+
+                $marca = $_POST["marca"];
+
+                $datos = array(
+                    "modelo" => $_POST["modelo"],
+                    "numero_serie" => $_POST["numero_serie"],
+                    "ram" => (int)$_POST["ram"],
+                    "procesador" => $procesador,
+                    "sistema_operativo" => $sistemaOperativo,
+                    "id_marca" => $marca,
+                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                    "fecha_compra" => $fechaCompraFormateada,
+                    "nota" => $_POST["nota"],
+                    "foto" => "foto",
+                );
+    
+                $insert = ModeloDispositivos::createDesktop($datos);
+    
+            } catch(mysqli_sql_exception $e) {
+                echo 'Message: ' .$e->getMessage();
+                echo '<script>alert("No se enviaron los datos correctamente al modelo...");</script>';
+            }
+        
+    }
+}
         //Funcion para consultar los tipos de dispositivos
         static function getTiposDispositivos(){
             $tabla = "tipos_dispositivos";
@@ -269,43 +364,7 @@
             return $arreglo;
         }
         //funcion para registrar un nuevo dispositivo (pc)
-        static function registrarDesktop(){
-            if(isset($_POST["Registrar"])){
-                try{
-                    $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
-                    Conexion::conectar()->query($sqlSetMaxAllowedPacket);
-    
-                    $fechaCompra = $_POST["fecha_compra"];
-                    if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
-                        $fechaCompraFormateada = $fechaCompra;
-                    } else { 
-                        echo 'Error en el formato de la fecha';
-                        exit;
-                    }
-  
-                    $datos = array(
-                        "modelo" => $_POST["modelo"],
-                        "numero_serie" => $_POST["numero_serie"],
-                        "ram" => (int)$_POST["ram"],
-                        "procesador" => $_POST["procesador"],
-                        "sistema_operativo" => $_POST["sistema_operativo"],
-                        "id_marca" => (int)$_POST["marca"],
-                        "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
-                        "fecha_compra" => $fechaCompraFormateada,
-                        "nota" => $_POST["nota"],
-                        "foto" => "foto",
-                    );
-    
-                    $insert = ModeloDispositivos::createDesktop($datos);
-    
-                } catch(mysqli_sql_exception $e) {
-                    echo 'Message: ' .$e->getMessage();
-                }
-            }
-        }
-    
-        //Funcion para consultar la marca de los dispositivos
-        //funcion para consultar los tipos de estados
+      
         static function getEstados(){
             $tabla = "estados_dispositivos";
             $respuesta = ModeloDispositivos::selectEstados($tabla);
