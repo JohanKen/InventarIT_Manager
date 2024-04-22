@@ -56,7 +56,7 @@ if(isset($_POST['Registrar'])){
     <div class="container-fluid">
             <div class="row fle">
                 <div class="col-md-6 headd">
-                    <h1>Nueva PC de escritorio</h1>
+                <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">NUEVA PC</h1>
                 </div>
                 <div class="col-md-6 heaad">
                     <img src="images/dis/desktop.png" alt="imagendesktop" class="img-fluid" style="max-width:200px;">
@@ -68,17 +68,17 @@ if(isset($_POST['Registrar'])){
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="col-3">
                     <div class="mb-3">
-                        <label for="modelo" class="form-label">Modelo</label>
+                        <label for="modelo" class="form-label">Modelo <span style="color: red;">*</span></label>
                         <input type="text" class="form-control" name="modelo" value="">
                     </div>
 
                     <div class="mb-3">
-                        <label for="numero_serie" class="form-label">Número de serie</label>
+                        <label for="numero_serie" class="form-label">Número de serie <span style="color: red;">*</span></label>
                         <input type="text" class="form-control" name="numero_serie">
                     </div>
                     <!------------------------------------------------------------------>
                     <div class="mb-3">
-                        <label for="marca" class="form-label">Marca</label>
+                        <label for="marca" class="form-label">Marca <span style="color: red;">*</span></label>
                         <select name="marca" class="form-select" id="marca">
                             <?php
                         $marcas = ControladorDispositivos::getMarcas();
@@ -106,18 +106,18 @@ if(isset($_POST['Registrar'])){
                 </div>
                 <div class="col-3">
                 <div class="mb-3">
-                    <label id="lblNew" for="labelrecio" class="form-label">Precio</label>
-                    <input type="text" class="form-control" name="precio" id="precioInput" value="" pattern="[0-9]*" title="Ingrese solo números">
+                    <label id="lblNew" for="labelrecio" class="form-label">Precio <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" name="precio" id="precioInput" value="" title="Ingrese solo números" oninput="formatoPrecio(this)">
                 </div>
 
                     <div class="mb-3">
-                        <label for="fecha_compra" class="form-label">Fecha de compra</label>
+                        <label for="fecha_compra" class="form-label">Fecha de compra <span style="color: red;">*</span></label>
                         <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value=""
                             placeholder="Selecciona una fecha">
                     </div>
 
                     <div class="mb-3">
-                        <label for="ram" class="form-label">RAM</label>
+                        <label for="ram" class="form-label">RAM <span style="color: red;">*</span></label>
                         <select class="form-select" name="ram">
                             <?php
                         $ramOptions = array("4GB", "8GB", "16GB", "32GB", "64GB");
@@ -231,10 +231,10 @@ if(isset($_POST['Registrar'])){
                         <label for="foto" class="form-label" required="true">Imagen del dispositivo (opcional)</label>
                         <input type="file" class="form-control" name="foto">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo"
-                    onclick="return validarCampos()">
+                    <input type="submit" class="btn btn-secondary custom-btn-color" name="Registrar" value="Registrar Dispositivo" onclick="return validarCampos()">
+
                     <hr>
-                    <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
+                    <a class="btn btn-danger customCancelar" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 
             </form>
         </div>
@@ -253,6 +253,28 @@ if(isset($_POST['Registrar'])){
            // }
        // });
 
+
+       function formatoPrecio(input) {
+        // Obtener el valor actual del campo de precio
+        let valor = input.value;
+
+        // Eliminar cualquier carácter que no sea un número o un punto decimal
+        valor = valor.replace(/[^\d.]/g, '');
+
+        // Separar el valor en parte entera y decimal
+        let partes = valor.split('.');
+        let parteEntera = partes[0];
+        let parteDecimal = partes.length > 1 ? '.' + partes[1] : '';
+
+        // Agregar separadores de miles a la parte entera
+        parteEntera = parteEntera.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        // Concatenar el signo de pesos, la parte entera y la parte decimal
+        valor = '$' + parteEntera + parteDecimal;
+
+        // Mostrar el valor formateado en el campo de precio
+        input.value = valor;
+    }
 
 
 function validarCampos() {

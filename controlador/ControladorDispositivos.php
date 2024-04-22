@@ -154,34 +154,44 @@
             return $arreglo;
         }
 
+
+         function formatoPrecioParaControlador($precioString) {
+            // Eliminar el símbolo de moneda y cualquier carácter que no sea un número o un punto decimal
+            $precioString = preg_replace('/[^0-9.]/', '', $precioString);
+        
+            // Convertir el precio a un valor numérico (float)
+            $precio = floatval($precioString);
+        
+            return $precio;
+        }
+        
         // Función para manejar el registro de una nueva marca
-        static function registrarLaptop(){
+         function registrarLaptop(){
             if(isset($_POST["Registrar"])){
                 try{
                     $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
                     Conexion::conectar()->query($sqlSetMaxAllowedPacket);
         
                     $fechaCompra = $_POST["fecha_compra"];
-                    if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
-                        $fechaCompraFormateada = $fechaCompra;
-                    } else { 
-                        echo "
-                        <script> 
-                            Swal.fire({
-                                title: 'Fecha incorrecta';
-                                text: 'Ingrese el formato de fecha correcto';
-                                type: 'warning';
-                            }).then(function(result)){
-                                if (true){
-                                    window.location.href='index.php?seccion=formularios/newLaptop';
-                                }
-                            })
-                        </script>
-                        ";
-                        
-                        
-                        exit;
-                    }
+                        if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                            $fechaCompraFormateada = $fechaCompra;
+                        } else { 
+                            echo "
+                            <script> 
+                                Swal.fire({
+                                    title: 'Fecha incorrecta',
+                                    text: 'Ingrese el formato de fecha correcto',
+                                    type: 'warning'
+                                }).then(function(result){
+                                    if (result.value) {
+                                        window.location.href='index.php?seccion=formularios/newLaptop';
+                                    }
+                                });
+                            </script>
+                            ";
+                            exit;
+                        }
+
 
 
 
@@ -228,10 +238,12 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                     } else {
                         $procesador = $procesadorSeleccionado;
                     }
-        
+                    
+
+
 
                     $marca = $_POST["marca"];
-
+                    $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
                     $datos = array(
                         "modelo" => $_POST["modelo"],
                         "numero_serie" => $_POST["numero_serie"],
@@ -239,7 +251,7 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                         "procesador" => $procesador,
                         "sistema_operativo" => $sistemaOperativo,
                         "id_marca" => $marca,
-                        "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                        "precio" => $precio,
                         "fecha_compra" => $fechaCompraFormateada,
                         "nota" => $_POST["nota"],
                         "foto" => "foto",
@@ -257,7 +269,7 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
 
 
 
-    static function registrarDesktop(){
+     function registrarDesktop(){
         if(isset($_POST["Registrar"])){
             try{
                 $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
@@ -270,18 +282,16 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                     echo "
                     <script> 
                         Swal.fire({
-                            title: 'Fecha incorrecta';
-                            text: 'Ingrese el formato de fecha correcto';
-                            type: 'warning';
-                        }).then(function(result)){
-                            if (true){
+                            title: 'Fecha incorrecta',
+                            text: 'Ingrese el formato de fecha correcto',
+                            type: 'warning'
+                        }).then(function(result){
+                            if (result.value) {
                                 window.location.href='index.php?seccion=formularios/newDesktop';
                             }
-                        })
+                        });
                     </script>
                     ";
-                    
-                    
                     exit;
                 }
 
@@ -333,6 +343,7 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
     
 
                 $marca = $_POST["marca"];
+                $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
 
                 $datos = array(
                     "modelo" => $_POST["modelo"],
@@ -341,7 +352,7 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                     "procesador" => $procesador,
                     "sistema_operativo" => $sistemaOperativo,
                     "id_marca" => $marca,
-                    "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  
+                    "precio" => $precio,                    
                     "fecha_compra" => $fechaCompraFormateada,
                     "nota" => $_POST["nota"],
                     "foto" => "foto",
@@ -354,6 +365,88 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                 echo '<script>alert("No se enviaron los datos correctamente al modelo...");</script>';
             }
         
+    }
+}
+
+function registrarImac(){
+    if(isset($_POST["Registrar"])){
+        try{
+            $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+            Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+            $fechaCompra = $_POST["fecha_compra"];
+            if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                $fechaCompraFormateada = $fechaCompra;
+            } else { 
+                echo "
+                <script> 
+                    Swal.fire({
+                        title: 'Fecha incorrecta',
+                        text: 'Ingrese el formato de fecha correcto',
+                        type: 'warning'
+                    }).then(function(result){
+                        if (result.value) {
+                            window.location.href='index.php?seccion=formularios/newiMac';
+                        }
+                    });
+                </script>
+                ";
+                exit;
+            }
+
+            $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
+
+            $datos = array(
+                "modelo" => $_POST["modelo"],
+                "numero_serie" => $_POST["numero_serie"],
+                "ram" => (int)$_POST["ram"],
+                "procesador" => $_POST["procesador"],
+                "sistema_operativo" => $_POST["sistema_operativo"],
+                "precio" => $precio,
+                "fecha_compra" => $fechaCompraFormateada,
+                "nota" => $_POST["nota"],
+                "foto" => "foto",
+                "Keyboard_model"=> $_POST["Keyboard_model"],
+                "keyboard_ns"=> $_POST["keyboard_ns"],
+                "mouse_model"=> $_POST["mouse_model"],
+                "mouse_ns"=>$_POST["mouse_ns"],
+            );
+
+            $insert = ModeloDispositivos::createImac($datos);
+
+        } catch(mysqli_sql_exception $e) {
+            echo 'Message: ' .$e->getMessage();
+        }
+    }
+}
+
+ function registrarDispositivo($tipo){
+    if(isset($_POST["Registrar"])){
+        try{
+            $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+            Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+
+           
+
+            $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
+
+            $datos = array(
+                "modelo" => $_POST["modelo"],
+                "numero_serie" => $_POST["numero_serie"],
+                "id_marca" => (int)$_POST["marca"],
+                "precio" => $precio,
+                "fecha_compra" => $_POST["fecha_compra"],
+                "nota" => $_POST["nota"],
+                "foto" => "foto",
+                "tipo" => $tipo,
+
+            );
+
+            $insert = ModeloDispositivos::createDispositivo($datos);
+
+        } catch(mysqli_sql_exception $e) {
+            echo 'Message: ' .$e->getMessage();
+        }
     }
 }
         //Funcion para consultar los tipos de dispositivos

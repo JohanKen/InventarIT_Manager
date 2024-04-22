@@ -19,7 +19,7 @@ body {
 }
 
 .headd {
-    display: flex;
+   
     margin-top: 20px;
     height: 130px;
     opacity: 0;
@@ -34,10 +34,30 @@ body {
     }
 }
 
+.custom-btn-color {
+    background-color: #005a9e; /* Color blue-800 */
+    border-color: #005a9e; /* Color blue-800 */
+}
+
+.custom-btn-color:hover {
+    background-color: #003363; /* Color dark version of blue-800 */
+    border-color: #003363; /* Color dark version of blue-800 */
+}
+
+.customCancelar{
+    background-color: #69010c;
+    border-color: #69010c;
+}
+
+.customCancelar:hover{
+    background-color: #79000c;
+    border-color: #79000c;
+}
+
+
 .headd h1 {
     text-align: center;
     color: #333;
-    text-shadow: 1px 4px rgb(255, 255, 255);
 
     width: 600px;
     padding: 10px;

@@ -5,6 +5,8 @@
     margin: 10%;
     width: 50%;
 }
+
+
 .imgMouse{
     width: 150px;
 }
@@ -94,7 +96,7 @@ transition: all 0.3s ease; /* Animación de transición */
 opacity: 1; /* Muestra el texto al hacer hover */
 visibility: visible; /* Muestra el texto al hacer hover */
 font-size: 24px; /* Tamaño de fuente aumentado */
-color: blue; /* Color del texto al hacer hover */
+color: #061f36; /* Color del texto al hacer hover */
 }
 
 .anima-label {
@@ -104,15 +106,15 @@ text-transform: uppercase;
 font-size: 2em; /* Ajusta el tamaño de fuente según sea necesario */
 letter-spacing: 4px;
 overflow: hidden;
-background: linear-gradient(90deg, #808080, #555555);
+background: linear-gradient(90deg, #0c0c0c, #0c0c0c);
 background-repeat: no-repeat;
 background-size: 80%;
 animation: animate 3s linear infinite;
 -webkit-background-clip: text;
--webkit-text-fill-color: rgba(255, 255, 255, 0);
+-webkit-text-fill-color: rgba(0, 0, 0, 0);
 }
 .anclaDiss:hover .col {
-background-color: #3498db !important; /* Color de fondo azul al pasar el mouse */
+background-color: #003363 !important; /* Color de fondo azul al pasar el mouse */
 transition: background-color 0.5s ease !important; /* Transición suave */
 
 }
@@ -144,7 +146,7 @@ background-position: 500%;
 .anclaDiss:hover .imgSwitches,
 .anclaDiss:hover .imgImpresora,
 .anclaDiss:hover .imgOtro {
-    background-color: #3498db; /* Color de fondo azul */
+    background-color: #003363; /* Color de fondo azul */
     transition: background-color 0.5s ease, transform 0.3s ease; /* Transición suave para el color de fondo y la escala */
     transform: scale(1.1); /* Escala un 10% más grande al hacer hover */
     border-radius: 5px;
@@ -152,7 +154,7 @@ background-position: 500%;
 }
 
 .anclaDiss:hover .label {
-background-color: #3498db; /* Color de fondo azul */
+background-color: #003363; /* Color de fondo azul */
 transition: background-color 0.5s ease; /* Transición suave */
 }
 
