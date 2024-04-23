@@ -190,7 +190,7 @@
                             if (!empty($marca) && isset($marca['marca'])) {
                                 $nombreMarca = $marca['marca'];
                             } else {
-                                echo "No se obtuvo la marca insertada correctamente"
+                                echo "No se obtuvo la marca insertada correctamente";
                             }
                             
                         } else {
