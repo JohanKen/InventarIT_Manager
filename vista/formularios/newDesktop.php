@@ -1,253 +1,374 @@
 <?php
-require_once 'controlador/ControladorDispositivos.php';
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//verificamos cuando se presiona el boton de registrar para irnos al controlador
+if(isset($_POST['Registrar'])){
+                
+                    
+    $registrar = new ControladorDispositivos;
+    $registrar->registrarDesktop();
+    echo '
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Dispositivo agregado correctamente"
+      });
+      setTimeout(function(){
+        window.location.href="index.php?seccion=dispositivos";
+      }, 1000); 
+    </script>';
 
-$marcas = array(
-    1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10,
-    11 => 11, 12 => 12, 13 => 13, 14 => 14, 15 => 15, 16 => 16, 17 => 17, 18 => 18, 19 => 19, 20 => 20,
-    21 => 21, 22 => 22, 23 => 23, 24 => 24, 25 => 25, 26 => 26, 27 => 27, 28 => 28, 29 => 29, 30 => 30,
-    31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 => 35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
-);
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['Registrar'])){
-        $registrar = new ControladorDispositivos;
-
-        $marcaSeleccionada = $_POST['marca'];
-        $idMarca = $marcas[$marcaSeleccionada];
-        $dispositivoInfo[0]['id_marca'] = $idMarca;
-
-        $precio = isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0;
-        $dispositivoInfo[0]['precio'] = $precio;
-
-        $tipo = 2;
-        $registrar ->registrarPc($tipo);
-        echo '
-            <script>
-                const Toast = Swal.mixin({
-                    toast : true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "Dispositivo agregado correctamente"
-                });
-                setTimeout(function()){
-                    window.location.href="index.php?seccion=dispositivos";
-
-                }, 3000); //redireccionar de igual forma despues de 3 segundos
-            </script>
-       
-            exit;
-            '
-        
-    }
-}
-
+    exit;
+    
+               
+   }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-            <!DOCTYPE html>
-            <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro PC</title>
+     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+   
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Registro laptop</title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-                    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-                </script>
-                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                <link rel="stylesheet" href="estilos/estilosFormularios.css">
-            </head>
+    
+    <link rel="stylesheet" href="estilos/estilosFormularios.css">
+    </head>
 
-            <body>
-                <div class="container-fluid">
-                    <div class="row fle">
-                        <div class="col-md-6 headd">
-                            <h1>Nueva PC de escritorio</h1>
-                        </div>
-                        <div class="col-md-6 heaad">
-                            <img src="images/dis/desktop.png" alt="imagenLaptop" class="img-fluid" style="max-height:200px">
-                        </div>
+    <body>
+
+    <div class="container-fluid">
+            <div class="row fle">
+                <div class="col-md-6 headd">
+                <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">NUEVA PC</h1>
+                </div>
+                <div class="col-md-6 heaad">
+                    <img src="images/dis/desktop.png" alt="imagendesktop" class="img-fluid" style="max-width:200px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-52">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="modelo" class="form-label">Modelo <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="modelo" value="">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="numero_serie" class="form-label">Número de serie <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="numero_serie">
+                    </div>
+                    <!------------------------------------------------------------------>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Marca <span style="color: red;">*</span></label>
+                        <select name="marca" class="form-select" id="marca">
+                            <?php
+                        $marcas = ControladorDispositivos::getMarcas();
+                        foreach ($marcas as $row => $item) {
+                            echo '<option value="' . $item[0] . '">' . $item[1] . '</option>';
+                        }
+                        ?>
+
+                    <!--
+                       <option value="otro">Otra marca</option>   
+                    -->                    
+                    
+                    </select>
+                    </div>
+                <!--div de nueva marca que se abre si se selecciona otro..
+
+                    <div class="mb-3" id="nuevaMarcaDiv" style="display: none;">
+                        <label for="nueva_marca" class="form-label">Nueva marca</label>
+                        <input type="text" class="form-control" id="nueva_marca" name="nueva_marca"
+                            placeholder="Ingresa la nueva marca...">
+                    </div>
+                    -->
+
+                    <!------------------------------------------------------------------>
+                </div>
+                <div class="col-3">
+                <div class="mb-3">
+                    <label id="lblNew" for="labelrecio" class="form-label">Precio <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" name="precio" id="precioInput" value="" title="Ingrese solo números" oninput="formatoPrecio(this)">
                 </div>
 
+                    <div class="mb-3">
+                        <label for="fecha_compra" class="form-label">Fecha de compra <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value=""
+                            placeholder="Selecciona una fecha">
+                    </div>
 
-
-
-
-                <div class="container mt-52">
-                        <form action="" method="post"  encytype="multipart/form-data">
-                        <!------------------------------------------------------------------------>
-                        <div class="col-3 ">
-                            <div class="mb-3 " id="formForm">
-                                <label for="modelo" class="form-label">Modelo</label>
-                                <input type="text" class="form-control" name="modelo" value="">
-                            </div>
-                            <!------------------------------------------------------------------------>
-
-                            <div class="mb-3" id="formForm">
-                                <label for="numero_serie" class="form-label">Número de serie</label>
-                                <input type="text" class="form-control" name="numero_serie">
-                            </div>
-
-                            <!------------------------------------------------------------------------>
-
-                            <div class="mb-3" id="formForm">
-                                <label for="marca" class="form-label">Marca</label>
-                                <select name="marca" id="" class="form-control">
-                                    <?php
-                        $marcas = ControladorDispositivos::getMarcas();
-
-                        foreach ($marcas as $row => $item) {
-                            // Comparar la marca del dispositivo con la marca actual del bucle
-                            //$selected = ($dispositivoInfo[0]["marca"] == $item[1]) ? 'selected' : '';
-
-                            echo '<option value="' . $item[0] . '" ' . $selected . '>' . $item[1] . '</option>';
-                        }
-                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <!------------------------------------------------------------------------>
-
-                        <div class="col-3">
-                            <div class="mb-3" id="formForm">
-                                <label for="precio" class="form-label">Precio</label>
-                                <input type="text" class="form-control" name="precio" id="precioInput" value="">
-                            </div>
-                            <!------------------------------------------------------------------------>
-
-                            <div class="mb-3" id="formForm">
-                                <label for="fecha_compra" class="form-label">Fecha de compra</label>
-                                <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput" value=""
-                                    placeholder="Selecciona una fecha">
-                            </div>
-                            <!------------------------------------------------------------------------>
-
-                            <div class="mb-3" id="formForm">
-                                <label for="ram" class="form-label">RAM</label>
-                                <select class="form-select" name="ram">
-                                    <?php
+                    <div class="mb-3">
+                        <label for="ram" class="form-label">RAM <span style="color: red;">*</span></label>
+                        <select class="form-select" name="ram">
+                            <?php
                         $ramOptions = array("4GB", "8GB", "16GB", "32GB", "64GB");
                         foreach ($ramOptions as $ramOption) {
                             $ramValue = intval(preg_replace('/[^0-9]/', '', $ramOption));
-                            //$selected = ($dispositivoInfo[0]["ram"] == $ramValue) ? 'selected' : '';
-                            echo "<option value='$ramValue' >$ramOption</option>";
+                            echo "<option value='$ramValue'>$ramOption</option>";
                         }
-                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="mb-3" id="formForm">
-                                <label for="procesador" class="form-label">Procesador</label>
-                                <select class="form-select" name="procesador">
-                                    <?php
-                        $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1",'Intel core i5');
+                        ?>
+                        </select>
+                    </div>
 
-                        foreach ($procesadoresBaseDatos as $procesador) {
-                            //$selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
-                            echo "<option value='$procesador' $selected>$procesador</option>";
-                        }
-                    ?>
-                                </select>
-                            </div>
-
-                            <div class="mb-3" id="formForm">
-                                <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
-                                <select class="form-select" name="sistema_operativo">
-                                    <?php
-                        //$sistemaOperativoActual = $dispositivoInfo[0]["sistema_operativo"];
-                        //echo "<option value='$sistemaOperativoActual' selected>$sistemaOperativoActual</option>";
-
-                        $sistemasOperativosBaseDatos = array(
-                            "Windows 10", "Windows 10 Pro", "Windows 11", "Windows 11 pro", "Ubuntu", "Fedora", "CentOS"
+                </div>
+                <!------------------------------------------------------------------>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="procesador" class="form-label">Procesador</label>
+                        <select class="form-select" name="procesador" id="procesador">
+                            <?php
+                        $procesadoresBaseDatos = array(
+                           "Intel Core i5-8600K (8va generación)",
+                            "Intel Core i7-8700K (8va generación)",
+                           "Intel Core i5-9600K (9na generación)",
+                            "Intel Core i7-9700K (9na generación)",
+                            "Intel Core i5-10600K (10ma generación)",
+                            "Intel Core i7-10700K (10ma generación)",
+                            "Intel Core i5-11600K (11va generación)",
+                            "Intel Core i7-11700K (11va generación)",
+                            "Intel Core i5-12400 (12va generación)",
+                            "Intel Core i7-12700K (12va generación)",
+                            "Intel Core i5-13400 (13va generación)",
+                            "Intel Core i7-13700K (13va generación)",                           
+                            "AMD Ryzen 5 1600X (1ra generación)",
+                            "AMD Ryzen 5 5600X (5ta generación)",
+                            "AMD Ryzen 7 5800X (5ta generación)",
+                            "AMD Ryzen 9 5900X (5ta generación)",
+                            "AMD Ryzen 5 6600X (6ta generación)",
+                            "AMD Ryzen 7 6700X (6ta generación)",
+                            "Apple M1 ",
+                            "Apple M1 Pro ",
+                            "Apple M1 Max ",
+                            "Apple M2"
                         );
+                        foreach ($procesadoresBaseDatos as $procesador) {
+                            echo "<option value='$procesador'>$procesador</option>";
+                        }
+                        ?>
+                            <option value="otro">Otro...</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
+                        <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
+                        <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
+                            placeholder="Ingresa el nuevo procesador">
+                    </div>
+
+                    <input type="hidden" name="procesador_seleccionado" id="procesador_seleccionado">
+
+                    <!------------------------------------------------------------------>
+
+                    <div class="mb-3">
+                        <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
+                        <select class="form-select" name="sistema_operativo" id="sistema_operativo">
+                            <?php
+                      $sistemasOperativosBaseDatos = array(
+                        "Windows 10",
+                        "Windows 10 Pro",
+                        "Windows 11",
+                        "Windows 11 Pro",
+                        "Ubuntu",
+                        "Fedora",
+                        "CentOS",
+                        "macOS",
+                        "macOS Catalina",
+                        "macOS Big Sur",
+                        "macOS Monterey",
+                        "Linux Mint",
+                        "Debian",
+                        "openSUSE",
+                        "Arch Linux",
+                        "FreeBSD",
+                        "Android",
+                        "iOS",
+                        "Chrome OS"
+                    );
+                    
 
                         foreach ($sistemasOperativosBaseDatos as $sistemaOperativo) {
-                                echo "<option value='$sistemaOperativo'>$sistemaOperativo</option>";
+                            echo "<option value='$sistemaOperativo'>$sistemaOperativo</option>";
                         }
-                    ?>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="col-3 ">
-                            <div class="mb-3" id="formForm">
-                                <label for="nota" class="form-label">Notas (opcional)</label
-                                ><textarea class="form-control" name="nota" rows="4"></textarea>
-                            </div>
+                        ?>
+                            <option value="otro">Otro...</option>
+                        </select>
+                    </div>
 
-                            <div class="mb-3" id="formForm">
-                                <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
-                                    required="true">Imagen del dispositivo (opcional)</label>
-                                <input type="file" class="form-control" name="foto">
-                            </div>
-                    
-
-                        <input type="submit" class="btn btn-primary" name="Registrar" value="Registrar Dispositivo">
-                        <hr>
-                        <a class="btn btn-danger" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
-                    
-                       
-                    </form>
+                    <div class="mb-3" id="nuevoSistemaOperativoDiv" style="display: none;">
+                        <label for="nuevo_sistema_operativo" class="form-label">Nuevo Sistema Operativo</label>
+                        <input type="text" class="form-control" id="nuevo_sistema_operativo"
+                            name="nuevo_sistema_operativo" placeholder="Ingresa el nuevo sistema operativo">
+                    </div>
 
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="nota" class="form-label">Notas (opcional)</label>
+                        <textarea class="form-control" name="nota" rows="4"></textarea>
+                    </div>
 
-                <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var fechaCompraInput = document.getElementById('fechaCompraInput');
-                    var fechaCompraHidden = document.getElementById('fechaCompraHidden');
 
-                    fechaCompraInput.addEventListener('focus', function() {
-                        if (fechaCompraInput.value === '') {
-                            fechaCompraInput.placeholder = 'Selecciona una fecha';
-                        }
-                    });
+                    <div class="mb-3">
+                        <label for="foto" class="form-label" required="true">Imagen del dispositivo (opcional)</label>
+                        <input type="file" class="form-control" name="foto">
+                    </div>
+                    <input type="submit" class="btn btn-secondary custom-btn-color" name="Registrar" value="Registrar Dispositivo" onclick="return validarCampos()">
 
-                    fechaCompraInput.addEventListener('blur', function() {
-                        if (fechaCompraInput.value === '') {
-                            fechaCompraInput.placeholder = 'Selecciona una fecha';
-                        }
-                    });
+                    <hr>
+                    <a class="btn btn-danger customCancelar" href="index.php?seccion=nuevoDispositivo">Cancelar</a>
 
-                    fechaCompraInput.addEventListener('click', function() {
-                        fechaCompraHidden.style.display = 'block';
-                        fechaCompraInput.style.display = 'none';
-                    });
+            </form>
+        </div>
+        <script>
+   
+//
+//codigo para abrir div de nueva marca si se selecciona el option= "otro" en la marca...
+//document.getElementById("marca").addEventListener("change", function() {
+  //          var nuevaMarcaDiv = document.getElementById("nuevaMarcaDiv");
+    //        var marcaSeleccionada = this.value;
 
-                    fechaCompraHidden.addEventListener('change', function() {
-                        var fechaSeleccionada = new Date(fechaCompraHidden.value);
-                        var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
-                        fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
-                            fechaSeleccionada.getFullYear();
-                        fechaCompraHidden.style.display = 'none';
-                        fechaCompraInput.style.display = 'block';
-                    });
+      //      if (marcaSeleccionada === "otro") {
+        //        nuevaMarcaDiv.style.display = "block";
+         //   } else {
+           //     nuevaMarcaDiv.style.display = "none";
+           // }
+       // });
 
-                    function obtenerNombreMes(numeroMes) {
-                        var meses = [
-                            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-                        ];
-                        return meses[numeroMes];
-                    }
-                });
-                </script>
 
-                </div>
-            </body>
+       function formatoPrecio(input) {
+        // Obtener el valor actual del campo de precio
+        let valor = input.value;
 
-            </html>
+        // Eliminar cualquier carácter que no sea un número o un punto decimal
+        valor = valor.replace(/[^\d.]/g, '');
+
+        // Separar el valor en parte entera y decimal
+        let partes = valor.split('.');
+        let parteEntera = partes[0];
+        let parteDecimal = partes.length > 1 ? '.' + partes[1] : '';
+
+        // Agregar separadores de miles a la parte entera
+        parteEntera = parteEntera.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        // Concatenar el signo de pesos, la parte entera y la parte decimal
+        valor = '$' + parteEntera + parteDecimal;
+
+        // Mostrar el valor formateado en el campo de precio
+        input.value = valor;
+    }
+
+
+function validarCampos() {
+    // Obtener los valores de los campos
+    var modelo = document.getElementsByName("modelo")[0].value.trim();
+    var numero_serie = document.getElementsByName("numero_serie")[0].value.trim();
+    var marca = document.getElementsByName("marca")[0].value;
+    var precio = document.getElementsByName("precio")[0].value.trim();
+    var fecha_compra = document.getElementsByName("fecha_compra")[0].value.trim();
+    var ram = document.getElementsByName("ram")[0].value;
+    var procesador = document.getElementsByName("procesador")[0].value;
+    var sistema_operativo = document.getElementsByName("sistema_operativo")[0].value;
+
+    // Validar que todos los campos obligatorios estén llenos
+    if (modelo === '' || numero_serie === '' || marca === '' || precio === '' || fecha_compra === '' || ram === '' || procesador === '' || sistema_operativo === '') {
+        Swal.fire({
+            title:"Formulario incompleto",
+            text:"Por favor, llene todos los campos obligatorios.",
+            icon:"warning"
+        });
+        
+        return false; // Impedir que el formulario se envíe
+    }
+
+    // Si todos los campos obligatorios están llenos, permitir enviar el formulario
+    return true;
+}
+
+
+        document.getElementById("sistema_operativo").addEventListener("change", function() {
+            var nuevoSistemaOperativoDiv = document.getElementById("nuevoSistemaOperativoDiv");
+            var sistemaOperativoSeleccionado = this.value;
+
+            if (sistemaOperativoSeleccionado === "otro") {
+                nuevoSistemaOperativoDiv.style.display = "block";
+            } else {
+                nuevoSistemaOperativoDiv.style.display = "none";
+            }
+        });
+
+
+        document.getElementById('procesador').addEventListener('change', function() {
+            var select = document.getElementById('procesador');
+            var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
+            var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
+
+            if (select.value === 'otro') {
+                nuevoProcesadorDiv.style.display = 'block';
+                procesadorSeleccionadoInput.value = '';
+            } else {
+                nuevoProcesadorDiv.style.display = 'none';
+                procesadorSeleccionadoInput.value = select.value;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var fechaCompraInput = document.getElementById('fechaCompraInput');
+            var fechaCompraHidden = document.getElementById('fechaCompraHidden');
+
+            fechaCompraInput.addEventListener('focus', function() {
+                if (fechaCompraInput.value === '') {
+                    fechaCompraInput.placeholder = 'Selecciona una fecha';
+                }
+            });
+
+            fechaCompraInput.addEventListener('blur', function() {
+                if (fechaCompraInput.value === '') {
+                    fechaCompraInput.placeholder = 'Selecciona una fecha';
+                }
+            });
+
+            fechaCompraInput.addEventListener('click', function() {
+                fechaCompraHidden.style.display = 'block';
+                fechaCompraInput.style.display = 'none';
+            });
+
+            fechaCompraHidden.addEventListener('change', function() {
+                var fechaSeleccionada = new Date(fechaCompraHidden.value);
+                var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
+                fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
+                    fechaSeleccionada.getFullYear();
+                fechaCompraHidden.style.display = 'none';
+                fechaCompraInput.style.display = 'block';
+            });
+
+            function obtenerNombreMes(numeroMes) {
+                var meses = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ];
+                return meses[numeroMes];
+            }
+        });
+        </script>
+    </body>
+
+</html>

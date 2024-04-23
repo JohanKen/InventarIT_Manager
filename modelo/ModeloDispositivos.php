@@ -40,7 +40,37 @@ class ModeloDispositivos extends Conexion {
         }
     }
 
-
+    static function createImac($datos){
+        $conexion = Conexion::conectar();
+        try{
+    
+            $ram = (int) $datos["ram"];
+            $precio = (double) $datos["precio"];
+    
+            $statement = $conexion->prepare("CALL insertar_imac(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->bind_param("ssisssissssss",
+                $datos["modelo"],
+                $datos["numero_serie"],
+                $precio,
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"],
+                $ram,
+                $datos["procesador"],
+                $datos["sistema_operativo"],
+                $datos["Keyboard_model"],
+                $datos["keyboard_ns"],
+                $datos["mouse_model"],
+                $datos["mouse_ns"]
+            );
+    
+            $statement->execute();
+            $statement->close();
+    
+        }catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+        }
+    }
     //Funcion para agregar un nuevo desktop
     static function createDesktop($datos){
         $conexion = Conexion::conectar();
@@ -71,7 +101,32 @@ class ModeloDispositivos extends Conexion {
             echo 'Message: ' .$e->getMessage();
         }
     }
-
+    static function createDispositivo($datos){
+        $conexion = Conexion::conectar();
+        try{
+    
+            $precio = (double) $datos["precio"];
+            $id_marca = (int) $datos["id_marca"];
+    
+            $statement = $conexion->prepare("CALL insertar_dispositivo(?, ?, ?, ?, ?, ?, ?,?)");
+            $statement ->bind_param("ssiisssi",
+                $datos["modelo"],
+                $datos["numero_serie"],
+                $id_marca,
+                $precio,
+                $datos["fecha_compra"],
+                $datos["nota"],
+                $datos["foto"],
+                $datos["tipo"],
+            );
+    
+            $statement->execute();
+            $statement->close();
+            
+       }catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+       }
+    }
 
 
     // Función para eliminar un dispositivo
@@ -167,18 +222,18 @@ class ModeloDispositivos extends Conexion {
         $res = Conexion::conectar()->query($sql);
         return $res;
     }
-    //insertar nueva marca,...
+    //insertar nueva marca
     public static function insertarNuevaMarca($nuevaMarca) {
         try {
             $query = "CALL insertar_marca(?)";
             $stmt = Conexion::conectar()->prepare($query);
-            $stmt->bindParam(1, $nuevaMarca, PDO::PARAM_STR);
+           
+            $stmt->bind_param("s", $nuevaMarca);
             $stmt->execute();
-            return Conexion::conectar()->lastInsertId();
+            return Conexion::conectar()->insert_id;
         } catch (PDOException $e) {
-            // Manejar el error de inserción aquí, si es necesario
             echo "<script>alert('Error al insertar nueva marca: ".$e->getMessage()."');</script>";
-            return false; // Retornar false en caso de error
+            return false; 
         }
     }
     

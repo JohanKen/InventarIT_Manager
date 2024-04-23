@@ -125,7 +125,6 @@ function ObtenerDatosUsuario($id){
                                     </div>
                                     <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class="btn btn-warning" id="btnWar">Actualizar Información</a>
 
-                                    <a href="javascript:void(0);" onclick="solicitarPassword(<?php echo $datosUsuario[0]; ?>);" class="btn btn-warning" id="btnWar">Actualizar Información</a>
 
                                     <div class="d-flex justify-content-start">
                                         <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>

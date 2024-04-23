@@ -1,12 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../images/bg.jpg");
+    background-image: url("../images/bgnew.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     overflow-x: hidden;
+    
 }
+
+
 .header {
     width: 100%;
 }
@@ -28,18 +31,12 @@ body {
 
 .menu h1 {
     margin-right: 20px;
-<<<<<<< HEAD
+
 } 
 
 #btnCerrarSesion{
     color: #ff0000c4 ;
     z-index: 10 !important;
-=======
-}
-
-#btnCerrarSesion{
-    color: #ff0000c4 ;
->>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 }
 
 .menu a {
@@ -48,10 +45,6 @@ body {
     margin-right: 20px;
     transition: all 0.3s ease;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 .dark-list {
     background-color: #343a40;
     color: #ffffff;
@@ -65,16 +58,6 @@ body {
     color: #3dc51b;
 }
 
-<<<<<<< HEAD
-.search {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    width: 250px;
-    height: 40px;
-}
-=======
->>>>>>> 401d556b3aae3e6830672aa64cf62a9345894089
 
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
