@@ -98,7 +98,7 @@
 
                         setTimeout(function() {
                             window.location.href='index.php?seccion=dispositivos';
-                        }, 3000); </script>
+                        }, 1500); </script>
                         ";
                     }
 

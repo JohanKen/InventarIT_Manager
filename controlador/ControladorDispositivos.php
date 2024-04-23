@@ -79,7 +79,7 @@
         
 
 
-        static function editarDispositivos()
+         function editarDispositivos()
                 {
                 if (isset($_POST["guardar"])) {
                     // Almacenamos la información al modelo para que la guarde en la base de datos
@@ -110,7 +110,8 @@
                                 exit;
                             }
                             
-                           
+                            $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
+
                             $datos = array(
                                 "id_dispositivo" => (int)$_POST["id_dispositivo"],
                                 "modelo" => $_POST["modelo"],
@@ -119,7 +120,7 @@
                                 "procesador" => $_POST["procesador"],
                                 "sistema_operativo" => $_POST["sistema_operativo"],
                                 "id_marca" => (int)$_POST["marca"],
-                                "precio" =>$_POST["precio"] ,  
+                                "precio" =>$precio,
                                 "estado" => (int)$_POST["estado"],
                                 "fecha_compra" => $fechaCompraFormateada,
                                 "nota" => $_POST["nota"],
