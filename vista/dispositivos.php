@@ -14,14 +14,31 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="estilos/estilosDispositivos.css">
+    <style>
+    .imagen-editar {
+        cursor: pointer;
+    }
 
+    .acciones {
+        display:flex;    
+    }
+    .acciones img {
+        max-width: 40px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .acciones img:hover {
+        transform: scale(1.2);
+    }
+</style>
 </head> 
 
 <body>
     <div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
-                <h1>Dispositivos</h1>
+            <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">dispositivos</h1>
                 <form class="form-inline" id="searchBar">
                   
 
@@ -46,20 +63,20 @@
         </a>
         <div class="container" style="margin-top: 10px !important;">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>Id Dispositivo</th>
-                            <th>Tipo de dispositivo</th>
-                            <th>Modelo</th>
-                            <th>Número de Serie</th>
-                            <th>Marca</th>
-                            <th>Precio</th>
-                            <th>Estado del Dispositivo</th>
-                            <th>Fecha de Compra</th>
-                            <th>Notas</th>
-                            <th>Imagen</th>
-                            <th>Acciones</th>
+                            <th>ID</th>
+                            <th>TIPO</th>
+                            <th>MODELO</th>
+                            <th>NUMERO DE SERIE</th>
+                            <th>MARCA</th>
+                            <th>PRECIO</th>
+                            <th>ESTADO</th>
+                            <th>FECHA DE COMPRA</th>
+                            <th>NOTAS</th>
+                            <th>IMAGEN</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,13 +121,25 @@
                             <td>{$item[8]}</td>
                             <td><img src='{$item[9]}' alt='' height='50'></td>
                             <td>
-                                <button type='button' class='btn btn-info' onclick=\"window.location.href='index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}'\">Editar</button>
-                                <button type='button' class='btn btn-danger' onclick='confirmarBorrar({$item[0]});'>Borrar</button>
-                            </td>
+                            <div class='acciones'>
+                                <img src='images/editar.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
+                                <img src='images/basura.png' alt='Borrar' style='max-width:40px; cursor:pointer;' onclick='confirmarBorrar({$item[0]});'>
+                            </div> 
+                        </td>
+                        
+
                         </tr>
-                    ";
-                    
+                        ";
+
+                        // Agregar evento de clic para redireccionar al hacer clic en la imagen
+                        echo "<script>
+                                document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
+                                    window.location.href = 'index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}';
+                                });
+                            </script>";
                     }
+
+
                     ?>
                     </tbody>
                 </table>
@@ -119,31 +148,40 @@
 
     </div>
 
-    <div class="modal" id="confirmarBorrarModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="cerrarModal()">&times;</span>
-            <h4>Confirmar Eliminación</h4>
-            <p>¿Estás seguro de que deseas eliminar este dispositivo?</p>
-            <button class="btn-danger" id="btnBorrarModal">Borrar</button>
-            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
-        </div>
-    </div>
-
 
 
     <script>
+
+function confirmarBorrar(id_dispositivo) {
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "El dispositivo se eliminara definitivamente.",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "index.php?seccion=dispositivos&accion=eliminarDispositivos&id_dispositivo=" + id_dispositivo;
+        }
+    });
+}
+
+
+    
+
+        // Agrega un evento de clic a la imagen
+    document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
+        // Redirige a la página deseada al hacer clic en la imagen
+        window.location.href = 'index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}';
+    });
     document.addEventListener('DOMContentLoaded', function() {
         var headerTabla = document.querySelector('.headerTabla');
         headerTabla.classList.add('show');
     });
 
-    function confirmarBorrar(id_dispositivo) {
-        document.getElementById('confirmarBorrarModal').style.display = 'flex';
-        document.getElementById('btnBorrarModal').onclick = function() {
-            window.location.href = "index.php?seccion=dispositivos&accion=eliminarDispositivos&id_dispositivo=" +
-                id_dispositivo;
-        };
-    }
 
     function cerrarModal() {
         document.getElementById('confirmarBorrarModal').style.display = 'none';
