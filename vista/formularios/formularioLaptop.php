@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
          // Obtén el valor directo del campo de precio 
         // Almacena el precio en el arreglo $dispositivoInfo
-        $dispositivoInfo[0]['precio'] = $precio;
+      
 
     
         
@@ -218,27 +218,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            <!--------------------------------Procesador------------------------------------------->
                 <div class="mb-3" id="">
           <label for="procesador" class="form-label">Procesador</label>
-                           <select class="form-select" name="procesador">
+                           <select class="form-select" name="procesador" id="procesador">
                                <?php
-                                   $procesadoresBaseDatos = array("Intel Core i3 10th Gen", "AMD Ryzen 5000", "Apple M1");
+                                   $procesadoresBaseDatos = array("Intel Core i5-8600K (8va generación)",
+                                   "Intel Core i7-8700K (8va generación)",
+                                  "Intel Core i5-9600K (9na generación)",
+                                   "Intel Core i7-9700K (9na generación)",
+                                   "Intel Core i5-10600K (10ma generación)",
+                                   "Intel Core i7-10700K (10ma generación)",
+                                   "Intel Core i5-11600K (11va generación)",
+                                   "Intel Core i7-11700K (11va generación)",
+                                   "Intel Core i5-12400 (12va generación)",
+                                   "Intel Core i7-12700K (12va generación)",
+                                   "Intel Core i5-13400 (13va generación)",
+                                   "Intel Core i7-13700K (13va generación)",                           
+                                   "AMD Ryzen 5 1600X (1ra generación)",
+                                   "AMD Ryzen 5 5600X (5ta generación)",
+                                   "AMD Ryzen 7 5800X (5ta generación)",
+                                   "AMD Ryzen 9 5900X (5ta generación)",
+                                   "AMD Ryzen 5 6600X (6ta generación)",
+                                   "AMD Ryzen 7 6700X (6ta generación)",
+                                   "Apple M1 ",
+                                   "Apple M1 Pro ",
+                                   "Apple M1 Max ",
+                                   "Apple M2");
            
                                    foreach ($procesadoresBaseDatos as $procesador) {
                                        $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
                                        echo "<option value='$procesador' $selected>$procesador</option>";
                                    }
                                    ?>
+                                   <option value="otro">Otro...</option>
                            </select>
                        </div>
+                       <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
+                        <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
+                        <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
+                            placeholder="Ingresa el nuevo procesador">
+                    </div>
            <!----------------------------------Sistema operativo----------------------------------------->
                        <div class="mb-3" id="">
                            <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
-                           <select class="form-select" name="sistema_operativo">
+                           <select class="form-select" name="sistema_operativo" id="sistema_operativo">
                                <?php
                                    $sistemaOperativoActual = $dispositivoInfo[0]["sistema_operativo"];
                                    echo "<option value='$sistemaOperativoActual' selected>$sistemaOperativoActual</option>";
            
                                    $sistemasOperativosBaseDatos = array(
-                                       "Windows 10", "Windows 10 Pro", "Windows 11", "Windows 11 pro", "macOS High Sierra", "macOS Mojave", "macOS Catalina", "macOS Big Sur", "macOS Monterey", "Linux Mint", "Ubuntu", "Fedora", "CentOS"
+                                    "Windows 10",
+                                    "Windows 10 Pro",
+                                    "Windows 11",
+                                    "Windows 11 Pro",
+                                    "Ubuntu",
+                                    "Fedora",
+                                    "CentOS",
+                                    "macOS",
+                                    "macOS Catalina",
+                                    "macOS Big Sur",
+                                    "macOS Monterey",
+                                    "Linux Mint",
+                                    "Debian",
+                                    "openSUSE",
+                                    "Arch Linux",
+                                    "FreeBSD",
+                                    "Android",
+                                    "iOS",
+                                    "Chrome OS"
                                    );
            
                                    foreach ($sistemasOperativosBaseDatos as $sistemaOperativo) {
@@ -247,8 +292,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                        }
                                    }
                                    ?>
+                                   <option value="otro">Otro...</option>
                            </select>
                        </div>
+                       <div class="mb-3" id="nuevoSistemaOperativoDiv" style="display: none;">
+                        <label for="nuevo_sistema_operativo" class="form-label">Nuevo Sistema Operativo</label>
+                        <input type="text" class="form-control" id="nuevo_sistema_operativo"
+                            name="nuevo_sistema_operativo" placeholder="Ingresa el nuevo sistema operativo">
+                    </div>
                        <div class="mb-3" id="">
                 <label for="nota" class="form-label">Notas</label>
                 <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
@@ -329,6 +380,31 @@ function formatoPrecio(input) {
         input.value = valor;
     }
 //
+document.getElementById("sistema_operativo").addEventListener("change", function() {
+            var nuevoSistemaOperativoDiv = document.getElementById("nuevoSistemaOperativoDiv");
+            var sistemaOperativoSeleccionado = this.value;
+
+            if (sistemaOperativoSeleccionado === "otro") {
+                nuevoSistemaOperativoDiv.style.display = "block";
+            } else {
+                nuevoSistemaOperativoDiv.style.display = "none";
+            }
+        });
+
+
+        document.getElementById('procesador').addEventListener('change', function() {
+            var select = document.getElementById('procesador');
+            var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
+            var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
+
+            if (select.value === 'otro') {
+                nuevoProcesadorDiv.style.display = 'block';
+                procesadorSeleccionadoInput.value = '';
+            } else {
+                nuevoProcesadorDiv.style.display = 'none';
+                procesadorSeleccionadoInput.value = select.value;
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             var fechaCompraInput = document.getElementById('fechaCompraInput');
