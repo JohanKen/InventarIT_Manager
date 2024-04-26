@@ -119,10 +119,24 @@
                             <td>{$item[6]}</td>
                             <td>{$item[7]}</td>
                             <td>{$item[8]}</td>
-                            <td><img src='{$item[9]}' alt='' height='50'></td>
+                           <td>
+                           ";
+                           if ($item[1] == "Laptop" && empty($item[9]))  {
+                            echo "
+                                <img src='images/dis/laptop.png' alt='laptop' height='50'>
+                            </td>";
+                        }else{
+                            echo "
+                            <img src='{$item[9]}' alt='' height='50'>
+                         </td>";
+
+                        }
+                        
+                            echo"
                             <td>
                             <div class='acciones'>
                                 <img src='images/editar.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
+
                                 <img src='images/basura.png' alt='Borrar' style='max-width:40px; cursor:pointer;' onclick='confirmarBorrar({$item[0]});'>
                             </div> 
                         </td>

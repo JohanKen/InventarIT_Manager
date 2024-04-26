@@ -255,7 +255,7 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                         "precio" => $precio,
                         "fecha_compra" => $fechaCompraFormateada,
                         "nota" => $_POST["nota"],
-                        "foto" => "foto",
+                        "foto" => "",
                     );
         
                     $insert = ModeloDispositivos::createLaptop($datos);
