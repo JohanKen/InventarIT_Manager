@@ -19,5 +19,6 @@ include 'controlador/ControladorDispositivos.php';
 
 //Modelos
 include_once 'modelo/ModeloDispositivos.php';
-include 'plantilla.php';                                    
+include 'plantilla.php';        
+                            
 ?>

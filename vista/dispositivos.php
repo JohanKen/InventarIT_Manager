@@ -119,8 +119,78 @@
                             <td>{$item[6]}</td>
                             <td>{$item[7]}</td>
                             <td>{$item[8]}</td>
-                           <td>
+                            <td style='text-align:center; vertical-align:middle;'>
                            ";
+
+
+
+
+
+
+
+                        if (empty($item[9])) {
+                        switch ($item[1]) {
+                            case "Laptop":
+                                echo "
+                                    <img src='images/dis/laptop.png' alt='IMGlaptop' height='50'>
+                                    ";
+                                    break;
+                            
+                                
+                            case "Descktop":
+                                echo "
+                                    <img src='images/dis/desktop.png' alt='IMGdesktop' height='50'>
+                                    ";
+                                    break;
+
+                            case "iMac":
+                                echo "
+                                    <img src='images/dis/imac.png' alt='IMGimac' height='50'>
+                                    ";
+                                    break;
+                            case  "Teclado":
+                                echo "
+                                    <img src='images/dis/teclado.png' alt='IMGteclado' height='50'>
+                                    ";
+                                    break;
+                            case "Mouse":
+                                echo "
+                                <img src='images/dis/logi.png' alt='IMGmouse' height='50'>
+                                ";
+                                break;
+                                case "Monitor":
+                                    echo "
+                                    <img src='images/dis/monitor.png' alt='IMGmonitor' height='50'>
+                                    ";
+                                    break;
+                                    case "Headset":
+                                        echo "
+                                        <img src='images/dis/headset.png' alt='IMGheadset' height='50'>
+                                        ";
+                                        break;
+                                        case "Celular":
+                                            echo "
+                                            <img src='images/dis/celular.png' alt='IMGcelular' height='50'>
+                                            ";
+                                            break;
+                                            case "Switches":
+                                                echo "
+                                                <img src='images/dis/switch.png' alt='IMGswitch' height='50'>
+                                                ";
+                                                break;
+                                            case "Impresora":
+                                                echo "
+                                                <img src='images/dis/hp.png' alt='IMGimpresora' height='50'>
+                                                ";
+                                                break;
+                                                case "otro":
+                                                    echo "
+                                                    <img src='images/dis/otros.png' alt='IMGotro' height='50'>
+                                                    ";
+                                                    break;
+
+                        }
+                        /*
                            if ($item[1] == "Laptop" && empty($item[9]))  {
                             echo "
                                 <img src='images/dis/laptop.png' alt='laptop' height='50'>
@@ -130,8 +200,14 @@
                             <img src='{$item[9]}' alt='' height='50'>
                          </td>";
 
-                        }
-                        
+                        }*/
+                    }
+
+
+
+
+
+
                             echo"
                             <td>
                             <div class='acciones'>

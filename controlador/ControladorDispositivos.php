@@ -124,7 +124,7 @@
                                 "estado" => (int)$_POST["estado"],
                                 "fecha_compra" => $fechaCompraFormateada,
                                 "nota" => $_POST["nota"],
-                                "foto" => "foto",
+                                "foto" => "",
                             );
                             
                         
@@ -255,6 +255,8 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                         "precio" => $precio,
                         "fecha_compra" => $fechaCompraFormateada,
                         "nota" => $_POST["nota"],
+                        //crear bucle condicional para cuando no existe una imagen y cuando si...
+                //foto vacia de momento para que aparezca imagen de dispositivo defiinida por defecto
                         "foto" => "",
                     );
         
@@ -356,7 +358,9 @@ de la base de datos y verificar que se esta recorriendo de manera adecuada dicho
                     "precio" => $precio,                    
                     "fecha_compra" => $fechaCompraFormateada,
                     "nota" => $_POST["nota"],
-                    "foto" => "foto",
+                    //crear bucle condicional para cuando no existe una imagen y cuando si...
+                //foto vacia de momento para que aparezca imagen de dispositivo defiinida por defecto
+                    "foto" => "",
                 );
     
                 $insert = ModeloDispositivos::createDesktop($datos);
@@ -406,7 +410,9 @@ function registrarImac(){
                 "precio" => $precio,
                 "fecha_compra" => $fechaCompraFormateada,
                 "nota" => $_POST["nota"],
-                "foto" => "foto",
+                //crear bucle condicional para cuando no existe una imagen y cuando si...
+                //foto vacia de momento para que aparezca imagen de dispositivo defiinida por defecto
+                "foto" => "",
                 "Keyboard_model"=> $_POST["Keyboard_model"],
                 "keyboard_ns"=> $_POST["keyboard_ns"],
                 "mouse_model"=> $_POST["mouse_model"],
@@ -438,7 +444,9 @@ function registrarImac(){
                 "precio" => $precio,
                 "fecha_compra" => $_POST["fecha_compra"],
                 "nota" => $_POST["nota"],
-                "foto" => "foto",
+                //crear bucle condicional para cuando no existe una imagen y cuando si...
+                //foto vacia de momento para que aparezca imagen de dispositivo defiinida por defecto
+                "foto" => "",
                 "tipo" => $tipo,
 
             );
