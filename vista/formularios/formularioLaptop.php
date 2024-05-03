@@ -1,3 +1,4 @@
+-- Active: 1713236527236@@127.0.0.1@3306@inventarit_manager
 <?php
 require_once 'controlador/ControladorDispositivos.php';
 error_reporting(E_ALL);
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 1000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                 toast.onmouseenter = Swal.stopTimer;
@@ -72,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
             setTimeout(function(){
                 window.location.href='index.php?seccion=dispositivos';
-            }, 1500); 
+            }, 1000); 
             </script>";
 
         exit;
@@ -114,10 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="container mt-52">
         <?php
+        
         if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
             
         ?>
         <form action="" method="post" enctype="multipart/form-data">
+        
         <div class="col-3">
 
 <!-------------------------------Id-------------------------------------------->
@@ -126,13 +129,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" name="id_dispositivo"
                     value="<?= $dispositivoInfo[0]["id_dispositivo"] ?>" readonly>
             </div>
-
 <!-------------------------------Modelo-------------------------------------------->
             <div class="mb-3" id="">
                 <label for="modelo" class="form-label">Modelo</label>
                 <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>" required>
             </div>
-
 <!-----------------------------------Numero de serie---------------------------------------->
             <div class="mb-3" id="">
                 <label for="numero_serie" class="form-label">Número de serie</label>
@@ -156,10 +157,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
             </div>
-
-            <div class="col-3">
             
 <!--------------------------------Estado------------------------------------------->
+<!-------------El estado no esta cargando por el predifinido que viene desde la base de datos
+---------------aunque esto no afe4cta enb la base de datos...---------------------->
+<div class="col-3">
             <div class="mb-3" id="">
                 <label for="estado" class="form-label">Estado</label>
                 <select class="form-select" name="estado" required>
@@ -174,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 echo "Disponible";
                                                 break;
                                             case 2:
-                                                echo "Asignado ";
+                                                echo "Asignado";
                                                 break;
                                             case 3:
                                                 echo "Dañado";
@@ -249,6 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                    }
                                    ?>
                                    <option value="otro">Otro...</option>
+
                            </select>
                        </div>
                        <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
@@ -257,7 +260,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             placeholder="Ingresa el nuevo procesador">
                     </div>
            <!----------------------------------Sistema operativo----------------------------------------->
-                       <div class="mb-3" id="">
+           <!---------------------Sistema operativo no se esta agregando desde la base de datos,
+           Solo esta mostrando tal cual la palabra otro pero no esta mostranbdo el nombre del nuevo sistema que ese esta agregando--->s           
+           <div class="mb-3" id="">
                            <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
                            <select class="form-select" name="sistema_operativo" id="sistema_operativo">
                                <?php
@@ -309,7 +314,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                        
             <div class="col-3">
            
-<!-----------------------------------Notas---------------------------------------->
+
            
 <!------------------------------------Imagen--------------------------------------->
             <div class="mb-3" id="">
@@ -326,6 +331,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 
                 <hr>
+                <?php
+                echo"Datos actuales del dispositivo:";
+                echo"<pre>";
+                print_r($dispositivoInfo);
+                echo "</pre>";
+            ?>
             </div>
             </div>
 <!-----------------------------------------RAM-------------------------------->

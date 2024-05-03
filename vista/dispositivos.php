@@ -45,10 +45,22 @@
                 </form>
             </header>
             <div class="col-md-12 text-center d-flex">
+
+<!--------------------------------------------------->    
+<!---------BARRA DE BUSQUEDA DEBE MOSTRAR RESULTADOS POR SWEET ALERT Y DESPUES PODERSE CERRAR--->
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
-                <input class="form-control border border-dark bg-white text-dark" type="search" name="busquedaDispositivos" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Buscar</button>
+                <form action="phpSearch.php" method="post">
+                Search <input type="text" name="search"><br>
+                <input type ="submit">
+                </form>   
+  
+ 
+    
             </div>
+
+
+
+<!--------------------------------------------------->    
 
                 <div class="input-group input-group-sm mt-3 "  style=" max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
                     <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">

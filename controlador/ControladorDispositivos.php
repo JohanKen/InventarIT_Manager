@@ -112,13 +112,34 @@
                             
                             $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
 
+                  
+                    // Obtener el valor del sistema operativo seleccionado
+                    $sistemaOperativoSeleccionado = $_POST['sistema_operativo'];
+
+                    // Si el sistema operativo seleccionado es "otro", usar el nuevo sistema operativo ingresado
+                    if ($sistemaOperativoSeleccionado === "otro") {
+                        $sistemaOperativo = isset($_POST['nuevo_sistema_operativo']) ? $_POST['nuevo_sistema_operativo'] : "";
+                    } else {
+                        $sistemaOperativo = $sistemaOperativoSeleccionado;
+                    }
+                    
+                    // Obtener el valor del procesador seleccionado
+                    $procesadorSeleccionado = $_POST['procesador'];
+        
+                    // Si el procesador seleccionado es "otro", usar el nuevo procesador
+                    if ($procesadorSeleccionado === "otro") {
+                        $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
+                    } else {
+                        $procesador = $procesadorSeleccionado;
+                    }
+
                             $datos = array(
                                 "id_dispositivo" => (int)$_POST["id_dispositivo"],
                                 "modelo" => $_POST["modelo"],
                                 "numero_serie" => $_POST["numero_serie"],
                                 "ram" => (int)$_POST["ram"],
                                 "procesador" => $_POST["procesador"],
-                                "sistema_operativo" => $_POST["sistema_operativo"],
+                                "sistema_operativo" => $sistemaOperativo,
                                 "id_marca" => (int)$_POST["marca"],
                                 "precio" =>$precio,
                                 "estado" => (int)$_POST["estado"],
@@ -193,7 +214,7 @@
                             exit;
                         }
 
-
+                        $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
 
 
 /* codigo para insertar una nueva marca, hace falta revisar que si esta regresando un id

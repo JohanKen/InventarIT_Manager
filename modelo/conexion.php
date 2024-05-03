@@ -4,8 +4,8 @@
 
 
     //Conexion con servidor guillermo
-  /*
-   public static $servername = "192.168.100.33";
+   /*
+   public static $servername = "192.168.100.84";
     
    public static $username = "Johan";
     
@@ -13,8 +13,8 @@
     
     public static $database = "inventarit_manager";
  
-
 */
+
     //Conexion con servidor local casa
      /*
     public static $servername = "127.0.0.1";
