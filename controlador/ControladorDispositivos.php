@@ -122,7 +122,7 @@
                     } else {
                         $sistemaOperativo = $sistemaOperativoSeleccionado;
                     }
-                    
+                
                     // Obtener el valor del procesador seleccionado
                     $procesadorSeleccionado = $_POST['procesador'];
         

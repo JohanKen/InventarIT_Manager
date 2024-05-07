@@ -1,14 +1,11 @@
-El menu esta soolo comentado para poder visualizar de manera mas facil los errores
-
-Se va a omitir la accion de poder agregar nuevas marcas, procesador y sistema operativo
-de momento con sweet alert, esto se hara con otro text
-
-Agregar nueva marca no funciono de manera correcta dentro del fomrulario para agregar una nueva
-marca en laptop a partir del option otro, se omitio esta opcion de momento.
-
-Validaciones de formularios en macbook solo seran los necesarios tales como modelo numero de serie precio y fecha de compra,
+falta accion de agregar una nueva marca en agregar un nuevo dispositivo asi como en la accion de editar cada uno
 
 rutas de imagenes se vana a almacenar solo la ruta de la imagen cargada a la base de datos y la imagen en si se debe guardar en el servidor
 
 formato de fecha incorrecto en agregar cualquier dispositivo debe guardar los datos que ya se ingresaron
 y no recargar la pagina con todos los campos en blanco de nuevo
+
+procesador nuevo no esta guardandose de manera correcta al editar laptop.
+
+estado del dispositivo se muestra diferente a lo que hay verdaderamaente en la base de datos y lio que se muestra en la vista lo cual solo es un problema en la vista en si
+

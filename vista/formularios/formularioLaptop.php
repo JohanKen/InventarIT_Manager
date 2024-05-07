@@ -1,4 +1,4 @@
--- Active: 1713236527236@@127.0.0.1@3306@inventarit_manager
+
 <?php
 require_once 'controlador/ControladorDispositivos.php';
 error_reporting(E_ALL);
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row fle">
                     <div class="col-md-6 headd">
                     <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">EDITAR LAPTOP</h1>
-                    </div>
+                </div>
                     <div class="col-md-6 heaad">
                         <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
                     </div>
@@ -166,26 +166,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="estado" class="form-label">Estado</label>
                 <select class="form-select" name="estado" required>
                     <?php
-                                    foreach ($estados as $estadoId => $estadoLabel) {
-                                        $selected = ($dispositivoInfo[0]["id_estado"] == $estadoId) ? 'selected' : '';
-                                        echo "<option value='$estadoId' $selected>";
-                                        
-                                        // Mostrar el nombre del estado en lugar del valor entero
-                                        switch ($estadoId) {
-                                            case 1:
-                                                echo "Disponible";
-                                                break;
-                                            case 2:
-                                                echo "Asignado";
-                                                break;
-                                            case 3:
-                                                echo "Dañado";
-                                                break;
-                                            
-                                        }
+                      
+                      foreach ($estados as $estadoId => $estadoLabel) {
+                        $selected = ($dispositivoInfo[0]['estado'] == $estadoLabel) ? 'selected' : '';
+                        echo "<option value='$estadoId' $selected>";
+                        
+                        switch ($estadoLabel) {
+                            case 1:
+                                echo "Disponible";
+                                break;
+                            
+                    case 2:
+                        echo "Asignado";
+                        break;
+                        case 3:
+                            echo "Dañado"; 
+                                break;
+                        }
 
-                                        echo "</option>";
-                                    }
+                        echo"</option>";
+                    }
+                    
                                     ?>
                 </select>
             </div>
@@ -261,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
            <!----------------------------------Sistema operativo----------------------------------------->
            <!---------------------Sistema operativo no se esta agregando desde la base de datos,
-           Solo esta mostrando tal cual la palabra otro pero no esta mostranbdo el nombre del nuevo sistema que ese esta agregando--->s           
+           Solo esta mostrando tal cual la palabra otro pero no esta mostranbdo el nombre del nuevo sistema que ese esta agregando--->           
            <div class="mb-3" id="">
                            <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
                            <select class="form-select" name="sistema_operativo" id="sistema_operativo">
