@@ -138,7 +138,7 @@
                                 "modelo" => $_POST["modelo"],
                                 "numero_serie" => $_POST["numero_serie"],
                                 "ram" => (int)$_POST["ram"],
-                                "procesador" => $_POST["procesador"],
+                                "procesador" => $procesador,
                                 "sistema_operativo" => $sistemaOperativo,
                                 "id_marca" => (int)$_POST["marca"],
                                 "precio" =>$precio,

@@ -1,4 +1,3 @@
-
 <?php
 require_once 'controlador/ControladorDispositivos.php';
 error_reporting(E_ALL);
@@ -18,9 +17,9 @@ $marcas = array(
 
 //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
 $estados = array(
-    1 => 1,
-    2 => 2,
-    3 => 3
+    1 => "Disponible",
+    2 => "Asignado",
+    3 => "Dañado"
 );
 
 
@@ -86,13 +85,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar dispositivo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="estilos/estilosFormularios.css">
 </head>
@@ -103,48 +106,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <div class="container-fluid">
-                <div class="row fle">
-                    <div class="col-md-6 headd">
-                    <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">EDITAR LAPTOP</h1>
-                </div>
-                    <div class="col-md-6 heaad">
-                        <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
-                    </div>
-                </div>
+        <div class="row fle">
+            <div class="col-md-6 headd">
+                <h1
+                    style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">
+                    EDITAR LAPTOP</h1>
             </div>
+            <div class="col-md-6 heaad">
+                <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
+            </div>
+        </div>
+    </div>
 
-            <div class="container mt-52">
+    <div class="container mt-52">
         <?php
         
         if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
             
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-        
-        <div class="col-3">
 
-<!-------------------------------Id-------------------------------------------->
-            <div class="mb-3" id="">
-                <label for="id_dispositivo" class="form-label">ID</label>
-                <input type="text" class="form-control" name="id_dispositivo"
-                    value="<?= $dispositivoInfo[0]["id_dispositivo"] ?>" readonly>
-            </div>
-<!-------------------------------Modelo-------------------------------------------->
-            <div class="mb-3" id="">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>" required>
-            </div>
-<!-----------------------------------Numero de serie---------------------------------------->
-            <div class="mb-3" id="">
-                <label for="numero_serie" class="form-label">Número de serie</label>
-                <input type="text" class="form-control" name="numero_serie"
-                    value="<?= $dispositivoInfo[0]["numero_serie"] ?>" required>
-            </div>
-            <!-------------------------------Marca-------------------------------------------->
-            <div class="mb-3" id="">
-                <label for="marca" class="form-label">Marca</label>
-                <select name="marca" id="" class="form-control" required>
-                    <?php
+            <div class="col-3">
+
+                <!-------------------------------Id-------------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="id_dispositivo" class="form-label">ID</label>
+                    <input type="text" class="form-control" name="id_dispositivo"
+                        value="<?= $dispositivoInfo[0]["id_dispositivo"] ?>" readonly>
+                </div>
+                <!-------------------------------Modelo-------------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>"
+                        required>
+                </div>
+                <!-----------------------------------Numero de serie---------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="numero_serie" class="form-label">Número de serie</label>
+                    <input type="text" class="form-control" name="numero_serie"
+                        value="<?= $dispositivoInfo[0]["numero_serie"] ?>" required>
+                </div>
+                <!-------------------------------Marca-------------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="marca" class="form-label">Marca</label>
+                    <select name="marca" id="" class="form-control" required>
+                        <?php
                         $marcas = ControladorDispositivos::getMarcas();
 
                         foreach ($marcas as $row => $item) {
@@ -154,57 +160,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo '<option value="' . $item[0] . '" ' . $selected . '>' . $item[1] . '</option>';
                         }
                         ?>
-                </select>
+                    </select>
+                </div>
             </div>
-            </div>
-            
-<!--------------------------------Estado------------------------------------------->
-<!-------------El estado no esta cargando por el predifinido que viene desde la base de datos
----------------aunque esto no afe4cta enb la base de datos...---------------------->
-<div class="col-3">
-            <div class="mb-3" id="">
-                <label for="estado" class="form-label">Estado</label>
-                <select class="form-select" name="estado" required>
-                    <?php
-                      
-                      foreach ($estados as $estadoId => $estadoLabel) {
-                        $selected = ($dispositivoInfo[0]['estado'] == $estadoLabel) ? 'selected' : '';
-                        echo "<option value='$estadoId' $selected>";
-                        
-                        switch ($estadoLabel) {
-                            case 1:
-                                echo "Disponible";
-                                break;
-                            
-                    case 2:
-                        echo "Asignado";
-                        break;
-                        case 3:
-                            echo "Dañado"; 
-                                break;
-                        }
 
-                        echo"</option>";
-                    }
-                    
-                                    ?>
-                </select>
-            </div>
-<!------------------------------Precio-------------------------------------------->
-            <div class="mb-3" id="">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="text" class="form-control" name="precio" id="precioInput"
-                    value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>" oninput="formatoPrecio(this)" required>
-            </div>
-            <div class="mb-3" id="">
-                <label for="fecha_compra" class="form-label">Fecha de compra</label>
-                <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput"
-                    value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha" required>
-            </div>
-            <div class="mb-3" id="">
-                <label for="ram" class="form-label">RAM</label>
-                <select class="form-select" name="ram">
-                    <?php
+            <!--------------------------------Estado------------------------------------------->
+            <!-------------El estado no esta cargando por el predifinido que viene desde la base de datos
+---------------aunque esto no afe4cta enb la base de datos...---------------------->
+            <div class="col-3">
+                <div class="mb-3" id="">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" name="estado" required>
+    <?php
+    foreach ($estados as $estadoId => $estadoLabel) {
+        // Obtener el estado actual del dispositivo
+        $estadoActual = $dispositivoInfo[0]['estado'];
+
+        // Comparar el estado actual con el estado del bucle
+        $selected = ($estadoActual == $estadoLabel) ? 'selected' : '';
+
+        // Imprimir la opción del select con el estado correspondiente
+        echo "<option value='$estadoId' $selected>$estadoLabel</option>";
+    }
+    ?>
+</select>
+
+                </div>
+                <!------------------------------Precio-------------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="text" class="form-control" name="precio" id="precioInput"
+                        value="<?= '$' . number_format($dispositivoInfo[0]["precio"], 2, '.', ',') ?>"
+                        oninput="formatoPrecio(this)" required>
+                </div>
+                <div class="mb-3" id="">
+                    <label for="fecha_compra" class="form-label">Fecha de compra</label>
+                    <input type="date" class="form-control" name="fecha_compra" id="fechaCompraInput"
+                        value="<?= $dispositivoInfo[0]["fecha_compra"] ?>" placeholder="Selecciona una fecha" required>
+                </div>
+                <div class="mb-3" id="">
+                    <label for="ram" class="form-label">RAM</label>
+                    <select class="form-select" name="ram">
+                        <?php
                         $ramOptions = array("4GB", "8GB", "16GB", "32GB", "64GB");
                         foreach ($ramOptions as $ramOption) {
                             $ramValue = intval(preg_replace('/[^0-9]/', '', $ramOption));
@@ -212,17 +209,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<option value='$ramValue' $selected>$ramOption</option>";
                         }
                         ?>
-                </select>
+                    </select>
+                </div>
             </div>
-            </div>
-<!---------------------------------Fecha de compra------------------------------------------>
-<div class="col-3">
-           
-           <!--------------------------------Procesador------------------------------------------->
+            <!---------------------------------Fecha de compra------------------------------------------>
+            <div class="col-3">
+
+                <!--------------------------------Procesador------------------------------------------->
                 <div class="mb-3" id="">
-          <label for="procesador" class="form-label">Procesador</label>
-                           <select class="form-select" name="procesador" id="procesador">
-                               <?php
+                    <label for="procesador" class="form-label">Procesador</label>
+                    <select class="form-select" name="procesador" id="procesador">
+                        <?php
+                                $procesadorActual = $dispositivoInfo[0]["procesador"];
+                                echo "<option value='$procesadorActual' selected>$procesadorActual</option>";
+
                                    $procesadoresBaseDatos = array("Intel Core i5-8600K (8va generación)",
                                    "Intel Core i7-8700K (8va generación)",
                                   "Intel Core i5-9600K (9na generación)",
@@ -247,26 +247,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                    "Apple M2");
            
                                    foreach ($procesadoresBaseDatos as $procesador) {
-                                       $selected = ($dispositivoInfo[0]["procesador"] == $procesador) ? 'selected' : '';
-                                       echo "<option value='$procesador' $selected>$procesador</option>";
+                                    if($procesador !== $procesadorActual)
+                                    echo "<option value='$procesador' $selected>$procesador</option>";
                                    }
                                    ?>
-                                   <option value="otro">Otro...</option>
+                        <option value="otro">Otro...</option>
 
-                           </select>
-                       </div>
-                       <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
-                        <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
-                        <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
-                            placeholder="Ingresa el nuevo procesador">
-                    </div>
-           <!----------------------------------Sistema operativo----------------------------------------->
-           <!---------------------Sistema operativo no se esta agregando desde la base de datos,
-           Solo esta mostrando tal cual la palabra otro pero no esta mostranbdo el nombre del nuevo sistema que ese esta agregando--->           
-           <div class="mb-3" id="">
-                           <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
-                           <select class="form-select" name="sistema_operativo" id="sistema_operativo">
-                               <?php
+                    </select>
+                </div>
+                <div class="mb-3" id="nuevoProcesadorDiv" style="display: none;">
+                    <label for="nuevo_procesador" class="form-label">Nuevo Procesador</label>
+                    <input type="text" class="form-control" id="nuevo_procesador" name="nuevo_procesador"
+                        placeholder="Ingresa el nuevo procesador">
+                </div>
+                <!----------------------------------Sistema operativo----------------------------------------->
+                <!---------------------Sistema operativo no se esta agregando desde la base de datos,
+           Solo esta mostrando tal cual la palabra otro pero no esta mostranbdo el nombre del nuevo sistema que ese esta agregando--->
+                <div class="mb-3" id="">
+                    <label for="sistema_operativo" class="form-label">Sistema Operativo</label>
+                    <select class="form-select" name="sistema_operativo" id="sistema_operativo">
+                        <?php
                                    $sistemaOperativoActual = $dispositivoInfo[0]["sistema_operativo"];
                                    echo "<option value='$sistemaOperativoActual' selected>$sistemaOperativoActual</option>";
            
@@ -298,60 +298,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                        }
                                    }
                                    ?>
-                                   <option value="otro">Otro...</option>
-                           </select>
-                       </div>
-                       <div class="mb-3" id="nuevoSistemaOperativoDiv" style="display: none;">
-                        <label for="nuevo_sistema_operativo" class="form-label">Nuevo Sistema Operativo</label>
-                        <input type="text" class="form-control" id="nuevo_sistema_operativo"
-                            name="nuevo_sistema_operativo" placeholder="Ingresa el nuevo sistema operativo">
-                    </div>
-                       <div class="mb-3" id="">
-                <label for="nota" class="form-label">Notas</label>
-                <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
+                        <option value="otro">Otro...</option>
+                    </select>
+                </div>
+                <div class="mb-3" id="nuevoSistemaOperativoDiv" style="display: none;">
+                    <label for="nuevo_sistema_operativo" class="form-label">Nuevo Sistema Operativo</label>
+                    <input type="text" class="form-control" id="nuevo_sistema_operativo" name="nuevo_sistema_operativo"
+                        placeholder="Ingresa el nuevo sistema operativo">
+                </div>
+                <div class="mb-3" id="">
+                    <label for="nota" class="form-label">Notas</label>
+                    <textarea class="form-control" name="nota" rows="4"><?= $dispositivoInfo[0]["nota"] ?></textarea>
+                </div>
+                <!-------------------------------Botones-------------------------------------------->
             </div>
-           <!-------------------------------Botones-------------------------------------------->
-                       </div>
-                       
+
             <div class="col-3">
-           
 
-           
-<!------------------------------------Imagen--------------------------------------->
-            <div class="mb-3" id="">
-                <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
-                    required="true">Imagen del dispositivo</label>
-                <input type="file" class="form-control" name="foto">
-            </div>
-            <div class="mb-3" id="">
-            <input type="submit" class="btn btn-secondary custom-btn-color" name="guardar" value="Actualizar Dispositivo">
 
-            <hr>
-            <a class="btn btn-danger customCancelar" href="index.php?seccion=dispositivos">Cancelar</a>
-<!--------------------------------------------------------------------------->
 
-                
-                <hr>
-                <?php
+                <!------------------------------------Imagen--------------------------------------->
+                <div class="mb-3" id="">
+                    <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
+                        required="true">Imagen del dispositivo</label>
+                    <input type="file" class="form-control" name="foto">
+                </div>
+                <div class="mb-3" id="">
+                    <input type="submit" class="btn btn-secondary custom-btn-color" name="guardar"
+                        value="Actualizar Dispositivo">
+
+                    <hr>
+                    <a class="btn btn-danger customCancelar" href="index.php?seccion=dispositivos">Cancelar</a>
+                    <!--------------------------------------------------------------------------->
+
+
+                    <hr>
+                    <?php
                 echo"Datos actuales del dispositivo:";
                 echo"<pre>";
                 print_r($dispositivoInfo);
                 echo "</pre>";
             ?>
+                </div>
             </div>
-            </div>
-<!-----------------------------------------RAM-------------------------------->
-          
-            </div>
-           
-            
-            
-           
+            <!-----------------------------------------RAM-------------------------------->
+
+    </div>
 
 
-        </form> 
 
-        <?php
+
+
+
+    </form>
+
+    <?php
     
 
     
@@ -367,10 +368,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
 
-        <script>
-
-
-function formatoPrecio(input) {
+    <script>
+    function formatoPrecio(input) {
         // Obtener el valor actual del campo de precio
         let valor = input.value;
 
@@ -391,72 +390,72 @@ function formatoPrecio(input) {
         // Mostrar el valor formateado en el campo de precio
         input.value = valor;
     }
-//
-document.getElementById("sistema_operativo").addEventListener("change", function() {
-            var nuevoSistemaOperativoDiv = document.getElementById("nuevoSistemaOperativoDiv");
-            var sistemaOperativoSeleccionado = this.value;
+    //
+    document.getElementById("sistema_operativo").addEventListener("change", function() {
+        var nuevoSistemaOperativoDiv = document.getElementById("nuevoSistemaOperativoDiv");
+        var sistemaOperativoSeleccionado = this.value;
 
-            if (sistemaOperativoSeleccionado === "otro") {
-                nuevoSistemaOperativoDiv.style.display = "block";
-            } else {
-                nuevoSistemaOperativoDiv.style.display = "none";
+        if (sistemaOperativoSeleccionado === "otro") {
+            nuevoSistemaOperativoDiv.style.display = "block";
+        } else {
+            nuevoSistemaOperativoDiv.style.display = "none";
+        }
+    });
+
+
+    document.getElementById('procesador').addEventListener('change', function() {
+        var select = document.getElementById('procesador');
+        var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
+        var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
+
+        if (select.value === 'otro') {
+            nuevoProcesadorDiv.style.display = 'block';
+            procesadorSeleccionadoInput.value = '';
+        } else {
+            nuevoProcesadorDiv.style.display = 'none';
+            procesadorSeleccionadoInput.value = select.value;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var fechaCompraInput = document.getElementById('fechaCompraInput');
+        var fechaCompraHidden = document.getElementById('fechaCompraHidden');
+
+        fechaCompraInput.addEventListener('focus', function() {
+            if (fechaCompraInput.value === '') {
+                fechaCompraInput.placeholder = 'Selecciona una fecha';
             }
         });
 
-
-        document.getElementById('procesador').addEventListener('change', function() {
-            var select = document.getElementById('procesador');
-            var nuevoProcesadorDiv = document.getElementById('nuevoProcesadorDiv');
-            var procesadorSeleccionadoInput = document.getElementById('procesador_seleccionado');
-
-            if (select.value === 'otro') {
-                nuevoProcesadorDiv.style.display = 'block';
-                procesadorSeleccionadoInput.value = '';
-            } else {
-                nuevoProcesadorDiv.style.display = 'none';
-                procesadorSeleccionadoInput.value = select.value;
+        fechaCompraInput.addEventListener('blur', function() {
+            if (fechaCompraInput.value === '') {
+                fechaCompraInput.placeholder = 'Selecciona una fecha';
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var fechaCompraInput = document.getElementById('fechaCompraInput');
-            var fechaCompraHidden = document.getElementById('fechaCompraHidden');
-
-            fechaCompraInput.addEventListener('focus', function() {
-                if (fechaCompraInput.value === '') {
-                    fechaCompraInput.placeholder = 'Selecciona una fecha';
-                }
-            });
-
-            fechaCompraInput.addEventListener('blur', function() {
-                if (fechaCompraInput.value === '') {
-                    fechaCompraInput.placeholder = 'Selecciona una fecha';
-                }
-            });
-
-            fechaCompraInput.addEventListener('click', function() {
-                fechaCompraHidden.style.display = 'block';
-                fechaCompraInput.style.display = 'none';
-            });
-
-            fechaCompraHidden.addEventListener('change', function() {
-                var fechaSeleccionada = new Date(fechaCompraHidden.value);
-                var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
-                fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
-                    fechaSeleccionada.getFullYear();
-                fechaCompraHidden.style.display = 'none';
-                fechaCompraInput.style.display = 'block';
-            });
-
-            function obtenerNombreMes(numeroMes) {
-                var meses = [
-                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-                ];
-                return meses[numeroMes];
-            }
+        fechaCompraInput.addEventListener('click', function() {
+            fechaCompraHidden.style.display = 'block';
+            fechaCompraInput.style.display = 'none';
         });
-        </script>
+
+        fechaCompraHidden.addEventListener('change', function() {
+            var fechaSeleccionada = new Date(fechaCompraHidden.value);
+            var nombreMes = obtenerNombreMes(fechaSeleccionada.getMonth());
+            fechaCompraInput.value = fechaSeleccionada.getDate() + '-' + nombreMes + '-' +
+                fechaSeleccionada.getFullYear();
+            fechaCompraHidden.style.display = 'none';
+            fechaCompraInput.style.display = 'block';
+        });
+
+        function obtenerNombreMes(numeroMes) {
+            var meses = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            return meses[numeroMes];
+        }
+    });
+    </script>
     </div>
 </body>
 
