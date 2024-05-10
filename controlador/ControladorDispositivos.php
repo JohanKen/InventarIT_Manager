@@ -122,17 +122,14 @@
                     } else {
                         $sistemaOperativo = $sistemaOperativoSeleccionado;
                     }
-                
                     // Obtener el valor del procesador seleccionado
                     $procesadorSeleccionado = $_POST['procesador'];
-        
                     // Si el procesador seleccionado es "otro", usar el nuevo procesador
                     if ($procesadorSeleccionado === "otro") {
                         $procesador = isset($_POST['nuevo_procesador']) ? $_POST['nuevo_procesador'] : "";
                     } else {
                         $procesador = $procesadorSeleccionado;
                     }
-
                             $datos = array(
                                 "id_dispositivo" => (int)$_POST["id_dispositivo"],
                                 "modelo" => $_POST["modelo"],
@@ -503,7 +500,7 @@ function registrarImac(){
         return array($dispositivo[0][0], $dispositivo[0][1]); // Ajusta esto según la estructura de tu tabla.
     }
 
-        
+    
 
     }
 

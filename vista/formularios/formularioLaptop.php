@@ -171,19 +171,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-3" id="">
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-select" name="estado" required>
-    <?php
-    foreach ($estados as $estadoId => $estadoLabel) {
-        // Obtener el estado actual del dispositivo
-        $estadoActual = $dispositivoInfo[0]['estado'];
+                        <?php
+                        foreach ($estados as $estadoId => $estadoLabel) {
+                            // Obtener el estado actual del dispositivo
+                            $estadoActual = $dispositivoInfo[0]['estado'];
 
-        // Comparar el estado actual con el estado del bucle
-        $selected = ($estadoActual == $estadoLabel) ? 'selected' : '';
+                            // Comparar el estado actual con el estado del bucle
+                            $selected = ($estadoActual == $estadoLabel) ? 'selected' : '';
 
-        // Imprimir la opción del select con el estado correspondiente
-        echo "<option value='$estadoId' $selected>$estadoLabel</option>";
-    }
-    ?>
-</select>
+                            // Imprimir la opción del select con el estado correspondiente
+                            echo "<option value='$estadoId' $selected>$estadoLabel</option>";
+                        }
+                        ?>
+                    </select>
 
                 </div>
                 <!------------------------------Precio-------------------------------------------->
@@ -319,8 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <!------------------------------------Imagen--------------------------------------->
                 <div class="mb-3" id="">
-                    <label for="foto" class="form-label" style="color:black; font-family:lato; text-align:center;"
-                        required="true">Imagen del dispositivo</label>
+                    <label for="foto" class="form-label" required="true">Imagen del dispositivo</label>
                     <input type="file" class="form-control" name="foto">
                 </div>
                 <div class="mb-3" id="">
@@ -332,16 +331,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <!--------------------------------------------------------------------------->
 
 
-                    <hr>
-                    <?php
-                echo"Datos actuales del dispositivo:";
-                echo"<pre>";
-                print_r($dispositivoInfo);
-                echo "</pre>";
-            ?>
+                    
+                    
                 </div>
             </div>
-            <!-----------------------------------------RAM-------------------------------->
+
 
     </div>
 
