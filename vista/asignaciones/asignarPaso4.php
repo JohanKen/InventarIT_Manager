@@ -1,6 +1,8 @@
 <?php 
 require_once 'controlador/ControladorColaboradores.php';
 require_once 'controlador/ControladorAsignaciones.php';
+include 'cartaResponsiva.php';
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -13,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
     $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
     $correos = json_decode($_POST['correos_json'], true);
 
-    //se crea la signacion en la base de datos
+    //se crea la asignacion en la base de datos
     $colaborador = $datoscolaborador[0]["id_colaborador"];
     $registar = new ControladorAsignaciones;
     foreach ($dispositivosSeleccionados as $item){
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
         $registar -> registrarAsignacion($dispositivo,$colaborador);
     }
 
-    include 'cartaResponsiva.php';
+    //include 'cartaResponsiva.php';
     $generarPDF = new PDF;
     $generarPDF->generarPDF($dispositivosSeleccionados,$nombreApellidoColaborador,$correos);
     
@@ -31,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
         </script>';
     exit;
     
-    }
-    
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,9 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="agregarCampo()">Agregar</button>
+            <button type="button" class="btn btn-primary" onclick="agregarCampo()" >Agregar</button>
             
-            <button type="submit" class="btn btn-primary" name="aceptar" onclick="guardarCorreos()">Confirmar Asignacion</button>
+            <button type="submit" class="btn btn-primary" name="aceptar" onclick="this.disabled = true; guardarCorreos()">Confirmar Asignacion</button>
             
             <input type="hidden" name="correos_json" id="correos_json">
         </form>
@@ -78,14 +79,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
             }
 
             function guardarCorreos() {
+
                 var correos = [];
                 var camposCorreo = document.querySelectorAll('input[name="correo[]"]');
                 camposCorreo.forEach(function(input) {
                     correos.push(input.value);
                 });
                 document.getElementById('correos_json').value = JSON.stringify(correos);
+
+                console.log(correos);
             }
+
         </script>
+        
 
     </div>
 

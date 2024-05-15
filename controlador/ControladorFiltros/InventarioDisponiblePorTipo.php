@@ -37,7 +37,7 @@
                         }
                     }
                     ?>
-                    <th>Precio<th>
+                    <th>Precio</th>
                     <th></th>
                 </tr>
             </thead>

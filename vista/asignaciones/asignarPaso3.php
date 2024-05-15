@@ -63,11 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div >
                     <label for="id_colaborador" class="form-label">ID Colaborador</label>
                     <input type="text" class="form-control" name="id_colaborador" value="<?= $datoscolaborador[0]["id_colaborador"] ?>" readonly>
-                </div>
-
-                <div >
                     <label for="colaborador">Colaborador</label>
                     <input type="text" class="form-control" name="colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"], ' ', $datoscolaborador[0]["apellido_paterno_colaborador"] ?>">
+                    <label for="cliente" class="form-label">Cliente:</label>
+                    <input type="text" class="form-control" name="cliente" value="<?= $datoscolaborador[0]["empresa"] ?>" readonly>
                 </div>
 
         <?php
@@ -83,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Modelo</th>
                                 <th>Numero de Serie</th>
                                 <th>Marca</th>
-                                <th>Marca</th>
+                                <th>Precio</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo '<td>' . $dispositivo['serie'] . '</td>';
                                 echo '<td>' . $dispositivo['marca'] . '</td>';
                                 echo '<td>' . $dispositivo['precio'] . '</td>';
+                                /* '<td><button type="button" onclick="eliminarFila(this, ' . $dispositivo['id_dispositivo'] . ')">Quitar</button></td>';*/
                                 echo '</tr>';
                             }
                             ?>
@@ -112,6 +112,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
             </form>
+
+        <script>
+            function eliminarFila(botonQuitar, id_dispositivo) {
+                // Eliminar la fila de la tabla de dispositivos seleccionados
+                var filaSeleccionada = botonQuitar.parentNode.parentNode;
+                filaSeleccionada.parentNode.removeChild(filaSeleccionada);
+            }
+        </script>
         
     </div>
 </body>

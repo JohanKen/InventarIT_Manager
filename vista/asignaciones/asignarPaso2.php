@@ -16,11 +16,12 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
     <title>Paso 2 de la asignación</title>
 </head>
 <body>
-    <br><br><br><br><br><br><br> <!-- Eliminar esto en el futuro -->
+    <br><br><br><br><br><br><br> <!-- Eliminar esto en el futuro --><!--salto de linea -->
     <div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
                 <h1>Paso 2 - Elegir Dispositivo</h1>
+                <br><!--salto de linea -->
             </header>
         </div>
 
@@ -29,7 +30,12 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 <div>
                     <label for="nombre_colaborador" class="form-label">Colaborador Seleccionado:</label>
                     <input type="text" class="form-control" name="nombre_colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"] ?>" readonly>
+                    <label for="cliente" class="form-label">Cliente:</label>
+                    <input type="text" class="form-control" name="cliente" value="<?= $datoscolaborador[0]["empresa"] ?>" readonly>
                 </div>
+
+                <br><!--salto de linea -->
+
             <?php else : ?>
                 <p>El array $datoscolaborador no está definido o no tiene la estructura esperada.</p>
             <?php endif; ?>
@@ -57,6 +63,8 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 </table>
             </div>
 
+            <br><!--salto de linea -->
+
             <div>
                 <table id="dispositivos_seleccionados">
                     <thead>
@@ -72,6 +80,8 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                     <tbody></tbody>
                 </table>
             </div>
+
+            <br>
 
             <!-- Input oculto para almacenar datos de dispositivos seleccionados -->
             <input type="hidden" name="id_colaborador" value="<?= $datoscolaborador[0]["id_colaborador"] ?>">
@@ -103,7 +113,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                         if (xhr.status === 200) {
                             //.log("Contenido de la respuesta:", xhr.responseText);
                             document.getElementById("dispositivos2").innerHTML = xhr.responseText;
-                            console.log("Lista de dispositivos omitidos:", dispositivosOmitidos);
+                            //console.log("Lista de dispositivos omitidos:", dispositivosOmitidos);
                         } else {
                             console.error("Error en la respuesta del servidor");
                         }
@@ -197,19 +207,6 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 // Eliminar la fila de la tabla de dispositivos seleccionados
                 var filaSeleccionada = botonQuitar.parentNode.parentNode;
                 filaSeleccionada.parentNode.removeChild(filaSeleccionada);
-
-                // Restaurar la fila correspondiente en la tabla de dispositivos disponibles
-                var tablaDisponibles = document.getElementById('dispositivos2').getElementsByTagName('tbody')[0];
-                var filasDisponibles = tablaDisponibles.getElementsByTagName('tr');
-
-                for (var i = 0; i < filasDisponibles.length; i++) {
-                    var id = filasDisponibles[i].getElementsByTagName('td')[0].innerText;
-                    if (id === id_dispositivo) {
-                        // La fila a restaurar se encontró, así que la agregamos nuevamente
-                        tablaDisponibles.appendChild(filasDisponibles[i]);
-                        break;
-                    }
-                }
 
                 // Eliminar el ID del dispositivo de la lista de omitidos
                 var index = dispositivosOmitidos.indexOf(id_dispositivo);

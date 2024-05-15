@@ -1,6 +1,6 @@
 <?php class Conexion {
     // Propiedades estáticas
-    public static $servername = "192.168.100.33";
+    public static $servername = "192.168.100.64";
     public static $username = "Johan";
     public static $password = "RTStrc2023";
     public static $database = "inventarit_manager";
