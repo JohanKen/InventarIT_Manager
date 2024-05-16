@@ -33,21 +33,30 @@
        
        //funcion para consultar los detalles de dispositivos de manera general sin especificar
         //que sea de algun tipo en especifico
-        static function detalleDispositivo(){
+        static function detalleDispositivo($tipo){
             if(isset($_GET["id_dispositivo"])){
-                $tabla = "v_inv_dispositivos";
                 $id = $_GET["id_dispositivo"];
-
-                $obj = ModeloDispositivos::selectDispositivosId($tabla, $id);
-                $dispositivo = $obj->fetch_all();
+                
+                $obj = ModeloDispositivos::selectDispositivo($id,$tipo);
+                
+                // Verificar si $obj es un objeto mysqli_result
+                if ($obj instanceof mysqli_result) {
+                    // Si es un objeto mysqli_result, aplicar fetch_all()
+                    $dispositivo = $obj->fetch_all(MYSQLI_ASSOC);
+                } else {
+                    // Si no es un objeto mysqli_result, asumir que ya es un array
+                    $dispositivo = $obj;
+                }
+                
                 return $dispositivo;
+                
             }
         }
 
         static function detalleDispositivoPLI(){
             if(isset($_GET["id_dispositivo"])){
                 $id = $_GET["id_dispositivo"];
-                
+            
                 $obj = ModeloDispositivos::selectDispositivosPLI($id);
                 
                 // Verificar si $obj es un objeto mysqli_result
@@ -78,8 +87,66 @@
 
         
 
+         function editarDispositivo(){
+            if (isset($_POST["guardar"])) {
+    
+    
+                // Almacenamos la información al modelo para que la guarde en la base de datos
+            
+                    try {
+                        // Ajustar max_allowed_packet para esta conexión
+                        $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                        Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+    
+                        // Validar el formato de la fecha
+                        $fechaCompra = $_POST["fecha_compra"];
+                        if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                            $fechaCompraFormateada = $fechaCompra;
+                        } else { 
+                            // Manejar el caso en que la fecha no tiene el formato correcto
+                            echo "
+                            <script> 
+                                swal({
+                                    title: 'Fecha incorrecta';
+                                    text: 'Ingrese el formato de fecha correcto';
+                                    type: 'warning';
+                                }).then(function(result)){
+                                    if (true){
+                                        window.location.href= 'index.php?seccion=nuevousuario';
+                                    }
+                                })
+                            </script>
+                            ";
+                            exit;
+                        }
+                        
+                        // Obtén el valor directo del campo de precio 
+                        
+                        $precio = isset($_POST['precio']) ? $this->formatoPrecioParaControlador($_POST['precio']) : 0;
 
-         function editarDispositivos()
+                        $datos = array(
+                            "id_dispositivo" => (int)$_POST["id_dispositivo"],
+                            "modelo" => $_POST["modelo"],
+                            "numero_serie" => $_POST["numero_serie"],
+                            "id_marca" => (int)$_POST["marca"],
+                            "precio" => $precio,
+                            "estado" => (int)$_POST["estado"],
+                            "fecha_compra" => $fechaCompraFormateada,
+                            "nota" => $_POST["nota"],
+                            "foto" => "foto",
+                        );
+                        
+                        $insert = ModeloDispositivos::updateDispositivo($datos);
+    
+                        
+                    } catch (mysqli_sql_exception $e) {
+                        // Manejar excepciones de MySQL
+                        echo 'Message: ' .$e->getMessage();
+                    }
+                }
+    
+            }
+         function editarLaptop()
                 {
                 if (isset($_POST["guardar"])) {
                     // Almacenamos la información al modelo para que la guarde en la base de datos
@@ -102,7 +169,7 @@
                                         type: 'warning';
                                     }).then(function(result)){
                                         if (true){
-                                            window.location.href= 'index.php?seccion=nuevousuario';
+                                            window.location.href= 'index.php?seccion=dispositivos';
                                         }
                                     })
                                 </script>
@@ -144,12 +211,7 @@
                                 "nota" => $_POST["nota"],
                                 "foto" => "",
                             );
-                            
-                        
-                        
-                    
-
-                            $insert = ModeloDispositivos::updateLaptop($datos);
+                         $insert = ModeloDispositivos::updateLaptop($datos);
 
                         } catch (mysqli_sql_exception $e) {
                             // Manejar excepciones de MySQL
@@ -158,13 +220,63 @@
                     } else {
                         echo 'Por favor, introduce una imagen';
                     }
-
-               
-                
                 }
 
 
+                static function editarIMac() {
+                    if (isset($_POST["guardar"])) {
+                        // Almacenamos la información al modelo para que la guarde en la base de datos
+                        try {
+                            // Ajustar max_allowed_packet para esta conexión
+                            $sqlSetMaxAllowedPacket = "SET GLOBAL max_allowed_packet=64*1024*1024";
+                            Conexion::conectar()->query($sqlSetMaxAllowedPacket);
+                
+                            // Validar el formato de la fecha
+                            $fechaCompra = $_POST["fecha_compra"];
+                            if (DateTime::createFromFormat('Y-m-d', $fechaCompra) !== false) {
+                                $fechaCompraFormateada = $fechaCompra;
+                            } else {
+                                // Manejar el caso en que la fecha no tiene el formato correcto
+                                echo 'Error en el formato de la fecha';
+                                exit;
+                            }
 
+                            $marca= $_POST["marca"];
+                
+                            // Obtén el valor directo del campo de precio 
+                            $datos = array(
+                                "id_dispositivo" => (int)$_POST["id_dispositivo"],
+                                "modelo" => $_POST["modelo"],
+                                "numero_serie" => $_POST["numero_serie"],
+                                "ram" => (int)$_POST["ram"],
+                                "procesador" => $_POST["procesador"],
+                                "sistema_operativo" => $_POST["sistema_operativo"],
+                                "id_marca" => $marca,
+                                "precio" => isset($_POST['precio']) ? floatval(str_replace(',', '', $_POST['precio'])) : 0,  // Se usa el precio procesado como double
+                                "estado" => (int)$_POST["estado"],
+                                "fecha_compra" => $fechaCompraFormateada,
+                                "nota" => $_POST["nota"],
+                                "foto" => "foto",
+                                "Keyboard_model" => $_POST["Keyboard_model"],
+                                "keyboard_ns" => $_POST["keyboard_ns"],
+                                "mouse_model" => $_POST["mouse_model"],
+                                "mouse_ns" => $_POST["mouse_ns"],
+                            );
+                
+                            $insert = ModeloDispositivos::updateIMac($datos);
+                
+                        } catch (mysqli_sql_exception $e) {
+                            // Manejar excepciones de MySQL
+                            echo 'Error en la conexión a la base de datos.';
+                        }
+                    } else {
+                        echo 'No se recibió ninguna solicitud para guardar el iMac.';
+                    }
+                
+                
+                }
+                
+        
                 
         static function getMarcas(){
             $tabla = "marcas";

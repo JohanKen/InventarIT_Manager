@@ -12,7 +12,7 @@ $marcas = array(
     1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10,
     11 => 11, 12 => 12, 13 => 13, 14 => 14, 15 => 15, 16 => 16, 17 => 17, 18 => 18, 19 => 19, 20 => 20,
     21 => 21, 22 => 22, 23 => 23, 24 => 24, 25 => 25, 26 => 26, 27 => 27, 28 => 28, 29 => 29, 30 => 30,
-    31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 => 35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
+    31 => 31, 32 => 32, 33 => 33, 34 => 34, 35 =>  35, 36 => 36, 37 => 37, 38 => 38, 39 => 39,
 );
 
 //Array asociativo que mapea los estados y les asigna un numero para que salgan como un entero
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
         
-        $update->editarDispositivos();
+        $update->editarLaptop();
             echo "
             <script>
             const Toast = Swal.mixin({
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
             Toast.fire({
                 icon: 'success',
-                title: 'Dispositivo editado correctamente'
+                title: 'Laptop actualizada correctamente'
             });
             setTimeout(function(){
                 window.location.href='index.php?seccion=dispositivos';
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-6 headd">
                 <h1
                     style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">
-                    EDITAR LAPTOP</h1>
+                    ACTUALIZAR LAPTOP</h1>
             </div>
             <div class="col-md-6 heaad">
                 <img src="images/dis/laptop.png" alt="imagenLaptop" class="img-fluid">
@@ -120,14 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container mt-52">
         <?php
-        
-        if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
-            
+            if (isset($dispositivoInfo) && is_array($dispositivoInfo) && isset($dispositivoInfo[0])) {
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-
             <div class="col-3">
-
                 <!-------------------------------Id-------------------------------------------->
                 <div class="mb-3" id="">
                     <label for="id_dispositivo" class="form-label">ID</label>
@@ -137,8 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-------------------------------Modelo-------------------------------------------->
                 <div class="mb-3" id="">
                     <label for="modelo" class="form-label">Modelo</label>
-                    <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>"
-                        required>
+                    <input type="text" class="form-control" name="modelo" value="<?= $dispositivoInfo[0]["modelo"] ?>" required>
                 </div>
                 <!-----------------------------------Numero de serie---------------------------------------->
                 <div class="mb-3" id="">

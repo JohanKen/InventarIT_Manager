@@ -49,10 +49,8 @@
 <!--------------------------------------------------->    
 <!---------BARRA DE BUSQUEDA DEBE MOSTRAR RESULTADOS POR SWEET ALERT Y DESPUES PODERSE CERRAR--->
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
-                <form action="phpSearch.php" method="post">
-                Search <input type="text" name="search"><br>
-                <input type ="submit">
-                </form>   
+            <input type ="text" class="form-control" name="buscar" id="buscar">
+            <button type="submit" class="btn btn-primary" onclick="buscarDispositivo()">Buscar</button> 
   
  
     
@@ -271,7 +269,28 @@ function confirmarBorrar(id_dispositivo) {
     });
 }
 
+function buscarDispositivo() {
+            console.log("La función cargarDispositivos se está ejecutando");
+            var buscarDispositivo = document.getElementById("buscar").value;
+            var xhr = new XMLHttpRequest();
 
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        document.getElementById("inventario_dispositivos").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/ControladorFiltros/buscadorDispositivos.php?buscar="+ buscarDispositivo;
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
+        }
     
 
         // Agrega un evento de clic a la imagen

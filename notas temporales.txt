@@ -8,4 +8,13 @@ AGREGAR DISPOSITIVOS:
 Formato de fecha incorrecto en agregar cualquier dispositivo debe guardar los datos que ya se ingresaron
 y no recargar la pagina con todos los campos en blanco de nuevo
 
+BARRA DE BUSQUEDA DISPOSITIVOS:
+Agregar barra de busqueda (falta buscar fecha en la misma pero agregarla como primera version)
 
+FORMATO DE FECHA EDITAR DISPOSITIVOS:
+Formateo de fechas en todos los formularios para cuando no se inserta de manera correcta, recargar en la misma pagina donde se tiene el
+error del formato de la fecha
+
+NUMEROS DE SERIE:
+Numeros de serie que se repiten esta correctamente para que no se agreguen asi, sin embargo el mensaje en todos lados para agregar
+se muestra de manera incorrecta

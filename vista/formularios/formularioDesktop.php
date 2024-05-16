@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
         Toast.fire({
             icon: 'success',
-            title: 'Dispositivo editado correctamente'
+            title: 'Desktop actualizado correctamente'
         });
         setTimeout(function(){
             window.location.href='index.php?seccion=dispositivos';
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container-fluid">
                 <div class="row fle">
                     <div class="col-md-6 headd">
-                    <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">EDITAR PC</h1>
+                    <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363; ">ACTUALIZAR PC</h1>
                     </div>
                     <div class="col-md-6 heaad">
                         <img src="images/dis/desktop.png" alt="imagenLaptop" style="max-width:200px;" class="img-fluid">
@@ -187,7 +187,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $procesadorActual = $dispositivoInfo[0]["procesador"];
                                 echo "<option value='$procesadorActual' selected>$procesadorActual</option>";
 
-                                   $procesadoresBaseDatos = array("Intel Core i5-8600K (8va generación)",
+                                   $procesadoresBaseDatos = array(
+                                    "Apple M1 Pro ",
+                                   "Apple M1 Max ",
+                                   "Apple M2",
+                                    "Intel Core i5-8600K (8va generación)",
                                    "Intel Core i7-8700K (8va generación)",
                                   "Intel Core i5-9600K (9na generación)",
                                    "Intel Core i7-9700K (9na generación)",
@@ -205,10 +209,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                    "AMD Ryzen 9 5900X (5ta generación)",
                                    "AMD Ryzen 5 6600X (6ta generación)",
                                    "AMD Ryzen 7 6700X (6ta generación)",
-                                   "Apple M1 ",
-                                   "Apple M1 Pro ",
-                                   "Apple M1 Max ",
-                                   "Apple M2");
+                                   "Apple M1 "
+                                   );
            
                                    foreach ($procesadoresBaseDatos as $procesador) {
                                     if($procesador !== $procesadorActual)

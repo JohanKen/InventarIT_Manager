@@ -150,7 +150,34 @@ class ModeloDispositivos extends Conexion {
     }
 
 
-
+    static function selectDispositivo($id,$tipo) {
+        try {
+            $conexion = Conexion::conectar();
+            
+            // Usar un prepared statement con un marcador de posición ?
+            $stmt = $conexion->prepare("CALL inventarit_manager.datos_dispo(?,?)");
+            $stmt->bind_param('ii', $id,$tipo); // 'i' indica que el parámetro es de tipo entero
+            $stmt->execute();
+    
+            // Obtener el resultado
+            $result = $stmt->get_result();
+    
+            // Verificar si get_result() está disponible
+            if ($result !== false) {
+                // Devolver el resultado en formato asociativo
+                return $result->fetch_all(MYSQLI_ASSOC);
+            } else {
+                // Manejar el caso donde get_result() no está disponible
+                echo "Error: No se pudo obtener el resultado de la consulta.";
+                return null;
+            }
+        } catch (mysqli_sql_exception $e) {
+            // Manejar la excepción de alguna manera apropiada (puedes imprimir el mensaje o lanzar la excepción)
+            echo "Error al ejecutar la consulta:" . $e->getMessage();
+            // O lanzar la excepción para que sea manejada en un nivel superior
+            // throw new Exception("Error al ejecutar la consulta: " . $e->getMessage());
+        }
+    }
 
     //seleccionar dispositivos si son laptop, pc o imac
     static function selectDispositivosPLI($id) {
@@ -287,6 +314,111 @@ static function updateLaptop($datos) {
     }
 }
 
+static function updateIMac($datos) {
+    $conexion = Conexion::conectar();// Accede a la variable de conexión global
+    try {
+        // Crear variables para almacenar los valores
+        $id_dispositivo = (int) $datos["id_dispositivo"];
+        $id_marca = (int) $datos["id_marca"];
+        $ram = (int) $datos["ram"];
+        $estado = (int) $datos["estado"];
+        $precio = (double) $datos["precio"];
+
+        //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
+        $statement = $conexion->prepare("CALL editar_imac(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->bind_param("issiisssississss",
+            $id_dispositivo,
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+            $ram,
+            $datos["procesador"],
+            $datos["sistema_operativo"],
+            $estado,
+            $datos["Keyboard_model"],
+            $datos["keyboard_ns"],
+            $datos["mouse_model"],
+            $datos["mouse_ns"]
+        );
+
+        // Muestra el array antes de ejecutar la sentencia preparada
+      
+
+        $statement->execute();
+        $statement->close();
+       
+        
+        
+        //echo "ARRAY EN EL MODELO(datos)...($datos)";
+        //var_dump($datos);
+
+        // Mensaje de éxito
+        
+
+    } catch (Exception $e) {
+        // Manejar errores generales
+        echo 'Message: ' .$e->getMessage();
+    }
+}
+
+
+static function updateDispositivo($datos) {
+    $conexion = Conexion::conectar();// Accede a la variable de conexión global
+    try {
+        // Crear variables para almacenar los valores
+        $id_dispositivo = (int) $datos["id_dispositivo"];
+        $id_marca = (int) $datos["id_marca"];
+        $estado = (int) $datos["estado"];
+        $precio = (double) $datos["precio"];
+
+        //nuevo statement para verificar que el problema no sea como es que se esta pidiendo el procedmienietno almacenado desde el codigo.
+        $statement = $conexion->prepare("CALL editar_dispositivo(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->bind_param("issiisssi",
+            $id_dispositivo,
+            $datos["modelo"],
+            $datos["numero_serie"],
+            $id_marca,
+            $precio,
+            $datos["fecha_compra"],
+            $datos["nota"],
+            $datos["foto"],
+            $estado
+        );
+
+        // Muestra el array antes de ejecutar la sentencia preparada
+        $statement->execute();
+        $statement->close();
+
+        //echo "ARRAY EN EL MODELO(datos)...($datos)";
+        //var_dump($datos);
+
+        // Mensaje de éxito
+        
+    } catch (Exception $e) {
+        // Manejar errores generales
+        echo 'Message: ' .$e->getMessage();
+    }
+}
+
+static function buscarDispositivo($buscar){
+    try{
+        $conexion = Conexion::conectar();
+
+        $stmt = $conexion->prepare("CALL inventarit_manager.buscador_dispositivos(?)");
+        $stmt -> bind_param('s',$buscar);
+        $stmt -> execute();
+
+        $result = $stmt->get_result();
+        return $result ->fetch_all(MYSQLI_ASSOC);
+
+    }catch (mysqli_sql_exception $e){
+        echo "Error al ehecutar la consulta: ".$e->getMessage();
+    }
+}
    
 }
 ?>
