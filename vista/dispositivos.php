@@ -53,7 +53,7 @@
 
                 <div class="input-group input-group-sm mt-3" style="max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
                     <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
-                    <a href="index.php?seccion=nuevoDispositivo"><button id="btnAgregarNuevo" class="btn btn-primary">AGREGAR NUEVO DISPOSITIVO</button></a>
+                    <a href="index.php?seccion=nuevoDispositivo"><button  class="btn-11">AGREGAR NUEVO DISPOSITIVO</button></a>
                     
                     <a href="javascript:window.location.reload(true)" ><img src="images/reload.png" id="imgReload" alt="" style="width:30px ;margin-left:5%; margin-top: 5%;"></a>
                     </div>        
