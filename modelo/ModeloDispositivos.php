@@ -404,19 +404,18 @@ static function updateDispositivo($datos) {
     }
 }
 
-static function buscarDispositivo($buscar){
-    try{
+static function buscarDispositivo($buscar) {
+    try {
         $conexion = Conexion::conectar();
 
         $stmt = $conexion->prepare("CALL inventarit_manager.buscador_dispositivos(?)");
-        $stmt -> bind_param('s',$buscar);
-        $stmt -> execute();
+        $stmt->bind_param('s', $buscar);
+        $stmt->execute();
 
         $result = $stmt->get_result();
-        return $result ->fetch_all(MYSQLI_ASSOC);
-
-    }catch (mysqli_sql_exception $e){
-        echo "Error al ehecutar la consulta: ".$e->getMessage();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    } catch (mysqli_sql_exception $e) {
+        echo "Error al ejecutar la consulta: " . $e->getMessage();
     }
 }
    

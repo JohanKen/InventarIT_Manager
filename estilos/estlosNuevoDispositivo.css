@@ -87,6 +87,7 @@ font-size: 16px; /* Tamaño de fuente base */
 opacity: 0; /* Inicialmente oculto */
 visibility: hidden; /* Inicialmente oculto */
 transition: all 0.3s ease; /* Animación de transición */
+justify-content: center;
 }
 
 
