@@ -39,12 +39,11 @@
             </header>
             <div class="col-md-12 text-center d-flex">
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
-                <input type="text" class="form-control" name="buscar" id="buscar">
-                <div class="input-group-append" style="border-radius: none !important;">
-                    <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none;">&times;</span>
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="buscarDispositivo()">Buscar</button>
-                </div>
+  <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
+  <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
+  <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
+</div>
+
 
 
 
@@ -53,9 +52,9 @@
 
                 <div class="input-group input-group-sm mt-3" style="max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
                     <img src="./images/lap.png" id="IMGlaptop" alt="IMAGEN">
-                    <a href="index.php?seccion=nuevoDispositivo"><button  class="btn-11">AGREGAR NUEVO DISPOSITIVO</button></a>
+                    <a href="index.php?seccion=nuevoDispositivo"><button class="custom-btn btn-3">AGREGAR NUEVO DISPOSITIVO</button></a>
                     
-                    <a href="javascript:window.location.reload(true)" ><img src="images/reload.png" id="imgReload" alt="" style="width:30px ;margin-left:5%; margin-top: 5%;"></a>
+                    <a href="javascript:window.location.reload(true)" ><img src="images/reload.png" id="imgReload" alt="" style="width:25px; margin:2%;"></a>
                     </div>        
             </div>
         </div>
