@@ -17,8 +17,8 @@ body {
     z-index: 100;
 }
 #logoInventarit {
-    width: 120px;
-    margin-right: 40px;
+    width: 160px;
+    
 }
 .menu {
     background-color: #333;
@@ -37,6 +37,8 @@ body {
 #btnCerrarSesion{
     color: #ff0000c4 ;
     z-index: 10 !important;
+    width: max-content !important;
+
 }
 
 .menu a {
@@ -64,7 +66,33 @@ body {
     margin: 8px 0; 
 }
 
+.nav-link{
+    width: max-content !important;
 
+}
+#usuarioLink {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none; /* Remueve el subrayado por defecto */
+    display: flex; /* Para alinear el texto y la imagen */
+    align-items: center; /* Centra verticalmente la imagen y el texto */
+}
+
+#usuarioLink img {
+    max-width: 25px;
+    margin-right: 5px;
+}
+
+#usuarioLink:hover {
+    background-color: #333; /* Cambia el fondo al pasar el cursor */
+    color: #f0f0f0; /* Cambia el color del texto al pasar el cursor */
+    text-decoration: underline; /* Agrega un subrayado al pasar el cursor */
+    border-radius: 5px; /* Redondea las esquinas del fondo */
+}
+
+#usuarioLink:hover img {
+    filter: brightness(0.8); /* Oscurece la imagen al pasar el cursor */
+}
 
 
 
@@ -89,6 +117,11 @@ body {
     z-index: 10 !important;
 }
 
+.dropdown-menu{
+    background-color: #212529 !important;
+    border-radius: 0 !important;
+}
+
 #btnUserDropDown{
     color: #333 !important;
     z-index: 10 !important;
@@ -101,3 +134,145 @@ body {
 .messages:hover #userDropdown {
     display: block;
 }
+
+.dropdown-item{
+    color:#ffffff !important;
+}
+
+.dropdown-item:hover{
+    color:#000000 !important;
+    border-top: 4px solid #1882c9 !important;
+    border-bottom: 4px solid #1882c9 !important;
+}
+
+
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Definición de la animación de cierre */
+
+
+  
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+           
+            background-color: #f4f4f4;
+        }
+
+
+        .header {
+            animation: slideInHeader 1s forwards;
+            
+        }
+        
+        .container-menu {
+            animation: slideDownMenu 1s forwards;
+            
+        }
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideDownMenu {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideDownContent {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        
+        .link-1 {
+            transition: 0.3s ease !important;
+            background: #3fa46b00 !important;
+            color: #ffffff !important;
+            font-size: 16px !important;
+            text-decoration: none !important;
+            border-top: 2px solid #212529 !important;
+            border-bottom: 2px solid #212529 !important;
+            padding: 10px 0 !important;
+            margin: 0 20px !important;
+          }
+          .link-1:hover {
+            border-top: 4px solid #ffffff !important;
+            border-bottom: 4px solid #ffffff !important;
+            padding: 6px 0 !important; 
+          }
+
+          .link-2 {
+            width: max-content !important;
+            transition: 0.3s ease !important;
+            background: #3fa46b00 !important;
+            color: #ffffff !important;
+            font-size: 14px !important;
+            text-decoration: none !important;
+            border-top: 2px solid #1882c9 !important;
+            border-bottom: 2px solid #1882c9 !important;
+            padding: 10px 0 !important;
+            margin: 0 5px !important;
+          }
+          .link-2:hover {
+            border-top: 2px solid #ffffff !important;
+            border-bottom: 2px solid #ffffff !important;
+            padding: 10px 0 !important; 
+          }
+
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownMenu {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownContent {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            animation: slideInHeader 1s forwards;
+            
+        }
+        
+        .container-menu {
+            animation: slideDownMenu 1s forwards;
+          
+        }

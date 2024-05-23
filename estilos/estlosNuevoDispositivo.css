@@ -6,6 +6,10 @@
     width: 50%;
 }
 
+.col{
+    align-items: center !important;
+    justify-content: center !important;
+}
 
 .imgMouse{
     width: 150px;
@@ -15,7 +19,7 @@
 }
 .container.bg-dark {
 background-color: black; 
-
+ 
 }
 .container .row {
 margin-top: 20px; 
@@ -78,7 +82,10 @@ max-width: 180px;
 width: 290px; 
 }
 .container .anclaDiss {
-position: relative; 
+position: relative !important; 
+width: 100% !important;
+padding: 50px !important;
+height: 100% !important;
 }
 .container .label {
 color: white; /* Color del texto */

@@ -15,3 +15,100 @@
     }
 
 
+
+
+    @keyframes slideIn {
+      from {
+          transform: translateY(-100%);
+      }
+      to {
+          transform: translateY(0);
+      }
+  }
+  
+  /* Definición de la animación de cierre */
+  
+  
+    
+  body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+             
+              background-color: #f4f4f4;
+          }
+  
+  
+          .header {
+              animation: slideInHeader 1s forwards;
+              
+          }
+          
+          .container-menu {
+              animation: slideDownMenu 1s forwards;
+              
+          }
+          @keyframes slideInHeader {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+          
+          @keyframes slideDownMenu {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+          
+          @keyframes slideDownContent {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+          
+        
+  
+          @keyframes slideInHeader {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+  
+          @keyframes slideDownMenu {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+  
+          @keyframes slideDownContent {
+              from {
+                  transform: translateY(-100%);
+              }
+              to {
+                  transform: translateY(0);
+              }
+          }
+  
+          .header {
+              animation: slideInHeader 1s forwards;
+              
+          }
+          
+          .container-menu {
+              animation: slideDownMenu 1s forwards;
+            
+          }

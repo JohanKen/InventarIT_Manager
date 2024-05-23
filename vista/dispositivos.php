@@ -17,7 +17,7 @@
         .acciones {
             display: flex;
         }
-        [
+        
         .acciones img {
             max-width: 40px;
             cursor: pointer;
@@ -34,15 +34,15 @@
     <div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
-                <h1 style="font-size: 28px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363;">Dispositivos</h1>
+                <h1 style="font-size: 28px; margin-top:20px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363;">Dispositivos</h1>
                 <form class="form-inline" id="searchBar"></form>
             </header>
             <div class="col-md-12 text-center d-flex">
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
-  <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
-  <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
-  <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
-</div>
+                <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
+                <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
+                <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
+            </div>
 
 
 
@@ -87,16 +87,13 @@
                                 <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
                                 <script>
                                 Swal.fire({
-                                    position: 'top-end',
+                                    position: 'center',
                                     icon: 'success',
                                     title: 'Dispositivo eliminado con éxito',
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
-
-                                setTimeout(function() {
-                                    window.location.href='index.php?seccion=dispositivos';
-                                }, 1500); </script>
+ </script>
                                 ";
                             }
 

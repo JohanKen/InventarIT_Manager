@@ -54,7 +54,7 @@
                 <div class="container text-center">
                     <div class="row">
                         
-                        <div class="col">
+                        <div class="col" style="padding-top:5%">
                             <a class="anclaDiss" href="index.php?seccion=formularios/newMouse">
                                 <img class="imgMouse" src="images/dis/logi.png" alt="Mouse">
                                 <span class="label anima-label">Mouse</span>

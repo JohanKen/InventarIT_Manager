@@ -188,6 +188,16 @@ padding: 20px;
 
 
 
+#IMGlaptop {
+    max-width: 100%; /* Establece el ancho máximo al 100% del contenedor */
+    height: auto; /* Hace que la altura se ajuste automáticamente para mantener la proporción de aspecto */
+    width: auto; /* Establece el ancho automático para mantener la proporción de aspecto */
+    max-height: 200px; /* Establece una altura máxima para la imagen */
+}
+
+
+
+
 @keyframes slideIn {
     from {
         transform: translateY(-100%);
@@ -246,16 +256,6 @@ body {
         }
         
       
-
-        #IMGlaptop {
-            max-width: 100%; /* Establece el ancho máximo al 100% del contenedor */
-            height: auto; /* Hace que la altura se ajuste automáticamente para mantener la proporción de aspecto */
-            width: auto; /* Establece el ancho automático para mantener la proporción de aspecto */
-            max-height: 200px; /* Establece una altura máxima para la imagen */
-        }
-        
-        
-       
 
         @keyframes slideInHeader {
             from {
