@@ -35,14 +35,23 @@
             }
         }
         
-        static function borrarColaboradores(){
+         static function borrarColaboradores(){
             if(isset($_GET["accion"])&& $_GET["accion"] == "eliminarColaborador"){
                 $id = $_GET["id_colaborador"];
 
                 $delete = ModeloColaboradores::deleteColaborador($id);
-          
-            }
-        }
+
+                //variable de control para evitar el bucle
+                 
+                 $ejecutado = false;
+        
+                 if ($delete > 0 && !$ejecutado) {
+                     $ejecutado = true; // Marcar como ejecutado para evitar el bucle
+                     return true;
+                 }
+             }
+             return false;
+         }
 
         static function detalleColaborador(){
             if(isset($_GET["id_colaborador"])){

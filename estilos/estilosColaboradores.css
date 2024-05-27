@@ -1,0 +1,330 @@
+
+
+header {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      
+
+}
+#IMGlaptop {
+    opacity: 1;
+
+    max-width: 140px;
+    max-height: 420px;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+#clearContainer {
+    border: none !important;
+    display: flex;
+    align-items: center;
+  }
+  
+  #clearSearch {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: rgba(0, 123, 255, 0.61); /* Azul con opacidad */
+    border: none; /* Aseguramos que no haya borde */
+  }
+  
+  #clearSearch:hover {
+    color: rgba(0, 123, 255, 1); /* Azul sólido al hacer hover */
+  }
+#divBuscar{
+    margin-top: 10% !important;
+margin-left: 3%;
+width: 50%;
+border-width: 0;
+border-radius: none;
+margin: 0;
+
+}
+.input-group  {
+    position: relative;
+    width: 50%;
+  }
+@media only screen and (max-width: 768px) {
+    #IMGlaptop {
+        max-width: 150px;
+        /* Reducir el tamaño de la imagen en tabletas */
+        max-height: 150px;
+    }
+}
+.custom-btn {
+ 
+  color: #fff;
+
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  background: transparent;  
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.btn-3 {
+  background: rgb(0,172,238);
+  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+  padding: 5px;
+  line-height: 32px;
+  padding: 2%;
+  border: none;
+  
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+   background: rgb(253, 254, 255);
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover{
+   background: transparent;
+  box-shadow: none;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:hover{
+   color: rgb(255, 255, 255);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+   background: rgb(223, 239, 255);
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
+.custom-btn1 {
+ 
+    color: #fff;
+  
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    background: transparent;  
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+  .btn-4 {
+    background: rgb(0,172,238);
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+    padding: 5px;
+    line-height: 32px;
+    padding: 2%;
+    border: none;
+    
+  }
+  .btn-4 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .btn-4:before,
+  .btn-4:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+     background: rgb(253, 254, 255);
+    transition: all 0.3s ease;
+  }
+  .btn-4:before {
+    height: 0%;
+    width: 2px;
+  }
+  .btn-4:after {
+    width: 0%;
+    height: 2px;
+  }
+  .btn-4:hover{
+     background: transparent;
+    box-shadow: none;
+  }
+  .btn-4:hover:before {
+    height: 100%;
+  }
+  .btn-4:hover:after {
+    width: 100%;
+  }
+  .btn-4 span:hover{
+     color: rgb(255, 255, 255);
+  }
+  .btn-4 span:before,
+  .btn-4 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+     background: rgb(223, 239, 255);
+    transition: all 0.3s ease;
+  }
+  .btn-4 span:before {
+    width: 2px;
+    height: 0%;
+  }
+  .btn-4 span:after {
+    width: 0%;
+    height: 2px;
+  }
+  .btn-4 span:hover:before {
+    height: 100%;
+  }
+  .btn-4 span:hover:after {
+    width: 100%;
+  }
+  
+
+.buscarForm {
+    color: #000; /* Cambia el color del texto a negro */
+    
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    background: #fff;  /* Fondo blanco */
+    cursor: text;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                7px 7px 20px 0px rgba(0,0,0,.1),
+                4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    border: none;
+  }
+  
+  .buscarForm:focus {
+    color: #000; /* Asegura que el texto sea negro cuando está enfocado */
+    background: #fff;  /* Fondo blanco */
+  }
+  
+  .buscarForm::placeholder {
+    color: #888; /* Placeholder en gris oscuro */
+  }
+  
+  .buscarForm span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .buscarForm:before,
+  .buscarForm:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: rgb(253, 254, 255);
+    transition: all 0.3s ease;
+  }
+  
+  .buscarForm:before {
+    height: 0%;
+    width: 2px;
+  }
+  
+  .buscarForm:after {
+    width: 0%;
+    height: 2px;
+  }
+  
+  .buscarForm:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  .buscarForm:hover:before {
+    height: 100%;
+  }
+  
+  .buscarForm:hover:after {
+    width: 100%;
+  }
+  
+  .buscarForm span:hover {
+    color: rgb(255, 255, 255);
+  }
+  
+  .buscarForm span:before,
+  .buscarForm span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: rgb(223, 239, 255);
+    transition: all 0.3s ease;
+  }
+  
+  .buscarForm span:before {
+    width: 2px;
+    height: 0%;
+  }
+  
+  .buscarForm span:after {
+    width: 0%;
+    height: 2px;
+  }
+  
+  .buscarForm span:hover:before {
+    height: 100%;
+  }
+  
+  .buscarForm span:hover:after {
+    width: 100%;
+  }
+  
+  
