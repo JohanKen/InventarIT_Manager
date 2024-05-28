@@ -229,15 +229,14 @@
     
     <script>
         function buscarDispositivo() {
-            console.log("La función cargarDispositivos se está ejecutando");
             var buscarDispositivo = document.getElementById("buscar").value;
             var xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
-                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    
                     if (xhr.status === 200) {
-                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        
                         document.getElementById("inventario_dispositivos").innerHTML = xhr.responseText;
                     } else {
                         console.error("Error en la respuesta del servidor");

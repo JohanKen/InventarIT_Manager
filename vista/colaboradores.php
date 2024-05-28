@@ -59,6 +59,13 @@
             </select>
         </div>
 
+        <br>
+
+        <div>
+            <input type="text" class="form-control" name="buscar" id="buscar">
+            <button type="submit" class="btn btn-primary" onclick="buscarColaborador()">Buscar</button>
+        </div>
+
         <div class="tabla">
             <table class="tabla" id="colaboradores">
                 <thead class ="thead-dark">
@@ -149,6 +156,31 @@
             };
 
             var url = "controlador/ControladorFiltros/ColaboradoresPorCliente.php?cliente=" + clienteSeleccionado;
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
+        }
+    </script>
+
+    <script>
+        function buscarColaborador() {
+            
+            var buscarColaborador = document.getElementById("buscar").value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    
+                    if (xhr.status === 200) {
+                        
+                        document.getElementById("colaboradores").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/ControladorFiltros/buscadorColaborador.php?buscar="+ buscarColaborador;
             xhr.open("GET", url, true);
             console.log("Solicitud AJAX enviada a: " + url);
             xhr.send();
