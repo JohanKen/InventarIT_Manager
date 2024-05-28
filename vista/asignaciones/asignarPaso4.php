@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
 
             <button type="button" class="btn btn-primary" onclick="agregarCampo()" >Agregar</button>
             
-            <button type="submit" class="btn btn-primary" name="aceptar" onclick="this.disabled = true; guardarCorreos()">Confirmar Asignacion</button>
+            <button type="submit" class="btn btn-primary" name="aceptar" onclick="guardarCorreos()">Confirmar Asignacion</button>
             
             <input type="hidden" name="correos_json" id="correos_json">
         </form>
