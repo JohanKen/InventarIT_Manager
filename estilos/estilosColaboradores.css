@@ -12,6 +12,58 @@ header {
       
 
 }
+
+
+.custom-btn-color {
+  background-color: #005a9e; /* Color blue-800 */
+  border-color: #005a9e; /* Color blue-800 */
+}
+
+.custom-btn-color:hover {
+  background-color: #003363; /* Color dark version of blue-800 */
+  border-color: #003363; /* Color dark version of blue-800 */
+}
+
+.customCancelar{
+  background-color: #69010c;
+  border-color: #69010c;
+}
+
+.customCancelar:hover{
+  background-color: #79000c;
+  border-color: #79000c;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.btn-danger {
+  background-color: #da0d21;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #66ff00;
+  color: #333;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+form{
+  display: flex;
+  padding: 30px;
+  
+}
 #IMGlaptop {
     opacity: 1;
 

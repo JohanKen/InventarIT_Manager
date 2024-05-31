@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dispositivoInfo[0]['precio'] = $precio;
     
         
-        $update->editarDispositivos();
+        $update->editarDispositivo();
         echo "
         <script>
         const Toast = Swal.mixin({

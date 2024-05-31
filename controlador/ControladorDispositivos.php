@@ -19,9 +19,24 @@
                 // Variable de control para evitar el bucle
                 $ejecutado = false;
         
+               
+
                 if ($delete > 0 && !$ejecutado) {
-                    $ejecutado = true; // Marcar como ejecutado para evitar el bucle
-                    return true;
+                    echo "
+                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    <script>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Dispositivo eliminado con exito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    setTimeout(function() {
+                        window.location.href='index.php?seccion=dispositivos';
+                    }, 1500); </script>
+                    ";
                 }
             }
             return false;
@@ -106,13 +121,13 @@
                             // Manejar el caso en que la fecha no tiene el formato correcto
                             echo "
                             <script> 
-                                swal({
-                                    title: 'Fecha incorrecta';
-                                    text: 'Ingrese el formato de fecha correcto';
-                                    type: 'warning';
-                                }).then(function(result)){
-                                    if (true){
-                                        window.location.href= 'index.php?seccion=nuevousuario';
+                                Swal.fire({
+                                    title: 'Fecha incorrecta',
+                                    text: 'Ingrese el formato de fecha correcto',
+                                    type: 'warning'
+                                }).then(function(result){
+                                    if (result.value){
+                                        window.location.href= 'index.php?seccion=dispositivos';
                                     }
                                 })
                             </script>
@@ -163,12 +178,12 @@
                                 // Manejar el caso en que la fecha no tiene el formato correcto
                                 echo "
                                 <script> 
-                                    swal({
-                                        title: 'Fecha incorrecta';
-                                        text: 'Ingrese el formato de fecha correcto';
-                                        type: 'warning';
-                                    }).then(function(result)){
-                                        if (true){
+                                    Swal.fire({
+                                        title: 'Fecha incorrecta',
+                                        text: 'Ingrese el formato de fecha correcto',
+                                        type: 'warning'
+                                    }).then(function(result){
+                                        if (result.value){
                                             window.location.href= 'index.php?seccion=dispositivos';
                                         }
                                     })
@@ -237,7 +252,19 @@
                                 $fechaCompraFormateada = $fechaCompra;
                             } else {
                                 // Manejar el caso en que la fecha no tiene el formato correcto
-                                echo 'Error en el formato de la fecha';
+                                echo "
+                                <script> 
+                                    Swal.fire({
+                                        title: 'Fecha incorrecta',
+                                        text: 'Ingrese el formato de fecha correcto',
+                                        type: 'warning'
+                                    }).then(function(result){
+                                        if (result.value){
+                                            window.location.href= 'index.php?seccion=dispositivos';
+                                        }
+                                    })
+                                </script>
+                                ";
                                 exit;
                             }
 

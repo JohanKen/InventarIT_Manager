@@ -82,20 +82,8 @@
                             $eliminar = new ControladorDispositivos();
                             $eliminado =  $eliminar->borrarDispositivos();
 
-                            if ($eliminado) {
-                                echo "
-                                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                                <script>
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: 'Dispositivo eliminado con éxito',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
- </script>
-                                ";
-                            }
+                            
+                                
 
                             $lista = ControladorDispositivos::consultaDispositivos();
                             foreach ($lista as $row => $item) {
@@ -200,7 +188,6 @@
             console.log("La función buscarDispositivo se está ejecutando");
             var buscarDispositivo = document.getElementById("buscar").value;
             var xhr = new XMLHttpRequest();
-
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     console.log("Respuesta del servidor:", xhr.status, xhr.statusText);

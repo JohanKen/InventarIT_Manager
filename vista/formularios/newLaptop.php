@@ -370,6 +370,7 @@ function validarCampos() {
                 return meses[numeroMes];
             }
         });
+        
         </script>
     </body>
 

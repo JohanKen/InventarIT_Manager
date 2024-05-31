@@ -12,11 +12,23 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
-    .actions{
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+     .imagen-editar {
+            cursor: pointer;
+        }
+
+        .acciones {
+            display: flex;
+        }
+        
+        .acciones img {
+            max-width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .acciones img:hover {
+            transform: scale(1.2);
+        }
 </style>
 </head>
 
@@ -32,7 +44,7 @@
                 <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
                 <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
                 <!--Cmaibar nombre de la funcion por buscarColaborador y que funcione de la misma manera que la barra de buscador de dispositivos -->
-                <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
+                <button type="submit" class="custom-btn1 btn-4" onclick="buscarColaborador()">Buscar</button>
             </div>
             <div class="input-group input-group-sm mt-3" style="max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
                     <img src="images/empleados.png" id="IMGlaptop" alt="IMAGEN">
@@ -43,12 +55,12 @@
 </div>
         <div class="container" style="margin-top: 10px !important;">
         <div class="table-responsive">
-                <table class="table table-striped table-hover" id="inventario_dispositivos">
+                <table class="table table-striped table-hover" id="colaboradores">
                     <thead class="table-dark">
                     <tr>
                         <th>Id Colaborador</th>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
+                        <th>Nombre(s)</th>
+                        <th>Apellido(s)</th>
                         <th>Cliente</th>
                         <th>Departamento</th>
                         <th>Estado</th>
@@ -70,28 +82,37 @@
                             title: 'Colaborador eliminado con éxito',
                             showConfirmButton: false,
                             timer: 1500
+                        }).then(() => {
+                            window.location.href = 'index.php?seccion=colaboradores'; 
                         });
-</script>
+                        </script>
                         ";
+                        exit(); // Finaliza la ejecución del script PHP después de la salida del script JavaScript
                     }
                     $listaColaboradores = ControladorColaboradores::consultarColaboradores();
                     foreach ($listaColaboradores as $item) {
-                        echo '
+                        echo "
                             <tr>
-                                <td>' . $item[0] . '</td>
-                                <td>' . $item[1] . '</td>
-                                <td>' . $item[2] . '</td>
-                                <td>' . $item[3] . '</td>
-                                <td>' . $item[4] . '</td>
-                                <td>' . $item[5] . '</td>
-                                <td>' . $item[6] . '</td>
-                                <td class="actions">
-                                    <a href="index.php?seccion=editarColaborador&id_colaborador=' . $item[0] . '" <button type="button" class="btn btn-primary">Editar</button></a>
-                                    <hr>
-                                    <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item[0] . ');" <button type="button" id="btnBorrar" class="btn btn-danger">Eliminar</button></a>
-                                </td>
+                                <td>$item[0]</td>
+                                <td>$item[1] </td>
+                                <td> $item[2] </td>
+                                <td> $item[3] </td>
+                                <td> $item[4] </td>
+                                <td> $item[5] </td>
+                                <td> $item[6] </td>
+                                <td>
+                                <div class='acciones'>
+                                    <img src='images/editar.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
+                                    <img src='images/basura.png' alt='Borrar' style='max-width:40px; cursor:pointer;' onclick='confirmarBorrar({$item[0]});'>
+                                </div> 
+                            </td>
                             </tr>
-                        ';
+                        ";
+                        echo "<script>
+                                    document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
+                                        window.location.href = 'index.php?seccion=editarColaborador&id_colaborador={$item[0]}';
+                                    });
+                                </script>";
                     }
                     ?>
                 </tbody>
@@ -104,28 +125,28 @@
     const btn = document.getElementById("btnBorrar");
     
     //cambiar la funcion por una funcion igual de buscar pero buscar colaboradores
-    function buscarDispositivo() {
-            console.log("La función buscarDispositivo se está ejecutando");
-            var buscarDispositivo = document.getElementById("buscar").value;
-            var xhr = new XMLHttpRequest();
+    function buscarColaborador() {
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
-                    if (xhr.status === 200) {
-                        console.log("Contenido de la respuesta:", xhr.responseText);
-                        document.querySelector("#inventario_dispositivos tbody").innerHTML = xhr.responseText;
-                    } else {
-                        console.error("Error en la respuesta del servidor");
-                    }
-                }
-            };
+var buscarColaborador = document.getElementById("buscar").value;
+var xhr = new XMLHttpRequest();
 
-            var url = "controlador/ControladorFiltros/buscadorDispositivos.php?buscar=" + encodeURIComponent(buscarDispositivo);
-            xhr.open("GET", url, true);
-            console.log("Solicitud AJAX enviada a: " + url);
-            xhr.send();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+
+        if (xhr.status === 200) {
+
+            document.getElementById("colaboradores").innerHTML = xhr.responseText;
+        } else {
+            console.error("Error en la respuesta del servidor");
         }
+    }
+};
+
+var url = "controlador/ControladorFiltros/buscadorColaborador.php?buscar="+ buscarColaborador;
+xhr.open("GET", url, true);
+console.log("Solicitud AJAX enviada a: " + url);
+xhr.send();
+}
    
 
     function confirmarBorrar(id_colaborador) {

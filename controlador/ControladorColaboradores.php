@@ -92,7 +92,21 @@
                     if (DateTime::createFromFormat('Y-m-d',$fechaIngreso) !==false){
                         $fechaIngresoFormateada = $fechaIngreso;
                     }else{
-                        echo 'Error en el formato de la fecha';
+                        
+                        echo "
+
+                        <script> 
+                            Swal.fire({
+                                title: 'Fecha incorrecta',
+                                text: 'Ingrese el formato de fecha correcto',
+                                type: 'warning'
+                            }).then(function(result){
+                                if (result.value){
+                                    window.location.href='index.php?seccion=colaboradores';
+                                }
+                            });
+                        </script>
+                        ";
                         exit;
                     }
 

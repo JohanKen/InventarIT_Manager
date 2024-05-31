@@ -8,7 +8,22 @@
             $res = Conexion::conectar()->query($sql);
             return $res;
         }
+        static function buscarColaborador($buscar) {
+            try{
+                $conexion = Conexion::conectar();
 
+                $stmt = $conexion->prepare("CALL inventarit_manager.buscador_colaborador(?)");
+                $stmt -> bind_param('s',$buscar);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+
+                return $result->fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysqli_sql_exception $e){
+                echo "Error al ejecutar la consulta:" . $e->getMessage();
+            }
+        }
         static function deleteColaborador($id){
             $id_colaborador = (int)$id;
             $sql = "CALL inventarit_manager.eliminar_colaborador('$id');";

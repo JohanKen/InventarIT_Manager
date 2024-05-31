@@ -44,7 +44,7 @@ if ($datosDispositivo !== null) {
         case "Laptop":
             include('formularios/formularioLaptop.php');
             break;
-        case 'Descktop':
+        case 'Desktop':
             include('formularios/formularioDesktop.php');
             break;
         case 'iMac':

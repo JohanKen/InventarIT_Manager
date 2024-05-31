@@ -85,7 +85,7 @@ if (!empty($buscar)) {
         }
         echo '</tbody>';
     } else {
-        echo '<tbody><tr><
+        echo '<tbody><tr>
         <td colspan="11">No se encontraron dispositivos.</td></tr></tbody>';
     }
 } else {

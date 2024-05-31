@@ -65,15 +65,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Editar Colaborador</title>
-        <link rel="stylesheet" href="estilos/estilosFormularios.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="estilos/estilosFormularios.css">
+    <link rel="stylesheet" href="estilos/estilosColaboradores.css">
 <style>
     body{
         font-style: bold;
@@ -145,26 +145,42 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <h1 id="txtTitulo">Editar colaborador</h1>
         <img src="images/godin.png" id="imgGODIN" alt="">
     </div>
-    <div class="container">
+    <div class="container mt-52">
         <?php
             if (isset($datoscolaborador) && is_array($datoscolaborador) && isset($datoscolaborador[0])){
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-        <div class="row">
-        <div class="col-md-2">
+        <div class="col-3">
+        <div class="mb-3">
                 <label for="id_colaborador" class="form-label">ID</label>
                 <input type="text" class="form-control" name="id_colaborador" value="<?=$datoscolaborador[0]["id_colaborador"]?>" >
             </div>
-            <div class="col-md-4">
+            
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select name="estado" id="" class="form-control">
+                    <?php
+                        $estados = ControladorColaboradores::getEstados();
+                        foreach ($estados as $row => $item){
+                            $selected = ($datoscolaborador[0]["estado"] == $item[1]) ? 'selected' : '';
+                            echo '<option value="' . $item[0] . '" ' . $selected . '>' . $item[1] . '</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+            </div>
+            <div class="col-3">
+            <div class="mb-3">
                 <label for="nombre_colaborador" class="form-label">Nombre(s)</label>
                 <input type="text" class="form-control" name="nombre_colaborador" value="<?=$datoscolaborador[0]["nombre_colaborador"]?>" >
             </div>
-            <div class="col-md-4">
+            <div class="mb-3">
                 <label for="apellido_paterno_colaborador" class="form-label">Apellido(s)</label>
                 <input type="text" class="form-control" name="apellido_paterno_colaborador" value="<?=$datoscolaborador[0]["apellido_paterno_colaborador"]?>" >
+            </div><br><br><br> 
             </div>
-
-            <div class="col-md-3">
+            <div class="col-3">
+            <div class="mb-3">
                 <label for="empresa" class="form-Label">Cliente</label>
                     <select  name="empresa" id="" class="form-control" >
                         <?php 
@@ -179,33 +195,24 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                     </select>
                 </div>
 
-            <div class="col-md-4">
+            <div class="mb-3">
                 <label for="departamento" class="form-label">Departamento</label>
                 <input type="text" class="form-control" name="departamento" value="<?=$datoscolaborador[0]["departamento"]?>" >
             </div>
 
-            <div class="col-md-2">
-                <label for="estado" class="form-label">Estado</label>
-                <select name="estado" id="" class="form-control">
-                    <?php
-                        $estados = ControladorColaboradores::getEstados();
-                        foreach ($estados as $row => $item){
-                            $selected = ($datoscolaborador[0]["estado"] == $item[1]) ? 'selected' : '';
-                            echo '<option value="' . $item[0] . '" ' . $selected . '>' . $item[1] . '</option>';
-                        }
-                    ?>
-                </select>
             </div>
-
-            <div class="col-md-2">
+            <div class="col-3">
+            <div class="mb-3">
                 <label for="fecha_ingreso_colaborador" class="form-label">Fecha de ingreso</label>
                 <input type="date" class="form-control" name="fecha_ingreso_colaborador" id="fechaIngresoInput" value="<?= $datoscolaborador[0]["fecha_ingreso_colaborador"]?>" placeholder= "Selecciona una fecha">
             </div>
 
            
-            <div class="col-md-12 text-end">
-                <a class="btn btn-danger" href="index.php?seccion=colaboradores">Cancelar</a>
-                <input type="submit" class="btn btn-success" name="guardarColaborador" value="Actualizar Colaborador">
+            <div class="mb-3">
+            <input type="submit" class="btn btn-secondary custom-btn-color" name="guardarColaborador" value="Actualizar Colaborador">
+                            <hr>
+                <a class="btn btn-danger customCancelar" href="index.php?seccion=colaboradores">Cancelar</a>
+            </div>
             </div>
             </div>
     </form>

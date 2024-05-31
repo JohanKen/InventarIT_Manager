@@ -8,6 +8,9 @@ AGREGAR DISPOSITIVOS:
 Formato de fecha incorrecto en agregar cualquier dispositivo debe guardar los datos que ya se ingresaron
 y no recargar la pagina con todos los campos en blanco de nuevo
 
+BARRA DE BUSQUEDA COLABORADORES:
+Barrra de busqueda colaboradores no funciona correctamente
+
 BARRA DE BUSQUEDA DISPOSITIVOS:
 Agregar barra de busqueda (falta buscar fecha en la misma pero agregarla como primera version)
 
@@ -18,3 +21,13 @@ error del formato de la fecha
 NUMEROS DE SERIE:
 Numeros de serie que se repiten esta correctamente para que no se agreguen asi, sin embargo el mensaje en todos lados para agregar
 se muestra de manera incorrecta
+
+VALIDACIÓN DE FECHAS EN FORMULARIOS:
+Alerta de fecha incorrecta sin funcionar en todos los formularios para editar dispositivos y colaboradores,
+asi como en la pantalla cuando se quiere editar el perfil (tomar como ejemplo formularios para registrar nuevos dispositivos)
+
+MARCA DE APPLE:
+Marca de Imac debe registrarse por defecto como Apple y no como Imac
+
+CLIENTE AL AGREGAR Y EDITAR COLABORADOR
+Aparece mensaje error con la llave foranea cuando se agrega o edita un colaborador y se cambia o seleccciona un cliente diferente(solo pasa con algunos no con todos)
