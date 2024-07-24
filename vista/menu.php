@@ -1,10 +1,6 @@
 <?php 
-
-    //obtener datos del usuario para setearlos en el menu
     $id = $_SESSION['usuario']['id_usuario'];
-
     $datosUsuario =  ObtenerDatosUsuarios($id);
-
     function ObtenerDatosUsuarios ($id){
         if ($id >= 0) {
             try {
@@ -13,7 +9,7 @@
                 //verificar si se obtuvieron correctamente los datos
 
                 if (empty($UsuarioInfo[0])) {
-                    echo "Erropr no se pudieropn obtener los datos del usuario";
+                    echo "Error no se pudieron obtener los datos del usuario";
                     return null;
                 }
 
@@ -30,7 +26,6 @@
         }
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,17 +38,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap">
     <link rel="stylesheet" href="estilos/estilosMenu.css">
-    <link rel="stylesheet" href="@sweetalert2/themes/dark/dark.css">
-    <script src="sweetalert2/dist/sweetalert2.min.js"></script>
+   
+    
 
     <style>
     body {
@@ -96,7 +89,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="link-1" href="index.php?seccion=asignaciones">Onboarding</a>
+                                <a class="link-1" href="index.php?seccion=asignaciones/asignaciones">Onboarding</a>
                             </li>
                             <li class="nav-item">
                                 <a class="link-1" href="index.php?seccion=colaboradores">Colaboradores</a>

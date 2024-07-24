@@ -55,7 +55,7 @@
 </div>
         <div class="container" style="margin-top: 10px !important;">
         <div class="table-responsive">
-                <table class="table table-striped table-hover" id="colaboradores">
+                <table class="table table-secondary table-straped table-hover" id="colaboradores">
                     <thead class="table-dark">
                     <tr>
                         <th>Id Colaborador</th>
@@ -102,7 +102,7 @@
                                 <td> $item[6] </td>
                                 <td>
                                 <div class='acciones'>
-                                    <img src='images/editar.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
+                                    <img src='images/editColab.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
                                     <img src='images/basura.png' alt='Borrar' style='max-width:40px; cursor:pointer;' onclick='confirmarBorrar({$item[0]});'>
                                 </div> 
                             </td>

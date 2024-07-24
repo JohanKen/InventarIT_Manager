@@ -91,9 +91,12 @@
 }
 
 #imgGODIN {
-    margin-left: 2%;
-    max-width: 40px;
-    max-height: 40px;
+    opacity: 1;
+margin-left: 5%;
+max-width: 140px;
+max-height: 420px;
+transition: .5s ease;
+backface-visibility: hidden;
 }
 
 @media only screen and (max-width: 768px) {
@@ -137,7 +140,7 @@
 
 <div class="tittle" id="divTitulo">
     <h1 id="txtTitulo">Nuevo colaborador</h1>
-    <img src="images/godin.png" id="imgGODIN" alt="">
+    <img src="images/empleados.png" id="imgGODIN" alt="">
 </div>
 <div class="container">
     <form action="" method="post" enctype="multipart/form-data">

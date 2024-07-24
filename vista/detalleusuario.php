@@ -128,9 +128,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     .imgEditUser {
-        width: 230px;
-        height: 150px;
-        /* ajusta el tamaño de la imagen */
+       
+    max-width: 70%; 
+    height: auto; 
+    width: auto;
+    max-height: 100px; 
+
     }
     h6{
         font-size: 20px;
@@ -267,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     value="<?php echo $datosUsuario[7]; ?>">
             </div>
             <div class="mb_3">
-                <img class="imgEditUser" src="images/editUser.png" alt="">
+                <img class="imgEditUser" src="images/usuario.png" alt="">
                 <div class="botones">
                     <button type="button" class="btn btn-danger btnCancelar"
                         onclick="window.location.href='index.php?seccion=usuarios'">Cancelar</button>

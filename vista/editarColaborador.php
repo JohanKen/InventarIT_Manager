@@ -116,8 +116,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
 
     #imgGODIN {
-        max-width: 30px; /* Reducir el tamaño de la imagen en tabletas */
-        max-height: 30px;
+        max-width: 100px !important; /* Reducir el tamaño de la imagen en tabletas */
+        max-height: 100px !important;
     }
 }
 
@@ -143,7 +143,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <body>
     <div class="tittle" id="divTitulo">
         <h1 id="txtTitulo">Editar colaborador</h1>
-        <img src="images/godin.png" id="imgGODIN" alt="">
+        <img src="images/empleados.png" id="imgGODIN" alt="">
     </div>
     <div class="container mt-52">
         <?php

@@ -25,7 +25,7 @@
         }
 
         .acciones img:hover {
-            transform: scale(1.2);
+            transform: scale(1.2); 
         }
     </style>
 </head> 
@@ -35,7 +35,7 @@
         <div class="up">
             <header class="headerTabla">
                 <h1 style="font-size: 28px; margin-top:20px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363;">Dispositivos</h1>
-                <form class="form-inline" id="searchBar"></form>
+               
             </header>
             <div class="col-md-12 text-center d-flex">
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
@@ -154,9 +154,9 @@
 
                                 // Agregar evento de clic para redireccionar al hacer clic en la imagen
                                 echo "<script>
-                                    document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
-                                        window.location.href = 'index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}';
-                                    });
+                                        document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
+                                            window.location.href = 'index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}';
+                                        });
                                 </script>";
                             }
                         ?>

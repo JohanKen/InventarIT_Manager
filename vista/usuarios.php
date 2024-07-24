@@ -21,6 +21,25 @@
     
     <title>Usuarios</title>
     <style>
+
+.imagen-editar {
+            cursor: pointer;
+        }
+
+        .acciones {
+            display: flex;
+        }
+        
+        .acciones img {
+            max-width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .acciones img:hover {
+            transform: scale(1.2); 
+        }
+
     .disabled-btn {
         color: #6c757d; /* Color gris */
         cursor: not-allowed; /* Cursor de no permitido */
@@ -51,24 +70,28 @@
 <div class="contentSeccion">
         <div class="up">
             <header class="headerTabla">
-                <h1>Usuarios</h1>
+            <h1 style="font-size: 28px; margin-top:20px; font-weight: bold; color: #003367; text-transform: uppercase; border-bottom: 2px solid #003363;">Usuarios</h1>
                 
             </header>
-            <div class="imgbtn">
+            <div class="col-md-12 text-center d-flex">
+          
 
-                <img src="./images/userrr.png" id="IMGlaptop" alt="IMAGEN">
 
-                <div>
-                <a href="index.php?seccion=nuevousuario" class="btn btn-success btn-lg mb-3">Agregar nuevo usuario</a>
-
-                    <br>
-                </div>
+                <div class="input-group input-group-sm mt-3" style="max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
+                    <img src="./images/usuario.png" id="imgUsuario" alt="IMAGEN">
+                    <a href="index.php?seccion=nuevousuario" "><button class="custom-btn btn-3">AGREGAR NUEVO USUARIO</button></a>
+                    
+                    <a href="javascript:window.location.reload(true)" ><img src="images/reload.png" id="imgReload" alt="" style="width:25px; margin:2%;"></a>
+                    </div>        
             </div>
+        </div>
+            
         </div>
 
     </div>
-<div class="table-responsive" style="padding:15px">
-<table class="table  table-light table-hover ">
+    <div class="container" style="margin-top: 10px !important;">
+<div class="table-responsive" style="padding:10px">
+<table class="table  table-primary table-hover ">
         <thead class="table-dark align-middle border-dark">
             <tr>
              
@@ -137,22 +160,27 @@
                                 // Si es el mismo usuario, mostrar los botones de edición y borrado deshabilitados visualmente
                                 echo '
                                 <td class="actionss">
-                                <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" class="disabled-btn" id="enlaceEditar"><button type="button" class="btn btn-secondary">Editar</button></a>
-                                <hr>
-                                <a href="javascript:void(0);" class="disabled-btn" id="enlaceBorrar"><button type="button" class="btn btn-secondary">Eliminar</button></a>
                             </td>';
                             } else {
                                 // Si no es el mismo usuario, mostrar los botones de edición y borrado habilitados
-                                echo  '
-                                <td class="actions">
-                                    <a href="index.php?seccion=detalleusuario&id_usuario=' . $item[0] . '" id="enlaceEditar"><button type="button" class="btn btn-primary">Editar</button></a>
-                                    <hr>
-                                    <a href="javascript:void(0);" onclick="mostrarAlerta(\'' . $item[0] . '\', \'' . $item[1] . '\')" id="btnBorrar"><button type="button" class="btn btn-danger">Eliminar</button></a>
-                                    </td>'; 
+                                echo  "
+                                <td >
+                                   <div class='acciones'>
+                                            <img src='images/editar.png' alt='Editar' style='max-width:40px;' class='imagen-editar' id='editar-{$item[0]}'>
+                                            <img src='images/basura.png' alt='Borrar' style='max-width:40px; cursor:pointer;' onclick='confirmarBorrar({$item[0]});'>
+                                        </div>  
+                                </td>"; 
                             };
                     
                     echo '
                         </tr>';
+
+                        // Agregar click para redireccionar al hacer click en la imagen de editar
+                        echo"<script>
+                                        document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
+                                            window.location.href = 'index.php?seccion=detalleusuario&id_usuario={$item[0]}';
+                                        });
+                                </script>";
                     
                     }
                         ?>
@@ -176,59 +204,28 @@
         }
     }
     ?>
+    </div>
     <script>
-const btn = document.getElementById("btnBorrar");
 
-function mostrarAlerta(id_usuario, nombreUsuario) {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-    });
-    swalWithBootstrapButtons.fire({
-        title: '¿Seguro que deseas eliminar a este usuario?',
-        text: 'No podrás deshacer esta acción',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, Deseo eliminarlo',
-        cancelButtonText: 'No, Cancelar.',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire({
-                title: 'Eliminado!',
-                text: 'El usuario está siendo eliminado...',
-                icon: 'success',
-                timer: 1500, 
-                showConfirmButton: false 
-            }).then(() => {
-                // Redirigir a la página de eliminación después de mostrar la alerta de éxito
-                window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
-            });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire({
-                title: 'Cancelado',
-                text: ':)',
-                icon: 'error'
+function confirmarBorrar(id_usuario) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "El usuario se eliminara definitivamente",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
+                }
             });
         }
-    });
-}
 
 
-function cerrarModal() {
-    document.getElementById('confirmarBorrarModal').style.display = 'none';
-}
-
-function confirmarBorrar(id_usuario, nombreUsuario) {
-    document.getElementById('confirmarBorrarModal').style.display = 'flex';
-    document.getElementById('btnBorrarModal').onclick = function () {
-        window.location.href = "index.php?seccion=usuarios&accion=eliminarUsuario&id_usuario=" + id_usuario;
-    }
-    document.getElementById('nombreUsuario').innerText = nombreUsuario;
-}
+        
     </script>
 </body>
 

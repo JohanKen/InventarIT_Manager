@@ -31,3 +31,9 @@ Marca de Imac debe registrarse por defecto como Apple y no como Imac
 
 CLIENTE AL AGREGAR Y EDITAR COLABORADOR
 Aparece mensaje error con la llave foranea cuando se agrega o edita un colaborador y se cambia o seleccciona un cliente diferente(solo pasa con algunos no con todos)
+
+BARRA DE BUSQUEDA DE COLABORADORES
+Editar barra de busqueda de colaboradores para su funcionalidad identica a la de dispositivos
+
+Hay un procedimiento almacenado existente en el cual no se esta involucrando a tablas
+foraneas como las son el uso de la tabla colaboradores con el id incorrecto

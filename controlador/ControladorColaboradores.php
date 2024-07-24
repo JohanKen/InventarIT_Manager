@@ -16,7 +16,6 @@
             $arregloColaborador = $obj->fetch_all();
             return $arregloColaborador;
         }
-
         public static function consultarColaboradorPorCliente() {
             if (isset($_GET['cliente'])) {
                 $clienteSeleccionado = $_GET['cliente'];
@@ -34,6 +33,7 @@
                 echo '<option value="">Error: Parámetro cliente no proporcionado</option>';
             }
         }
+
         
          static function borrarColaboradores(){
             if(isset($_GET["accion"])&& $_GET["accion"] == "eliminarColaborador"){

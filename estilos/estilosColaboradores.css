@@ -126,8 +126,9 @@ margin: 0;
   outline: none;
 }
 .btn-3 {
-  background: rgb(0,172,238);
-  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+
+  background: rgb(111, 136, 1);
+  background: linear-gradient(0deg, rgb(238, 238, 0) 0%, rgb(163, 181, 0) 100%);
   padding: 5px;
   line-height: 32px;
   padding: 2%;
@@ -212,8 +213,8 @@ margin: 0;
     outline: none;
   }
   .btn-4 {
-    background: rgb(0,172,238);
-    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+    background: rgb(204, 231, 0);
+    background: linear-gradient(0deg, rgb(234, 255, 0) 0%, rgb(184, 171, 0) 100%);
     padding: 5px;
     line-height: 32px;
     padding: 2%;
