@@ -11,6 +11,12 @@ y no recargar la pagina con todos los campos en blanco de nuevo
 BARRA DE BUSQUEDA COLABORADORES:
 Barrra de busqueda colaboradores no funciona correctamente
 
+BARRA DE BUSQUEDA ONBOARDING
+Barra de busqueda en onboarding no esta funcionando como se espera
+
+FILTRO DE BUSQUEDA EN ONBOARDING
+Filtro de busqueda por cliente no funciona correctamente en el apartado de asignaciones
+
 BARRA DE BUSQUEDA DISPOSITIVOS:
 Agregar barra de busqueda (falta buscar fecha en la misma pero agregarla como primera version)
 

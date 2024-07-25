@@ -53,7 +53,7 @@ footer{
 
         <footer>
   
-    <div class="right-content" >
+    <div class="right-content" style="align-items:center;">
         <img src="./images/logo.png" alt=""id="FootImg">
     </div>
 </footer>
