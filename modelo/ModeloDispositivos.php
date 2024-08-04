@@ -10,6 +10,7 @@ class ModeloDispositivos extends Conexion {
         return $res;
     }
 
+    
     static function createLaptop($datos){
         $conexion = Conexion::conectar();
         try{

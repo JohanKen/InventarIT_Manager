@@ -10,8 +10,36 @@ if(!empty($buscar)){
     $Colaboradores = ModeloColaboradores::buscarColaborador($buscar);
 
     ?>
-    <table class="tabla" id="colaboradores">
-        <thead class="thead-dark">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resiltados de busquedad</title>
+        <link rel="stylesheet" href="estilos/estilosColaboradores.css">
+        <style>
+     .imagen-editar {
+            cursor: pointer;
+        }
+
+        .acciones {
+            display: flex;
+        }
+        
+        .acciones img {
+            max-width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .acciones img:hover {
+            transform: scale(1.2);
+        }
+</style>
+    </head>
+    <body>
+    <table class="table table-secondary table-straped table-hover" id="colaboradores">
+    <thead class="table-dark">
             <tr>
                 <th>ID Colaborador</th>
                 <th>Nombre</th>
@@ -35,16 +63,22 @@ if(!empty($buscar)){
                             <td>' . $item['departamento']. '</td>
                             <td>' . $item['estado']. '</td>
                             <td>' . $item['fecha_ingreso_colaborador']. '</td>
+                            <div class="acciones">
+
                             <td>
-                                <a href="index.php?seccion=editarColaborador&id_colaborador=' . $item['id_colaborador'] . '">Editar</a>
-                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item['id_colaborador'] . '); "id="enlaceBorrar" >Borrar</a>
+                                <a href="index.php?seccion=editarColaborador&id_colaborador=' . $item['id_colaborador'] .'"><img src="images/editColab.png" alt="Editar" style="max-width:40px;" class="imagen-editar"></a>
+                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item['id_colaborador'] . '); "id="enlaceBorrar" ><img src="images/basura.png" alt="Borrar" style="max-width:40px; cursor:pointer;" ></a>
                             </td>
+                            </div> 
                         </tr>
                     ';
                 }
             ?>
         </tbody>
     </table>
+    </body>
+    </html>
+    
 <?php
     }
 ?>

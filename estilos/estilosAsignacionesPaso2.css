@@ -1,0 +1,136 @@
+
+header {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      
+
+}
+.headerr h2 {
+    margin-top: 10px;
+    font-size: 40px;
+}
+#tipo_dispositivo {
+  background-color: rgba(84, 164, 248, 0.205) !important;
+  padding: 10px !important;
+  font-size: 16px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+}
+
+#tipo_dispositivo:hover {
+  transform: scale(1.05) !important;
+  border-color: #007bff !important;
+}
+
+#optionCliente {
+  padding: 5px;
+}
+
+#optionCliente:hover {
+  background-color: rgba(84, 164, 248, 0.1);
+  cursor: pointer;
+}
+
+
+.form-label {
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(75, 74, 74);
+}
+.form-labell {
+    font-weight: bold;
+    font-size: 20px;
+    
+}
+
+.form-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    
+}
+tr:hover {background-color: coral;}
+.form-group {
+    margin-bottom: 20px;
+   
+}
+.form-groupp {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.rightButtons{
+    padding-top: 10px;
+    padding: 40px;
+    margin-left: 12%;
+}
+body{
+    font-style: bold;
+}
+
+.btn-custom {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.up {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.form-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+#ri{
+ margin-left: 10%;
+}
+ #aNew{
+    width: 80px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+
+    font-style: bold;
+}
+
+
+#imgNuevoCol{
+    width: 80px;
+}
+.new{
+    color: #333;
+    font-style: bold;
+    text-decoration: none;
+}
+.seleccionados{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.btnNew{
+    border-radius: 10px;
+ border: none;
+background-color: #459fff60;
+}
+
+#title{
+    margin-top: 10px;
+    
+}
+
+

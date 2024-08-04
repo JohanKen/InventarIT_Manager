@@ -10,10 +10,10 @@
     if(!empty($tipoSeleccionado)){
         
         $dispositivos  = ModeloAsignaciones::selectDispositivoTipo($tipoSeleccionado);
-        
+       
         ?>
-        <table id="dispositivos2">
-            <thead>
+        <table table class="table table-sm" id="dispositivos2">
+            <thead class="table-dark" >
                 <tr>
                     <th>Id Dispositivo</th>
                     <th>Tipo de dispositivo</th>
@@ -58,7 +58,7 @@
                                         <td>' . $item['procesador'].'</td>
                                         <td>' . $item['sistema_operativo'].'</td>
                                         <td>' . $item['precio'].'</td>
-                                        <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Agregar</button></td>
+                                        <td><button type="button" class="btn btn-primary btn-custom" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Asignar</button></td>
                                     </tr>
                                 ';
                             }
@@ -74,7 +74,7 @@
                                         <td>' . $item['numero_serie'] . '</td>
                                         <td>' . $item['marca'] . '</td>
                                         <td>' . $item['precio'].'</td>
-                                        <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Agregar</button></td>
+                                        <td><button type="button" class="btn btn-primary btn-custom" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Asignar</button></td>
 
                                     </tr>
                                 ';
@@ -98,7 +98,7 @@
                                         <td>' . $item['mouse_model'].'</td>
                                         <td>' . $item['mouse_ns'].'</td>
                                         <td>' . $item['precio'].'</td>
-                                        <td><button type="button" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Agregar</button></td>
+                                        <td><button type="button" class="btn btn-primary btn-custom" onclick="agregarDesdeTabla(' . $item['id_dispositivo'] . ', \'' . $item['tipo'] . '\', \'' . $item['modelo'] . '\', \'' . $item['numero_serie'] . '\', \'' . $item['marca'] . '\', \'' . $item['precio'] . '\')">Asignar</button></td>
                                     </tr>
                                 ';
                             }
@@ -109,7 +109,7 @@
             </table>
         <?php
     } else {
-        echo 'Elige un tipo de dispositivo ';
+        
     }
 
 ?>

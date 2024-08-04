@@ -13,68 +13,95 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paso 2 de la asignación</title>
+    <title>Dispositivos para asignar</title>
+    <link rel="stylesheet" href="estilos/estilosAsignacionesPaso2.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <br><br><br><br><br><br><br> <!-- Eliminar esto en el futuro --><!--salto de linea -->
-    <div class="contentSeccion">
-        <div class="up">
-            <header class="headerTabla">
-                <h1>Paso 2 - Elegir Dispositivo</h1>
-                <br><!--salto de linea -->
-            </header>
-        </div>
+<div class="up">
+        <header class="header text-center">
+            <h2 id="title">Dispositivos para asignar</h2>
+        </header>
+    </div>
 
         <?php if (isset($datoscolaborador) && is_array($datoscolaborador) && isset($datoscolaborador)) : ?>
-        <form action ="" method="post" enctype="multipart/form-data">
-                <div>
-                    <label for="nombre_colaborador" class="form-label">Colaborador Seleccionado:</label>
-                    <input type="text" class="form-control" name="nombre_colaborador" value="<?= $datoscolaborador[0]["nombre_colaborador"] . ' ' . $datoscolaborador[0]["apellido_paterno_colaborador"] ?>" readonly>
-                    <label for="cliente" class="form-label">Cliente:</label>
-                    <input type="text" class="form-control" name="cliente" value="<?= $datoscolaborador[0]["empresa"] ?>" readonly>
-                </div>
 
-                <br><!--salto de linea -->
+
+        <div class="form-container">
+        <form action ="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="d-flex align-content-center" >
+                <div class="d-flex align-content-center flex-wrap">
+                    <label for="cliente" class="form-label">
+                        <img src="images/clienteSelect.png" alt="Cliente Icon" class="form-icon">
+                            <?php echo $datoscolaborador[0]["empresa"];?>
+                     </label>
+                     </div>
+                 
+                     <div class="d-flex align-content-center flex-wrap" id="ri">
+                    <label for="colaborador2" class="form-label">
+                        <img src="images/empleados.png" alt="Colaborador Icon" class="form-icon">
+                        <?php echo $datoscolaborador[0]["nombre_colaborador"]; echo $datoscolaborador[0]["apellido_paterno_colaborador"];?>
+                    </label>
+                  
+                    <br>
+                    
+                 </div> 
+                 </div>
+
+              
 
             <?php else : ?>
                 <p>El array $datoscolaborador no está definido o no tiene la estructura esperada.</p>
             <?php endif; ?>
-
-            <div>
-                <label for="tipo_dispositivo" class="form-label">Selecciona un Tipo de Dispositivo a Asignar</label>
-                <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo" onchange="cargarDispositivos()">
+            <!--CONSTRUIR DE MANERA CORRECTA SELECT COMO EN CARROUSEL AL IGUAL QUE LA SELECCION DE DISPOSITIVOS CUANDO RECIEN SE VAN A REGISTRAR-->
+            <div class="container text-center">  
+                <div class="row ">
+                    <div class="col-sm"></div>
+                    <div class="col-sm"> <label for="tipo_dispositivo" class="form-labell">Tipo de Dispositivo</label>
+                <select name="tipo_dispositivo" class="form-control" id="tipo_dispositivo"  onchange="cargarDispositivos()">
                     <option value="0" disabled selected>-- Seleccione el Tipo de Dispositivo --</option>
-                    <option value="1">Laptop</option>
-                    <option value="2">Desktop</option>
-                    <option value="3">iMac</option>
-                    <option value="4">Teclado</option>
-                    <option value="5">Mouse</option>
-                    <option value="6">Monitor</option>
-                    <option value="7">Headset</option>
-                    <option value="8">Celular</option>
-                    <option value="9">Switches</option>
-                    <option value="12">Otro</option>
-                </select>
+                    <option value="1" id="option">Laptop</option>
+                    <option value="2" >Desktop</option>
+                    <option value="3" >iMac</option>
+                    <option value="4" >Teclado</option>
+                    <option value="5" >Mouse</option>
+                    <option value="6" >Monitor</option>
+                    <option value="7" >Headset</option>
+                    <option value="8" >Celular</option>
+                    <option value="9" >Switches</option>
+                    <option value="12" >Otro</option>
+                </select></div>
+                    <div class="col-sm"></div>
+                </div>
+               
             </div>
             
             <div>
-                <table id="dispositivos2">
+                <br>
+                <table class="table table-sm" id="dispositivos2">
                     <!-- La tabla no aparece hasta que se selecciona un tipo de dispositivo -->
                 </table>
             </div>
 
-            <br><!--salto de linea -->
+           <br>
 
             <div>
-                <table id="dispositivos_seleccionados">
-                    <thead>
-                        <tr>
+                <br><br>
+                <h3 class="form-labell">Dispositivos seleccionados</h3>
+                <table class="table table-sm" id="dispositivos_seleccionados">
+                    <thead class="table-dark">
+                        <tr class="w-50 p-3">
                             <th>Id Dispositivo</th>
                             <th>Tipo de dispositivo</th>
                             <th>Modelo</th>
                             <th>Número de Serie</th>
                             <th>Marca</th>
                             <th>Precio</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -89,13 +116,13 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
 
             <div action="mb-3" method="formForm">
-                <button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a></button>
-                <button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a></button>
+                <!--<button><a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a></button>--> 
+                <button class="btn btn-danger"><a style="color: white; text-decoration:none" href="index.php?seccion=asignaciones/asignarPaso1">Volver</a></button>
                 <button type="button" class="btn btn-primary" onclick="continuar()">Continuar</button>
             </div>
-        
+            </div>
         </form>
-
+        </div>
         <script>
             cargarDispositivos();
 
@@ -133,6 +160,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 var datosTabla = obtenerDatosTabla();
                 
                 if (datosTabla.length === 0) {  
+                    //CAMBIAR ESTE CAMPO POR SWEET ALERT...
                     alert("No se a Seleccionado ningun dispositivo");
                 }else{
                     dispositivosSeleccionadosInput.value = JSON.stringify(datosTabla);
@@ -164,7 +192,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                                         '<td>' + serie + '</td>' +
                                         '<td>' + marca + '</td>' +
                                         '<td>' + precio + '</td>'+
-                                        '<td><button type="button" onclick="eliminarFila(this, ' + id_dispositivo + '); cargarDispositivos()">Quitar</button></td>';
+                                        '<td><button type="button" class="btn btn-danger" onclick="eliminarFila(this, ' + id_dispositivo + '); cargarDispositivos()">Remover</button></td>';
 
                 // Agregar la nueva fila al tbody de la tabla de dispositivos_seleccionados
                 tablaSeleccionados.appendChild(nuevaFila);
@@ -175,7 +203,6 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 }
 
             }
-
             function obtenerDatosTabla() {
                 var datos = [];
                 var tabla = document.getElementById('dispositivos_seleccionados');

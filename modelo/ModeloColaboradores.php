@@ -112,7 +112,7 @@
                     echo 'Error al insertar el colaborador: ' . $statement->error;
                     exit;
                 }
-
+                
                 $statement->close();
 
             }catch(Exception $e){
@@ -136,6 +136,13 @@
                 echo "Error al ejecutar la consulta:" . $e->getMessage();
             }
         }
+
+        static function selectUltimoColaborador($tabla){
+            $sql = "SELECT * FROM inventarit_manager.$tabla;";
+            $res = Conexion::conectar()->query($sql);
+            return $res;
+        }
+
     }
 
 ?>

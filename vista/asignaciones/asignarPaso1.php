@@ -30,26 +30,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Document</title> -->
-    <link rel="stylesheet" href="estilos/estilosFormularios.css">
+    <link rel="stylesheet" href="estilos/estilosAsignacionesPaso1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <div class="contentSeccion">
+    <div class="up">
+        <header class="header text-center">
+            <h2>Nueva Asignación</h2>
+        </header>
+    </div>
 
-        <div class="up">
-            <header class="headerTabla">
-                <h1>Paso 1 - Elegir un Colaborador</h1>
-            </header>
-        </div>
-
+    <div class="form-container">
         <form action="" method="post" enctype="multipart/form-data">
-
-            <div class="mb-3" id="formForm">
-                <label for="cliente" class="form-label">Selecciona el cliente:</label>
+            <div class="form-group">
+                <label for="cliente" class="form-label">
+                    <img src="images/clienteSelect.png" alt="Cliente Icon" class="form-icon"> Cliente
+                </label>
                 <select name="cliente" class="form-control" id="cliente" onchange="cargarVistasColaboradores()">
                     <option value="0" disabled selected>-- Seleccione un cliente --</option>
                     <option value="1">RTS</option>
-                    
                     <option value="2">Saela</option>
                     <option value="3">Nutiliti</option>
                     <option value="4">Ranger Design</option>
@@ -78,25 +81,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                 </select>
             </div>
 
-            <div class="mb-3" id="formForm">
-                <label for="colaborador2" class="form-label">Elige el colaborador</label>
+            <div class="form-group">
+                <label for="colaborador2" class="form-label">
+                    <img src="images/empleados.png" alt="Colaborador Icon" class="form-icon"> Colaborador
+                </label>
+
+
+
+                
                 <select name="colaborador2" id="colaborador2" class="form-control">
                     <option value="" disabled selected>-- Primero Seleccione un Cliente --</option>
                 </select>
             </div>
-            
 
-            <div class="mb-3" id="formForm">
-                <a href="index.php?seccion=asignaciones/asignarPaso1-2">Nuevo Colaborador</a>
-            </div>
-
-            <div class="mb3" id="formForm">
-                <a class="btn btn-danger" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
-                <button type="submit" class="btn btn-primary" name="continuar">Continuar</button>
+            <div class="form-groupp">
+                <div class="leftButtons">
+                <a href="index.php?seccion=asignaciones/asignarPaso1-2" id="aNew">
+                    <br>
+                        <img src="images/newUser.png" id="imgNuevoCol" alt="Nuevo Colaborador">Nuevo Colaborador
+                   
+                </a>
+                </div>
+                <div class="rightButtons">       
+                    <a class="btn btn-danger btn-custom" href="index.php?seccion=asignaciones/asignaciones">Cancelar</a>
+                   
+                    <button type="submit" class="btn btn-primary btn-custom" name="continuar">Continuar</button>
+                </div>
             </div>
 
         </form>
     </div>
+
 
     <script>
     function cargarVistasColaboradores() {

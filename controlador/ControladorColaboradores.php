@@ -16,12 +16,20 @@
             $arregloColaborador = $obj->fetch_all();
             return $arregloColaborador;
         }
+
+        static function getClientes(){
+            $tabla = "empresas";
+            $respesta = ModeloColaboradores::selectClientes($tabla);
+            $arreglo = $respesta->fetch_all();
+            return $arreglo;
+        }
+
         public static function consultarColaboradorPorCliente() {
             if (isset($_GET['cliente'])) {
                 $clienteSeleccionado = $_GET['cliente'];
-                
+                    
                 $colaboradores = ModeloColaboradores::selectColaboradorPorCliente($clienteSeleccionado);
-    
+                
                 $options = "";
                 foreach ($colaboradores as $row => $item) {
                     $options .= '<option value="' . $colaborador['id_colaborador'] . '">' 
@@ -68,12 +76,7 @@
             }
         }
 
-        static function getClientes(){
-            $tabla = "empresas";
-            $respesta = ModeloColaboradores::selectClientes($tabla);
-            $arreglo = $respesta->fetch_all();
-            return $arreglo;
-        }
+    
 
         static function getEstados(){
             $tabla = "estados_colaboradores";

@@ -42,27 +42,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="estilos/estilosAsignacionesPaso4.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <br><br><br><br><br> <!-- Eliminar esta línea --><!-- Eliminar esta línea -->
     <div class="contenSeccion">
         <header>
-            <h1>Paso 4 - Enviar por correo a:</h1>
+            <h1>Envio de cartas responsivas</h1>
         </header>
+            <br><br>
         <form action="" method="post" enctype="multipart/form-data">
+        <div class="row ">
+        <div class="col-sm"></div>
+        <div class="col-sm">
             <div id="contenedor-correos">
                 <!-- Campo de entrada inicial -->
                 <div class="form-group">
-                    <label for="correo" class="form-label">Correo</label>
-                    <input type="text" class="form-control" name="correo[]">
+                    <label for="correo" class="form-label">Enviar a:</label>
+                    <input type="text"id="cliente" placeholder="alguien@example.com" class="form-control" name="correo[]">
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="agregarCampo()" >Agregar</button>
+            <button type="button" class="btn btn-light" onclick="agregarCampo()" > + Agregar otra dirección...</button>
             
-            <button type="submit" class="btn btn-primary" name="aceptar" onclick="guardarCorreos()">Confirmar Asignacion</button>
+            <button type="submit" class="btn btn-success" name="aceptar" id="btnConfirmarAsignacion" onclick="guardarCorreos()">Enviar</button>
             
             <input type="hidden" name="correos_json" id="correos_json">
+            </div>
+            <div class="col-sm"></div>
         </form>
 
         <script>
@@ -72,8 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aceptar'])) {
                 var nuevoCampo = document.createElement("div");
                 nuevoCampo.classList.add("form-group"); // Agrega la clase form-group al nuevo campo
                 nuevoCampo.innerHTML = `
-                    <label for="correo" class="form-label">Correo</label>
-                    <input type="text" class="form-control" name="correo[]">
+                    <label for="correo" class="form-label">También dirigir a:</label>
+                    <input type="text" class="form-control" name="correo[]"  id="cliente" placeholder="alguien@example.com">
                 `;
                 contenedor.appendChild(nuevoCampo); // Agrega el nuevo campo al contenedor
             }

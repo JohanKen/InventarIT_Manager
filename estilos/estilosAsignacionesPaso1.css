@@ -1,0 +1,112 @@
+
+header {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      
+
+}
+.headerr h2 {
+    margin-top: 10px;
+    font-size: 40px;
+}
+#cliente {
+  background-color: rgba(84, 164, 248, 0.205);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#cliente:hover {
+  transform: scale(1.05);
+  border-color: #007bff;
+}
+
+#optionCliente {
+  padding: 5px;
+}
+
+#optionCliente:hover {
+  background-color: rgba(84, 164, 248, 0.1);
+  cursor: pointer;
+}
+
+
+
+
+.form-label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+   
+}
+.form-groupp {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.rightButtons{
+    padding-top: 10px;
+    padding: 40px;
+    margin-left: 12%;
+}
+body{
+    font-style: bold;
+}
+
+.btn-custom {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.up {
+    margin-bottom: 30px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+ #aNew{
+    width: 80px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+
+    font-style: bold;
+}
+
+#imgNuevoCol{
+    width: 80px;
+}
+.new{
+    color: #333;
+    font-style: bold;
+    text-decoration: none;
+}
+
+.btnNew{
+    border-radius: 10px;
+ border: none;
+background-color: #459fff60;
+}
