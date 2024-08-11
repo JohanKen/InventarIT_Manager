@@ -75,7 +75,7 @@
                             <th>NOTAS</th>
                             <th>IMAGEN</th>
                             <th></th>
-                        </tr>
+                        </tr>BBBN
                     </thead>
                     <tbody>
                         <?php
@@ -219,20 +219,20 @@
             cerrarModal();
         }
         document.getElementById('buscar').addEventListener('input', function() {
-  const clearSearch = document.getElementById('clearSearch');
-  if (this.value.length > 0) {
-    clearSearch.style.display = 'flex';
-  } else {
-    clearSearch.style.display = 'none';
-  }
-});
+            const clearSearch = document.getElementById('clearSearch');
+            if (this.value.length > 0) {
+                clearSearch.style.display = 'flex';
+            } else {
+                clearSearch.style.display = 'none';
+            }
+            });
 
-document.getElementById('clearSearch').addEventListener('click', function() {
-  const buscarInput = document.getElementById('buscar');
-  buscarInput.value = '';
-  this.style.display = 'none';
-  window.location.reload(true);
-});
+            document.getElementById('clearSearch').addEventListener('click', function() {
+            const buscarInput = document.getElementById('buscar');
+            buscarInput.value = '';
+            this.style.display = 'none';
+            window.location.reload(true);
+            });
 
 
     </script>

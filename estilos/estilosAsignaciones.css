@@ -11,6 +11,8 @@ header {
 
 }
 
+
+
 #cliente {
   background-color: rgba(84, 164, 248, 0.205);
   padding: 10px;
@@ -291,6 +293,7 @@ margin: 0;
   right: 0;
   top: 0;
    background: rgb(253, 254, 255);
+   color: #333;
   transition: all 0.3s ease;
 }
 .btn-4:before {
@@ -312,7 +315,7 @@ margin: 0;
   width: 100%;
 }
 .btn-4 span:hover{
-   color: rgb(255, 255, 255);
+   color: #333;
 }
 .btn-4 span:before,
 .btn-4 span:after {
@@ -389,8 +392,9 @@ margin: 0;
     height: 2px;
   }
   .btn-4:hover{
-     background: transparent;
+    background: linear-gradient(90deg, rgba(58,171,180,1) 0%, rgba(29,237,253,0.6334908963585435) 50%, rgba(19,192,242,1) 100%);
     box-shadow: none;
+    color: #fffefe;
   }
   .btn-4:hover:before {
     height: 100%;
@@ -431,7 +435,7 @@ margin: 0;
     
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    background: #fff;  /* Fondo blanco */
+    background: rgba(174, 194, 215, 0.57);;  /* Fondo blanco */
     cursor: text;
     transition: all 0.3s ease;
     position: relative;

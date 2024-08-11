@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetzzzzzzzzzalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
+
      .imagen-editar {
             cursor: pointer;
         }
@@ -37,7 +38,6 @@
     
     <header class="headerTabla">
                 <h1 style="font-size: 28px; margin-top:20px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363;">COLABORADORES</h1>
-                
             </header>
             <div class="col-md-12 text-center d-flex">
             <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 400px; margin: auto;">
@@ -52,7 +52,7 @@
                     <a href="javascript:window.location.reload(true)" ><img src="images/reload.png" id="imgReload" alt="" style="width:25px; margin:2%;"></a>
             </div>    
 </div>
-</div>
+</div> 
         <div class="container" style="margin-top: 10px !important;">
         <div class="table-responsive">
                 <table class="table table-secondary table-straped table-hover" id="colaboradores">
@@ -88,7 +88,8 @@
                         });
                         </script>
                         ";
-                        exit(); // Finaliza la ejecución del script PHP después de la salida del script JavaScript
+                        exit();
+                         // Finaliza la ejecución del script PHP después de la salida del script JavaScript
                     }
                     $listaColaboradores = ControladorColaboradores::consultarColaboradores();
                     foreach ($listaColaboradores as $item) {

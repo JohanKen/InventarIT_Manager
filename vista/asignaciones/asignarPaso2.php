@@ -83,6 +83,11 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
             <div>
                 <br>
                 <table class="table table-sm" id="dispositivos2">
+                <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
+                <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
+                <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
+                <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
+            </div>
                     <!-- La tabla no aparece hasta que se selecciona un tipo de dispositivo -->
                 </table>
             </div>
@@ -92,6 +97,7 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
             <div>
                 <br><br>
                 <h3 class="form-labell">Dispositivos seleccionados</h3>
+                
                 <table class="table table-sm" id="dispositivos_seleccionados">
                     <thead class="table-dark">
                         <tr class="w-50 p-3">
@@ -242,6 +248,34 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 }
 
             }
+
+            
+            function buscarDispositivo() {
+            console.log("La función buscarDispositivo se está ejecutando");
+            var buscarDispositivo = document.getElementById("buscar").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        document.querySelector("#inventario_dispositivos tbody").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+                        
+            var url = "controlador/ControladorFiltros/buscadorDispositivos.php?buscar=" + encodeURIComponent(buscarDispositivo);
+            xhr.open("GET", url, true);
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var headerTabla = document.querySelector('.headerTabla');
+            headerTabla.classList.add('show');
+        });
 
         </script>
 

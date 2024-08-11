@@ -38,7 +38,6 @@
                 $colaboradorSeleccionado = $item[0];
             }
 
-            //CAMBIAR LA FORMA EN LA QUE SE ESTA REDIRECCIONANDO POR UNA CON SWEET ALERT PARA QUE FUNCIONE DE MANERA ADECUADA
             
             if ($colaboradorSeleccionado > 0){
                 echo "<script>

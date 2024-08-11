@@ -19,8 +19,8 @@ Hace falta agregar una barra de busqueda para hacer mas rapida la asignacion de 
 BARRA DE BUSQUEDA COLABORADORES:
 Barrra de busqueda colaboradores no funciona correctamente
 
-BARRA DE BUSQUEDA ONBOARDING
-Barra de busqueda en onboarding no esta funcionando como se espera
++++++BARRA DE BUSQUEDA ONBOARDING
++++++Barra de busqueda en onboarding no esta funcionando como se espera
 
 FILTRO DE BUSQUEDA EN ONBOARDING
 Filtro de busqueda por cliente no funciona correctamente en el apartado de asignaciones

@@ -29,7 +29,7 @@
                 <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
                 <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
                 <!--Cmaibar nombre de la funcion por buscarColaborador y que funcione de la misma manera que la barra de buscador de dispositivos -->
-                <button type="submit" class="custom-btn1 btn-4" onclick="buscarColaborador()">Buscar</button>
+                <button type="submit" class="custom-btn1 btn-4" onclick="buscarAsignacion()">Buscar</button>
             </div>
             <div class="input-group input-group-sm mt-3" style="max-width: 300px; margin: auto; display: block !important; display: flex; flex-direction: column; align-items: flex-end;">
                     <img src="images/asignar.png" id="IMGlaptop" alt="IMAGEN">
@@ -202,6 +202,34 @@
             console.log("Solicitud AJAX enviada a: " + url);
             xhr.send();
         }
+
+
+        
+        function buscarAsignacion() {
+
+                var buscarAsignacion = document.getElementById("buscar").value;
+                var xhr = new XMLHttpRequest();
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+
+                        if (xhr.status === 200) {
+
+                            document.getElementById("asignaciones").innerHTML = xhr.responseText;
+                        } else {
+                            console.error("Error en la respuesta del servidor");
+                        }
+                    }
+                };
+
+
+                //agregar archivo para hacer el buscador pero de asignaciones
+                var url = "controlador/ControladorFiltros/buscadorAsignaciones.php?buscar="+ buscarAsignacion;
+                xhr.open("GET", url, true);
+                console.log("Solicitud AJAX enviada a: " + url);
+                xhr.send();
+                }
+
     </script>
 
     </div>

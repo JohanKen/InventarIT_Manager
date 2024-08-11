@@ -9,7 +9,6 @@ ini_set('display_errors', '1');
 $datoscolaborador = ControladorColaboradores::detalleColaborador();
 $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecode($_GET['dispositivos']), true) : [];
 
-
 ?>
 
 <!DOCTYPE html>

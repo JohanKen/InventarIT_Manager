@@ -9,6 +9,26 @@
             return $res;
         }
 
+
+        static function buscarAsignacion($buscar) {
+            try{
+                $conexion = Conexion::conectar();
+
+                $stmt = $conexion->prepare("CALL inventarit_manager.buscador_asignacion(?)");
+                $stmt -> bind_param('s',$buscar);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+
+                return $result->fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysqli_sql_exception $e){
+                echo "el procedimiento almacenado no existe";
+                
+                echo "Error al ejecutar la consulta:" . $e->getMessage();
+            }
+        }
+
         static function deleteAsignacion($id){
             $id_asignacion = (int)$id;
             $sql = "CALL inventarit_manager.eliminar_asignacion('$id')";
