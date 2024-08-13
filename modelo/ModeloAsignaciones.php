@@ -68,5 +68,21 @@
             }
         }
 
+        static function buscarAsignacion($buscar){
+            try{
+                $conexion = Conexion::conectar();
+
+                $stmt = $conexion->prepare("CALL inventarit_manager.buscador_asignacion(?)");
+                $stmt -> bind_param('s',$buscar);
+                $stmt -> execute();
+
+                $result = $stmt->get_result();
+                return $result -> fetch_all(MYSQLI_ASSOC);
+
+            }catch (mysql_sql_exception $e){
+                echo "Error al ehecutar la consulta: ".$e->getMessage();
+            }
+        }
+
     }
 ?>

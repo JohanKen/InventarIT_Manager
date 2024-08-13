@@ -52,6 +52,13 @@
             </select>
         </div>
 
+        <br>
+
+        <div>
+            <input type="text" class="form-control" name="buscar" id="buscar">
+            <button type="submit" class="btn btn-primary" onclick="buscarAsignacion()">Buscar</button>
+        </div>
+
         <div class="tabla">
             <table class="tabla" id="asignaciones">
                 <thead class="thead-dark">
@@ -169,6 +176,31 @@
         }
     </script>
 
-    </div>
+    <script>
+        function buscarAsignacion() {
+            var busqueda = document.getElementById("buscar").value;
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log("Respuesta del servidor:", xhr.status, xhr.statusText);
+                    if (xhr.status === 200) {
+                        // Procesa la respuesta del servidor
+                        console.log("Contenido de la respuesta:", xhr.responseText);
+                        // Cambia el contenido de la tabla con el nuevo HTML recibido
+                        document.getElementById("asignaciones").innerHTML = xhr.responseText;
+                    } else {
+                        console.error("Error en la respuesta del servidor");
+                    }
+                }
+            };
+
+            var url = "controlador/ControladorFiltros/buscarAsignacion.php?buscar=" + buscarAsignaciones;
+            xhr.open("GET", url, true );
+            console.log("Solicitud AJAX enviada a: " + url);
+            xhr.send();
+        }
+    </script>
+
 </body>
 </html>
