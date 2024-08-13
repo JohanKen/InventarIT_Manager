@@ -180,7 +180,7 @@ class PDF extends FPDF {
         //"I" para que se vea en el neavegador
         $modo="F";
         //genera en nombre del archivo predeterminado para descargar
-        $nombre_archivo="./vista/asignaciones/cartasResponsivas/CartaResponasiva(".$nombreApellidoColaborador.").pdf";
+        $nombre_archivo="./vista/asignaciones/cartasResponsivas/CartaResponsiva(".$nombreApellidoColaborador.").pdf";
         //al utilizar Output para agregar el nombre y el modo
         $pdf->Output($nombre_archivo,$modo);
 
