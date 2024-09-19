@@ -94,7 +94,6 @@
                         <th>Apellido Colaborador</th>
                         <th>Cliente</th>
                         <th>Departamento</th>
-                        
                         <th>ID Dispositivo</th>
                         <th>Tipo</th>
                         <th>Marca</th>

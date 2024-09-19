@@ -19,9 +19,6 @@ Hace falta agregar una barra de busqueda para hacer mas rapida la asignacion de 
 BARRA DE BUSQUEDA COLABORADORES:
 Barrra de busqueda colaboradores no funciona correctamente
 
-+++++BARRA DE BUSQUEDA ONBOARDING
-+++++Barra de busqueda en onboarding no esta funcionando como se espera
-
 FILTRO DE BUSQUEDA EN ONBOARDING
 Filtro de busqueda por cliente no funciona correctamente en el apartado de asignaciones
 
@@ -54,3 +51,15 @@ Editar barra de busqueda de colaboradores para su funcionalidad identica a la de
 
 Hay un procedimiento almacenado existente en el cual no se esta involucrando a tablas
 foraneas como las son el uso de la tabla colaboradores con el id incorrecto
+
++++++VALIDAR ASIGNACIONES:
+Validar que el colaborador seleccionado para una nueva asignacion no cuente ya con un equipo
+anteriormente asignado del mismo tipo, Solo mostrar advertencia
+
+
+CANCELAR ENVIO DE CARTAS RESPONSIVAS
+Se debe de poder guardar la asignacion tambien dando la opcion de que en caso de que 
+no sea necesario enviar una carta responsiva no tenga que ser asi
+
+ALERTAS AL INICIO DE SESION DE CADA USUARIO:  
+Cambiar la alerta (SweetAlert2) para cada inicio de sesion de los usuarios. 

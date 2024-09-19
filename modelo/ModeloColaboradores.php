@@ -131,6 +131,7 @@
                 $result = $stmt->get_result();
 
                 return $result->fetch_all(MYSQLI_ASSOC);
+                
 
             }catch (mysqli_sql_exception $e){
                 echo "Error al ejecutar la consulta:" . $e->getMessage();

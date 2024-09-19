@@ -7,12 +7,20 @@
         include_once 'controlador/ControladorUsuarios.php';
         $login = new ControladorUsuarios;
         $login->validarLogin();
+        //agregar logica para que el saludo de inicio de sesion sea desde esta pantalla
+        //y no desde el controlador para poder agregar sweetAlert
+        if ($_SESSION['id_rol'] == 1) {    
+            header("location:index.php?");
+            
+        } 
     }
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+<head>   
     <meta charset="UTF-8">
     <link rel="icon" href="./images/logoNav.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,37 +29,34 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <style>
         body{
-            background: none;
-            background-image: url(./images/perro.jpg);
+            background-color: none;
+            background-image: url(images/bggg.png);
             background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .card {
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-            transition: box-shadow 0.3s ease; 
+            background: none;
+            border: none;
+            
         }
 
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
+       
         .form-control {
-            border-radius: 10px; 
+            border-radius: 5px; 
         }
 
         .btn-primary {
-            border-radius: 10px; 
+            border-radius: 5px; 
         }
 
         #olvideContra {
@@ -68,6 +73,31 @@
             color: white;
         }
 
+        /* Aplica el color blanco al placeholder */
+.placeholder-white::placeholder {
+    color: white;
+    opacity: 1; /* Esto asegura que el color se vea completamente */
+}
+
+/* Para navegadores webkit (como Chrome y Safari) */
+.placeholder-white::-webkit-input-placeholder {
+    color: white;
+}
+
+/* Para Mozilla Firefox */
+.placeholder-white:-moz-placeholder {
+    color: white;
+}
+
+/* Para Internet Explorer */
+.placeholder-white::-ms-input-placeholder {
+    color: white;
+}
+
+.colorGray{
+    color: gray;
+}'
+
     </style>
 </head>
 
@@ -81,18 +111,18 @@
                 <div class="text-center mb-4">
                     <!-- Aquí puedes colocar cualquier elemento adicional que desees centrar -->
                     <img src="./images/logoinventarit.png" alt="" style="width:300px" class="img-fluid">
-                    <h2 class="mt-3">¡Bienvenido de nuevo!</h2>
+                    <h2 class="mt-3 colorGray">¡Bienvenido de nuevo!</h2>
                 </div>
                     <div class="card-body">
                         <form method="POST" id="formLogin" class="needs-validation" novalidate>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="correo" name="email" required placeholder="Correo electrónico">
-                                <div class="invalid-feedback">
+                            <input type="text" class="form-control bg-secondary text-white placeholder-white" id="correo" name="email" required placeholder="Correo electrónico">
+                            <div class="invalid-feedback">
                                     Por favor ingresa tu correo electrónico.
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="password" name="password" required placeholder="Contraseña">
+                                <input type="password" class="form-control bg-secondary text-white placeholder-white" id="password" name="password" required placeholder="Contraseña">
                                 <div class="invalid-feedback">
                                     Por favor ingresa tu contraseña.
                                 </div>
@@ -118,9 +148,9 @@
             ?></div>
 
 
-<?php
-    }
-?>
+            <?php
+                }
+            ?>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="recordar-contrasena" name="recordar-contrasena">
                                 <label class="form-check-label" for="recordar-contrasena">Recordar contraseña</label>

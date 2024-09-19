@@ -10,7 +10,7 @@
         }
 
 
-        static function buscarAsignacion($buscar) {
+        static function buscarAsignacion($buscar){
             try{
                 $conexion = Conexion::conectar();
 
@@ -19,13 +19,10 @@
                 $stmt -> execute();
 
                 $result = $stmt->get_result();
+                return $result -> fetch_all(MYSQLI_ASSOC);
 
-                return $result->fetch_all(MYSQLI_ASSOC);
-
-            }catch (mysqli_sql_exception $e){
-                echo "el procedimiento almacenado no existe";
-                
-                echo "Error al ejecutar la consulta:" . $e->getMessage();
+            }catch (mysql_sql_exception $e){
+                echo "Error al ehecutar la consulta: ".$e->getMessage();
             }
         }
 
@@ -50,6 +47,13 @@
             }catch (mysqli_sql_exception $e){
                 echo "Error al ehecutar la consulta: ".$e->getMessage();
             }
+        }
+
+
+        static function selectColaborador(){
+            $sql = "SELECT * FROM inventarit_manager.asignacion;";
+            $res = Conexion::conectar()->query($sql);
+            return $res;
         }
 
         static function selectAsignacionesPorCliente($clienteSeleccionado){

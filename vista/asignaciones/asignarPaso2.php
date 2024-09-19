@@ -6,6 +6,9 @@ ini_set('display_errors', '1');
 
 $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +25,10 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 </head>
 <body>
 <div class="up">
-        <header class="header text-center">
-            <h2 id="title">Dispositivos para asignar</h2>
-        </header>
+<header class="headerTabla">
+                <h1 style="font-size: 28px; margin-top:20px; font-weight: bold; color: #003363; text-transform: uppercase; border-bottom: 2px solid #003363;">Dispositivos para asignar</h1>
+               
+            </header>
     </div>
 
         <?php if (isset($datoscolaborador) && is_array($datoscolaborador) && isset($datoscolaborador)) : ?>
@@ -47,10 +51,10 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                         <?php echo $datoscolaborador[0]["nombre_colaborador"]; echo $datoscolaborador[0]["apellido_paterno_colaborador"];?>
                     </label>
                   
-                    <br>
+                    <br>        
                     
-                 </div> 
-                 </div>
+                 </div>     
+                 </div>     
 
               
 
@@ -86,9 +90,10 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                 <div class="input-group input-group-sm mt-3" id="divBuscar" style="max-width: 300px; margin: auto;">
                 <input type="text" class="buscarForm" name="buscar" id="buscar" style="border-radius: none;">
                 <span class="input-group-text" id="clearSearch" style="cursor: pointer; display: none; border-radius: none;">&times;</span>
-                <button type="submit" class="custom-btn1 btn-4" onclick="buscarDispositivo()">Buscar</button>
+                <button type="submit" class="custom-btn1 btn-4" onclick="buscarAsignacion()">Buscar</button>
             </div>
                     <!-- La tabla no aparece hasta que se selecciona un tipo de dispositivo -->
+                    
                 </table>
             </div>
 
@@ -249,7 +254,6 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
 
             }
 
-            
             function buscarDispositivo() {
             console.log("La función buscarDispositivo se está ejecutando");
             var buscarDispositivo = document.getElementById("buscar").value;
@@ -265,17 +269,34 @@ $datoscolaborador = ControladorColaboradores::detalleColaborador();
                     }
                 }
             };
-                        
+
             var url = "controlador/ControladorFiltros/buscadorDispositivos.php?buscar=" + encodeURIComponent(buscarDispositivo);
             xhr.open("GET", url, true);
             console.log("Solicitud AJAX enviada a: " + url);
             xhr.send();
         }
 
+
         document.addEventListener('DOMContentLoaded', function() {
             var headerTabla = document.querySelector('.headerTabla');
             headerTabla.classList.add('show');
         });
+
+        document.getElementById('buscar').addEventListener('input', function() {
+            const clearSearch = document.getElementById('clearSearch');
+            if (this.value.length > 0) {
+                clearSearch.style.display = 'flex';
+            } else {
+                clearSearch.style.display = 'none';
+            }
+            });
+
+            document.getElementById('clearSearch').addEventListener('click', function() {
+            const buscarInput = document.getElementById('buscar');
+            buscarInput.value = '';
+            this.style.display = 'none';
+            window.location.reload(true);
+            });
 
         </script>
 

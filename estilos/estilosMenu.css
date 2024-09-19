@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../images/4kbg.png");
+    background-image: url("../images/bgged.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -17,15 +17,15 @@ body {
 }
 #logoInventarit {
     width: 160px;
-    
 }
 .menu {
-    background-color: #333;
+    background-color: #062886;
     color: #fff;
     width: 100%;
     display: flex;
     align-items: center;
     padding: 10px;
+    
 }
 
 .menu h1 {
@@ -35,11 +35,16 @@ body {
 
 #btnCerrarSesion{
     color: #ff0000c4 ;
+    border: none;
     z-index: 10 !important;
     width: max-content !important;
 
 }
 
+.nombre-usuario {
+    margin-left: 5px; /* Ajusta este valor según el espacio que quieras entre la imagen y el nombre */
+    white-space: nowrap !important; /* Evita saltos de línea dentro del nombre */
+  }
 .menu a {
     text-decoration: none;
     color: #fff;
@@ -58,7 +63,6 @@ body {
 .menu a:hover {
     color: #3dc51b;
 }
-
 
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
@@ -93,8 +97,6 @@ body {
     filter: brightness(0.8); /* Oscurece la imagen al pasar el cursor */
 }
 
-
-
 #userDropdown {
     position: absolute !important;
     top: 100%;
@@ -117,7 +119,7 @@ body {
 }
 
 .dropdown-menu{
-    background-color: #212529 !important;
+    background-color: white !important;
     border-radius: 0 !important;
 }
 
@@ -135,7 +137,7 @@ body {
 }
 
 .dropdown-item{
-    color:#ffffff !important;
+    color:#333 !important;
 }
 
 .dropdown-item:hover{
@@ -159,22 +161,19 @@ body {
 
 
   
-body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
-           
             background-color: #f4f4f4;
         }
 
 
         .header {
             animation: slideInHeader 1s forwards;
-            
         }
         
         .container-menu {
             animation: slideDownMenu 1s forwards;
-            
         }
         @keyframes slideInHeader {
             from {
@@ -205,40 +204,90 @@ body {
         
         
         .link-1 {
-            transition: 0.3s ease !important;
-            background: #3fa46b00 !important;
-            color: #ffffff !important;
-            font-size: 16px !important;
+            transition: all 0.3s ease !important;
+            background: rgba(63, 164, 107, 0) !important;
+            color: #333 !important;
+            font-size: 18px !important;
             text-decoration: none !important;
-            border-top: 2px solid #212529 !important;
-            border-bottom: 2px solid #212529 !important;
             padding: 10px 0 !important;
             margin: 0 20px !important;
+            border-radius: 4px !important;
+            position: relative !important;
+            overflow: hidden !important;
+           
+            display: inline-block !important;
           }
+          
+          .link-1::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: #b8d4ff !important;
+            transform: scaleX(0) !important;
+            transform-origin: left !important;
+            transition: transform 0.3s ease !important;
+            z-index: -1 !important;
+          }
+          
+          .link-1:hover::before {
+            transform: scaleX(1) !important;
+          }
+          
           .link-1:hover {
-            border-top: 4px solid #ffffff !important;
-            border-bottom: 4px solid #ffffff !important;
-            padding: 6px 0 !important; 
+            border-top: 4px solid #b8d4ff !important;
+            border-bottom: 4px solid #b8d4ff !important;
+            padding: 6px 0 !important;
+            color: #333 !important;
           }
-
+          
           .link-2 {
-            width: max-content !important;
-            transition: 0.3s ease !important;
-            background: #3fa46b00 !important;
-            color: #ffffff !important;
-            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            background: rgba(63, 164, 107, 0) !important;
+            color: #333 !important;
+            font-size: 16px !important;
             text-decoration: none !important;
-            border-top: 2px solid #1882c9 !important;
-            border-bottom: 2px solid #1882c9 !important;
             padding: 10px 0 !important;
-            margin: 0 5px !important;
+            margin: 0 20px !important;
+            border-radius: 4px !important;
+            position: relative !important;
+            overflow: hidden !important;
+            
+            white-space: nowrap !important; /* Evita saltos de línea dentro del enlace */
+            display: inline-flex !important;
+            align-items: center !important;
           }
-          .link-2:hover {
-            border-top: 2px solid #ffffff !important;
-            border-bottom: 2px solid #ffffff !important;
-            padding: 10px 0 !important; 
-          }
+          
 
+
+          .link-2::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: #b8d4ff !important;
+            transform: scaleX(0) !important;
+            transform-origin: left !important;
+            transition: transform 0.3s ease !important;
+            z-index: -1 !important;
+          }
+          
+          .link-2:hover::before {
+            transform: scaleX(1) !important;
+          }
+          
+          .link-2:hover {
+            border-top: 4px solid #b8d4ff !important;
+            border-bottom: 4px solid #b8d4ff !important;
+            padding: 6px 0 !important;
+            color: #333 !important;
+          }
+          
+          
         @keyframes slideInHeader {
             from {
                 transform: translateY(-100%);
@@ -275,3 +324,5 @@ body {
             animation: slideDownMenu 1s forwards;
           
         }
+
+        

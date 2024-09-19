@@ -62,6 +62,7 @@ $dispositivosSeleccionados = isset($_GET['dispositivos']) ? json_decode(urldecod
                         </div>
                     </div>
                     <button type="button" class="btn btn-light" onclick="agregarCampo()"> + Agregar otra dirección...</button>
+                    <br><br><hr>
                     <button type="submit" class="btn btn-success" name="aceptar" id="btnConfirmarAsignacion" onclick="guardarCorreos()">Enviar</button>
                     <input type="hidden" name="correos_json" id="correos_json">
                 </div>

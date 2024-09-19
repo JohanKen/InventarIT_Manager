@@ -13,7 +13,7 @@ $clienteSeleccionado = isset($_GET['cliente']) ? $_GET['cliente'] : '';
 if (!empty($clienteSeleccionado)) {
     // Obtener colaboradores según el cliente seleccionado
     $colaboradores = ModeloColaboradores::selectColaboradorPorCliente($clienteSeleccionado);
-
+    
     // Construir las opciones del select
     $options = "";
     foreach ($colaboradores as $item) {

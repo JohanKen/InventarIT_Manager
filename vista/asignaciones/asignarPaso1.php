@@ -3,8 +3,13 @@ require_once 'controlador/ControladorColaboradores.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
+
     $colaboradorSeleccionado = $_POST['colaborador2'];
+
+    
     if (empty($colaboradorSeleccionado)) {
         echo  '<script>
                 alert("Por favor, seleccione un colaborador.");
@@ -12,6 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
             </script>';
         exit;
     } else {
+
+        //validar que el colaborador seleccionado no tenga una asignacion anterior
+        //solo mostrar la alerta de que ya la tiene para poder continuar si el usuario
+        //asi lo desea
+        
+        //esto se debe crear como consulta directamente desde la base de datos
+        //con un procedimiento almcaenado
+        $controladorColaboradores = new ControladorAsignaciones();
+        $colaborador = $controladorColaboradores->consultarAsignacion($colaboradorSeleccionado);
+
         echo '
                 <script>            
                     var colaboradorSeleccionado = ' . json_encode($colaboradorSeleccionado) . ';
@@ -86,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                     <img src="images/empleados.png" alt="Colaborador Icon" class="form-icon"> Colaborador
                 </label>
 
-
+    
 
                 
                 <select name="colaborador2" id="colaborador2" class="form-control">
@@ -115,7 +130,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
 
     <script>
     function cargarVistasColaboradores() {
-
         console.log("cargarVistasColaboradores se está ejecutando");
         var clienteSeleccionado = document.getElementById("cliente").value;
         var xhr = new XMLHttpRequest();

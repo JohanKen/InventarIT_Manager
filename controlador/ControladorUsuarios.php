@@ -12,8 +12,6 @@ class ControladorUsuarios {
         
         if (isset($_POST["registrar"])) {
             try {
-
-
                 $password=$_POST['password'];
                 $ConfirmarPassword=$_POST['confirmar_password'];
 
@@ -235,7 +233,7 @@ class ControladorUsuarios {
     
             // Obtener el usuario
             $usuario = ModeloUsuarios::login($email, $password);
-
+    
             // Obtener el número de filas
             $count = $usuario->num_rows;
             
@@ -251,11 +249,8 @@ class ControladorUsuarios {
                     $fechaIngreso = $arreglo[0]['fecha_ingreso_usuario'];
                     $fechaCreacion = $arreglo[0]['fecha_creacion_usuario'];
                     $password = $arreglo[0]['password'];
-                    
-                    
                     // Configurar la variable de sesión con los datos del usuario
                     $_SESSION['usuario'] = $arreglo[0];
-                   
                     switch (true) {
                         case $rol_usuario == 1 && $estado_usuario == 1:
                             echo  '<script>

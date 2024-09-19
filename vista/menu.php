@@ -28,7 +28,6 @@
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
    
@@ -72,9 +71,9 @@
 
 <body>
     <header class="header">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container">
+        <div class="container-sm">
+            <nav class="navbar navbar-expand-lg  bg-primary-subtle border border-primary-subtle rounded-2 ">
+                <div class="container"> 
                     <a class="navbar-brand" href="#">
                         <img src="images/logoInventarit.png" alt="imgLogo" id="logoInventarit">
                     </a>
@@ -127,23 +126,18 @@
                    <a class="link-2" href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>"
                         id="usuarioLink">
                         <img src="images/useer.png" alt="">
-                        <?php echo $datosUsuario[3] . ' ' . $datosUsuario[1];?>
-                    </a>
+                        <span class="nombre-usuario"><?php echo $datosUsuario[3] . '&nbsp;' . $datosUsuario[1]; ?></span>
+                        </a>
 
                         </div>
                         
                  
                         <div class="align-self-center">
 
-                        <button id="btnCerrarSesion" type="button" class="btn btn-dark" onclick="cerrarSesion()">
+                        <button id="btnCerrarSesion" type="button" class="btn btn-dark bg-primary-subtle" onclick="cerrarSesion()">
                         <img src="images/imgclose.png" alt="" style="max-width:30px;">
                     </button>
                         </div>
-
-
-
-
-
                 </div>
             </nav>
         </div>

@@ -75,7 +75,7 @@
                             <th>NOTAS</th>
                             <th>IMAGEN</th>
                             <th></th>
-                        </tr>BBBN
+                        </tr>
                     </thead>
                     <tbody>
                         <?php
@@ -151,8 +151,7 @@
                                     </td>
                                 </tr>
                                 ";
-
-                                // Agregar evento de clic para redireccionar al hacer clic en la imagen
+                                //Agregar el evento click para redireccionar al hacer click en la imagen
                                 echo "<script>
                                         document.getElementById('editar-{$item[0]}').addEventListener('click', function() {
                                             window.location.href = 'index.php?seccion=editarDispositivos&id_dispositivo={$item[0]}';

@@ -1,86 +1,91 @@
-
-<?php
+<?php 
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-include_once __DIR__ . '/../../modelo/ModeloAsignaciones.php';
+include_once '../../modelo/ModeloAsignaciones.php';
 
-$buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+$buscar = isset($_GET['buscar']) ? $_GET['buscar'] :'';
 
 if(!empty($buscar)){
-    $Colaboradores = ModeloAsignaciones::buscarAsignacion($buscar);
+    $Asignaciones = ModeloAsignaciones::buscarAsignacion($buscar);
 
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Resiltados de busquedad</title>
-        <link rel="stylesheet" href="estilos/estilosColaboradores.css">
-        <style>
-                
-        .imagen-editar {
-            cursor: pointer;
-        }
-
-        .acciones {
-            display: flex;
-        }
-        
-        .acciones img {
-            max-width: 40px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .acciones img:hover {
-            transform: scale(1.2);
-        }
-</style>
-    </head>
-    <body>
-    <table class="table table-secondary table-straped table-hover" id="colaboradores">
-    <thead class="table-dark">
+        <div class="container-fluid">
+        <div class="table-responsive">
+   <table class="table table-secondary table-straped table-hover" id="asignaciones">
+   <thead class="table-dark">
             <tr>
+                <th>ID Asignacion</th>
                 <th>ID Colaborador</th>
-                <th>Nombre</th>
-                <th>Apellido Paterno</th>
+                <th>Nombre Colaborador</th>
+                <th>Apellido Colaborador</th>
                 <th>Cliente</th>
-                <th>Depatamento</th>
-                <th>Estado</th>
-                <th>Fecha de Ingreso</th>
+                <th>Departamento</th>
+                <th>ID Dispositivo</th>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Numero de serie</th>
+                <th>Precio</th>
+                <th>Fecha de asignacion</th>
                 <th>Opciones</th>
-            </tr>
         </thead>
         <tbody>
-            <?php
-                foreach($Colaboradores as $item){
+
+
+                <?php 
+                
+                //impresion de array como prueba para ver que es lo que se esta recibiendo desde la base de datos
+                /*echo('<pre>');
+                var_dump($Asignaciones);
+                echo('</pre>');
+*/
+                foreach($Asignaciones as $item){
                     echo '
                         <tr>
-                            <td>' . $item['id_colaborador']. '</td>
-                            <td>' . $item['nombre_colaborador']. '</td>
-                            <td>' . $item['apellido_paterno_colaborador']. '</td>
-                            <td>' . $item['empresa']. '</td>
-                            <td>' . $item['departamento']. '</td>
-                            <td>' . $item['estado']. '</td>
-                            <td>' . $item['fecha_ingreso_colaborador']. '</td>
-                            <div class="acciones">
-
+                            <td>'.$item['id_asignacion'].'</td>
+                            <td>'.$item['id_colaborador'].'</td>
+                            <td>'.$item['nombre_colaborador'].'</td>
+                            <td>'.$item['apellido_paterno_colaborador'].'</td>
+                            <td>'.$item['nombre_empresa'].'</td>
+                            <td>'.$item['departamento'].'</td>
+                            <td>'.$item['id_dispositivo'].'</td>
+                            <td>'.$item['tipo'].'</td>
+                            <td>'.$item['marca'].'</td>
+                            <td>'.$item['modelo'].'</td>
+                            <td>'.$item['numero_serie'].'</td>
+                            <td>$'.number_format($item['precio'], 2, '.', ',').'</td>
+                            <td>'.$item['fecha_asignacion'].'</td>
                             <td>
-                                <a href="index.php?seccion=editarColaborador&id_colaborador=' . $item['id_colaborador'] .'"><img src="images/editColab.png" alt="Editar" style="max-width:40px;" class="imagen-editar"></a>
-                                <a href="javascript:void(0);" onclick="confirmarBorrar(' . $item['id_colaborador'] . '); "id="enlaceBorrar" ><img src="images/basura.png" alt="Borrar" style="max-width:40px; cursor:pointer;" ></a>
+                                    <img src="images/basura.png" alt="Borrar" style="max-width:40px; cursor:pointer;" onclick="confirmarBorrar('.$item['id_asignacion'].');">
+
                             </td>
-                            </div> 
                         </tr>
                     ';
                 }
             ?>
         </tbody>
     </table>
-    </body>
-    </html>
-    
+    </div>
+    </div>
+    <script>
+             function confirmarBorrar(id_asignacion) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "La asignación se elimiara completamente.",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php?seccion=asignaciones/asignaciones&accion=eliminar&id_asignacion=" + id_asignacion;
+             }});
+             }
+        </script>
 <?php
-    }
+}
 ?>
+
