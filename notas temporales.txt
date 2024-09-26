@@ -62,4 +62,4 @@ Se debe de poder guardar la asignacion tambien dando la opcion de que en caso de
 no sea necesario enviar una carta responsiva no tenga que ser asi
 
 ALERTAS AL INICIO DE SESION DE CADA USUARIO:  
-Cambiar la alerta (SweetAlert2) para cada inicio de sesion de los usuarios. 
+Redireccion de manera correcta solo personalizar para cada tipo de usuario

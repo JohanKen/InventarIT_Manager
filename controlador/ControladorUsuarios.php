@@ -221,108 +221,60 @@ class ControladorUsuarios {
         $usuario = $obj->fetch_all();
         return $usuario;
         }
-
+        
     }
 
 
     // Función para llevar a cabo el inicio de sesión
-    public static function validarLogin() {
+    public static function validarLogin(){
         if (isset($_POST["entrar"])) {
             $email = $_POST["email"];
             $password = $_POST["password"];
     
-            // Obtener el usuario
             $usuario = ModeloUsuarios::login($email, $password);
-    
-            // Obtener el número de filas
             $count = $usuario->num_rows;
-            
+    
             if ($count > 0) {
                 $arreglo = $usuario->fetch_all(MYSQLI_ASSOC);
                 if (isset($arreglo[0]['id_rol']) && isset($arreglo[0]['id_estado_usuario'])) {
-                    $id_usuario = $arreglo[0]['id_usuario'];
-                    $apellido_paterno_usuario = $arreglo[0]['apellido_materno_usuario'];
-                    $nombre_usuario = $arreglo[0]['nombre_usuario'];
-                    $correo_usuario = $arreglo[0]['correo_usuario'];
-                    $estado_usuario = $arreglo[0]['id_estado_usuario'];
-                    $rol_usuario = $arreglo[0]['id_rol'];
-                    $fechaIngreso = $arreglo[0]['fecha_ingreso_usuario'];
-                    $fechaCreacion = $arreglo[0]['fecha_creacion_usuario'];
-                    $password = $arreglo[0]['password'];
-                    // Configurar la variable de sesión con los datos del usuario
                     $_SESSION['usuario'] = $arreglo[0];
-                    switch (true) {
-                        case $rol_usuario == 1 && $estado_usuario == 1:
-                            echo  '<script>
-                                    alert("Iniciaste sesión como administrador");
-                                    window.location.href="index.php";
-                                    </script>';
-                            exit;
-                            break;
-                        case $rol_usuario == 2 && $estado_usuario == 1:
-                            echo  '<script>
-                                    alert("Iniciaste sesión como editor");
-                                    window.location.href="index.php";
-                                    </script>';
-                            exit;
-                            break;
-                        case $rol_usuario == 3 && $estado_usuario == 1:
-                            echo  '<script>
-                                    alert("Iniciaste sesión como consultor");
-                                    window.location.href="index.php";
-                                    </script>';
-                            exit;
-                            break;
-                        case $rol_usuario == 1 && $estado_usuario == 2:
-                            echo  '<script>
-                                    alert("Tu usuario administrador está inactivo actualmente");
-                                    window.location.href="login.php";
-                                    </script>';
-                            exit;
-                            break;
-                        case $rol_usuario == 2 && $estado_usuario == 2:
-                            echo  '<script>
-                                    alert("Tu usuario editor está inactivo actualmente");
-                                    window.location.href="login.php";
-                                    </script>';
-                            exit;
-                            break;
-                        case $rol_usuario == 3 && $estado_usuario == 2:
-                            echo  '<script>
-                                    alert("Tu usuario consultor está inactivo actualmente");
-                                    window.location.href="login.php";
-                                    </script>';
-                            exit;
-                            break;
-                        default:
-                            // Código por defecto si no se cumplen las condiciones anteriores
-                            break;
+                    $rol_usuario = $arreglo[0]['id_rol'];
+                    $estado_usuario = $arreglo[0]['id_estado_usuario'];
+    
+                    if ($rol_usuario == 1 && $estado_usuario == 1) {
+                        return ['status' => 'success', 'message' => '', 'redirect' => 'index.php'];
                     }
-                } else {
-                    echo '<script>
-                            alert("Las claves necesarias no existen en el array de usuario.");
-                            window.location.href="Login.php";
-                          </script>';
-                    exit;
+                    if ($rol_usuario == 2 && $estado_usuario == 1) {
+                        return ['status' => 'success', 'message' => '', 'redirect' => 'index.php'];
+                    }
+                    if ($rol_usuario == 3 && $estado_usuario == 1) {
+                        return ['status' => 'success', 'message' => '', 'redirect' => 'index.php'];
+                    }
+                    if ($rol_usuario == 1 && $estado_usuario == 2) {
+                        return ['status' => 'error', 'message' => 'Este usuario esta inactivo actualmente', 'redirect' => 'login.php'];
+                    }
+                    if ($rol_usuario == 2 && $estado_usuario == 2) {
+                        return ['status' => 'error', 'message' => 'Este usuario esta inactivo actualmente', 'redirect' => 'login.php'];
+                    }
+                    if ($rol_usuario == 3 && $estado_usuario == 2) {
+                        return ['status' => 'error', 'message' => 'Este usuario esta inactivo actualmente', 'redirect' => 'login.php'];
+                    }
                 }
+                return ['status' => 'error', 'message' => 'Credenciales no reconocidas.', 'redirect' => 'login.php'];
             } else {
                 $usuarioIncorrecto = ModeloUsuarios::comprobarUsuario($email);
                 if ($usuarioIncorrecto) {
-                    echo '<script>
-                            alert("La contraseña es incorrecta");
-                            window.location.href="Login.php";
-                          </script>';
-                    exit;
+                    return ['status' => 'error', 'message' => 'Contraseña incorrecta', 'redirect' => 'login.php'];
                 } else {
-                    echo '<script>
-                            alert("El usuario no existe");
-                            window.location.href="Login.php";
-                          </script>';
-                    exit;
+                    return ['status' => 'error', 'message' => 'Usuario desconocido', 'redirect' => 'login.php'];
                 }
             }
         }
     }
+
+
+    
+    
 
  
 
