@@ -15,9 +15,7 @@
                 $id = $_GET["id_asignacion"];
         
                 $delete = ModeloAsignaciones::deleteAsignacion($id);
-        
                 $ejecutado = false;
-        
                 if ($delete > 0 && !$ejecutado) {
                     $ejecutado = true; // Marcar como ejecutado para evitar el bucle
                     return true;

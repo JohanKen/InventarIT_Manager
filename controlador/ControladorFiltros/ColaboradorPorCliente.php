@@ -25,6 +25,9 @@ if (!empty($clienteSeleccionado)) {
     echo $options;
 } else {
     // Enviar un mensaje de error si el cliente seleccionado está vacío
+    //enviar un mensaje de error si el cliente seleccionadaoe esta vacio para que jaoha ngustavo estrada castillo
+    //debido a que esto no se puede llevar a cabo si no tenemos la suficiente experiencia para realizarlo
     echo 'Error: Cliente no seleccionado.';
+
 }
 ?>

@@ -71,9 +71,9 @@
 
 <body>
     <header class="header">
-        <div class="container-sm">
-            <nav class="navbar navbar-expand-lg  bg-primary-subtle border border-primary-subtle rounded-2 ">
-                <div class="container"> 
+        <div class="container-fluid p-0 m-0" >
+            <nav class="navbar navbar-expand-lg  bg-dark border border-secondary-subtle rounded-0 m-0 p-0">
+                <div class="container-fluid"> 
                     <a class="navbar-brand" href="#">
                         <img src="images/logoInventarit.png" alt="imgLogo" id="logoInventarit">
                     </a>
@@ -81,61 +81,73 @@
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="link-1" href="index.php?seccion=inicio">Inicio</a>
-                            </li>
+                    <div class="container-fluid p-0 m-0">
+                        <div class="collapse navbar-collapse p-0 m-0" id="navbarNav">
+                            <ul class="navbar-nav">
 
-                            <li class="nav-item">
-                                <a class="link-1" href="index.php?seccion=asignaciones/asignaciones">Onboarding</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="link-1" href="index.php?seccion=colaboradores">Colaboradores</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="link-1 dropdown-toggle" href="#" id="equiposLink" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Equipos
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="equiposLink">
-                                    <li><a class="dropdown-item" href="index.php?seccion=dispositivos">Dispositivos</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">CCTV</a></li>
-                                    <li><a class="dropdown-item" href="#">Herramientas</a></li>
+                                <li>
+                                    <div class="link-container">
+                                        <a class="link-three" href="index.php?seccion=inicio">Inicio</a>
+                                    </div>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <div class="link-container">
+                                        <a class="link-three" href="index.php?seccion=asignaciones/asignaciones">Onboarding</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="link-container">
+                                        <a class="link-three" href="index.php?seccion=colaboradores">Colaboradores</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <div class="link-container">
+                                        <a class="link-three dropdown-toggle" href="#" id="equiposLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Equipos</a>
+                                        <ul class="dropdown-menu" aria-labelledby="equiposLink">
+                                            <li><a class="dropdown-item" href="index.php?seccion=dispositivos">Dispositivos</a></li>
+                                            <li><a class="dropdown-item" href="#">CCTV</a></li>
+                                            <li><a class="dropdown-item" href="#">Herramientas</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="link-container">
+                                        <a class="link-three" href="index.php?seccion=usuarios">Usuarios</a>
+                                    </div>
+                                </li>
+
+                                <hr>
+
+
+
+                                <!--Esta parte del menu (barra de busqueda y notificaciones seran adaptadas en la segunda version del sistema)
+                                <input type="text" id="searchInput" placeholder="Buscar" class="form-control">
+                                    <a href=""><img src="images/cam.png" id="imgCampana" alt=""></a>
+                                
+                                -->
                                 </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="link-1" href="index.php?seccion=usuarios">Usuarios</a>
-                            </li>
-                            <hr>
-
-
-
-                            <!--Esta parte del menu (barra de busqueda y notificaciones seran adaptadas en la segunda version del sistema)
-                        <input type="text" id="searchInput" placeholder="Buscar" class="form-control">
-                        <a href=""><img src="images/cam.png" id="imgCampana" alt=""></a>
-                        </ul>
-                        -->
+                            </div>
                     </div>
-
                 </div>
                 <div class="d-flex justify-content-xl-end" style="margin: 15px !important;">
 
-                   <div class="align-self-center">
-                   <a class="link-2" href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>"
-                        id="usuarioLink">
-                        <img src="images/useer.png" alt="">
+                   <div class="link-container align-self-center">
+                   <a class="link-two" href="index.php?seccion=perfil&id_usuario=<?php echo $_SESSION['usuario']['id_usuario']; ?>" id="usuarioLink">
+                        <img src="images/adminn.png" alt="">
                         <span class="nombre-usuario"><?php echo $datosUsuario[3] . '&nbsp;' . $datosUsuario[1]; ?></span>
                         </a>
 
                         </div>
                         
                  
-                        <div class="align-self-center">
-
-                        <button id="btnCerrarSesion" type="button" class="btn btn-dark bg-primary-subtle" onclick="cerrarSesion()">
-                        <img src="images/imgclose.png" alt="" style="max-width:30px;">
+                        <div class="link-container-exit align-self-center">
+                        
+                        <button id="btnCerrarSesion" type="button" class="btn" onclick="cerrarSesion()">
+                        <img src="images/cerrar.png" alt="" style="max-width:30px;">
                     </button>
                         </div>
                 </div>
@@ -160,6 +172,25 @@
         });
     }
     </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const body = document.body;
+        const contentHeight = body.scrollHeight; // Obtiene la altura total del contenido
+
+        // Ajusta la duración de la animación basada en la altura del contenido
+        let duration;
+
+        if (contentHeight < 600) {
+            duration = 20; // Menos contenido
+        } else if (contentHeight < 1200) {
+            duration =  30; // Contenido medio
+        } else {
+            duration = 60; // Más contenido
+        }
+
+        body.style.animationDuration = `${duration}s`; // Aplica la duración a la animación
+    });
+</script>
 
 
 

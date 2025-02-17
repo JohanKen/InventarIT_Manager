@@ -1,13 +1,4 @@
-MARCA EN DISPOSITIVOS
-Falta accion de agregar una nueva marca en agregar un nuevo dispositivo asi como en la accion de editar cada uno
-
-IMAGENES EN DISPOSITIVOS
-Rutas de imagenes se vana a almacenar solo la ruta de la imagen cargada a la base de datos y la imagen en si se debe guardar en el servidor
-
-AGREGAR DISPOSITIVOS:
-Formato de fecha incorrecto en agregar cualquier dispositivo debe guardar los datos que ya se ingresaron
-y no recargar la pagina con todos los campos en blanco de nuevo
-
+asignaciones:
 DISPOSITIVOS BUCABLES EN ASIGNACIONES:
 Debe ser posible buscar un dispositivo por numero de serie o filtar al momento de buscar para asignarl
 esto ya se puede hacer por tipo pero hay que agregar una barra de busqueda para poder buscar tambien los dispositivos
@@ -16,50 +7,63 @@ disponibles para su respectiva busqueda
 BARRA DE BUSQUEDA EN ASIGNAR PASO 2:
 Hace falta agregar una barra de busqueda para hacer mas rapida la asignacion de dispositivos.
 
-BARRA DE BUSQUEDA COLABORADORES:
-Barrra de busqueda colaboradores no funciona correctamente
-
 FILTRO DE BUSQUEDA EN ONBOARDING
 Filtro de busqueda por cliente no funciona correctamente en el apartado de asignaciones
-
-BARRA DE BUSQUEDA DISPOSITIVOS:
-Agregar barra de busqueda (falta buscar fecha en la misma pero agregarla como primera version)
-
-FORMATO DE FECHA EDITAR DISPOSITIVOS:
-Formateo de fechas en todos los formularios para cuando no se inserta de manera correcta, recargar en la misma pagina donde se tiene el
-error del formato de la fecha
 
 FORMATO DE PRECIOS EN TODAS LAS TABLAS DE ONBOARDING:
 Formatear el precio en los dispositivos para que se muestren en cantidad numerica con signos de pesos y comas.
 
-NUMEROS DE SERIE:
-Numeros de serie que se repiten esta correctamente para que no se agreguen asi, sin embargo el mensaje en todos lados para agregar
-se muestra de manera incorrecta
-
-VALIDACIÓN DE FECHAS EN FORMULARIOS:
-Alerta de fecha incorrecta sin funcionar en todos los formularios para editar dispositivos y colaboradores,
-asi como en la pantalla cuando se quiere editar el perfil (tomar como ejemplo formularios para registrar nuevos dispositivos)
-
-MARCA DE APPLE:
-Marca de Imac debe registrarse por defecto como Apple y no como Imac
-
-CLIENTE AL AGREGAR Y EDITAR COLABORADOR
-Aparece mensaje error con la llave foranea cuando se agrega o edita un colaborador y se cambia o seleccciona un cliente diferente(solo pasa con algunos no con todos)
-
-BARRA DE BUSQUEDA DE COLABORADORES
-Editar barra de busqueda de colaboradores para su funcionalidad identica a la de dispositivos
-
-Hay un procedimiento almacenado existente en el cual no se esta involucrando a tablas
-foraneas como las son el uso de la tabla colaboradores con el id incorrecto
-
 +++++VALIDAR ASIGNACIONES:
-Validar que el colaborador seleccionado para una nueva asignacion no cuente ya con un equipo
-anteriormente asignado del mismo tipo, Solo mostrar advertencia
+Validar en el paso 1 de las asignaciones que el colaborador seleccioando no tenga anteriormente una asignacion
 
 
 CANCELAR ENVIO DE CARTAS RESPONSIVAS
 Se debe de poder guardar la asignacion tambien dando la opcion de que en caso de que 
 no sea necesario enviar una carta responsiva no tenga que ser asi
 
-ALERTAS AL INICIO DE SESION DE CADA USUARIO:  
-Redireccion de manera correcta solo personalizar para cada tipo de usuario
+
+
+-------------------------------------------------------------------
+
+dispositivos:
+BARRA DE BUSQUEDA DISPOSITIVOS:
+Agregar barra de busqueda (falta buscar fecha en la misma pero agregarla como primera version)
+
+NUMEROS DE SERIE:
+Numeros de serie que se repiten esta correctamente para que no se agreguen asi, sin embargo el mensaje en todos lados para agregar
+se muestra de manera incorrecta
+
+
+MARCA DE APPLE:
+Marca de Imac debe registrarse por defecto como Apple y no como Imac
+
+FORMATO DE FECHA EDITAR DISPOSITIVOS:
+Formateo de fechas en todos los formularios para cuando no se inserta de manera correcta, recargar en la misma pagina donde se tiene el
+error del formato de la fecha
+
+
+
+-------------------------------------------------------------------
+colaboradores:
+BARRA DE BUSQUEDA COLABORADORES:
+Barrra de busqueda colaboradores no funciona correctamente
+
+CLIENTE AL AGREGAR Y EDITAR COLABORADOR
+Aparece mensaje error con la llave foranea cuando se agrega o edita un colaborador y se cambia o seleccciona un cliente diferente(solo pasa con algunos no con todos)
+
+BARRA DE BUSQUEDA DE COLABORADORES
+Editar barra de busqueda de colaboradores para su funcionalidad identica a la de dispositivos
+Hay un procedimiento almacenado existente en el cual no se esta involucrando a tablas
+foraneas como las son el uso de la tabla colaboradores con el id incorrecto
+
+
+-------------------------------------------------------------------
+general:
+
+VALIDACIÓN DE FECHAS EN FORMULARIOS:
+Alerta de fecha incorrecta sin funcionar en todos los formularios para editar dispositivos y colaboradores,
+asi como en la pantalla cuando se quiere editar el perfil (tomar como ejemplo formularios para registrar nuevos dispositivos)
+
+
+
+

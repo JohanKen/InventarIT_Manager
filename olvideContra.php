@@ -13,12 +13,54 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <style>
-        body {
-            background: none;
-            background-image: url(./images/perro2.jpg);
-            background-size: contain;
-            backdrop-filter: blur(3px);
-        }
+
+
+@keyframes bgAnimated {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    } 
+}
+
+      body {
+    margin: 0;
+    padding: 0;
+    background-image: url("images/olvide.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-x: hidden;
+    animation-name: bgAnimated;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; 
+}
+
+
+
+/* Media queries para ajustar la duración de la animación */
+@media (max-height: 600px) {
+    body {
+        animation-duration: 8s; /* Menos contenido, más rápido */
+    }
+}
+
+@media (min-height: 600px) and (max-height: 800px) {
+    body {
+        animation-duration: 12s; /* Contenido medio */
+    }
+}
+
+@media (min-height: 800px) {
+    body {
+        animation-duration: 16s; /* Más contenido, más lento */
+    }
+}
+
 
         .card {
             border-radius: 15px;

@@ -27,7 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
         $controladorColaboradores = new ControladorAsignaciones();
         $colaborador = $controladorColaboradores->consultarAsignacion($colaboradorSeleccionado);
 
-        echo '
+        
+        echo '<script type="text/javascript">',
+                'buscarAsignacion();',
+                '</script>'
+        ;
+        
+        '
                 <script>            
                     var colaboradorSeleccionado = ' . json_encode($colaboradorSeleccionado) . ';
                     var url = "index.php?seccion=asignaciones/asignarPaso2&id_colaborador=" + colaboradorSeleccionado;
@@ -98,14 +104,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
 
             <div class="form-group">
                 <label for="colaborador2" class="form-label">
-                    <img src="images/empleados.png" alt="Colaborador Icon" class="form-icon"> Colaborador
+                    <img src="images/empleados.png" alt="Colaborador Icon" class="form-icon">Colaborador
                 </label>
 
-    
-
-                
                 <select name="colaborador2" id="colaborador2" class="form-control">
-                    <option value="" disabled selected>-- Primero Seleccione un Cliente --</option>
+                    <option id="colaboradorSeleccionado" value="" disabled selected>-- Primero Seleccione un Cliente --</option>
                 </select>
             </div>
 
@@ -146,6 +149,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['continuar'])) {
                 }
             }
         };
+        
+        //integracion de funcion para verificar que el colaborador no tenga ya anteriormente una asignacion
+        var colaboradorSeleccionado  = getElementById("colaboradorSeleccionado");
+        function buscarAsignacion(){
+                console.log("El colaborador seleccionado es:" +colaboradorSeleccionado)
+        }
+
 
         var url = "controlador/ControladorFiltros/ColaboradorPorCliente.php?cliente=" + clienteSeleccionado;
         xhr.open("GET", url, true);

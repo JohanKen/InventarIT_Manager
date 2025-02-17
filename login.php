@@ -12,10 +12,10 @@ include_once 'controlador/ControladorUsuarios.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+    <link rel="stylesheet" href="estilos/estilosLogin.css">
     <style>
         body {
-            background-image: url(images/bggg.png);
+            background-image: url(images/bglogin.png);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -28,12 +28,13 @@ include_once 'controlador/ControladorUsuarios.php';
             border-radius: 5px; 
         }
         #olvideContra {
-            color: #007bff;
+            color: white;
             text-decoration: none;
             margin-top: 10px;
+            background: gray;
         }
         #olvideContra:hover {
-            background-color: #333;
+            background-color: white;
             color: white;
         }
         .placeholder-white::placeholder {
@@ -52,17 +53,17 @@ include_once 'controlador/ControladorUsuarios.php';
         <div class="col-md-6">
             <div class="card">
                 <div class="text-center mb-4">
-                    <img src="./images/logoinventarit.png" alt="" style="width:300px" class="img-fluid">
-                    <h2 class="mt-3 colorGray">¡Bienvenido de nuevo!</h2>
+                    <img src="./images/logoblancoinv.png" alt="" style="width:300px" class="img-fluid">
+                    <h2 class="bienvenido">¡Bienvenido de nuevo!</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" id="formLogin" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <input type="text" class="form-control bg-secondary text-white placeholder-white" id="correo" name="email" required placeholder="Correo electrónico">
+                            <input type="text" class="form-control bg-light text-gray placeholder-gray" id="correo" name="email" required placeholder="Correo electrónico">
                             <div class="invalid-feedback">Por favor ingresa tu correo electrónico.</div>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control bg-secondary text-white placeholder-white" id="password" name="password" required placeholder="Contraseña">
+                            <input type="password" class="form-control bg-light text-gray placeholder-gray" id="password" name="password" required placeholder="Contraseña">
                             <div class="invalid-feedback">Por favor ingresa tu contraseña.</div>
                         </div>
                         <?php
@@ -82,9 +83,9 @@ include_once 'controlador/ControladorUsuarios.php';
                             echo "</div>";
                         }
                         ?>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="recordar-contrasena" name="recordar-contrasena">
-                            <label class="form-check-label" for="recordar-contrasena">Recordar contraseña</label>
+                        <div class="mb-3 form-check" >
+                            <input type="checkbox" class="form-check-input"  id="recordar-contrasena" name="recordar-contrasena">
+                            <label class="form-check-label" for="recordar-contrasena" style="color:white">Recordar contraseña</label>
                         </div>
                         <div class="d-grid">
                             <button type="submit" name="entrar" class="btn btn-primary">Iniciar Sesión</button>
@@ -92,7 +93,7 @@ include_once 'controlador/ControladorUsuarios.php';
                         <hr>
                         <div class="text-center">
                             <p class="text-center" style="margin-top: 20px;">
-                                <a href="olvideContra.php" id="olvideContra" style="text-decoration: none; color: #3498db; font-size: 16px; border: 1px solid #3498db; padding: 8px 16px; border-radius: 3px; transition: all 0.3s ease;">Olvidé mi contraseña</a>
+                                <a href="olvideContra.php" id="olvideContra" style="text-decoration: none; color: #062886; font-size: 16px; border: 1px solid #062886; padding: 8px 16px; border-radius: 3px; transition: all 0.3s ease;">Olvidé mi contraseña</a>
                             </p>
                         </div>
                     </form>

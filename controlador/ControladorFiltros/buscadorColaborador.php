@@ -15,7 +15,7 @@ if(!empty($buscar)){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Resiltados de busquedad</title>
+        <title>Resultados de la busqueda</title>
         <link rel="stylesheet" href="estilos/estilosColaboradores.css">
         <style>
      .imagen-editar {
@@ -80,5 +80,10 @@ if(!empty($buscar)){
     </html>
     
 <?php
+    }else{
+        echo"<script>
+            window.location.reload(true);
+        </script>";
+        exit;
     }
 ?>

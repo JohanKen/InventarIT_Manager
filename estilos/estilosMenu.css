@@ -1,12 +1,46 @@
+@keyframes bgAnimated {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../images/bgged.png");
+    background-image: url("../images/bgn.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     overflow-x: hidden;
-    
+    animation-name: bgAnimated;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; 
+}
+
+
+/* Media queries para ajustar la duración de la animación */
+@media (max-height: 600px) {
+    body {
+        animation-duration: 8s; /* Menos contenido, más rápido */
+    }
+}
+
+@media (min-height: 600px) and (max-height: 800px) {
+    body {
+        animation-duration: 12s; /* Contenido medio */
+    }
+}
+
+@media (min-height: 800px) {
+    body {
+        animation-duration: 16s; /* Más contenido, más lento */
+    }
 }
 
 .header {
@@ -14,6 +48,8 @@ body {
 }
 .container{
     z-index: 100;
+    margin:0%;
+    padding: 0%;
 }
 #logoInventarit {
     width: 160px;
@@ -34,7 +70,7 @@ body {
 } 
 
 #btnCerrarSesion{
-    color: #ff0000c4 ;
+    margin-left: 10%;
     border: none;
     z-index: 10 !important;
     width: max-content !important;
@@ -66,12 +102,16 @@ body {
 
 .navbar-nav hr {
     border-top: 1px solid rgb(255, 255, 255); 
-    margin: 8px 0; 
+  
+}
+
+#navbarNav{
+    height: 100% !important;
 }
 
 .nav-link{
-    width: max-content !important;
-
+    width: 100% !important;
+    height: 100% !important;
 }
 #usuarioLink {
     color: #fff;
@@ -86,15 +126,10 @@ body {
     margin-right: 5px;
 }
 
-#usuarioLink:hover {
-    background-color: #333; /* Cambia el fondo al pasar el cursor */
-    color: #f0f0f0; /* Cambia el color del texto al pasar el cursor */
-    text-decoration: underline; /* Agrega un subrayado al pasar el cursor */
-    border-radius: 5px; /* Redondea las esquinas del fondo */
-}
 
 #usuarioLink:hover img {
     filter: brightness(0.8); /* Oscurece la imagen al pasar el cursor */
+    transform: scale(1.2);
 }
 
 #userDropdown {
@@ -121,6 +156,7 @@ body {
 .dropdown-menu{
     background-color: white !important;
     border-radius: 0 !important;
+    z-index: 3 !important;
 }
 
 #btnUserDropDown{
@@ -137,7 +173,7 @@ body {
 }
 
 .dropdown-item{
-    color:#333 !important;
+    color:#ffffff !important;
 }
 
 .dropdown-item:hover{
@@ -169,11 +205,11 @@ body {
 
 
         .header {
-            animation: slideInHeader 1s forwards;
+            animation: slideInHeader 4s forwards;
         }
         
         .container-menu {
-            animation: slideDownMenu 1s forwards;
+            animation: slideDownMenu 4s forwards;
         }
         @keyframes slideInHeader {
             from {
@@ -203,15 +239,182 @@ body {
         }
         
         
-        .link-1 {
-            transition: all 0.3s ease !important;
-            background: rgba(63, 164, 107, 0) !important;
-            color: #333 !important;
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            position: relative;
+            z-index: 0;
+          }
+
+          .link-container-exit{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin-left: 10%;
+            position: relative;
+            z-index: 0;
+          }
+
+          .link-container-exit:hover{
+            transform: scale(1.2);
+           
+          }
+
+          .link-two {
+            color: #2f78ff !important;
+            transition: color 1s cubic-bezier(0.32, 0, 0.67, 0) !important;
+          }
+          
+          .link-two:hover {
+            color: #ffffff !important;
+            transition: color 1s cubic-bezier(0.33, 1, 0.68, 1) !important;
+          }
+          
+          .link-two::before {
+            content: "" !important;
+            position: absolute !important;
+            z-index: -2 !important;
+            width: 100% !important;
+            height: 100% !important;
+            top: 0 !important;
+            right: 0 !important;
+            clip-path: polygon(
+              0% -20%,
+              100% -30%,
+              100% -10%,
+              0% 0%,
+              0% 130%,
+              100% 120%,
+              100% 100%,
+              0% 110%
+            ) !important;
+            background-color: #2f78ff !important;
+            color: #ffffff !important;
+            transition: clip-path 1s cubic-bezier(0.25, 1, 0.5, 1) !important;
+          }
+          
+          .link-two:hover::before {
+            clip-path: polygon(
+              0% 10%,
+              100% 0%,
+              100% 20%,
+              0% 30%,
+              0% 100%,
+              100% 90%,
+              100% 70%,
+              0% 80%
+            ) !important;
+          }
+          
+          .link-two::after {
+            content: "" !important;
+            position: absolute !important;
+            z-index: -1 !important;
+            width: 5ch !important;
+            height: 5ch !important;
+            top: 50% !important;
+            right: 50% !important;
+            transform: translate(50%, -50%) rotate(0deg) scale(0) !important;
+            transition: transform 1s ease !important;
+            color: #ffffff !important; 
+            background-color: #2f78ff !important;
+          }
+          
+          .link-two:hover::after {
+            transform: translate(50%, -50%) rotate(135deg) scale(1) !important;
+            color: #ffffff !important;
+        }
+
+          .link-three {
+            color: #ffffff !important;
             font-size: 18px !important;
             text-decoration: none !important;
             padding: 10px 0 !important;
             margin: 0 20px !important;
-            border-radius: 4px !important;
+          }
+          
+          .link-three::after {
+            content: "";
+            position: absolute;
+            z-index: 2;
+            
+            width: 50%;
+            height: 100%;
+            top: 0%;
+            left: 0%;
+            transform: translate(0, -50%) scaleY(0);
+            transition: transform 1s ease;
+            mix-blend-mode: difference;
+          
+            clip-path: polygon(
+              20% 60%,
+              100% 60%,
+              100% 40%,
+              20% 40%,
+              20% 0%,
+              60% 0%,
+              60% 20%,
+              20% 20%
+            );
+            
+            background-color: #2f78ff;
+          }
+          
+          .link-three:hover::after {
+            transform: translate(0, 0%) scaleY(1);
+            
+        }
+          
+          .link-three::before {
+            content: "";
+            position: absolute;
+            z-index: 2;
+            width: 50%;
+            height: 100%;
+            bottom: 0%;
+            right: 0%;
+            transform: translate(0, 50%) scaleY(0);
+            transition: transform 1s ease;
+            mix-blend-mode: difference;
+          
+            clip-path: polygon(
+              80% 40%,
+              0% 40%,
+              0% 60%,
+              80% 60%,
+              80% 100%,
+              40% 100%,
+              40% 80%,
+              80% 80%
+            );
+          
+            background-color: #2f78ff;
+          }
+          
+          
+
+          .link-three:hover::before {
+            
+            transform: translate(0%, 0%) scaleY(2);
+          }
+          
+
+
+        .link-1 {
+            transition: all 0.3s ease !important;
+            background: rgba(63, 164, 107, 0) !important;
+            color: #ffffff !important;
+            font-size: 18px !important;
+            text-decoration: none !important;
+            padding: 10px 0 !important;
+            margin: 0 20px !important;
+           
             position: relative !important;
             overflow: hidden !important;
            
@@ -236,9 +439,11 @@ body {
             transform: scaleX(1) !important;
           }
           
+          
+
           .link-1:hover {
-            border-top: 4px solid #b8d4ff !important;
-            border-bottom: 4px solid #b8d4ff !important;
+            border-right: 4px solid #b8d4ff !important;
+            border-left: 4px solid #b8d4ff !important;
             padding: 6px 0 !important;
             color: #333 !important;
           }
@@ -246,12 +451,12 @@ body {
           .link-2 {
             transition: all 0.3s ease !important;
             background: rgba(63, 164, 107, 0) !important;
-            color: #333 !important;
+            color: #ffdcdc !important;
             font-size: 16px !important;
             text-decoration: none !important;
             padding: 10px 0 !important;
             margin: 0 20px !important;
-            border-radius: 4px !important;
+            
             position: relative !important;
             overflow: hidden !important;
             
